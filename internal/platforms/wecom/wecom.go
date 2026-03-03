@@ -18,10 +18,10 @@ import (
 )
 
 const (
-	tokenURL      = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
-	sendMsgURL    = "https://qyapi.weixin.qq.com/cgi-bin/message/send"
-	kfSyncMsgURL  = "https://qyapi.weixin.qq.com/cgi-bin/kf/sync_msg"
-	kfSendMsgURL  = "https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg"
+	tokenURL     = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+	sendMsgURL   = "https://qyapi.weixin.qq.com/cgi-bin/message/send"
+	kfSyncMsgURL = "https://qyapi.weixin.qq.com/cgi-bin/kf/sync_msg"
+	kfSendMsgURL = "https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg"
 )
 
 // Platform implements router.Platform for WeChat Work (企业微信)
@@ -195,7 +195,7 @@ func (p *Platform) Send(ctx context.Context, userID string, resp router.Response
 	return nil
 }
 
-// sendTextMessage sends a text message to a user.
+// sendTextMessage sends a markdown message to a user.
 func (p *Platform) sendTextMessage(userID string, text string) error {
 	token, err := p.getToken()
 	if err != nil {
@@ -205,9 +205,9 @@ func (p *Platform) sendTextMessage(userID string, text string) error {
 	agentID, _ := strconv.Atoi(p.agentID)
 	msg := map[string]any{
 		"touser":  userID,
-		"msgtype": "text",
+		"msgtype": "markdown",
 		"agentid": agentID,
-		"text": map[string]string{
+		"markdown": map[string]string{
 			"content": text,
 		},
 	}
@@ -539,8 +539,8 @@ func (p *Platform) ListKfAccounts() ([]KfAccount, error) {
 	defer resp.Body.Close()
 
 	var result struct {
-		ErrCode    int         `json:"errcode"`
-		ErrMsg     string      `json:"errmsg"`
+		ErrCode     int         `json:"errcode"`
+		ErrMsg      string      `json:"errmsg"`
 		AccountList []KfAccount `json:"account_list"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

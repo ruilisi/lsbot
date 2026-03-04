@@ -9,6 +9,7 @@ import (
 	"syscall"
 
 	"github.com/pltanton/lingti-bot/internal/agent"
+	"github.com/pltanton/lingti-bot/internal/config"
 	"github.com/pltanton/lingti-bot/internal/gateway"
 	"github.com/pltanton/lingti-bot/internal/logger"
 	"github.com/pltanton/lingti-bot/internal/router"
@@ -94,6 +95,25 @@ func runGateway(cmd *cobra.Command, args []string) {
 		aiBaseURL = os.Getenv("AI_BASE_URL")
 		if aiBaseURL == "" {
 			aiBaseURL = os.Getenv("ANTHROPIC_BASE_URL")
+		}
+	}
+
+	// Load ~/.lingti.yaml and resolve named provider
+	if savedCfg, cfgErr := config.Load(); cfgErr == nil {
+		providerRef := aiProvider
+		if resolved, found := savedCfg.ResolveProvider(providerRef); found {
+			if aiProvider == "" {
+				aiProvider = resolved.Provider
+			}
+			if aiAPIKey == "" {
+				aiAPIKey = resolved.APIKey
+			}
+			if aiBaseURL == "" {
+				aiBaseURL = resolved.BaseURL
+			}
+			if aiModel == "" {
+				aiModel = resolved.Model
+			}
 		}
 	}
 

@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-intro-en" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">intro-en | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/intro-en"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="intro-en | lingti-bot"><meta data-rh="true" name="description" content="English | 中文"><meta data-rh="true" property="og:description" content="English | 中文"><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/intro-en"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/intro-en" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/intro-en" hreflang="x-default"><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a class="navbar__item navbar__link" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>intro-en</h1></header><p>English | <a class="" href="/lingti-bot/README.md">中文</a></p>
+<hr>
+<h1>lingti-bot (Lingti) 🐕⚡</h1>
+<blockquote>
+<p>🐕⚡ <strong>Minimal · Efficient · Compile Once Run Anywhere · Lightning Integration</strong> AI Bot</p>
+</blockquote>
+<p><a href="https://go.dev/" target="_blank" rel="noopener noreferrer" class=""><img decoding="async" loading="lazy" src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&amp;logo=go" alt="Go Version" class="img_ev3q"></a>
+<a class="" href="/lingti-bot/LICENSE"><img decoding="async" loading="lazy" src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" class="img_ev3q"></a>
+<a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class=""><img decoding="async" loading="lazy" src="https://img.shields.io/badge/Website-cli.lingti.com-blue?style=flat" alt="Website" class="img_ev3q"></a></p>
+<p><strong>Lingti Bot</strong> is an all-in-one AI Bot platform featuring **MCP Server**, **multi-platform messaging gateway**, **rich toolset**, and **intelligent conversation**.</p>
+<p><strong>Core Advantages:</strong></p>
+<ul>
+<li class="">🚀 <strong>Zero Dependency</strong> — Single 30MB binary, no Node.js/Python runtime needed, just <code>scp</code> and run</li>
+<li class="">☁️ <strong>Cloud Relay</strong> — No public server, domain registration, or HTTPS certificate needed, 5-min setup for WeCom/WeChat</li>
+<li class="">🤖 <strong>Browser Automation</strong> — Built-in CDP protocol control, snapshot-then-act pattern, no Puppeteer/Playwright installation</li>
+<li class="">🛠️ <strong>75+ MCP Tools</strong> — Covers files, Shell, system, network, calendar, Git, GitHub, and more</li>
+<li class="">🌏 <strong>China Platform Native</strong> — DingTalk, Feishu, WeCom, WeChat Official Account ready out-of-box</li>
+<li class="">💬 <strong>Built-in Web Chat UI</strong> — Open in any browser, no client needed. Supports <strong>multiple simultaneous sessions</strong> each with isolated AI memory, persists across page refreshes</li>
+<li class="">🔌 <strong>Embedded Friendly</strong> — Compile to ARM/MIPS, easy deployment to Raspberry Pi, routers, NAS</li>
+<li class="">🧠 <strong>Multi-AI Backend</strong> — <a class="" href="/lingti-bot/AI-PROVIDERS.md">16 AI providers</a> including Claude, DeepSeek, Kimi, MiniMax, Gemini, OpenAI, with per-platform/channel model overrides</li>
+<li class="">🔬 <strong>Claude Extended Thinking</strong> — Native Anthropic Thinking API support, real chain-of-thought reasoning via <code>/think high</code></li>
+<li class="">🐳 <strong>Docker Support</strong> — Multi-stage Dockerfile and docker-compose.yml for containerized deployment</li>
+<li class="">🩺 <strong>Health Diagnostics</strong> — <code>lingti-bot doctor</code> checks config, connectivity, dependencies in one command</li>
+</ul>
+<p>Supports WeCom, Feishu, DingTalk, Slack, Telegram, Discord, WhatsApp, LINE, Teams, and more — <a class="" href="/lingti-bot/chat-platforms">19 chat platforms</a> in total — plus a built-in <strong>browser Web Chat UI</strong> with multiple parallel sessions. Either <strong>5-minute cloud relay</strong> or <a class="" href="/lingti-bot/docs/openclaw-reference.md">OpenClaw</a>-style <strong>self-hosted deployment</strong>. Check <a class="" href="/lingti-bot/roadmap">Roadmap</a> for more features.</p>
+<blockquote>
+<p>🐕⚡ <strong>Why &quot;Lingti&quot;?</strong> Lingti (灵缇) means Greyhound in Chinese - the fastest dog in the world, known for agility and loyalty. Lingti Bot is equally agile and efficient, your faithful AI assistant.</p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="installation">Installation<a href="#installation" class="hash-link" aria-label="Installation的直接链接" title="Installation的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="macos--linux--wsl">macOS / Linux / WSL<a href="#macos--linux--wsl" class="hash-link" aria-label="macOS / Linux / WSL的直接链接" title="macOS / Linux / WSL的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">curl</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-fsSL</span><span class="token plain"> https://files.lingti.com/install-bot.sh </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">bash</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="windows-powershell">Windows (PowerShell)<a href="#windows-powershell" class="hash-link" aria-label="Windows (PowerShell)的直接链接" title="Windows (PowerShell)的直接链接" translate="no">​</a></h3>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">irm https://cli.lingti.com/install.ps1 | iex</span><br></span></code></pre></div></div>
+<p>After installation, run the interactive setup wizard:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot onboard</span><br></span></code></pre></div></div>
+<p>Once configured, start with no arguments needed:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay</span><br></span></code></pre></div></div>
+<p>Or pass arguments directly to run multiple instances or override saved config:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wecom </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="examples">Examples<a href="#examples" class="hash-link" aria-label="Examples的直接链接" title="Examples的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="intelligent-chat-file-management-information-retrieval">Intelligent Chat, File Management, Information Retrieval<a href="#intelligent-chat-file-management-information-retrieval" class="hash-link" aria-label="Intelligent Chat, File Management, Information Retrieval的直接链接" title="Intelligent Chat, File Management, Information Retrieval的直接链接" translate="no">​</a></h3>
+<table><tbody><tr><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-1.png" alt="Smart Assistant" class="img_ev3q"></td><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-2.png" alt="WeCom File Transfer" class="img_ev3q"></td><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-3.png" alt="Information Search" class="img_ev3q"></td></tr><tr><td style="text-align:center"><sub>💬 Smart Chat</sub></td><td style="text-align:center"><sub>📁 WeCom File Transfer</sub></td><td style="text-align:center"><sub>🔍 Information Search</sub></td></tr></tbody></table>
+<summary>📺 <b>Background Running Demo</b> — <code>make &amp;&amp; dist/lingti-bot gateway</code></summary>
+<br>
+<img decoding="async" loading="lazy" src="docs/images/demo-terminal.png" alt="Terminal Demo" class="img_ev3q">
+<p><sub>Clone, compile and run directly, paired with DeepSeek model, processing DingTalk messages in real-time</sub></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-lingti-bot">Why lingti-bot?<a href="#why-lingti-bot" class="hash-link" aria-label="Why lingti-bot?的直接链接" title="Why lingti-bot?的直接链接" translate="no">​</a></h2>
+<p><strong>Single Binary, Zero Dependencies, Local-First</strong></p>
+<p>Unlike traditional Bot frameworks that require Docker, databases, or complex runtime environments, lingti-bot achieves the ultimate in simplicity:</p>
+<ol>
+<li class=""><strong>Zero Dependencies</strong> — One 30MB binary file, no external dependencies, <code>scp</code> to any server and run</li>
+<li class=""><strong>Embedded Friendly</strong> — Pure Go implementation, compilable to ARM/MIPS, deployable to Raspberry Pi, routers, NAS</li>
+<li class=""><strong>Plain Text Output</strong> — No colored terminal output, avoiding extra rendering libraries or terminal compatibility issues</li>
+<li class=""><strong>Code Restraint</strong> — Every line of code has a clear reason to exist, rejecting over-design</li>
+<li class=""><strong>Cloud Relay Boost</strong> — No need for self-hosted web server, cloud relay completes WeChat Official Account and WeCom callback verification in seconds, Bot goes live immediately</li>
+</ol>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Clone, compile, run</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">git</span><span class="token plain"> clone https://github.com/ruilisi/lingti-bot.git</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">cd</span><span class="token plain"> lingti-bot </span><span class="token operator" style="color:#393A34">&amp;&amp;</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">make</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">./dist/lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="single-binary">Single Binary<a href="#single-binary" class="hash-link" aria-label="Single Binary的直接链接" title="Single Binary的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Compile</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Ready to use</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">./dist/lingti-bot serve</span><br></span></code></pre></div></div>
+<p>No Docker, no database, no cloud service required.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="local-first">Local-First<a href="#local-first" class="hash-link" aria-label="Local-First的直接链接" title="Local-First的直接链接" translate="no">​</a></h3>
+<p>All functions run locally, data is not uploaded to the cloud. Your files, calendar, and process information are safely kept locally.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cross-platform-support">Cross-Platform Support<a href="#cross-platform-support" class="hash-link" aria-label="Cross-Platform Support的直接链接" title="Cross-Platform Support的直接链接" translate="no">​</a></h3>
+<p>Core functions support macOS, Linux, Windows. macOS users can enjoy native calendar, reminders, notes, music control and more.</p>
+<p><strong>Supported Platforms:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>Architecture</th><th>Build Command</th></tr></thead><tbody><tr><td>macOS</td><td>ARM64 (Apple Silicon)</td><td><code>make darwin-arm64</code></td></tr><tr><td>macOS</td><td>AMD64 (Intel)</td><td><code>make darwin-amd64</code></td></tr><tr><td>Linux</td><td>AMD64</td><td><code>make linux-amd64</code></td></tr><tr><td>Linux</td><td>ARM64</td><td><code>make linux-arm64</code></td></tr><tr><td>Linux</td><td>MIPS</td><td><code>make linux-mips</code></td></tr><tr><td>Windows</td><td>AMD64</td><td><code>make windows-amd64</code></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture">Architecture<a href="#architecture" class="hash-link" aria-label="Architecture的直接链接" title="Architecture的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-server--claude-desktop-native-integration">MCP Server — Claude Desktop Native Integration<a href="#mcp-server--claude-desktop-native-integration" class="hash-link" aria-label="MCP Server — Claude Desktop Native Integration的直接链接" title="MCP Server — Claude Desktop Native Integration的直接链接" translate="no">​</a></h3>
+<p>lingti-bot is primarily an <strong>MCP (Model Context Protocol) Server</strong> that provides rich local tools for Claude Desktop and other MCP-compatible clients.</p>
+<p><strong>Quick Start:</strong></p>
+<ol>
+<li class="">Install lingti-bot:
+<ul>
+<li class="">macOS / Linux / WSL: <code>curl -fsSL https://files.lingti.com/install-bot.sh | bash</code></li>
+<li class="">Windows (PowerShell): <code>irm https://cli.lingti.com/install.ps1 -OutFile install.ps1; .\install.ps1 -Bot</code></li>
+</ul>
+</li>
+<li class="">Configure Claude Desktop MCP: <code>~/.config/Claude/claude_desktop_config.json</code>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;mcpServers&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lingti-bot&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;command&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;lingti-bot&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;args&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;serve&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+</li>
+<li class="">Restart Claude Desktop, you can now use 75+ local tools</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="multi-platform-gateway--message-router">Multi-Platform Gateway — Message Router<a href="#multi-platform-gateway--message-router" class="hash-link" aria-label="Multi-Platform Gateway — Message Router的直接链接" title="Multi-Platform Gateway — Message Router的直接链接" translate="no">​</a></h3>
+<p>In addition to MCP mode, lingti-bot can also run as a <strong>message router</strong>, connecting multiple messaging platforms simultaneously.</p>
+<p><strong>Supported Platforms:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>Connection Method</th><th>Setup</th><th>File Sending</th><th>Status</th></tr></thead><tbody><tr><td><strong>WeCom</strong></td><td>Callback API</td><td>Cloud Relay / Self-hosted</td><td>✅ All formats</td><td>✅</td></tr><tr><td><strong>WeChat Official</strong></td><td>Cloud Relay</td><td>10 seconds</td><td>✅ Image/Voice/Video</td><td>✅</td></tr><tr><td><strong>DingTalk</strong></td><td>Stream Mode</td><td>One-click</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Feishu/Lark</strong></td><td>WebSocket</td><td>One-click</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Slack</strong></td><td>Socket Mode</td><td>One-click</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Telegram</strong></td><td>Bot API</td><td>One-click</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Discord</strong></td><td>Gateway</td><td>One-click</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>WhatsApp</strong></td><td>Webhook + Graph API</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>LINE</strong></td><td>Webhook + Push API</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Microsoft Teams</strong></td><td>Bot Framework</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Matrix / Element</strong></td><td>HTTP Sync</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Google Chat</strong></td><td>Webhook + REST</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Mattermost</strong></td><td>WebSocket + REST</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>iMessage</strong></td><td>BlueBubbles</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Signal</strong></td><td>signal-cli REST</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Twitch</strong></td><td>IRC</td><td>Self-hosted</td><td>—</td><td>✅</td></tr><tr><td><strong>NOSTR</strong></td><td>WebSocket Relays</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Zalo</strong></td><td>Webhook + REST</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Nextcloud Talk</strong></td><td>HTTP Polling</td><td>Self-hosted</td><td>🔜 Planned</td><td>✅</td></tr><tr><td><strong>Web Chat UI</strong></td><td>WebSocket (built-in)</td><td><code>--webapp-port</code></td><td>—</td><td>✅</td></tr></tbody></table>
+<blockquote>
+<p>File sending details (setup, supported types, limitations): <a class="" href="/lingti-bot/file-sending">File Sending Guide</a></p>
+</blockquote>
+<blockquote>
+<p>Full list with config details and env vars: <a class="" href="/lingti-bot/chat-platforms">Chat Platforms</a></p>
+</blockquote>
+<p><strong>Cloud Relay Advantage:</strong> No public server, no domain registration, no HTTPS certificate, no firewall configuration, 5 minutes to complete integration.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-toolset--75-local-system-tools">MCP Toolset — 75+ Local System Tools<a href="#mcp-toolset--75-local-system-tools" class="hash-link" aria-label="MCP Toolset — 75+ Local System Tools的直接链接" title="MCP Toolset — 75+ Local System Tools的直接链接" translate="no">​</a></h3>
+<p>Covers all aspects of daily work, making AI your all-around assistant.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Tools</th><th>Features</th></tr></thead><tbody><tr><td><strong>File Operations</strong></td><td>9</td><td>Read/write, search, organize, batch delete, trash</td></tr><tr><td><strong>Shell Commands</strong></td><td>2</td><td>Command execution, path finding</td></tr><tr><td><strong>System Info</strong></td><td>4</td><td>CPU, memory, disk, environment variables</td></tr><tr><td><strong>Process Management</strong></td><td>3</td><td>List, details, terminate</td></tr><tr><td><strong>Network Tools</strong></td><td>4</td><td>Interfaces, connections, Ping, DNS</td></tr><tr><td><strong>Calendar</strong></td><td>6</td><td>View, create, search, delete events (macOS)</td></tr><tr><td><strong>Browser Automation</strong></td><td>12</td><td>Snapshot, click, input, screenshot, tab management</td></tr><tr><td><strong>Scheduled Tasks</strong></td><td>5</td><td>Create, list, delete, pause, resume cron jobs</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scheduled-tasks--automate-your-workflow">Scheduled Tasks — Automate Your Workflow<a href="#scheduled-tasks--automate-your-workflow" class="hash-link" aria-label="Scheduled Tasks — Automate Your Workflow的直接链接" title="Scheduled Tasks — Automate Your Workflow的直接链接" translate="no">​</a></h3>
+<p>Use standard Cron expressions to schedule periodic tasks for true unattended automation.</p>
+<p><strong>Core Features:</strong></p>
+<ul>
+<li class="">🕐 Support standard Cron expressions (minute, hour, day, month, weekday)</li>
+<li class="">💾 Task persistence, auto-resume after restart</li>
+<li class="">🔄 Pause/resume task execution</li>
+<li class="">📊 Record execution status and error information</li>
+<li class="">🛠️ Call any MCP tool</li>
+</ul>
+<p><strong>Quick Examples:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Daily backup at 2 AM</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">cron_create</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">name</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;daily-backup&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">schedule</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;0 2 * * *&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">tool</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;shell_execute&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">arguments</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token string" style="color:#e3116c">&quot;command&quot;</span><span class="token builtin class-name">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;tar -czf ~/backup-</span><span class="token string variable" style="color:#36acaa">$(</span><span class="token string variable function" style="color:#d73a49">date</span><span class="token string variable" style="color:#36acaa"> +%Y%m%d</span><span class="token string variable" style="color:#36acaa">)</span><span class="token string" style="color:#e3116c">.tar.gz ~/data&quot;</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Check disk space every 15 minutes</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">cron_create</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">name</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;disk-check&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">schedule</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;*/15 * * * *&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">tool</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;disk_usage&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">arguments</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token string" style="color:#e3116c">&quot;path&quot;</span><span class="token builtin class-name">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/&quot;</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Weekday morning standup reminder at 9 AM</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">cron_create</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">name</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;morning-standup&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">schedule</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;0 9 * * 1-5&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">tool</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;notification_send&quot;</span><span class="token plain">,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token assign-left variable" style="color:#36acaa">arguments</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token string" style="color:#e3116c">&quot;title&quot;</span><span class="token builtin class-name">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Standup Reminder&quot;</span><span class="token plain">, </span><span class="token string" style="color:#e3116c">&quot;message&quot;</span><span class="token builtin class-name">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Time for daily standup!&quot;</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<p><strong>Cron Expression Format:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">* * * * *</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│ │ │ │ │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│ │ │ │ └─ Day of week (0-6, 0=Sunday)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│ │ │ └─── Month (1-12)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│ │ └───── Day of month (1-31)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│ └─────── Hour (0-23)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└───────── Minute (0-59)</span><br></span></code></pre></div></div>
+<p><strong>Common Examples:</strong></p>
+<ul>
+<li class=""><code>0 * * * *</code> - Every hour</li>
+<li class=""><code>*/15 * * * *</code> - Every 15 minutes</li>
+<li class=""><code>0 9 * * 1-5</code> - Weekdays at 9 AM</li>
+<li class=""><code>0 0 1 * *</code> - First day of every month</li>
+<li class=""><code>30 8-18 * * *</code> - Every hour from 8:30 to 18:30</li>
+</ul>
+<p>Task configuration saved to <code>~/.lingti.db</code> (SQLite), auto-resume after MCP service restart.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="built-in-web-chat-ui--open-in-any-browser">Built-in Web Chat UI — Open in Any Browser<a href="#built-in-web-chat-ui--open-in-any-browser" class="hash-link" aria-label="Built-in Web Chat UI — Open in Any Browser的直接链接" title="Built-in Web Chat UI — Open in Any Browser的直接链接" translate="no">​</a></h3>
+<p>No client apps needed. Start the web chat interface with a single flag:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx --webapp-port </span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Open http://localhost:8080</span><br></span></code></pre></div></div>
+<p align="center">
+<img decoding="async" loading="lazy" src="docs/images/webapp-demo.png" alt="Web Chat UI Demo" width="800" class="img_ev3q">
+</p>
+<p><strong>Key features:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Details</th></tr></thead><tbody><tr><td><strong>Multiple simultaneous sessions</strong></td><td>Each session in the sidebar is fully independent — talk to the bot on different tasks at the same time without interference</td></tr><tr><td><strong>Isolated memory per session</strong></td><td>Each session has its own <code>channelID</code> → separate AI conversation history. What you say in session A never bleeds into session B</td></tr><tr><td><strong>True parallel processing</strong></td><td>Start a long task in session A, immediately switch to session B and send a new message — both are processed concurrently</td></tr><tr><td><strong>Session persistence</strong></td><td>Session list and chat history are saved in browser <code>localStorage</code> — survive page refreshes and browser restarts</td></tr><tr><td><strong>Markdown rendering</strong></td><td>Bot replies render full Markdown: code blocks with syntax hints, tables, lists, bold/italic</td></tr><tr><td><strong>Auto port increment</strong></td><td>If the configured port is busy, automatically tries the next port until one is free</td></tr><tr><td><strong>Zero extra dependencies</strong></td><td>UI is a single embedded HTML file — no Node.js, no npm, no build step</td></tr></tbody></table>
+<p><strong>Multiple sessions in action:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Browser tab (http://localhost:8080)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── Session A  ── &quot;Analyze this CSV file...&quot; (AI still working)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── Session B  ── &quot;Write a poem about cats&quot; (AI responded instantly)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── Session C  ── Yesterday&#x27;s conversation (still accessible)</span><br></span></code></pre></div></div>
+<p><strong>Via config file:</strong></p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># ~/.lingti.yaml</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">platforms</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">webapp</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">port</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">8080</span><br></span></code></pre></div></div>
+<p><strong>Via environment variable:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token assign-left variable" style="color:#36acaa">WEBAPP_PORT</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"> lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="skills--modular-capability-packs">Skills — Modular Capability Packs<a href="#skills--modular-capability-packs" class="hash-link" aria-label="Skills — Modular Capability Packs的直接链接" title="Skills — Modular Capability Packs的直接链接" translate="no">​</a></h3>
+<p>Skills are modular capability packs that teach lingti-bot how to use external tools. Each skill is a directory containing a <code>SKILL.md</code> file with YAML frontmatter for metadata and Markdown body for AI instructions.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># List all discovered skills</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Check readiness status</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills check</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Get details on a specific skill</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills info github</span><br></span></code></pre></div></div>
+<p>Ships with 8 bundled skills: Discord, GitHub, Slack, Peekaboo (macOS UI automation), Tmux, Weather, 1Password, and Obsidian. Supports user-custom and project-specific skills.</p>
+<p>See <a class="" href="/lingti-bot/skills">Skills Guide</a> for full documentation.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="multi-ai-backend">Multi-AI Backend<a href="#multi-ai-backend" class="hash-link" aria-label="Multi-AI Backend的直接链接" title="Multi-AI Backend的直接链接" translate="no">​</a></h3>
+<p>Supports <strong>15 AI providers</strong> covering mainstream LLM platforms globally:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Provider</th><th>Name</th><th>Default Model</th></tr></thead><tbody><tr><td>1</td><td><code>deepseek</code></td><td>DeepSeek (recommended)</td><td><code>deepseek-chat</code></td></tr><tr><td>2</td><td><code>qwen</code></td><td>Qwen / 通义千问</td><td><code>qwen-plus</code></td></tr><tr><td>3</td><td><code>claude</code></td><td>Claude (Anthropic)</td><td><code>claude-sonnet-4-20250514</code></td></tr><tr><td>4</td><td><code>kimi</code></td><td>Kimi / Moonshot</td><td><code>moonshot-v1-8k</code></td></tr><tr><td>5</td><td><code>minimax</code></td><td>MiniMax / 海螺 AI</td><td><code>MiniMax-Text-01</code></td></tr><tr><td>6</td><td><code>doubao</code></td><td>Doubao / 豆包 (ByteDance)</td><td><code>doubao-pro-32k</code></td></tr><tr><td>7</td><td><code>zhipu</code></td><td>Zhipu GLM / 智谱</td><td><code>glm-4-flash</code></td></tr><tr><td>8</td><td><code>openai</code></td><td>OpenAI (GPT)</td><td><code>gpt-4o</code></td></tr><tr><td>9</td><td><code>gemini</code></td><td>Gemini (Google)</td><td><code>gemini-2.0-flash</code></td></tr><tr><td>10</td><td><code>yi</code></td><td>Yi / 零一万物</td><td><code>yi-large</code></td></tr><tr><td>11</td><td><code>stepfun</code></td><td>StepFun / 阶跃星辰</td><td><code>step-2-16k</code></td></tr><tr><td>12</td><td><code>baichuan</code></td><td>Baichuan / 百川智能</td><td><code>Baichuan4</code></td></tr><tr><td>13</td><td><code>spark</code></td><td>Spark / 讯飞星火 (iFlytek)</td><td><code>generalv3.5</code></td></tr><tr><td>14</td><td><code>siliconflow</code></td><td>SiliconFlow / 硅基流动 (aggregator)</td><td><code>Qwen/Qwen2.5-72B-Instruct</code></td></tr><tr><td>15</td><td><code>grok</code></td><td>Grok (xAI)</td><td><code>grok-2-latest</code></td></tr></tbody></table>
+<blockquote>
+<p>Full list with API key links and aliases: <a class="" href="/lingti-bot/AI-PROVIDERS.md">AI Providers</a></p>
+</blockquote>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Specify provider via command line</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> qwen --api-key </span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;qwen-plus&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Override default model</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> openai --api-key </span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;gpt-4o-mini&quot;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="documentation">Documentation<a href="#documentation" class="hash-link" aria-label="Documentation的直接链接" title="Documentation的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a class="" href="/lingti-bot/AI-PROVIDERS.md">AI Providers</a> - 15 supported AI providers with API key links and aliases</li>
+<li class=""><a class="" href="/lingti-bot/chat-platforms">Chat Platforms</a> - 19 supported chat platforms with config details and env vars</li>
+<li class=""><a class="" href="/lingti-bot/cli-reference">CLI Reference</a> - Complete CLI documentation</li>
+<li class=""><a class="" href="/lingti-bot/skills">Skills Guide</a> - Modular capability packs: create, discover, manage skills</li>
+<li class=""><a class="" href="/lingti-bot/slack-integration">Slack Integration Guide</a> - Complete Slack app configuration tutorial</li>
+<li class=""><a class="" href="/lingti-bot/feishu-integration">Feishu Integration Guide</a> - Feishu/Lark app configuration tutorial</li>
+<li class=""><a class="" href="/lingti-bot/wecom-integration">WeCom Integration Guide</a> - WeCom app configuration tutorial</li>
+<li class=""><a class="" href="/lingti-bot/file-sending">File Sending Guide</a> - Per-platform file transfer capabilities, setup, and limitations</li>
+<li class=""><a class="" href="/lingti-bot/browser-automation">Browser Automation Guide</a> - Snapshot-then-act browser control</li>
+<li class=""><a class="" href="/lingti-bot/docs/openclaw-feature-comparison.md">OpenClaw Feature Comparison</a> - Detailed feature difference analysis</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="license">License<a href="#license" class="hash-link" aria-label="License的直接链接" title="License的直接链接" translate="no">​</a></h2>
+<p>MIT License - see <a class="" href="/lingti-bot/LICENSE">LICENSE</a> file for details</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="contact">Contact<a href="#contact" class="hash-link" aria-label="Contact的直接链接" title="Contact的直接链接" translate="no">​</a></h2>
+<ul>
+<li class="">Website: <a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="">cli.lingti.com</a></li>
+<li class="">Email: <code>jiefeng@ruc.edu.cn</code> / <code>jiefeng.hopkins@gmail.com</code></li>
+<li class="">GitHub: <a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="">github.com/ruilisi/lingti-bot</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/intro-en.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation" class="table-of-contents__link toc-highlight">Installation</a><ul><li><a href="#macos--linux--wsl" class="table-of-contents__link toc-highlight">macOS / Linux / WSL</a></li><li><a href="#windows-powershell" class="table-of-contents__link toc-highlight">Windows (PowerShell)</a></li></ul></li><li><a href="#examples" class="table-of-contents__link toc-highlight">Examples</a><ul><li><a href="#intelligent-chat-file-management-information-retrieval" class="table-of-contents__link toc-highlight">Intelligent Chat, File Management, Information Retrieval</a></li></ul></li><li><a href="#why-lingti-bot" class="table-of-contents__link toc-highlight">Why lingti-bot?</a><ul><li><a href="#single-binary" class="table-of-contents__link toc-highlight">Single Binary</a></li><li><a href="#local-first" class="table-of-contents__link toc-highlight">Local-First</a></li><li><a href="#cross-platform-support" class="table-of-contents__link toc-highlight">Cross-Platform Support</a></li></ul></li><li><a href="#architecture" class="table-of-contents__link toc-highlight">Architecture</a><ul><li><a href="#mcp-server--claude-desktop-native-integration" class="table-of-contents__link toc-highlight">MCP Server — Claude Desktop Native Integration</a></li><li><a href="#multi-platform-gateway--message-router" class="table-of-contents__link toc-highlight">Multi-Platform Gateway — Message Router</a></li><li><a href="#mcp-toolset--75-local-system-tools" class="table-of-contents__link toc-highlight">MCP Toolset — 75+ Local System Tools</a></li><li><a href="#scheduled-tasks--automate-your-workflow" class="table-of-contents__link toc-highlight">Scheduled Tasks — Automate Your Workflow</a></li><li><a href="#built-in-web-chat-ui--open-in-any-browser" class="table-of-contents__link toc-highlight">Built-in Web Chat UI — Open in Any Browser</a></li><li><a href="#skills--modular-capability-packs" class="table-of-contents__link toc-highlight">Skills — Modular Capability Packs</a></li><li><a href="#multi-ai-backend" class="table-of-contents__link toc-highlight">Multi-AI Backend</a></li></ul></li><li><a href="#documentation" class="table-of-contents__link toc-highlight">Documentation</a></li><li><a href="#license" class="table-of-contents__link toc-highlight">License</a></li><li><a href="#contact" class="table-of-contents__link toc-highlight">Contact</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

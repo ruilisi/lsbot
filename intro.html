@@ -1,0 +1,2123 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-intro" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">intro | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/intro"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="intro | lingti-bot"><meta data-rh="true" name="description" content="English | 中文"><meta data-rh="true" property="og:description" content="English | 中文"><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/intro"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/intro" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/intro" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"intro","item":"https://ruilisi.github.io/lingti-bot/intro"}]}</script><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/lingti-bot/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/relay"><span title="快速上手" class="categoryLinkLabel_W154">快速上手</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/relay"><span title="云中继（lingti-bot relay）" class="linkLabel_WmDU">云中继（lingti-bot relay）</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/configuration"><span title="配置优先级" class="linkLabel_WmDU">配置优先级</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/ai-providers"><span title="Supported AI Providers / 支持的 AI 服务" class="linkLabel_WmDU">Supported AI Providers / 支持的 AI 服务</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cli-reference"><span title="Command Line Reference" class="linkLabel_WmDU">Command Line Reference</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/chat-platforms"><span title="平台接入" class="categoryLinkLabel_W154">平台接入</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/chat-platforms"><span title="Supported Chat Platforms / 支持的聊天平台" class="linkLabel_WmDU">Supported Chat Platforms / 支持的聊天平台</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/feishu-integration"><span title="飞书集成指南" class="linkLabel_WmDU">飞书集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wecom-integration"><span title="企业微信集成指南" class="linkLabel_WmDU">企业微信集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wechat-integration"><span title="微信公众号一键接入指南" class="linkLabel_WmDU">微信公众号一键接入指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/slack-integration"><span title="Slack Integration" class="linkLabel_WmDU">Slack Integration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/dingtalk-integration"><span title="钉钉（DingTalk）集成指南" class="linkLabel_WmDU">钉钉（DingTalk）集成指南</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/gateway"><span title="部署方式" class="categoryLinkLabel_W154">部署方式</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/browser-automation"><span title="功能" class="categoryLinkLabel_W154">功能</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/roadmap"><span title="开发路线图" class="linkLabel_WmDU">开发路线图</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/lingti-bot/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">intro</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>intro</h1></header><p><a class="" href="/lingti-bot/README_EN.md">English</a> | 中文</p>
+<hr>
+<h1>lingti-bot (灵小缇 <a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="">cli.lingti.com/bot</a>)</h1>
+<blockquote>
+<p>🐕⚡「<strong>极简至上 效率为王 一次编译 到处执行 极速接入</strong>」的 AI Bot</p>
+</blockquote>
+<p><a href="https://go.dev/" target="_blank" rel="noopener noreferrer" class=""><img decoding="async" loading="lazy" src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&amp;logo=go" alt="Go Version" class="img_ev3q"></a>
+<a class="" href="/lingti-bot/LICENSE"><img decoding="async" loading="lazy" src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" class="img_ev3q"></a>
+<a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class=""><img decoding="async" loading="lazy" src="https://img.shields.io/badge/%E5%AE%98%E7%BD%91-cli.lingti.com-blue?style=flat" alt="Website" class="img_ev3q"></a></p>
+<p><strong>灵小缇</strong> 是一个集 <strong>MCP Server</strong>、<strong>多平台消息网关</strong>、<strong>丰富工具集</strong>、<strong>智能对话</strong>于一体的 AI Bot 平台。</p>
+<p><strong>核心优势：</strong></p>
+<ul>
+<li class="">🚀 <strong>零依赖部署</strong> — 单个 30MB 二进制文件，无需 Node.js/Python 运行时，<strong>一行命令</strong>安装即用</li>
+<li class="">☁️ <strong><a class="" href="/lingti-bot/cloud-relay">云中继</a>加持</strong> — 无需公网服务器、域名备案、HTTPS 证书，5 分钟接入企业微信/微信公众号</li>
+<li class="">🤖 <strong><a class="" href="/lingti-bot/browser-automation">浏览器自动化</a></strong> — 内置完整 CDP 控制引擎，可接管已有 Chrome 窗口，快照-操作模式精准定位元素，无需 Puppeteer/Playwright/Node.js</li>
+<li class="">🌐 <strong><a class="" href="/lingti-bot/social-platform-automation">社交平台自动化</a></strong> — 通过 MCP + Chrome 浏览器能力，AI 代操作知乎、小红书等内容平台，自动发帖、评论、互动，解放运营双手</li>
+<li class="">🛠️ <strong>75+ MCP 工具</strong> — 覆盖文件、Shell、系统、网络、日历、Git、GitHub 等全场景</li>
+<li class="">🌏 <strong>中国平台原生支持</strong> — 钉钉、飞书、企业微信、微信公众号开箱即用</li>
+<li class="">💬 <strong><a href="#web-chat-ui" class="">内置 Web 聊天界面</a></strong> — 无需任何客户端，浏览器直开，支持<strong>多会话并行</strong>，每个会话独立记忆，刷新不丢失</li>
+<li class="">🔌 <strong>嵌入式友好</strong> — 可编译到 ARM/MIPS，轻松部署到树莓派、路由器、NAS</li>
+<li class="">🧠 <strong>多 AI 后端</strong> — 集成 Claude、DeepSeek、Kimi、MiniMax、Gemini 等 <a class="" href="/lingti-bot/AI-PROVIDERS.md">16 种 AI 服务</a>，按需切换，支持<a href="#per-channel-model" class="">按平台/频道指定不同模型</a></li>
+<li class="">🔬 <strong>Claude 深度思考</strong> — 原生支持 Claude Extended Thinking API，<code>/think high</code> 即可启用真正的链式推理</li>
+<li class="">🐳 <strong>Docker 部署</strong> — 提供 Dockerfile 和 docker-compose.yml，一键容器化部署</li>
+<li class="">🩺 <strong>健康诊断</strong> — <code>lingti-bot doctor</code> 一键检查配置、连接、依赖，快速定位问题</li>
+</ul>
+<p>支持企业微信、飞书、钉钉、Slack、Telegram、Discord、WhatsApp、LINE、Teams 等 <a class="" href="/lingti-bot/chat-platforms">19 种聊天平台</a> 接入，以及内置<strong>浏览器 Web 聊天界面</strong>（多会话并行），既可通过<strong>云中继 5 分钟秒接</strong>，也可 <a class="" href="/lingti-bot/docs/openclaw-reference.md">OpenClaw</a> 式<strong>传统自建部署</strong>。查看 <a class="" href="/lingti-bot/roadmap">开发路线图</a> 了解更多功能规划。</p>
+<blockquote>
+<p>🐕⚡ <strong>为什么叫&quot;灵小缇&quot;？</strong> 灵缇犬（Greyhound）是世界上跑得最快的犬，以敏捷、忠诚著称。灵小缇同样敏捷高效，是你忠实的 AI 助手。</p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="安装">安装<a href="#安装" class="hash-link" aria-label="安装的直接链接" title="安装的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="macos--linux--wsl">macOS / Linux / WSL<a href="#macos--linux--wsl" class="hash-link" aria-label="macOS / Linux / WSL的直接链接" title="macOS / Linux / WSL的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">curl</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-fsSL</span><span class="token plain"> https://files.lingti.com/install-bot.sh </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">bash</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="windows-powershell">Windows (PowerShell)<a href="#windows-powershell" class="hash-link" aria-label="Windows (PowerShell)的直接链接" title="Windows (PowerShell)的直接链接" translate="no">​</a></h3>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">irm https://cli.lingti.com/install.ps1 | iex</span><br></span></code></pre></div></div>
+<p>安装完成后，通过交互式向导完成首次配置：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot onboard</span><br></span></code></pre></div></div>
+<p>配置保存后，无需任何参数即可启动：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay</span><br></span></code></pre></div></div>
+<p>也可以通过命令行参数直接启动，适合运行多个实例或覆盖已有配置：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wecom </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="样例">样例<a href="#样例" class="hash-link" aria-label="样例的直接链接" title="样例的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="内置-web-聊天界面--浏览器直开零配置"><a id="web-chat-ui" class="anchorTargetStickyNavbar_Vzrq"></a>内置 Web 聊天界面 — 浏览器直开，零配置<a href="#内置-web-聊天界面--浏览器直开零配置" class="hash-link" aria-label="内置-web-聊天界面--浏览器直开零配置的直接链接" title="内置-web-聊天界面--浏览器直开零配置的直接链接" translate="no">​</a></h3>
+<p>无需微信、无需 Slack，一个参数即可在本地浏览器中打开完整聊天界面：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx --webapp-port </span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 打开浏览器访问 http://localhost:8080</span><br></span></code></pre></div></div>
+<p align="center">
+<img decoding="async" loading="lazy" src="docs/images/webapp-demo.png" alt="Web 聊天界面演示" width="800" class="img_ev3q">
+</p>
+<p><strong>核心特性：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>说明</th></tr></thead><tbody><tr><td><strong>多会话并行</strong></td><td>左侧边栏管理多个独立会话，每个会话有独立的 AI 记忆上下文，互不干扰</td></tr><tr><td><strong>并发处理</strong></td><td>在会话 A 等待长任务时，立即切换到会话 B 发送新消息——两者并行处理</td></tr><tr><td><strong>会话持久化</strong></td><td>所有会话列表和聊天记录保存在浏览器 <code>localStorage</code>，刷新页面不丢失</td></tr><tr><td><strong>Markdown 渲染</strong></td><td>AI 回复支持完整 Markdown：代码块、表格、列表、加粗等</td></tr><tr><td><strong>端口自动切换</strong></td><td>若指定端口被占用，自动递增尝试直到找到空闲端口</td></tr><tr><td><strong>无需额外安装</strong></td><td>纯 HTML + 原生 JS，内嵌于二进制，无 Node.js / npm 依赖</td></tr></tbody></table>
+<p><strong>多会话并行示意：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">浏览器</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── 会话 A（UUID-1）── AI 正在处理长任务...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── 会话 B（UUID-2）── 刚发了新消息，AI 立即响应</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── 会话 C（UUID-3）── 历史记录，随时可查</span><br></span></code></pre></div></div>
+<p>每个会话对应一个独立 <code>channelID</code>，AI 记忆完全隔离——在会话 A 说的内容不会影响会话 B 的上下文。</p>
+<p><strong>通过配置文件启用：</strong></p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># ~/.lingti.yaml</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">platforms</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">webapp</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">port</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">8080</span><br></span></code></pre></div></div>
+<p><strong>环境变量：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">WEBAPP_PORT</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="智能对话文件管理信息检索">智能对话、文件管理、信息检索<a href="#智能对话文件管理信息检索" class="hash-link" aria-label="智能对话、文件管理、信息检索的直接链接" title="智能对话、文件管理、信息检索的直接链接" translate="no">​</a></h3>
+<table><tbody><tr><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-1.png" alt="智能助手" class="img_ev3q"></td><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-2.png" alt="企业微信文件传输" class="img_ev3q"></td><td width="33%"><img decoding="async" loading="lazy" src="docs/images/demo-chat-3.png" alt="信息搜索" class="img_ev3q"></td></tr><tr><td style="text-align:center"><sub>💬 智能对话</sub></td><td style="text-align:center"><sub>📁 企微文件传输</sub></td><td style="text-align:center"><sub>🔍 信息搜索</sub></td></tr></tbody></table>
+<summary>📺 <b>后台运行演示</b> — <code>make &amp;&amp; dist/lingti-bot gateway</code></summary>
+<br>
+<img decoding="async" loading="lazy" src="docs/images/demo-terminal.png" alt="Terminal Demo" class="img_ev3q">
+<p><sub>克隆代码后直接编译运行，配合 DeepSeek 模型，实时处理钉钉消息</sub></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="定时任务--ai-自动创建-cron-job">定时任务 — AI 自动创建 Cron Job<a href="#定时任务--ai-自动创建-cron-job" class="hash-link" aria-label="定时任务 — AI 自动创建 Cron Job的直接链接" title="定时任务 — AI 自动创建 Cron Job的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p>用自然语言创建定时任务 — 告诉 AI 你想要什么，剩下的交给它</p>
+</blockquote>
+<p align="center">
+<img decoding="async" loading="lazy" src="docs/images/demo-cron-wecom.png" alt="AI 创建定时任务演示" width="720" class="img_ev3q">
+</p>
+<p>在企业微信中对 AI 说一句话，即可创建复杂的定时任务。支持 Cron 表达式调度、macOS 系统通知、Shell 脚本执行等，真正实现无人值守自动化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="企业微信-ai-文件助手">企业微信 AI 文件助手<a href="#企业微信-ai-文件助手" class="hash-link" aria-label="企业微信 AI 文件助手的直接链接" title="企业微信 AI 文件助手的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p>用自然语言管理和传输文件 — 就像跟同事说话一样简单</p>
+</blockquote>
+<p align="center">
+<img decoding="async" loading="lazy" src="docs/images/wecom-file-transfer.png" alt="企业微信 AI 文件传输" width="720" class="img_ev3q">
+</p>
+<p>直接在企业微信中用自然语言浏览、查找、传输电脑上的文件。无需远程桌面，无需 U 盘，对 AI 说一句话即可。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="社交平台自动化--ai-驱动的内容平台运营">社交平台自动化 — AI 驱动的内容平台运营<a href="#社交平台自动化--ai-驱动的内容平台运营" class="hash-link" aria-label="社交平台自动化 — AI 驱动的内容平台运营的直接链接" title="社交平台自动化 — AI 驱动的内容平台运营的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p>通过 MCP + Chrome 浏览器能力，让 AI 代替你操作知乎、小红书等内容平台</p>
+</blockquote>
+<p>lingti-bot 将浏览器自动化能力与 AI 深度结合，针对中国主流内容平台提供<strong>智能化运营</strong>支持。不是简单的脚本录制回放，而是 AI 理解页面语义后的精准操作。</p>
+<p><strong>已支持平台：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th style="text-align:center">发帖/回答</th><th style="text-align:center">评论</th><th style="text-align:center">点赞/收藏</th><th>状态</th></tr></thead><tbody><tr><td><strong>知乎</strong></td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td>已支持</td></tr><tr><td><strong>小红书</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>微博</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>抖音（网页版）</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>B站</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>今日头条</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr></tbody></table>
+<p><strong>使用示例：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我在知乎上回答这个问题，内容围绕 Go 语言的优势&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;打开知乎这篇文章，帮我写一条评论&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;在小红书发一篇关于效率工具的笔记&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我给这篇知乎回答点个赞&quot;</span><br></span></code></pre></div></div>
+<p><strong>工作原理：</strong> AI 通过 MCP 协议调用浏览器工具（CDP 或 Chrome MCP），在你已登录的 Chrome 中操作，<strong>复用你的登录态</strong>，无需提供账号密码。AI 读取页面无障碍树快照，理解每个按钮和输入框的含义，像人一样精准操作。</p>
+<blockquote>
+<p>📖 <strong>详细文档：<a class="" href="/lingti-bot/social-platform-automation">社交平台自动化指南</a></strong></p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="浏览器自动化--让-ai-像人一样操控浏览器">浏览器自动化 — 让 AI 像人一样操控浏览器<a href="#浏览器自动化--让-ai-像人一样操控浏览器" class="hash-link" aria-label="浏览器自动化 — 让 AI 像人一样操控浏览器的直接链接" title="浏览器自动化 — 让 AI 像人一样操控浏览器的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p>无需 Puppeteer、无需 Node.js、无需安装任何依赖——直接用自然语言驾驭 Chrome</p>
+</blockquote>
+<p>lingti-bot 内置完整的 CDP（Chrome DevTools Protocol）自动化引擎，采用**快照-操作（Snapshot-then-Act）**模式：先读取页面无障碍树，理解每个元素的角色和名称，再精准点击、输入、截图。</p>
+<p><strong>直接在你正在使用的 Chrome 里操作：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 1. 用调试端口启动 Chrome（一次配置，长期使用）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">/Applications/Google</span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"> Chrome.app/Contents/MacOS/Google</span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"> Chrome </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --remote-debugging-port</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">9222</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --user-data-dir</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;</span><span class="token string environment constant" style="color:#36acaa">$HOME</span><span class="token string" style="color:#e3116c">/.lingti-bot/chrome-profile&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 2. ~/.lingti.yaml 中添加一行</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># browser:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">#   cdp_url: &quot;127.0.0.1:9222&quot;</span><br></span></code></pre></div></div>
+<p>之后，对 AI 说话即可——bot 会在你已有的 Chrome 里开新标签页操作，不再另弹窗口：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;打开知乎，搜索 Go 语言并截图&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我登录 GitHub，查看我最新的 PR&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;打开这个表单，填写姓名张三、手机 138xxxx1234，然后提交&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;把电商后台所有待审核商品都批量通过&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每隔5分钟截一张这个监控大屏的图&quot;</span><br></span></code></pre></div></div>
+<p><strong>工作原理（AI 自动完成全部步骤）：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">browser_navigate url=&quot;https://www.zhihu.com&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_snapshot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">→ [1] textbox &quot;搜索&quot; [2] button &quot;搜索&quot; [3] link &quot;登录&quot; ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_type ref=1 text=&quot;Go 语言&quot; submit=true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_snapshot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">→ 看到搜索结果列表</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_screenshot path=&quot;/tmp/zhihu-result.png&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">→ 截图保存完成</span><br></span></code></pre></div></div>
+<p>14 个浏览器工具覆盖完整自动化流程：生命周期管理、导航、无障碍树快照、点击/输入/按键、JavaScript 执行、批量操作、多标签页管理、截图。</p>
+<blockquote>
+<p>📖 <strong>完整使用指南、连接配置、故障排除：<a class="" href="/lingti-bot/browser-automation">浏览器自动化文档</a></strong></p>
+<p>📋 <strong>AI 操作规则详解（快照法则、搜索行为、弹窗处理、批量操作等）：<a class="" href="/lingti-bot/docs/browser-agent-rules.md">浏览器 AI 操作规则</a></strong></p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="为什么选择-lingti-bot">为什么选择 lingti-bot？<a href="#为什么选择-lingti-bot" class="hash-link" aria-label="为什么选择 lingti-bot？的直接链接" title="为什么选择 lingti-bot？的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lingti-bot-vs-openclaw">lingti-bot vs OpenClaw<a href="#lingti-bot-vs-openclaw" class="hash-link" aria-label="lingti-bot vs OpenClaw的直接链接" title="lingti-bot vs OpenClaw的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th><strong>lingti-bot</strong></th><th><strong>OpenClaw</strong></th></tr></thead><tbody><tr><td><strong>语言</strong></td><td>纯 Go 实现</td><td>Node.js</td></tr><tr><td><strong>运行依赖</strong></td><td>无（单一二进制）</td><td>需要 Node.js 运行时</td></tr><tr><td><strong>分发方式</strong></td><td>单个可执行文件，复制即用</td><td>npm 安装，依赖 node_modules</td></tr><tr><td><strong>嵌入式设备</strong></td><td>✅ 可轻松部署到 ARM/MIPS 等小型设备</td><td>❌ 需要 Node.js 环境</td></tr><tr><td><strong>安装大小</strong></td><td>~15MB 单文件</td><td>100MB+ (含 node_modules)</td></tr><tr><td><strong>输出风格</strong></td><td>纯文本，无彩色</td><td>彩色输出</td></tr><tr><td><strong>设计哲学</strong></td><td>极简主义，够用就好</td><td>功能丰富，灵活优先</td></tr><tr><td><strong>Docker 部署</strong></td><td>✅ 多阶段构建，~15MB 镜像</td><td>✅ Docker 支持</td></tr><tr><td><strong>Extended Thinking</strong></td><td>✅ Claude 原生 API</td><td>✅ 支持</td></tr><tr><td><strong>按平台模型切换</strong></td><td>✅ 配置文件声明式</td><td>✅ 支持</td></tr><tr><td><strong>健康诊断</strong></td><td>✅ <code>doctor</code> 命令</td><td>✅ 支持</td></tr><tr><td><strong>中国平台</strong></td><td>原生支持飞书/企微/钉钉</td><td>需自行集成</td></tr><tr><td><strong>云中继</strong></td><td>✅ 免自建服务器，秒级接入微信/企微</td><td>❌ 需自建 Web 服务</td></tr></tbody></table>
+<blockquote>
+<p>详细功能对比请参考：<a class="" href="/lingti-bot/docs/openclaw-feature-comparison.md">OpenClaw vs lingti-bot 技术特性对比</a></p>
+</blockquote>
+<p><strong>为什么选择纯 Go + 纯文本输出？</strong></p>
+<blockquote>
+<p><em>&quot;Simplicity is the ultimate sophistication.&quot;</em> — Leonardo da Vinci</p>
+</blockquote>
+<p>lingti-bot 将<strong>简洁性</strong>作为最高设计原则：</p>
+<ol>
+<li class=""><strong>零依赖部署</strong> — 单一二进制，<code>scp</code> 到任何机器即可运行，无需安装 Node.js、Python 或其他运行时</li>
+<li class=""><strong>嵌入式友好</strong> — 可编译到 ARM、MIPS 等架构，轻松部署到树莓派、路由器、NAS 等小型设备</li>
+<li class=""><strong>纯文本输出</strong> — 不使用彩色终端输出，避免引入额外的渲染库或终端兼容性问题</li>
+<li class=""><strong>代码克制</strong> — 每一行代码都有明确的存在理由，拒绝过度设计</li>
+<li class=""><strong>云中继加持</strong> — 无需自建 Web 服务器，通过云中继秒级完成微信公众号、企业微信的回调验证，Bot 即刻上线</li>
+</ol>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 克隆即编译，编译即运行</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">git</span><span class="token plain"> clone https://github.com/ruilisi/lingti-bot.git</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">cd</span><span class="token plain"> lingti-bot </span><span class="token operator" style="color:#393A34">&amp;&amp;</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">make</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">./dist/lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="单一二进制">单一二进制<a href="#单一二进制" class="hash-link" aria-label="单一二进制的直接链接" title="单一二进制的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 编译</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 即可使用</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">./dist/lingti-bot serve</span><br></span></code></pre></div></div>
+<p>无需数据库，无需云服务。也支持 <a href="#docker-%E9%83%A8%E7%BD%B2" class="">Docker 部署</a>。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="本地优先">本地优先<a href="#本地优先" class="hash-link" aria-label="本地优先的直接链接" title="本地优先的直接链接" translate="no">​</a></h3>
+<p>所有功能都在本地运行，数据不会上传到云端。你的文件、日历、进程信息都安全地保留在本地。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="跨平台支持">跨平台支持<a href="#跨平台支持" class="hash-link" aria-label="跨平台支持的直接链接" title="跨平台支持的直接链接" translate="no">​</a></h3>
+<p>核心功能支持 macOS、Linux、Windows。macOS 用户可享受日历、提醒事项、备忘录、音乐控制等原生功能。</p>
+<p><strong>支持的目标平台：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>架构</th><th>编译命令</th></tr></thead><tbody><tr><td>macOS</td><td>ARM64 (Apple Silicon)</td><td><code>make darwin-arm64</code></td></tr><tr><td>macOS</td><td>AMD64 (Intel)</td><td><code>make darwin-amd64</code></td></tr><tr><td>Linux</td><td>AMD64</td><td><code>make linux-amd64</code></td></tr><tr><td>Linux</td><td>ARM64</td><td><code>make linux-arm64</code></td></tr><tr><td>Linux</td><td>ARMv7 (树莓派等)</td><td><code>make linux-arm</code></td></tr><tr><td>Windows</td><td>AMD64</td><td><code>make windows-amd64</code></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="功能概览">功能概览<a href="#功能概览" class="hash-link" aria-label="功能概览的直接链接" title="功能概览的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-server--标准协议无缝集成">MCP Server — 标准协议，无缝集成<a href="#mcp-server--标准协议无缝集成" class="hash-link" aria-label="MCP Server — 标准协议，无缝集成的直接链接" title="MCP Server — 标准协议，无缝集成的直接链接" translate="no">​</a></h3>
+<p>灵小缇实现了完整的 <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer" class="">MCP (Model Context Protocol)</a> 协议，让任何支持 MCP 的 AI 客户端都能访问本地系统资源。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>客户端</th><th>状态</th><th>说明</th></tr></thead><tbody><tr><td>Claude Desktop</td><td>✅</td><td>Anthropic 官方桌面客户端</td></tr><tr><td>Cursor</td><td>✅</td><td>AI 代码编辑器</td></tr><tr><td>Windsurf</td><td>✅</td><td>Codeium 的 AI IDE</td></tr><tr><td>其他 MCP 客户端</td><td>✅</td><td>任何实现 MCP 协议的应用</td></tr></tbody></table>
+<p><strong>特点：</strong> 无需额外配置、无需数据库、无需 Docker、无需云服务，单一二进制文件即可运行。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="多平台消息网关--企业-im-秒接入">多平台消息网关 — 企业 IM 秒接入<a href="#多平台消息网关--企业-im-秒接入" class="hash-link" aria-label="多平台消息网关 — 企业 IM 秒接入的直接链接" title="多平台消息网关 — 企业 IM 秒接入的直接链接" translate="no">​</a></h3>
+<p>支持国内外主流企业消息平台，让团队在熟悉的工具中直接与 AI 对话。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>协议</th><th>接入方式</th><th>文件发送</th><th>状态</th></tr></thead><tbody><tr><td><strong>企业微信</strong></td><td>回调 API</td><td>云中继 / 自建</td><td>✅ 全格式</td><td>✅</td></tr><tr><td><strong>微信公众号</strong></td><td>云中继</td><td>10秒接入</td><td>✅ 图片/语音/视频</td><td>✅</td></tr><tr><td><strong>钉钉</strong></td><td>Stream Mode</td><td>一键接入</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>飞书/Lark</strong></td><td>WebSocket</td><td>一键接入</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Slack</strong></td><td>Socket Mode</td><td>一键接入</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Telegram</strong></td><td>Bot API</td><td>一键接入</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Discord</strong></td><td>Gateway</td><td>一键接入</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>WhatsApp</strong></td><td>Webhook + Graph API</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>LINE</strong></td><td>Webhook + Push API</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Microsoft Teams</strong></td><td>Bot Framework</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Matrix / Element</strong></td><td>HTTP Sync</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Google Chat</strong></td><td>Webhook + REST</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Mattermost</strong></td><td>WebSocket + REST</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>iMessage</strong></td><td>BlueBubbles</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Signal</strong></td><td>signal-cli REST</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Twitch</strong></td><td>IRC</td><td>自建</td><td>—</td><td>✅</td></tr><tr><td><strong>NOSTR</strong></td><td>WebSocket Relays</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Zalo</strong></td><td>Webhook + REST</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Nextcloud Talk</strong></td><td>HTTP Polling</td><td>自建</td><td>🔜 计划中</td><td>✅</td></tr><tr><td><strong>Web 聊天界面</strong></td><td>WebSocket</td><td><code>--webapp-port</code></td><td>—</td><td>✅</td></tr></tbody></table>
+<blockquote>
+<p>文件发送详情（配置方法、支持的文件类型、限制）：<a class="" href="/lingti-bot/file-sending">文件发送指南</a></p>
+</blockquote>
+<blockquote>
+<p>完整列表（含配置参数、环境变量）：<a class="" href="/lingti-bot/chat-platforms">聊天平台列表</a></p>
+</blockquote>
+<p><strong>云中继优势：</strong> 无需公网服务器、无需域名备案、无需 HTTPS 证书、无需防火墙配置，5 分钟完成接入。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-工具集--75-本地系统工具">MCP 工具集 — 75+ 本地系统工具<a href="#mcp-工具集--75-本地系统工具" class="hash-link" aria-label="MCP 工具集 — 75+ 本地系统工具的直接链接" title="MCP 工具集 — 75+ 本地系统工具的直接链接" translate="no">​</a></h3>
+<p>覆盖日常工作的方方面面，让 AI 成为你的全能助手。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>分类</th><th>工具数</th><th>功能</th></tr></thead><tbody><tr><td><strong>文件操作</strong></td><td>9</td><td>读写、搜索、整理、批量删除、废纸篓</td></tr><tr><td><strong>Shell 命令</strong></td><td>2</td><td>命令执行、路径查找</td></tr><tr><td><strong>系统信息</strong></td><td>4</td><td>CPU、内存、磁盘、环境变量</td></tr><tr><td><strong>进程管理</strong></td><td>3</td><td>列表、详情、终止</td></tr><tr><td><strong>网络工具</strong></td><td>4</td><td>接口、连接、Ping、DNS</td></tr><tr><td><strong>日历</strong></td><td>6</td><td>查看、创建、搜索、删除日程 (macOS)</td></tr><tr><td><strong>提醒事项</strong></td><td>5</td><td>列表、添加、完成、删除 (macOS)</td></tr><tr><td><strong>备忘录</strong></td><td>6</td><td>文件夹、列表、读取、创建、搜索、删除 (macOS)</td></tr><tr><td><strong>天气</strong></td><td>2</td><td>当前天气、多日预报</td></tr><tr><td><strong>网页搜索</strong></td><td>2</td><td>DuckDuckGo 搜索、网页内容获取</td></tr><tr><td><strong>剪贴板</strong></td><td>2</td><td>读写剪贴板</td></tr><tr><td><strong>截图</strong></td><td>1</td><td>屏幕截图</td></tr><tr><td><strong>系统通知</strong></td><td>1</td><td>发送桌面通知</td></tr><tr><td><strong>音乐控制</strong></td><td>7</td><td>播放、暂停、切歌、音量、搜索 (macOS)</td></tr><tr><td><strong>Git</strong></td><td>4</td><td>状态、日志、差异、分支</td></tr><tr><td><strong>GitHub</strong></td><td>6</td><td>PR 列表/详情、Issue 管理、仓库信息</td></tr><tr><td><strong><a class="" href="/lingti-bot/browser-automation">浏览器自动化</a></strong></td><td>14</td><td>CDP 控制引擎，可接管已有 Chrome，快照定位、点击/输入/JS、多标签页、截图</td></tr><tr><td><strong>定时任务</strong></td><td>5</td><td>创建、列表、删除、暂停、恢复计划任务</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="定时任务--自动化你的工作流">定时任务 — 自动化你的工作流<a href="#定时任务--自动化你的工作流" class="hash-link" aria-label="定时任务 — 自动化你的工作流的直接链接" title="定时任务 — 自动化你的工作流的直接链接" translate="no">​</a></h3>
+<p>使用标准 Cron 表达式调度周期性任务，支持两种模式：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th><strong>AI 智能任务</strong> (<code>prompt</code>)</th><th><strong>静态消息</strong> (<code>message</code>)</th></tr></thead><tbody><tr><td><strong>内容</strong></td><td>每次触发生成全新内容</td><td>每次发送相同文本</td></tr><tr><td><strong>工具调用</strong></td><td>可调用 web_search、天气、日历等所有工具</td><td>无</td></tr><tr><td><strong>适用场景</strong></td><td>新闻摘要、每日简报、随机鸡汤、学习提醒</td><td>固定提醒、打卡通知</td></tr><tr><td><strong>示例</strong></td><td>&quot;搜索最新AI新闻整理摘要&quot;</td><td>&quot;该喝水了！&quot;</td></tr></tbody></table>
+<p><strong>AI 智能任务</strong> — 每次触发运行完整 AI 对话，内容永远不重复：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每小时43分发一段鸡汤激励我写代码&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每天早上9点搜索AI新闻发给我摘要&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每天中午教我一个Go语言技巧&quot;</span><br></span></code></pre></div></div>
+<p><strong>静态消息</strong> — 每次发送固定文本：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每天早上9点提醒我开站会&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;每小时提醒我喝水&quot;</span><br></span></code></pre></div></div>
+<blockquote>
+<p>详细文档（完整示例、Cron 表达式、管理命令）：<a class="" href="/lingti-bot/cron-jobs">定时任务指南</a></p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="智能对话--多轮记忆自然交流">智能对话 — 多轮记忆，自然交流<a href="#智能对话--多轮记忆自然交流" class="hash-link" aria-label="智能对话 — 多轮记忆，自然交流的直接链接" title="智能对话 — 多轮记忆，自然交流的直接链接" translate="no">​</a></h3>
+<p>支持多轮对话记忆，能够记住之前的对话内容，实现连续自然的交流体验。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>说明</th></tr></thead><tbody><tr><td><strong>上下文记忆</strong></td><td>每个用户独立的对话上下文，最近 50 条消息</td></tr><tr><td><strong>自动过期</strong></td><td>对话 60 分钟无活动后自动清除</td></tr><tr><td><strong>多 AI 后端</strong></td><td><a class="" href="/lingti-bot/AI-PROVIDERS.md">16 种 AI 服务</a>按需切换</td></tr><tr><td><strong>对话管理</strong></td><td><code>/new</code>、<code>/reset</code>、<code>新对话</code> 命令重置对话</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="健康诊断--一键排查配置问题">健康诊断 — 一键排查配置问题<a href="#健康诊断--一键排查配置问题" class="hash-link" aria-label="健康诊断 — 一键排查配置问题的直接链接" title="健康诊断 — 一键排查配置问题的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot doctor</span><br></span></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot doctor</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">=================</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">OS: darwin/arm64, Go: go1.24.0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Checks:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ Config file (~/.lingti.yaml) — loaded</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ AI API key — set (sk-ant-a..., provider: claude)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ AI provider connectivity — reachable (HTTP 200)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ Platform credentials — wecom, telegram</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ Binary: gh — found</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✗ Binary: chrome — not found in PATH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ Binary: claude — found</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ MCP server: chrome — command &quot;npx&quot; available</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ✓ Temp directory — writable</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">8 passed, 1 failed</span><br></span></code></pre></div></div>
+<p>检查项包括：配置文件、API 密钥、AI 连接、平台凭证、必需工具、CDP 连接、MCP 服务器、磁盘空间。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="按平台频道模型切换"><a id="per-channel-model" class="anchorTargetStickyNavbar_Vzrq"></a>按平台/频道模型切换<a href="#按平台频道模型切换" class="hash-link" aria-label="按平台频道模型切换的直接链接" title="按平台频道模型切换的直接链接" translate="no">​</a></h3>
+<p>为不同平台或频道配置不同的 AI 模型，在 <code>~/.lingti.yaml</code> 中声明：</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">ai</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">provider</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> deepseek</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">api_key</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> sk</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">model</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> deepseek</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">chat</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># 按平台/频道覆盖</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">overrides</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> telegram</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">provider</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">api_key</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> sk</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">ant</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">model</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">sonnet</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">4</span><span class="token punctuation" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">20250514</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> discord</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">provider</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> openai</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">api_key</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> sk</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">model</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> gpt</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">4o</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> slack</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">channel_id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> C12345</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">provider</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">api_key</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> sk</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">ant</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span></code></pre></div></div>
+<p>匹配规则：先匹配 <code>platform + channel_id</code>（精确），再匹配 <code>platform</code>（宽泛），最后使用默认配置。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="claude-深度思考--原生-extended-thinking-api">Claude 深度思考 — 原生 Extended Thinking API<a href="#claude-深度思考--原生-extended-thinking-api" class="hash-link" aria-label="Claude 深度思考 — 原生 Extended Thinking API的直接链接" title="Claude 深度思考 — 原生 Extended Thinking API的直接链接" translate="no">​</a></h3>
+<p>对 Claude 模型启用真正的链式推理（非提示词模拟），通过会话命令切换：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>模式</th><th>思考 Token 预算</th></tr></thead><tbody><tr><td><code>/think off</code></td><td>关闭</td><td>0</td></tr><tr><td><code>/think low</code></td><td>简单</td><td>1,024</td></tr><tr><td><code>/think medium</code></td><td>中等（默认）</td><td>4,096</td></tr><tr><td><code>/think high</code></td><td>深度</td><td>16,384</td></tr></tbody></table>
+<ul>
+<li class=""><strong>Claude 模型</strong>：自动使用 Anthropic Thinking API，模型在回复前进行真正的内部推理</li>
+<li class=""><strong>其他模型</strong>：降级为系统提示词引导的思考模式</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-部署">Docker 部署<a href="#docker-部署" class="hash-link" aria-label="Docker 部署的直接链接" title="Docker 部署的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 构建镜像</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">docker</span><span class="token plain"> build </span><span class="token parameter variable" style="color:#36acaa">-t</span><span class="token plain"> lingti-bot </span><span class="token builtin class-name">.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 运行</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">docker</span><span class="token plain"> run </span><span class="token parameter variable" style="color:#36acaa">-e</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">sk-xxx </span><span class="token parameter variable" style="color:#36acaa">-e</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">TELEGRAM_BOT_TOKEN</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">xxx lingti-bot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 使用 docker-compose（推荐）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">docker</span><span class="token plain"> compose up </span><span class="token parameter variable" style="color:#36acaa">-d</span><br></span></code></pre></div></div>
+<p><code>docker-compose.yml</code> 支持配置文件挂载、环境变量注入，以及可选的 Chrome 容器用于浏览器自动化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="skills--模块化能力扩展">Skills — 模块化能力扩展<a href="#skills--模块化能力扩展" class="hash-link" aria-label="Skills — 模块化能力扩展的直接链接" title="Skills — 模块化能力扩展的直接链接" translate="no">​</a></h3>
+<p>Skills 是模块化的能力包，教会 lingti-bot 如何使用外部工具。每个 Skill 是一个包含 <code>SKILL.md</code> 文件的目录，通过 YAML frontmatter 声明依赖和元数据，通过 Markdown 正文提供 AI 指令。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 列出所有已发现的 Skills</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 查看就绪状态</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills check</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 查看某个 Skill 的详细信息</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills info github</span><br></span></code></pre></div></div>
+<p>内置 8 个 Skills：Discord、GitHub、Slack、Peekaboo（macOS UI 自动化）、Tmux、天气、1Password、Obsidian。支持用户自定义和项目级 Skills。</p>
+<p>详细文档：<a class="" href="/lingti-bot/skills">Skills 指南</a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="功能速览表">功能速览表<a href="#功能速览表" class="hash-link" aria-label="功能速览表的直接链接" title="功能速览表的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模块</th><th>说明</th><th>特点</th></tr></thead><tbody><tr><td><strong>MCP Server</strong></td><td>标准 MCP 协议服务器</td><td>兼容 Claude Desktop、Cursor、Windsurf 等所有 MCP 客户端</td></tr><tr><td><strong>多平台消息网关</strong></td><td><a class="" href="/lingti-bot/chat-platforms">19 种聊天平台</a></td><td>微信公众号、企业微信、Slack、飞书一键接入，支持云中继</td></tr><tr><td><strong><a href="#web-chat-ui" class="">Web 聊天界面</a></strong></td><td>内置浏览器 UI</td><td>多会话并行，独立记忆隔离，Markdown 渲染，<code>--webapp-port</code> 一键启用</td></tr><tr><td><strong>MCP 工具集</strong></td><td>75+ 本地系统工具</td><td>文件、Shell、系统、网络、日历、Git、GitHub 等全覆盖</td></tr><tr><td><strong>Skills</strong></td><td>模块化能力扩展</td><td>8 个内置 Skill，支持自定义和项目级扩展</td></tr><tr><td><strong>智能对话</strong></td><td>多轮对话与记忆</td><td>上下文记忆、<a class="" href="/lingti-bot/AI-PROVIDERS.md">16 种 AI 后端</a>、按平台模型切换</td></tr><tr><td><strong>深度思考</strong></td><td>Claude Extended Thinking</td><td>原生 Thinking API，4 级思考深度</td></tr><tr><td><strong>健康诊断</strong></td><td><code>doctor</code> 命令</td><td>一键检查配置、连接、依赖</td></tr><tr><td><strong>Docker 部署</strong></td><td>容器化</td><td>多阶段构建，docker-compose 支持</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="云中继零门槛接入企业消息平台">云中继：零门槛接入企业消息平台<a href="#云中继零门槛接入企业消息平台" class="hash-link" aria-label="云中继：零门槛接入企业消息平台的直接链接" title="云中继：零门槛接入企业消息平台的直接链接" translate="no">​</a></h2>
+<blockquote>
+<p><strong>告别公网服务器、告别复杂配置，让 AI Bot 接入像配置 Wi-Fi 一样简单</strong></p>
+</blockquote>
+<p>传统接入企业微信等平台需要：公网服务器 → 域名备案 → HTTPS 证书 → 防火墙配置 → 回调服务开发...</p>
+<p><strong>lingti-bot 云中继</strong> 将这一切简化为 3 步：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 步骤 1: 安装</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># macOS / Linux / WSL:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">curl</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-fsSL</span><span class="token plain"> https://files.lingti.com/install-bot.sh </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">bash</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Windows (PowerShell):</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">irm https://cli.lingti.com/install.ps1 </span><span class="token parameter variable" style="color:#36acaa">-OutFile</span><span class="token plain"> install.ps1</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> .</span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain">install.ps1 </span><span class="token parameter variable" style="color:#36acaa">-Bot</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 步骤 2: 配置企业可信IP（应用管理 → 找到应用 → 企业可信IP → 添加 106.52.166.51）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 步骤 3: 一条命令搞定验证和消息处理</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wecom </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-corp-id </span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">. --wecom-token </span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">. --wecom-aes-key </span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">. </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 然后去企业微信后台配置回调 URL: https://bot.lingti.com/wecom</span><br></span></code></pre></div></div>
+<p><strong>工作原理：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">企业微信(用户消息) --&gt; bot.lingti.com(云中继) --WebSocket--&gt; lingti-bot(本地AI处理)</span><br></span></code></pre></div></div>
+<p><strong>优势对比：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>传统方案</th><th>云中继方案</th></tr></thead><tbody><tr><td>公网服务器</td><td>✅ 需要</td><td>❌ 不需要</td></tr><tr><td>域名/备案</td><td>✅ 需要</td><td>❌ 不需要</td></tr><tr><td>HTTPS证书</td><td>✅ 需要</td><td>❌ 不需要</td></tr><tr><td>回调服务开发</td><td>✅ 需要</td><td>❌ 不需要</td></tr><tr><td>接入时间</td><td>数天</td><td><strong>5分钟</strong></td></tr><tr><td>AI处理位置</td><td>服务器</td><td><strong>本地</strong></td></tr><tr><td>数据安全</td><td>云端存储</td><td><strong>本地处理</strong></td></tr></tbody></table>
+<blockquote>
+<p>📖 <strong>深入了解云中继的架构原理、协议规范和完整消息流程，请阅读 <a class="" href="/lingti-bot/cloud-relay">云中继技术方案详解</a></strong></p>
+<p>详细对比请参考：<a class="" href="/lingti-bot/docs/vs-openclaw-integration.md">lingti-bot vs OpenClaw：简化 AI 集成的努力</a></p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="微信公众号一键接入">微信公众号一键接入<a href="#微信公众号一键接入" class="hash-link" aria-label="微信公众号一键接入的直接链接" title="微信公众号一键接入的直接链接" translate="no">​</a></h3>
+<p>微信搜索公众号「<strong>灵缇小秘</strong>」，关注后发送任意消息获取接入教程，10秒将lingti-bot接入微信。
+详细教程请参考：<a class="" href="/lingti-bot/wechat-integration">微信公众号接入指南</a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="飞书接入">飞书接入<a href="#飞书接入" class="hash-link" aria-label="飞书接入的直接链接" title="飞书接入的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">飞书商店应用正在上架流程中，目前可通过自建应用实现绑定。教程请参考：<a href="https://github.com/ruilisi/lingti-bot/blob/master/docs/feishu-integration.md" target="_blank" rel="noopener noreferrer" class="">飞书集成指南</a></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="企业微信接入">企业微信接入<a href="#企业微信接入" class="hash-link" aria-label="企业微信接入的直接链接" title="企业微信接入的直接链接" translate="no">​</a></h3>
+<p>通过<strong>云中继模式</strong>，无需公网服务器即可接入企业微信：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 1. 先去企业微信后台配置企业可信IP</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">#    应用管理 → 找到应用 → 企业可信IP → 添加: 106.52.166.51</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 2. 一条命令搞定验证和消息处理</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wecom </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-corp-id YOUR_CORP_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-agent-id YOUR_AGENT_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-secret YOUR_SECRET </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-token YOUR_TOKEN </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-aes-key YOUR_AES_KEY </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key YOUR_API_KEY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 3. 去企业微信后台配置回调 URL: https://bot.lingti.com/wecom</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">#    保存配置后验证自动完成，消息立即可以处理</span><br></span></code></pre></div></div>
+<p>详细教程请参考：<a class="" href="/lingti-bot/wecom-integration">企业微信集成指南</a> | <a class="" href="/lingti-bot/cloud-relay">云中继技术方案详解</a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="钉钉接入">钉钉接入<a href="#钉钉接入" class="hash-link" aria-label="钉钉接入的直接链接" title="钉钉接入的直接链接" translate="no">​</a></h3>
+<p>使用 <strong>Stream 模式</strong>，无需公网服务器即可接入钉钉机器人：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 一条命令搞定</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --dingtalk-client-id YOUR_APP_KEY </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --dingtalk-client-secret YOUR_APP_SECRET </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p><strong>配置步骤：</strong></p>
+<ol>
+<li class="">登录 <a href="https://open.dingtalk.com/" target="_blank" rel="noopener noreferrer" class="">钉钉开放平台</a>，创建企业内部应用</li>
+<li class="">在应用详情页获取 AppKey (ClientID) 和 AppSecret (ClientSecret)</li>
+<li class="">开启机器人功能，配置消息接收模式为 <strong>Stream 模式</strong></li>
+<li class="">运行上述命令即可</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sponsors">Sponsors<a href="#sponsors" class="hash-link" aria-label="Sponsors的直接链接" title="Sponsors的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><a href="https://game.lingti.com" target="_blank" rel="noopener noreferrer" class="">灵缇游戏加速</a></strong> - PC/Mac/iOS/Android 全平台游戏加速、热点加速、AI 及学术资源定向加速，And More</li>
+<li class=""><strong><a href="https://router.lingti.com" target="_blank" rel="noopener noreferrer" class="">灵缇路由</a></strong> - 您的路由管家、网游电竞专家</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="lingti-cli-生态">lingti-cli 生态<a href="#lingti-cli-生态" class="hash-link" aria-label="lingti-cli 生态的直接链接" title="lingti-cli 生态的直接链接" translate="no">​</a></h2>
+<p><strong>lingti-bot</strong> 是 <strong>lingti-cli</strong> 五位一体平台的核心开源组件。</p>
+<p>我们正在打造 <strong>AI 时代开发者与知识工作者的终极效率平台</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模块</th><th>定位</th><th>说明</th></tr></thead><tbody><tr><td><strong>CLI</strong></td><td>操控总台</td><td>统一入口，如同操作系统的引导程序</td></tr><tr><td><strong>Net</strong></td><td>全球网络</td><td>跨洲 200Mbps 加速，畅享全球 AI 服务</td></tr><tr><td><strong>Token</strong></td><td>数字员工</td><td>Token 即代码，代码即生产力</td></tr><tr><td><strong>Bot</strong></td><td>助理管理</td><td>数字员工接入与管理，简单到极致 ← <em>本项目</em></td></tr><tr><td><strong>Code</strong></td><td>开发环境</td><td>Terminal 回归舞台中央，极致输入效率</td></tr></tbody></table>
+<blockquote>
+<p><strong>为什么是 cli.lingti.com/bot 而不是 bot.lingti.com？</strong></p>
+<p>因为 Bot 是 CLI 生态的一部分。IDE 正在消亡，纯粹的 Terminal 界面正在回归。未来的生产力工具，将围绕 CLI 重新构建。</p>
+</blockquote>
+<p><strong>联系我们 / 加入我们</strong></p>
+<table>
+  <tbody><tr>
+    <th width="56%" style="text-align:center">邮件联系</th>
+    <th width="44%" style="text-align:center">扫码加群</th>
+  </tr>
+  <tr>
+    <td width="56%">
+      无论您是追求极致效率的顶尖开发者、关注 AI 时代生产力变革的投资人，还是想成为 Sponsor，
+      欢迎联系：
+      <code>jiefeng@ruc.edu.cn</code>
+      /
+      <code>jiefeng.hopkins@gmail.com</code>
+    </td>
+    <td width="44%" style="text-align:center">
+      <img decoding="async" loading="lazy" src="https://lingti-1302055788.cos.ap-guangzhou.myqcloud.com/contact_me_qr-2.png" alt="扫码加群" width="230" class="img_ev3q">
+    </td>
+  </tr></tbody></table>
+<hr>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">                              lingti-bot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    +---------------+    +---------------+    +---------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    |  MCP Server   |    |   Message     |    |    Agent      |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    |   (stdio)     |    |   Gateway     |    |   (Claude)    |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    +-------+-------+    +-------+-------+    +-------+-------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            |                    |                    |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            +--------------------+--------------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                 |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                 v</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       +-------------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       |    MCP Tools      |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       | Files, Shell, Net |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       | System, Calendar  |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       | Browser Automation|</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                       +-------------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                 |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            +--------------------+--------------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            |                                         |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            v                                         v</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    +---------------+                       +------------------+</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    | Claude Desktop|                       | Slack / Feishu   |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    | Cursor, etc.  |                       | Messaging Apps   |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    +---------------+                       +------------------+</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-server">MCP Server<a href="#mcp-server" class="hash-link" aria-label="MCP Server的直接链接" title="MCP Server的直接链接" translate="no">​</a></h2>
+<p>灵小缇作为标准 MCP (Model Context Protocol) 服务器，让任何支持 MCP 的 AI 客户端都能访问本地系统资源。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="支持的客户端">支持的客户端<a href="#支持的客户端" class="hash-link" aria-label="支持的客户端的直接链接" title="支持的客户端的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Claude Desktop</strong> - Anthropic 官方桌面客户端</li>
+<li class=""><strong>Cursor</strong> - AI 代码编辑器</li>
+<li class=""><strong>其他 MCP 客户端</strong> - 任何实现 MCP 协议的应用</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="快速配置">快速配置<a href="#快速配置" class="hash-link" aria-label="快速配置的直接链接" title="快速配置的直接链接" translate="no">​</a></h3>
+<p><strong>Claude Desktop</strong> (<code>~/Library/Application Support/Claude/claude_desktop_config.json</code>)：</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;mcpServers&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lingti-bot&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;command&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/path/to/lingti-bot&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;args&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;serve&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Cursor</strong> (<code>.cursor/mcp.json</code>)：</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;mcpServers&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lingti-bot&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;command&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/path/to/lingti-bot&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;args&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;serve&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>就这么简单！重启客户端后，AI 助手即可使用所有 lingti-bot 提供的工具。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="特点">特点<a href="#特点" class="hash-link" aria-label="特点的直接链接" title="特点的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>无需额外配置</strong> - 一个二进制文件，两行配置</li>
+<li class=""><strong>无需数据库</strong> - 无外部依赖</li>
+<li class=""><strong>无需 Docker</strong> - 单一静态二进制</li>
+<li class=""><strong>无需云服务</strong> - 完全本地运行</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="多平台消息网关">多平台消息网关<a href="#多平台消息网关" class="hash-link" aria-label="多平台消息网关的直接链接" title="多平台消息网关的直接链接" translate="no">​</a></h2>
+<p>灵小缇支持多种企业消息平台，让你的团队在熟悉的工具中直接与 AI 对话。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="支持的平台">支持的平台<a href="#支持的平台" class="hash-link" aria-label="支持的平台的直接链接" title="支持的平台的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>协议</th><th>状态</th></tr></thead><tbody><tr><td><strong>企业微信</strong></td><td>回调 API</td><td>✅ 已支持</td></tr><tr><td><strong>微信公众号</strong></td><td>云中继</td><td>✅ 已支持</td></tr><tr><td><strong>钉钉</strong></td><td>Stream Mode</td><td>✅ 已支持</td></tr><tr><td><strong>飞书/Lark</strong></td><td>WebSocket</td><td>✅ 已支持</td></tr><tr><td><strong>Slack</strong></td><td>Socket Mode</td><td>✅ 已支持</td></tr><tr><td><strong>Telegram</strong></td><td>Bot API</td><td>✅ 已支持</td></tr><tr><td><strong>Discord</strong></td><td>Gateway</td><td>✅ 已支持</td></tr><tr><td><strong>WhatsApp</strong></td><td>Webhook + Graph API</td><td>✅ 已支持</td></tr><tr><td><strong>LINE</strong></td><td>Webhook + Push API</td><td>✅ 已支持</td></tr><tr><td><strong>Microsoft Teams</strong></td><td>Bot Framework</td><td>✅ 已支持</td></tr><tr><td><strong>Matrix / Element</strong></td><td>HTTP Sync</td><td>✅ 已支持</td></tr><tr><td><strong>Google Chat</strong></td><td>Webhook + REST</td><td>✅ 已支持</td></tr><tr><td><strong>Mattermost</strong></td><td>WebSocket + REST</td><td>✅ 已支持</td></tr><tr><td><strong>iMessage</strong></td><td>BlueBubbles</td><td>✅ 已支持</td></tr><tr><td><strong>Signal</strong></td><td>signal-cli REST</td><td>✅ 已支持</td></tr><tr><td><strong>Twitch</strong></td><td>IRC</td><td>✅ 已支持</td></tr><tr><td><strong>NOSTR</strong></td><td>WebSocket Relays</td><td>✅ 已支持</td></tr><tr><td><strong>Zalo</strong></td><td>Webhook + REST</td><td>✅ 已支持</td></tr><tr><td><strong>Nextcloud Talk</strong></td><td>HTTP Polling</td><td>✅ 已支持</td></tr><tr><td><strong>Web 聊天界面</strong></td><td>WebSocket (内置)</td><td>✅ 已支持</td></tr></tbody></table>
+<blockquote>
+<p>完整列表：<a class="" href="/lingti-bot/chat-platforms">聊天平台列表</a></p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="一键接入">一键接入<a href="#一键接入" class="hash-link" aria-label="一键接入的直接链接" title="一键接入的直接链接" translate="no">​</a></h3>
+<p>灵小缇提供 <strong>1 分钟内一键接入</strong>方式，无需复杂配置：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 设置 API 密钥</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">ANTHROPIC_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;sk-ant-your-api-key&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Slack 一键接入</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">SLACK_BOT_TOKEN</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;xoxb-...&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">SLACK_APP_TOKEN</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;xapp-...&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 飞书一键接入</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">FEISHU_APP_ID</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;cli_...&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">FEISHU_APP_SECRET</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;...&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 启动网关</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">./lingti-bot gateway</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="多-ai-后端">多 AI 后端<a href="#多-ai-后端" class="hash-link" aria-label="多 AI 后端的直接链接" title="多 AI 后端的直接链接" translate="no">​</a></h3>
+<p>支持 <strong>16 种 AI 服务</strong>，涵盖国内外主流大模型平台，按需切换：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Provider</th><th>名称</th><th>默认模型</th></tr></thead><tbody><tr><td>1</td><td><code>deepseek</code></td><td>DeepSeek (推荐)</td><td><code>deepseek-chat</code></td></tr><tr><td>2</td><td><code>qwen</code></td><td>通义千问 (Qwen)</td><td><code>qwen-plus</code></td></tr><tr><td>3</td><td><code>claude</code></td><td>Claude (Anthropic)</td><td><code>claude-sonnet-4-20250514</code></td></tr><tr><td>4</td><td><code>kimi</code></td><td>Kimi / 月之暗面</td><td><code>moonshot-v1-8k</code></td></tr><tr><td>5</td><td><code>minimax</code></td><td>MiniMax / 海螺 AI</td><td><code>MiniMax-Text-01</code></td></tr><tr><td>6</td><td><code>doubao</code></td><td>豆包 (ByteDance)</td><td><code>doubao-pro-32k</code></td></tr><tr><td>7</td><td><code>zhipu</code></td><td>智谱 GLM</td><td><code>glm-4-flash</code></td></tr><tr><td>8</td><td><code>openai</code></td><td>OpenAI (GPT)</td><td><code>gpt-4o</code></td></tr><tr><td>9</td><td><code>gemini</code></td><td>Gemini (Google)</td><td><code>gemini-2.0-flash</code></td></tr><tr><td>10</td><td><code>yi</code></td><td>零一万物 (Yi)</td><td><code>yi-large</code></td></tr><tr><td>11</td><td><code>stepfun</code></td><td>阶跃星辰 (StepFun)</td><td><code>step-2-16k</code></td></tr><tr><td>12</td><td><code>baichuan</code></td><td>百川智能 (Baichuan)</td><td><code>Baichuan4</code></td></tr><tr><td>13</td><td><code>spark</code></td><td>讯飞星火 (iFlytek)</td><td><code>generalv3.5</code></td></tr><tr><td>14</td><td><code>siliconflow</code></td><td>硅基流动 (aggregator)</td><td><code>Qwen/Qwen2.5-72B-Instruct</code></td></tr><tr><td>15</td><td><code>grok</code></td><td>Grok (xAI)</td><td><code>grok-2-latest</code></td></tr><tr><td>16</td><td><code>ollama</code></td><td>Ollama (本地)</td><td><code>llama3.2</code></td></tr></tbody></table>
+<blockquote>
+<p>完整列表（含 API Key 获取链接、别名）：<a class="" href="/lingti-bot/AI-PROVIDERS.md">AI 服务列表</a></p>
+</blockquote>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 使用命令行参数指定</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> qwen --api-key </span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;qwen-plus&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 覆盖默认模型</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> openai --api-key </span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;gpt-4o-mini&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细文档">详细文档<a href="#详细文档" class="hash-link" aria-label="详细文档的直接链接" title="详细文档的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><a class="" href="/lingti-bot/CONFIGURATION.md">配置优先级</a> - 命令行参数 &gt; 环境变量 &gt; 配置文件的解析机制</li>
+<li class=""><a class="" href="/lingti-bot/AI-PROVIDERS.md">AI 服务列表</a> - 16 种 AI 服务详情、API Key 获取、别名</li>
+<li class=""><a class="" href="/lingti-bot/chat-platforms">聊天平台列表</a> - 19 种聊天平台详情、配置参数、环境变量</li>
+<li class=""><a class="" href="/lingti-bot/cli-reference">命令行参考</a> - 完整的命令行使用文档</li>
+<li class=""><a class="" href="/lingti-bot/skills">Skills 指南</a> - Skills 系统详解：创建、发现、配置</li>
+<li class=""><a class="" href="/lingti-bot/slack-integration">Slack 集成指南</a> - 完整的 Slack 应用配置教程</li>
+<li class=""><a class="" href="/lingti-bot/feishu-integration">飞书集成指南</a> - 飞书/Lark 应用配置教程</li>
+<li class=""><a class="" href="/lingti-bot/wecom-integration">企业微信集成指南</a> - 企业微信应用配置教程</li>
+<li class=""><a class="" href="/lingti-bot/file-sending">文件发送指南</a> - 各平台文件传输能力、配置与限制</li>
+<li class=""><a class="" href="/lingti-bot/cron-jobs">定时任务指南</a> - AI 智能任务 vs 静态消息、Cron 表达式、管理命令</li>
+<li class=""><a class="" href="/lingti-bot/browser-automation">浏览器自动化指南</a> - CDP 引擎、接管已有 Chrome、14 个工具完整参考、典型场景与故障排除</li>
+<li class=""><a class="" href="/lingti-bot/docs/browser-agent-rules.md">浏览器 AI 操作规则</a> - AI agent 的所有浏览器行为规则：快照法则、搜索行为、弹窗处理、批量操作、连接模式、常见错误纠正</li>
+<li class=""><a class="" href="/lingti-bot/social-platform-automation">社交平台自动化指南</a> - 知乎、小红书等内容平台的 AI 自动化运营</li>
+<li class=""><a class="" href="/lingti-bot/docs/openclaw-feature-comparison.md">OpenClaw 技术特性对比</a> - 详细功能差异分析</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-工具集">MCP 工具集<a href="#mcp-工具集" class="hash-link" aria-label="MCP 工具集的直接链接" title="MCP 工具集的直接链接" translate="no">​</a></h2>
+<p>灵小缇提供 <strong>75+ MCP 工具</strong>，覆盖日常工作的方方面面。包含全新的<a class="" href="/lingti-bot/browser-automation">浏览器自动化</a>能力。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="工具分类">工具分类<a href="#工具分类" class="hash-link" aria-label="工具分类的直接链接" title="工具分类的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>分类</th><th>工具数</th><th>说明</th></tr></thead><tbody><tr><td>文件操作</td><td>9</td><td>读写、搜索、整理、废纸篓</td></tr><tr><td>Shell 命令</td><td>2</td><td>命令执行、路径查找</td></tr><tr><td>系统信息</td><td>4</td><td>CPU、内存、磁盘、环境变量</td></tr><tr><td>进程管理</td><td>3</td><td>列表、详情、终止</td></tr><tr><td>网络工具</td><td>4</td><td>接口、连接、Ping、DNS</td></tr><tr><td>日历 (macOS)</td><td>6</td><td>查看、创建、搜索、删除</td></tr><tr><td>提醒事项 (macOS)</td><td>5</td><td>列表、添加、完成、删除</td></tr><tr><td>备忘录 (macOS)</td><td>6</td><td>文件夹、列表、读取、创建、搜索、删除</td></tr><tr><td>天气</td><td>2</td><td>当前天气、预报</td></tr><tr><td>网页搜索</td><td>2</td><td>DuckDuckGo 搜索、网页获取</td></tr><tr><td>剪贴板</td><td>2</td><td>读写剪贴板</td></tr><tr><td>截图</td><td>1</td><td>屏幕截图</td></tr><tr><td>系统通知</td><td>1</td><td>发送通知</td></tr><tr><td>音乐控制 (macOS)</td><td>7</td><td>播放、暂停、切歌、音量</td></tr><tr><td>Git</td><td>4</td><td>状态、日志、差异、分支</td></tr><tr><td>GitHub</td><td>6</td><td>PR、Issue、仓库信息</td></tr><tr><td><a class="" href="/lingti-bot/browser-automation">浏览器自动化</a></td><td>14</td><td>快照、点击、输入、JS 执行、批量操作、截图、标签页</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="文件操作">文件操作<a href="#文件操作" class="hash-link" aria-label="文件操作的直接链接" title="文件操作的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>file_read</code></td><td>读取文件内容</td></tr><tr><td><code>file_write</code></td><td>写入文件内容</td></tr><tr><td><code>file_list</code></td><td>列出目录内容</td></tr><tr><td><code>file_search</code></td><td>按模式搜索文件</td></tr><tr><td><code>file_info</code></td><td>获取文件详细信息</td></tr><tr><td><code>file_list_old</code></td><td>列出长时间未修改的文件</td></tr><tr><td><code>file_delete_old</code></td><td>删除长时间未修改的文件</td></tr><tr><td><code>file_delete_list</code></td><td>批量删除指定文件</td></tr><tr><td><code>file_trash</code></td><td>移动文件到废纸篓（macOS）</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="shell-命令">Shell 命令<a href="#shell-命令" class="hash-link" aria-label="Shell 命令的直接链接" title="Shell 命令的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>shell_execute</code></td><td>执行 Shell 命令</td></tr><tr><td><code>shell_which</code></td><td>查找可执行文件路径</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="系统信息">系统信息<a href="#系统信息" class="hash-link" aria-label="系统信息的直接链接" title="系统信息的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>system_info</code></td><td>获取系统信息（CPU、内存、OS）</td></tr><tr><td><code>disk_usage</code></td><td>获取磁盘使用情况</td></tr><tr><td><code>env_get</code></td><td>获取环境变量</td></tr><tr><td><code>env_list</code></td><td>列出所有环境变量</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="进程管理">进程管理<a href="#进程管理" class="hash-link" aria-label="进程管理的直接链接" title="进程管理的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>process_list</code></td><td>列出运行中的进程</td></tr><tr><td><code>process_info</code></td><td>获取进程详细信息</td></tr><tr><td><code>process_kill</code></td><td>终止进程</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="网络工具">网络工具<a href="#网络工具" class="hash-link" aria-label="网络工具的直接链接" title="网络工具的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>network_interfaces</code></td><td>列出网络接口</td></tr><tr><td><code>network_connections</code></td><td>列出活动网络连接</td></tr><tr><td><code>network_ping</code></td><td>TCP 连接测试</td></tr><tr><td><code>network_dns_lookup</code></td><td>DNS 查询</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="日历macos">日历（macOS）<a href="#日历macos" class="hash-link" aria-label="日历（macOS）的直接链接" title="日历（macOS）的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>calendar_today</code></td><td>获取今日日程</td></tr><tr><td><code>calendar_list_events</code></td><td>列出未来事件</td></tr><tr><td><code>calendar_create_event</code></td><td>创建日历事件</td></tr><tr><td><code>calendar_search</code></td><td>搜索日历事件</td></tr><tr><td><code>calendar_delete_event</code></td><td>删除日历事件</td></tr><tr><td><code>calendar_list_calendars</code></td><td>列出所有日历</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="提醒事项macos">提醒事项（macOS）<a href="#提醒事项macos" class="hash-link" aria-label="提醒事项（macOS）的直接链接" title="提醒事项（macOS）的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>reminders_today</code></td><td>获取今日待办事项</td></tr><tr><td><code>reminders_add</code></td><td>添加新提醒</td></tr><tr><td><code>reminders_complete</code></td><td>标记提醒为已完成</td></tr><tr><td><code>reminders_delete</code></td><td>删除提醒</td></tr><tr><td><code>reminders_list_lists</code></td><td>列出所有提醒列表</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="备忘录macos">备忘录（macOS）<a href="#备忘录macos" class="hash-link" aria-label="备忘录（macOS）的直接链接" title="备忘录（macOS）的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>notes_list_folders</code></td><td>列出备忘录文件夹</td></tr><tr><td><code>notes_list</code></td><td>列出备忘录</td></tr><tr><td><code>notes_read</code></td><td>读取备忘录内容</td></tr><tr><td><code>notes_create</code></td><td>创建新备忘录</td></tr><tr><td><code>notes_search</code></td><td>搜索备忘录</td></tr><tr><td><code>notes_delete</code></td><td>删除备忘录</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="天气">天气<a href="#天气" class="hash-link" aria-label="天气的直接链接" title="天气的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>weather_current</code></td><td>获取当前天气</td></tr><tr><td><code>weather_forecast</code></td><td>获取天气预报</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="网页搜索">网页搜索<a href="#网页搜索" class="hash-link" aria-label="网页搜索的直接链接" title="网页搜索的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>web_search</code></td><td>DuckDuckGo 搜索</td></tr><tr><td><code>web_fetch</code></td><td>获取网页内容</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="剪贴板">剪贴板<a href="#剪贴板" class="hash-link" aria-label="剪贴板的直接链接" title="剪贴板的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>clipboard_read</code></td><td>读取剪贴板内容</td></tr><tr><td><code>clipboard_write</code></td><td>写入剪贴板</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="系统通知">系统通知<a href="#系统通知" class="hash-link" aria-label="系统通知的直接链接" title="系统通知的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>notification_send</code></td><td>发送系统通知</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="截图">截图<a href="#截图" class="hash-link" aria-label="截图的直接链接" title="截图的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>screenshot</code></td><td>截取屏幕截图</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="音乐控制macos">音乐控制（macOS）<a href="#音乐控制macos" class="hash-link" aria-label="音乐控制（macOS）的直接链接" title="音乐控制（macOS）的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>music_play</code></td><td>播放音乐</td></tr><tr><td><code>music_pause</code></td><td>暂停音乐</td></tr><tr><td><code>music_next</code></td><td>下一首</td></tr><tr><td><code>music_previous</code></td><td>上一首</td></tr><tr><td><code>music_now_playing</code></td><td>获取当前播放信息</td></tr><tr><td><code>music_volume</code></td><td>设置音量</td></tr><tr><td><code>music_search</code></td><td>搜索并播放音乐</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="git">Git<a href="#git" class="hash-link" aria-label="Git的直接链接" title="Git的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>git_status</code></td><td>查看仓库状态</td></tr><tr><td><code>git_log</code></td><td>查看提交日志</td></tr><tr><td><code>git_diff</code></td><td>查看文件差异</td></tr><tr><td><code>git_branch</code></td><td>查看分支信息</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="github">GitHub<a href="#github" class="hash-link" aria-label="GitHub的直接链接" title="GitHub的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>github_pr_list</code></td><td>列出 Pull Requests</td></tr><tr><td><code>github_pr_view</code></td><td>查看 PR 详情</td></tr><tr><td><code>github_issue_list</code></td><td>列出 Issues</td></tr><tr><td><code>github_issue_view</code></td><td>查看 Issue 详情</td></tr><tr><td><code>github_issue_create</code></td><td>创建新 Issue</td></tr><tr><td><code>github_repo_view</code></td><td>查看仓库信息</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="浏览器自动化">浏览器自动化<a href="#浏览器自动化" class="hash-link" aria-label="浏览器自动化的直接链接" title="浏览器自动化的直接链接" translate="no">​</a></h3>
+<p>基于 <a href="https://github.com/go-rod/rod" target="_blank" rel="noopener noreferrer" class="">go-rod</a> 的纯 Go 浏览器自动化引擎，采用**快照-操作（Snapshot-then-Act）**模式，可接管已有 Chrome 窗口，无需 Puppeteer/Playwright/Node.js。</p>
+<blockquote>
+<p>📖 完整指南：<a class="" href="/lingti-bot/browser-automation">浏览器自动化文档</a></p>
+</blockquote>
+<p><strong>连接已有 Chrome（推荐）：</strong></p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># ~/.lingti.yaml</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">browser</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">cdp_url</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;127.0.0.1:9222&quot;</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic"># Chrome 需以 --remote-debugging-port=9222 启动</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">screen_size</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;1920x1080&quot;</span><span class="token plain">     </span><span class="token comment" style="color:#999988;font-style:italic"># 或 &quot;fullscreen&quot;</span><br></span></code></pre></div></div>
+<p><strong>核心工作流：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">browser_snapshot  →  [1] textbox &quot;搜索&quot;  [2] button &quot;搜索&quot;  [3] link &quot;登录&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_type ref=1 text=&quot;keyword&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_click ref=2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">browser_snapshot  →  重新获取编号（页面变化后必须重新 snapshot）</span><br></span></code></pre></div></div>
+<p><strong>14 个工具完整列表：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>browser_start</code></td><td>启动新浏览器，或连接已有 Chrome（<code>cdp_url</code> 参数）</td></tr><tr><td><code>browser_stop</code></td><td>关闭浏览器；CDP 连接模式下只断开，不关闭 Chrome</td></tr><tr><td><code>browser_status</code></td><td>查看运行状态（是否 connected、页面数、当前 URL）</td></tr><tr><td><code>browser_navigate</code></td><td>导航到 URL，自动等待页面加载，浏览器未启动时自动按优先级连接</td></tr><tr><td><code>browser_snapshot</code></td><td>获取无障碍树快照，为每个可交互元素分配数字 ref</td></tr><tr><td><code>browser_screenshot</code></td><td>截图，支持视口截图或整页截图，<code>full_page=true</code></td></tr><tr><td><code>browser_click</code></td><td>按 ref 编号点击元素，自动滚动到可见位置</td></tr><tr><td><code>browser_type</code></td><td>按 ref 编号输入文本，<code>submit=true</code> 输入后按 Enter</td></tr><tr><td><code>browser_press</code></td><td>按键（Enter、Tab、Escape、方向键、PageUp/Down 等）</td></tr><tr><td><code>browser_execute_js</code></td><td>在当前页面执行任意 JavaScript，返回结果字符串</td></tr><tr><td><code>browser_click_all</code></td><td>按 CSS 选择器批量点击，支持间隔延迟和跳过条件</td></tr><tr><td><code>browser_tabs</code></td><td>列出所有标签页（target_id、url、title）</td></tr><tr><td><code>browser_tab_open</code></td><td>打开新标签页，可指定初始 URL</td></tr><tr><td><code>browser_tab_close</code></td><td>按 target_id 关闭标签页，或关闭当前活跃标签页</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其他">其他<a href="#其他" class="hash-link" aria-label="其他的直接链接" title="其他的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>功能</th></tr></thead><tbody><tr><td><code>open_url</code></td><td>在浏览器中打开 URL</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="智能对话">智能对话<a href="#智能对话" class="hash-link" aria-label="智能对话的直接链接" title="智能对话的直接链接" translate="no">​</a></h2>
+<p>灵小缇支持<strong>多轮对话记忆</strong>，能够记住之前的对话内容，实现连续自然的交流体验。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="工作原理">工作原理<a href="#工作原理" class="hash-link" aria-label="工作原理的直接链接" title="工作原理的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">每个用户在每个频道有独立的对话上下文</li>
+<li class="">自动保存最近 <strong>50 条消息</strong></li>
+<li class="">对话 <strong>60 分钟</strong>无活动后自动过期</li>
+<li class="">支持跨多轮对话的上下文理解</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="使用示例">使用示例<a href="#使用示例" class="hash-link" aria-label="使用示例的直接链接" title="使用示例的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">用户：我叫小明，今年25岁</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：你好小明！很高兴认识你。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：我叫什么名字？</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：你叫小明。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：我多大了？</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：你今年25岁。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：帮我创建一个日程，标题就用我的名字</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：好的，我帮你创建了一个标题为&quot;小明&quot;的日程。</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="对话管理命令">对话管理命令<a href="#对话管理命令" class="hash-link" aria-label="对话管理命令的直接链接" title="对话管理命令的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td><code>/new</code></td><td>开始新对话，清除历史记忆</td></tr><tr><td><code>/reset</code></td><td>同上</td></tr><tr><td><code>/clear</code></td><td>同上</td></tr><tr><td><code>新对话</code></td><td>中文命令，开始新对话</td></tr><tr><td><code>清除历史</code></td><td>中文命令，清除对话历史</td></tr></tbody></table>
+<blockquote>
+<p><strong>提示</strong>：当你想让 AI &quot;忘记&quot;之前的内容重新开始时，只需发送 <code>/new</code> 即可。</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="快速开始">快速开始<a href="#快速开始" class="hash-link" aria-label="快速开始的直接链接" title="快速开始的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其他安装方式">其他安装方式<a href="#其他安装方式" class="hash-link" aria-label="其他安装方式的直接链接" title="其他安装方式的直接链接" translate="no">​</a></h3>
+<p><strong>从源码编译</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">git</span><span class="token plain"> clone https://github.com/ruilisi/lingti-bot.git</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">cd</span><span class="token plain"> lingti-bot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> build  </span><span class="token comment" style="color:#999988;font-style:italic"># 或: make darwin-arm64 / make linux-amd64</span><br></span></code></pre></div></div>
+<p><strong>手动下载</strong></p>
+<p>前往 <a href="https://github.com/ruilisi/lingti-bot/releases" target="_blank" rel="noopener noreferrer" class="">GitHub Releases</a> 下载对应平台的二进制文件。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="使用方式">使用方式<a href="#使用方式" class="hash-link" aria-label="使用方式的直接链接" title="使用方式的直接链接" translate="no">​</a></h3>
+<p><strong>方式一：MCP Server 模式</strong></p>
+<p>配置 Claude Desktop 或 Cursor，详见 <a href="#mcp-server" class="">MCP Server</a> 章节。</p>
+<p><strong>方式二：消息网关模式</strong></p>
+<p>连接 Slack、飞书等平台，详见 <a href="#%E5%A4%9A%E5%B9%B3%E5%8F%B0%E6%B6%88%E6%81%AF%E7%BD%91%E5%85%B3" class="">多平台消息网关</a> 章节。</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="使用示例-1">使用示例<a href="#使用示例-1" class="hash-link" aria-label="使用示例的直接链接" title="使用示例的直接链接" translate="no">​</a></h2>
+<p>配置完成后，你可以让 AI 助手执行以下操作：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="日历与日程">日历与日程<a href="#日历与日程" class="hash-link" aria-label="日历与日程的直接链接" title="日历与日程的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;今天有什么日程安排？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;这周有哪些会议？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我创建一个明天下午3点的会议，标题是&#x27;产品评审&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;搜索所有包含&#x27;周报&#x27;的日程&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="文件操作与传输">文件操作与传输<a href="#文件操作与传输" class="hash-link" aria-label="文件操作与传输的直接链接" title="文件操作与传输的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;列出桌面上的所有文件&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;读取 ~/Documents/notes.txt 的内容&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;将 ~/Desktop/报告.pdf 发送给我&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;把 Documents 里的产品介绍发给我&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;桌面上超过30天没动过的文件有哪些？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我把这些旧文件移到废纸篓&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="系统与进程">系统与进程<a href="#系统与进程" class="hash-link" aria-label="系统与进程的直接链接" title="系统与进程的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;我的电脑配置是什么？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;现在 CPU 占用多少？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;Chrome 占用了多少内存？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;结束 PID 1234 的进程&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="网络与搜索">网络与搜索<a href="#网络与搜索" class="hash-link" aria-label="网络与搜索的直接链接" title="网络与搜索的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;我的 IP 地址是什么？&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我搜索一下最新的 AI 新闻&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;查询 github.com 的 DNS&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="音乐控制">音乐控制<a href="#音乐控制" class="hash-link" aria-label="音乐控制的直接链接" title="音乐控制的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;播放音乐&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;下一首&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;音量调到 50%&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;播放周杰伦的歌&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="组合任务">组合任务<a href="#组合任务" class="hash-link" aria-label="组合任务的直接链接" title="组合任务的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;查看今天的日程，然后检查天气，最后列出待办事项&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我整理桌面：列出超过60天的旧文件，然后移到废纸篓&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;搜索最近的科技新闻，整理成备忘录&quot;</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="项目结构">项目结构<a href="#项目结构" class="hash-link" aria-label="项目结构的直接链接" title="项目结构的直接链接" translate="no">​</a></h2>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── main.go                 # 程序入口</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── Makefile                # 构建脚本</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── Dockerfile              # 多阶段 Docker 构建</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── docker-compose.yml      # 容器编排</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── go.mod                  # Go 模块定义</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── cmd/                    # 命令行接口</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── root.go             # 根命令</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── serve.go            # MCP 服务器命令</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── doctor.go           # 健康诊断命令</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── service.go          # 系统服务管理</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   └── version.go          # 版本信息</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── internal/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── mcp/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── server.go       # MCP 服务器实现</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── browser/            # 浏览器自动化引擎</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── browser.go      # 浏览器生命周期管理</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── snapshot.go     # 无障碍树快照与 ref 映射</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── actions.go      # 元素交互（点击、输入、悬停）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── tools/              # MCP 工具实现</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── filesystem.go   # 文件读写、列表、搜索</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── shell.go        # Shell 命令执行</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── system.go       # 系统信息、磁盘、环境变量</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── process.go      # 进程列表、信息、终止</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── network.go      # 网络接口、连接、DNS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── calendar.go     # macOS 日历集成</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── filemanager.go  # 文件整理（清理旧文件）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── reminders.go    # macOS 提醒事项</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── notes.go        # macOS 备忘录</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── weather.go      # 天气查询（wttr.in）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── websearch.go    # 网页搜索和获取</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── clipboard.go    # 剪贴板读写</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── notification.go # 系统通知</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── screenshot.go   # 屏幕截图</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── browser.go      # 浏览器自动化工具（12个）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── music.go        # 音乐控制（Spotify/Apple Music）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── router/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── router.go       # 多平台消息路由器</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── platforms/          # 消息平台集成</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── slack/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   │   └── slack.go    # Slack Socket Mode</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── feishu/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │       └── feishu.go   # 飞书 WebSocket</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── agent/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── agent.go        # Agent 主逻辑与工具定义</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── pool.go         # Agent 连接池（按平台模型切换）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── provider.go     # AI Provider 接口</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── provider_claude.go  # Claude 实现（含 Extended Thinking）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── session.go      # 会话设置（思考级别）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   ├── tools.go        # 工具执行</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │   └── memory.go       # 会话记忆</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   └── service/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── manager.go      # 系统服务管理</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── docs/                   # 文档</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── slack-integration.md    # Slack 集成指南</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── feishu-integration.md   # 飞书集成指南</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └── openclaw-reference.md   # 架构参考</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="make-目标">Make 目标<a href="#make-目标" class="hash-link" aria-label="Make 目标的直接链接" title="Make 目标的直接链接" translate="no">​</a></h2>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 开发</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> build          </span><span class="token comment" style="color:#999988;font-style:italic"># 编译当前平台</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> run            </span><span class="token comment" style="color:#999988;font-style:italic"># 本地运行</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> </span><span class="token builtin class-name">test</span><span class="token plain">           </span><span class="token comment" style="color:#999988;font-style:italic"># 运行测试</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">fmt</span><span class="token plain">            </span><span class="token comment" style="color:#999988;font-style:italic"># 格式化代码</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> lint           </span><span class="token comment" style="color:#999988;font-style:italic"># 代码检查</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> clean          </span><span class="token comment" style="color:#999988;font-style:italic"># 清理构建产物</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> version        </span><span class="token comment" style="color:#999988;font-style:italic"># 显示版本</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 跨平台编译</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> darwin-arm64   </span><span class="token comment" style="color:#999988;font-style:italic"># macOS Apple Silicon</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> darwin-amd64   </span><span class="token comment" style="color:#999988;font-style:italic"># macOS Intel</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> darwin-universal </span><span class="token comment" style="color:#999988;font-style:italic"># macOS 通用二进制</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> linux-amd64    </span><span class="token comment" style="color:#999988;font-style:italic"># Linux x64</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> linux-arm64    </span><span class="token comment" style="color:#999988;font-style:italic"># Linux ARM64</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> linux-all      </span><span class="token comment" style="color:#999988;font-style:italic"># 所有 Linux 平台</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> all            </span><span class="token comment" style="color:#999988;font-style:italic"># 所有平台</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 服务管理</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">install</span><span class="token plain">        </span><span class="token comment" style="color:#999988;font-style:italic"># 安装为系统服务</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> uninstall      </span><span class="token comment" style="color:#999988;font-style:italic"># 卸载系统服务</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> start          </span><span class="token comment" style="color:#999988;font-style:italic"># 启动服务</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> stop           </span><span class="token comment" style="color:#999988;font-style:italic"># 停止服务</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> status         </span><span class="token comment" style="color:#999988;font-style:italic"># 查看服务状态</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># macOS 签名</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> codesign       </span><span class="token comment" style="color:#999988;font-style:italic"># 代码签名（需要开发者证书）</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="命令行选项">命令行选项<a href="#命令行选项" class="hash-link" aria-label="命令行选项的直接链接" title="命令行选项的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="全局选项">全局选项<a href="#全局选项" class="hash-link" aria-label="全局选项的直接链接" title="全局选项的直接链接" translate="no">​</a></h3>
+<p>这些选项可用于所有命令，放在子命令之前使用。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>选项</th><th>简写</th><th>说明</th><th>默认值</th></tr></thead><tbody><tr><td><code>--yes</code></td><td><code>-y</code></td><td><strong>自动批准模式</strong> - 跳过所有确认提示，直接执行操作</td><td><code>false</code></td></tr><tr><td><code>--debug</code></td><td>-</td><td><strong>调试模式</strong> - 启用详细日志和浏览器截图</td><td><code>false</code></td></tr><tr><td><code>--log &lt;level&gt;</code></td><td>-</td><td><strong>日志级别</strong> - silent, info, verbose, very-verbose</td><td><code>info</code></td></tr><tr><td><code>--debug-dir &lt;path&gt;</code></td><td>-</td><td><strong>调试目录</strong> - 保存调试截图的路径</td><td><code>/tmp/lingti-bot</code></td></tr></tbody></table>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="自动批准模式---yes">自动批准模式 (<code>--yes</code>)<a href="#自动批准模式---yes" class="hash-link" aria-label="自动批准模式---yes的直接链接" title="自动批准模式---yes的直接链接" translate="no">​</a></h4>
+<p>启用后，AI 将立即执行文件写入、删除、Shell 命令等操作，无需每次询问确认。</p>
+<p><strong>适用场景：</strong></p>
+<ul>
+<li class="">✅ 批量文件处理</li>
+<li class="">✅ 代码生成和重构</li>
+<li class="">✅ 文档自动更新</li>
+<li class="">✅ CI/CD 自动化流程</li>
+<li class="">✅ 信任环境下的快速操作</li>
+</ul>
+<p><strong>不适用场景：</strong></p>
+<ul>
+<li class="">❌ 生产环境服务器</li>
+<li class="">❌ 共享系统</li>
+<li class="">❌ 首次尝试新操作</li>
+<li class="">❌ 涉及敏感数据</li>
+</ul>
+<p><strong>使用示例：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 启用自动批准</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot </span><span class="token parameter variable" style="color:#36acaa">--yes</span><span class="token plain"> router </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 简写形式</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot </span><span class="token parameter variable" style="color:#36acaa">-y</span><span class="token plain"> router </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 结合调试模式</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot </span><span class="token parameter variable" style="color:#36acaa">--yes</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--debug</span><span class="token plain"> router </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<p><strong>行为对比：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 不使用 --yes（默认）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：保存这个文件到 config.yaml</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：  我已经准备好内容。是否确认保存到 config.yaml？</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：是的</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：  ✅ 已保存到 config.yaml</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 使用 --yes</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">用户：保存这个文件到 config.yaml</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI：  ✅ 已保存到 config.yaml </span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">247</span><span class="token plain"> 字节</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<p><strong>安全提示：</strong></p>
+<ul>
+<li class="">在 git 仓库中使用 <code>--yes</code> 最安全，可随时通过 <code>git diff</code> 查看变更</li>
+<li class="">建议先在测试目录中尝试 <code>--yes</code> 模式</li>
+<li class="">即使启用 <code>--yes</code>，危险操作（如 <code>rm -rf /</code>）仍会被拒绝</li>
+</ul>
+<p>详细文档：</p>
+<ul>
+<li class=""><a class="" href="/lingti-bot/auto-approval">自动批准完整指南</a></li>
+<li class=""><a class="" href="/lingti-bot/docs/auto-approval-quickref.md">快速参考</a></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="调试模式---debug">调试模式 (<code>--debug</code>)<a href="#调试模式---debug" class="hash-link" aria-label="调试模式---debug的直接链接" title="调试模式---debug的直接链接" translate="no">​</a></h4>
+<p>启用后自动设置日志级别为 <code>very-verbose</code>，并在浏览器操作出错时保存截图。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot </span><span class="token parameter variable" style="color:#36acaa">--debug</span><span class="token plain"> router </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek --api-key sk-xxx</span><br></span></code></pre></div></div>
+<p>详细文档：</p>
+<ul>
+<li class=""><a class="" href="/lingti-bot/docs/browser-debug.md">浏览器调试指南</a></li>
+<li class=""><a class="" href="/lingti-bot/docs/browser-debug-quickref.md">快速参考</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="配置优先级">配置优先级<a href="#配置优先级" class="hash-link" aria-label="配置优先级的直接链接" title="配置优先级的直接链接" translate="no">​</a></h2>
+<p>所有配置项按以下优先级解析：<strong>命令行参数 &gt; 环境变量 &gt; 配置文件 (<code>~/.lingti.yaml</code>)</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 配置文件已保存 provider: qwen，但命令行覆盖为 deepseek</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek</span><br></span></code></pre></div></div>
+<p>完整的环境变量、命令行参数、配置文件对照表请参考：<a class="" href="/lingti-bot/CONFIGURATION.md">配置优先级</a></p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据文件">数据文件<a href="#数据文件" class="hash-link" aria-label="数据文件的直接链接" title="数据文件的直接链接" translate="no">​</a></h2>
+<p>lingti-bot 在用户主目录下存储以下文件：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>路径</th><th>说明</th></tr></thead><tbody><tr><td><code>~/.lingti.yaml</code></td><td>配置文件（AI 服务、平台密钥等）</td></tr><tr><td><code>~/.lingti.db</code></td><td>SQLite 数据库（定时任务等持久化数据）</td></tr><tr><td><code>~/.lingti.db-wal</code></td><td>SQLite WAL 日志（自动管理，勿手动删除）</td></tr><tr><td><code>~/.lingti.db-shm</code></td><td>SQLite 共享内存（自动管理，勿手动删除）</td></tr><tr><td><code>~/.lingti-bot/browser/</code></td><td>浏览器自动化的用户数据目录</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="安全注意事项">安全注意事项<a href="#安全注意事项" class="hash-link" aria-label="安全注意事项的直接链接" title="安全注意事项的直接链接" translate="no">​</a></h2>
+<ul>
+<li class="">lingti-bot 提供对本地系统的访问能力，请在可信环境中使用</li>
+<li class="">Shell 命令执行有基本的危险命令过滤，但仍需谨慎</li>
+<li class="">API 密钥等敏感信息请使用环境变量，不要提交到版本控制</li>
+<li class="">生产环境建议使用专用服务账号运行</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="依赖">依赖<a href="#依赖" class="hash-link" aria-label="依赖的直接链接" title="依赖的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/mark3labs/mcp-go" target="_blank" rel="noopener noreferrer" class="">mcp-go</a> - MCP 协议 Go 实现</li>
+<li class=""><a href="https://github.com/spf13/cobra" target="_blank" rel="noopener noreferrer" class="">cobra</a> - CLI 框架</li>
+<li class=""><a href="https://github.com/shirou/gopsutil" target="_blank" rel="noopener noreferrer" class="">gopsutil</a> - 系统信息</li>
+<li class=""><a href="https://github.com/slack-go/slack" target="_blank" rel="noopener noreferrer" class="">slack-go</a> - Slack SDK</li>
+<li class=""><a href="https://github.com/larksuite/oapi-sdk-go" target="_blank" rel="noopener noreferrer" class="">oapi-sdk-go</a> - 飞书/Lark SDK</li>
+<li class=""><a href="https://github.com/liushuangls/go-anthropic" target="_blank" rel="noopener noreferrer" class="">go-anthropic</a> - Anthropic API 客户端</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="许可证">许可证<a href="#许可证" class="hash-link" aria-label="许可证的直接链接" title="许可证的直接链接" translate="no">​</a></h2>
+<p>MIT License</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="贡献">贡献<a href="#贡献" class="hash-link" aria-label="贡献的直接链接" title="贡献的直接链接" translate="no">​</a></h2>
+<p>欢迎提交 Issue 和 Pull Request！</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="开发环境">开发环境<a href="#开发环境" class="hash-link" aria-label="开发环境的直接链接" title="开发环境的直接链接" translate="no">​</a></h2>
+<p>本项目完全在 <strong><a href="https://cli.lingti.com/code" target="_blank" rel="noopener noreferrer" class="">lingti-code</a></strong> 环境中编写完成。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="关于-lingti-code">关于 lingti-code<a href="#关于-lingti-code" class="hash-link" aria-label="关于 lingti-code的直接链接" title="关于 lingti-code的直接链接" translate="no">​</a></h3>
+<p><a href="https://github.com/ruilisi/lingti-code" target="_blank" rel="noopener noreferrer" class="">lingti-code</a> 是一个一体化的 AI 就绪开发环境平台，基于 <strong>Tmux + Neovim + Zsh</strong> 构建，支持 macOS、Ubuntu 和 Docker 部署。</p>
+<p><strong>核心组件：</strong></p>
+<ul>
+<li class=""><strong>Shell</strong> - ZSH + Prezto 框架，100+ 常用别名和函数，fasd 智能导航</li>
+<li class=""><strong>Editor</strong> - Neovim + SpaceVim 发行版，LSP 集成，GitHub Copilot 支持</li>
+<li class=""><strong>Terminal</strong> - Tmux 终端复用，vim 风格键绑定，会话管理</li>
+<li class=""><strong>版本控制</strong> - Git 最佳实践配置，丰富的 Git 别名</li>
+<li class=""><strong>开发工具</strong> - asdf 版本管理器，ctags，IRB/Pry 增强</li>
+</ul>
+<p><strong>AI 集成：</strong></p>
+<ul>
+<li class="">Claude Code CLI 配置，支持项目感知的 CLAUDE.md 文件</li>
+<li class="">自定义状态栏显示 Token 用量</li>
+<li class="">预配置 LSP 插件（Python basedpyright、Go gopls）</li>
+</ul>
+<p><strong>一键安装：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">bash</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;</span><span class="token string variable" style="color:#36acaa">$(</span><span class="token string variable function" style="color:#d73a49">curl</span><span class="token string variable" style="color:#36acaa"> </span><span class="token string variable parameter variable" style="color:#36acaa">-fsSL</span><span class="token string variable" style="color:#36acaa"> https://raw.githubusercontent.com/lingti/lingti-code/master/install.sh</span><span class="token string variable" style="color:#36acaa">)</span><span class="token string" style="color:#e3116c">&quot;</span><br></span></code></pre></div></div>
+<p>更多信息请访问：<a href="https://cli.lingti.com/code" target="_blank" rel="noopener noreferrer" class="">官网</a> | <a href="https://github.com/ruilisi/lingti-code" target="_blank" rel="noopener noreferrer" class="">GitHub</a></p>
+<hr>
+<p><strong>灵小缇</strong> - 你的敏捷 AI 助手 🐕</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/intro.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--next" href="/lingti-bot/relay"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">云中继（lingti-bot relay）</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#安装" class="table-of-contents__link toc-highlight">安装</a><ul><li><a href="#macos--linux--wsl" class="table-of-contents__link toc-highlight">macOS / Linux / WSL</a></li><li><a href="#windows-powershell" class="table-of-contents__link toc-highlight">Windows (PowerShell)</a></li></ul></li><li><a href="#样例" class="table-of-contents__link toc-highlight">样例</a><ul><li><a href="#内置-web-聊天界面--浏览器直开零配置" class="table-of-contents__link toc-highlight"><a id="web-chat-ui"></a>内置 Web 聊天界面 — 浏览器直开，零配置</a></li><li><a href="#智能对话文件管理信息检索" class="table-of-contents__link toc-highlight">智能对话、文件管理、信息检索</a></li><li><a href="#定时任务--ai-自动创建-cron-job" class="table-of-contents__link toc-highlight">定时任务 — AI 自动创建 Cron Job</a></li><li><a href="#企业微信-ai-文件助手" class="table-of-contents__link toc-highlight">企业微信 AI 文件助手</a></li><li><a href="#社交平台自动化--ai-驱动的内容平台运营" class="table-of-contents__link toc-highlight">社交平台自动化 — AI 驱动的内容平台运营</a></li><li><a href="#浏览器自动化--让-ai-像人一样操控浏览器" class="table-of-contents__link toc-highlight">浏览器自动化 — 让 AI 像人一样操控浏览器</a></li></ul></li><li><a href="#为什么选择-lingti-bot" class="table-of-contents__link toc-highlight">为什么选择 lingti-bot？</a><ul><li><a href="#lingti-bot-vs-openclaw" class="table-of-contents__link toc-highlight">lingti-bot vs OpenClaw</a></li><li><a href="#单一二进制" class="table-of-contents__link toc-highlight">单一二进制</a></li><li><a href="#本地优先" class="table-of-contents__link toc-highlight">本地优先</a></li><li><a href="#跨平台支持" class="table-of-contents__link toc-highlight">跨平台支持</a></li></ul></li><li><a href="#功能概览" class="table-of-contents__link toc-highlight">功能概览</a><ul><li><a href="#mcp-server--标准协议无缝集成" class="table-of-contents__link toc-highlight">MCP Server — 标准协议，无缝集成</a></li><li><a href="#多平台消息网关--企业-im-秒接入" class="table-of-contents__link toc-highlight">多平台消息网关 — 企业 IM 秒接入</a></li><li><a href="#mcp-工具集--75-本地系统工具" class="table-of-contents__link toc-highlight">MCP 工具集 — 75+ 本地系统工具</a></li><li><a href="#定时任务--自动化你的工作流" class="table-of-contents__link toc-highlight">定时任务 — 自动化你的工作流</a></li><li><a href="#智能对话--多轮记忆自然交流" class="table-of-contents__link toc-highlight">智能对话 — 多轮记忆，自然交流</a></li><li><a href="#健康诊断--一键排查配置问题" class="table-of-contents__link toc-highlight">健康诊断 — 一键排查配置问题</a></li><li><a href="#按平台频道模型切换" class="table-of-contents__link toc-highlight"><a id="per-channel-model"></a>按平台/频道模型切换</a></li><li><a href="#claude-深度思考--原生-extended-thinking-api" class="table-of-contents__link toc-highlight">Claude 深度思考 — 原生 Extended Thinking API</a></li><li><a href="#docker-部署" class="table-of-contents__link toc-highlight">Docker 部署</a></li><li><a href="#skills--模块化能力扩展" class="table-of-contents__link toc-highlight">Skills — 模块化能力扩展</a></li><li><a href="#功能速览表" class="table-of-contents__link toc-highlight">功能速览表</a></li></ul></li><li><a href="#云中继零门槛接入企业消息平台" class="table-of-contents__link toc-highlight">云中继：零门槛接入企业消息平台</a><ul><li><a href="#微信公众号一键接入" class="table-of-contents__link toc-highlight">微信公众号一键接入</a></li><li><a href="#飞书接入" class="table-of-contents__link toc-highlight">飞书接入</a></li><li><a href="#企业微信接入" class="table-of-contents__link toc-highlight">企业微信接入</a></li><li><a href="#钉钉接入" class="table-of-contents__link toc-highlight">钉钉接入</a></li></ul></li><li><a href="#sponsors" class="table-of-contents__link toc-highlight">Sponsors</a></li><li><a href="#lingti-cli-生态" class="table-of-contents__link toc-highlight">lingti-cli 生态</a></li><li><a href="#mcp-server" class="table-of-contents__link toc-highlight">MCP Server</a><ul><li><a href="#支持的客户端" class="table-of-contents__link toc-highlight">支持的客户端</a></li><li><a href="#快速配置" class="table-of-contents__link toc-highlight">快速配置</a></li><li><a href="#特点" class="table-of-contents__link toc-highlight">特点</a></li></ul></li><li><a href="#多平台消息网关" class="table-of-contents__link toc-highlight">多平台消息网关</a><ul><li><a href="#支持的平台" class="table-of-contents__link toc-highlight">支持的平台</a></li><li><a href="#一键接入" class="table-of-contents__link toc-highlight">一键接入</a></li><li><a href="#多-ai-后端" class="table-of-contents__link toc-highlight">多 AI 后端</a></li><li><a href="#详细文档" class="table-of-contents__link toc-highlight">详细文档</a></li></ul></li><li><a href="#mcp-工具集" class="table-of-contents__link toc-highlight">MCP 工具集</a><ul><li><a href="#工具分类" class="table-of-contents__link toc-highlight">工具分类</a></li><li><a href="#文件操作" class="table-of-contents__link toc-highlight">文件操作</a></li><li><a href="#shell-命令" class="table-of-contents__link toc-highlight">Shell 命令</a></li><li><a href="#系统信息" class="table-of-contents__link toc-highlight">系统信息</a></li><li><a href="#进程管理" class="table-of-contents__link toc-highlight">进程管理</a></li><li><a href="#网络工具" class="table-of-contents__link toc-highlight">网络工具</a></li><li><a href="#日历macos" class="table-of-contents__link toc-highlight">日历（macOS）</a></li><li><a href="#提醒事项macos" class="table-of-contents__link toc-highlight">提醒事项（macOS）</a></li><li><a href="#备忘录macos" class="table-of-contents__link toc-highlight">备忘录（macOS）</a></li><li><a href="#天气" class="table-of-contents__link toc-highlight">天气</a></li><li><a href="#网页搜索" class="table-of-contents__link toc-highlight">网页搜索</a></li><li><a href="#剪贴板" class="table-of-contents__link toc-highlight">剪贴板</a></li><li><a href="#系统通知" class="table-of-contents__link toc-highlight">系统通知</a></li><li><a href="#截图" class="table-of-contents__link toc-highlight">截图</a></li><li><a href="#音乐控制macos" class="table-of-contents__link toc-highlight">音乐控制（macOS）</a></li><li><a href="#git" class="table-of-contents__link toc-highlight">Git</a></li><li><a href="#github" class="table-of-contents__link toc-highlight">GitHub</a></li><li><a href="#浏览器自动化" class="table-of-contents__link toc-highlight">浏览器自动化</a></li><li><a href="#其他" class="table-of-contents__link toc-highlight">其他</a></li></ul></li><li><a href="#智能对话" class="table-of-contents__link toc-highlight">智能对话</a><ul><li><a href="#工作原理" class="table-of-contents__link toc-highlight">工作原理</a></li><li><a href="#使用示例" class="table-of-contents__link toc-highlight">使用示例</a></li><li><a href="#对话管理命令" class="table-of-contents__link toc-highlight">对话管理命令</a></li></ul></li><li><a href="#快速开始" class="table-of-contents__link toc-highlight">快速开始</a><ul><li><a href="#其他安装方式" class="table-of-contents__link toc-highlight">其他安装方式</a></li><li><a href="#使用方式" class="table-of-contents__link toc-highlight">使用方式</a></li></ul></li><li><a href="#使用示例-1" class="table-of-contents__link toc-highlight">使用示例</a><ul><li><a href="#日历与日程" class="table-of-contents__link toc-highlight">日历与日程</a></li><li><a href="#文件操作与传输" class="table-of-contents__link toc-highlight">文件操作与传输</a></li><li><a href="#系统与进程" class="table-of-contents__link toc-highlight">系统与进程</a></li><li><a href="#网络与搜索" class="table-of-contents__link toc-highlight">网络与搜索</a></li><li><a href="#音乐控制" class="table-of-contents__link toc-highlight">音乐控制</a></li><li><a href="#组合任务" class="table-of-contents__link toc-highlight">组合任务</a></li></ul></li><li><a href="#项目结构" class="table-of-contents__link toc-highlight">项目结构</a></li><li><a href="#make-目标" class="table-of-contents__link toc-highlight">Make 目标</a></li><li><a href="#命令行选项" class="table-of-contents__link toc-highlight">命令行选项</a><ul><li><a href="#全局选项" class="table-of-contents__link toc-highlight">全局选项</a></li></ul></li><li><a href="#配置优先级" class="table-of-contents__link toc-highlight">配置优先级</a></li><li><a href="#数据文件" class="table-of-contents__link toc-highlight">数据文件</a></li><li><a href="#安全注意事项" class="table-of-contents__link toc-highlight">安全注意事项</a></li><li><a href="#依赖" class="table-of-contents__link toc-highlight">依赖</a></li><li><a href="#许可证" class="table-of-contents__link toc-highlight">许可证</a></li><li><a href="#贡献" class="table-of-contents__link toc-highlight">贡献</a></li><li><a href="#开发环境" class="table-of-contents__link toc-highlight">开发环境</a><ul><li><a href="#关于-lingti-code" class="table-of-contents__link toc-highlight">关于 lingti-code</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

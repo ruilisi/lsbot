@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-social-platform-automation" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">社交平台自动化 | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/social-platform-automation"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="社交平台自动化 | lingti-bot"><meta data-rh="true" name="description" content="通过 MCP + Chrome 浏览器能力，让 AI 代替你操作知乎、小红书等中国主流内容平台"><meta data-rh="true" property="og:description" content="通过 MCP + Chrome 浏览器能力，让 AI 代替你操作知乎、小红书等中国主流内容平台"><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/social-platform-automation"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/social-platform-automation" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/social-platform-automation" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"社交平台自动化","item":"https://ruilisi.github.io/lingti-bot/social-platform-automation"}]}</script><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/relay"><span title="快速上手" class="categoryLinkLabel_W154">快速上手</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/relay"><span title="云中继（lingti-bot relay）" class="linkLabel_WmDU">云中继（lingti-bot relay）</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/configuration"><span title="配置优先级" class="linkLabel_WmDU">配置优先级</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/ai-providers"><span title="Supported AI Providers / 支持的 AI 服务" class="linkLabel_WmDU">Supported AI Providers / 支持的 AI 服务</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cli-reference"><span title="Command Line Reference" class="linkLabel_WmDU">Command Line Reference</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/chat-platforms"><span title="平台接入" class="categoryLinkLabel_W154">平台接入</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/chat-platforms"><span title="Supported Chat Platforms / 支持的聊天平台" class="linkLabel_WmDU">Supported Chat Platforms / 支持的聊天平台</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/feishu-integration"><span title="飞书集成指南" class="linkLabel_WmDU">飞书集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wecom-integration"><span title="企业微信集成指南" class="linkLabel_WmDU">企业微信集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wechat-integration"><span title="微信公众号一键接入指南" class="linkLabel_WmDU">微信公众号一键接入指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/slack-integration"><span title="Slack Integration" class="linkLabel_WmDU">Slack Integration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/dingtalk-integration"><span title="钉钉（DingTalk）集成指南" class="linkLabel_WmDU">钉钉（DingTalk）集成指南</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/gateway"><span title="部署方式" class="categoryLinkLabel_W154">部署方式</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/lingti-bot/browser-automation"><span title="功能" class="categoryLinkLabel_W154">功能</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/browser-automation"><span title="浏览器自动化" class="linkLabel_WmDU">浏览器自动化</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/lingti-bot/social-platform-automation"><span title="社交平台自动化" class="linkLabel_WmDU">社交平台自动化</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/skills"><span title="Skills" class="linkLabel_WmDU">Skills</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cron-jobs"><span title="定时任务指南" class="linkLabel_WmDU">定时任务指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/file-sending"><span title="文件发送指南" class="linkLabel_WmDU">文件发送指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/auto-approval"><span title="Auto-Approval Mode (--yes)" class="linkLabel_WmDU">Auto-Approval Mode (--yes)</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/roadmap"><span title="开发路线图" class="linkLabel_WmDU">开发路线图</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/lingti-bot/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">功能</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">社交平台自动化</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>社交平台自动化</h1></header>
+<blockquote>
+<p>通过 MCP + Chrome 浏览器能力，让 AI 代替你操作知乎、小红书等中国主流内容平台</p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="概述">概述<a href="#概述" class="hash-link" aria-label="概述的直接链接" title="概述的直接链接" translate="no">​</a></h2>
+<p>lingti-bot 将浏览器自动化能力与 AI 深度结合，针对中国主流内容平台提供<strong>智能化运营</strong>支持。不同于传统的 RPA 脚本录制回放，lingti-bot 的方案是：</p>
+<ol>
+<li class=""><strong>AI 理解语义</strong> — 通过无障碍树快照读取页面结构，理解每个元素的含义</li>
+<li class=""><strong>MCP 驱动操作</strong> — 通过 MCP 协议（内置 CDP 引擎或 Chrome MCP Server）精准操作浏览器</li>
+<li class=""><strong>复用登录态</strong> — 在你已登录的 Chrome 中操作，无需提供账号密码</li>
+<li class=""><strong>自然语言指令</strong> — 用中文告诉 AI 你想做什么，AI 自动完成全部步骤</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="平台支持状态">平台支持状态<a href="#平台支持状态" class="hash-link" aria-label="平台支持状态的直接链接" title="平台支持状态的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th style="text-align:center">发帖/回答</th><th style="text-align:center">评论</th><th style="text-align:center">点赞/收藏</th><th style="text-align:center">搜索/浏览</th><th>状态</th></tr></thead><tbody><tr><td><strong>知乎</strong></td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td>已支持</td></tr><tr><td><strong>小红书</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>微博</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>抖音（网页版）</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>B站</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr><tr><td><strong>今日头条</strong></td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td style="text-align:center">🔜</td><td>规划中</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="知乎已支持">知乎（已支持）<a href="#知乎已支持" class="hash-link" aria-label="知乎（已支持）的直接链接" title="知乎（已支持）的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="支持的操作">支持的操作<a href="#支持的操作" class="hash-link" aria-label="支持的操作的直接链接" title="支持的操作的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>回答问题</strong> — 打开知乎问题页面，AI 撰写回答并提交</li>
+<li class=""><strong>发表评论</strong> — 在回答或文章下方发表评论</li>
+<li class=""><strong>点赞/收藏</strong> — 给回答、文章点赞或收藏</li>
+<li class=""><strong>搜索浏览</strong> — 搜索关键词，浏览搜索结果</li>
+<li class=""><strong>截图</strong> — 截取知乎页面截图</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="使用示例">使用示例<a href="#使用示例" class="hash-link" aria-label="使用示例的直接链接" title="使用示例的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我在知乎上回答这个问题，内容围绕 Go 语言的优势&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;打开知乎这篇文章，帮我写一条评论&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;帮我给这篇知乎回答点个赞&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&quot;在知乎搜索 &#x27;AI 编程&#x27; 并截图前三个结果&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="技术细节">技术细节<a href="#技术细节" class="hash-link" aria-label="技术细节的直接链接" title="技术细节的直接链接" translate="no">​</a></h3>
+<p>知乎的富文本编辑器使用 contenteditable div，lingti-bot 通过以下方式处理：</p>
+<ul>
+<li class="">通过快照定位编辑器和按钮元素</li>
+<li class="">使用 ClipboardEvent 模拟粘贴操作写入内容（绕过 contenteditable 兼容性问题）</li>
+<li class="">自动处理评论展开/折叠、编辑器弹出等交互流程</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="工作原理">工作原理<a href="#工作原理" class="hash-link" aria-label="工作原理的直接链接" title="工作原理的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="架构">架构<a href="#架构" class="hash-link" aria-label="架构的直接链接" title="架构的直接链接" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">用户（自然语言）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AI Agent（理解意图 + 规划步骤）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">MCP 工具调用（browser_snapshot → browser_click → browser_type → ...）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Chrome（CDP 协议 / Chrome MCP Server）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">目标平台（知乎/小红书/...）</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="两种浏览器控制方式">两种浏览器控制方式<a href="#两种浏览器控制方式" class="hash-link" aria-label="两种浏览器控制方式的直接链接" title="两种浏览器控制方式的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方式</th><th>说明</th><th>适用场景</th></tr></thead><tbody><tr><td><strong>内置 CDP 引擎</strong></td><td>lingti-bot 自带的 go-rod 浏览器引擎</td><td>MCP Server 模式、消息网关模式</td></tr><tr><td><strong>Chrome MCP Server</strong></td><td>通过 Chrome DevTools MCP 协议</td><td>Claude Code 等 MCP 客户端直接使用</td></tr></tbody></table>
+<p>两种方式都复用你已有的 Chrome 窗口和登录态，操作体验一致。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="前置条件">前置条件<a href="#前置条件" class="hash-link" aria-label="前置条件的直接链接" title="前置条件的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">Chrome 以调试端口启动（或配置 Chrome MCP Server）</li>
+<li class="">在 Chrome 中已登录目标平台账号</li>
+<li class="">lingti-bot 已配置 CDP 连接</li>
+</ol>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># ~/.lingti.yaml</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">browser</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">cdp_url</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;127.0.0.1:9222&quot;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="规划中的平台">规划中的平台<a href="#规划中的平台" class="hash-link" aria-label="规划中的平台的直接链接" title="规划中的平台的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="小红书下一步重点">小红书（下一步重点）<a href="#小红书下一步重点" class="hash-link" aria-label="小红书（下一步重点）的直接链接" title="小红书（下一步重点）的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">发布笔记（图文/视频）</li>
+<li class="">评论互动</li>
+<li class="">点赞/收藏/关注</li>
+<li class="">搜索浏览</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="微博">微博<a href="#微博" class="hash-link" aria-label="微博的直接链接" title="微博的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">发微博</li>
+<li class="">转发/评论</li>
+<li class="">点赞</li>
+<li class="">话题互动</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="b站">B站<a href="#b站" class="hash-link" aria-label="B站的直接链接" title="B站的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">发布动态</li>
+<li class="">视频评论</li>
+<li class="">点赞/投币/收藏</li>
+<li class="">搜索浏览</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="抖音网页版">抖音（网页版）<a href="#抖音网页版" class="hash-link" aria-label="抖音（网页版）的直接链接" title="抖音（网页版）的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">视频浏览</li>
+<li class="">评论互动</li>
+<li class="">点赞/收藏</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="今日头条">今日头条<a href="#今日头条" class="hash-link" aria-label="今日头条的直接链接" title="今日头条的直接链接" translate="no">​</a></h3>
+<ul>
+<li class="">发布文章</li>
+<li class="">评论互动</li>
+<li class="">搜索浏览</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="与传统-rpa-的区别">与传统 RPA 的区别<a href="#与传统-rpa-的区别" class="hash-link" aria-label="与传统 RPA 的区别的直接链接" title="与传统 RPA 的区别的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>lingti-bot</th><th>传统 RPA（按键精灵等）</th></tr></thead><tbody><tr><td><strong>定位方式</strong></td><td>无障碍树语义理解</td><td>坐标/图像匹配</td></tr><tr><td><strong>抗变化</strong></td><td>强（理解元素含义）</td><td>弱（UI 变化即失效）</td></tr><tr><td><strong>灵活性</strong></td><td>自然语言指令，随时调整</td><td>预录脚本，修改成本高</td></tr><tr><td><strong>智能程度</strong></td><td>AI 自动处理异常和弹窗</td><td>需要预设所有分支</td></tr><tr><td><strong>内容生成</strong></td><td>AI 自动生成内容</td><td>需要预先准备内容</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="注意事项">注意事项<a href="#注意事项" class="hash-link" aria-label="注意事项的直接链接" title="注意事项的直接链接" translate="no">​</a></h2>
+<ul>
+<li class="">请遵守各平台的使用条款和社区规范</li>
+<li class="">建议控制操作频率，避免触发平台反作弊机制</li>
+<li class="">社交平台自动化功能仅供个人效率提升使用</li>
+<li class="">AI 生成的内容请在发布前审核确认</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/social-platform-automation.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/lingti-bot/browser-automation"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">浏览器自动化</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/lingti-bot/skills"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">Skills</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#概述" class="table-of-contents__link toc-highlight">概述</a></li><li><a href="#平台支持状态" class="table-of-contents__link toc-highlight">平台支持状态</a></li><li><a href="#知乎已支持" class="table-of-contents__link toc-highlight">知乎（已支持）</a><ul><li><a href="#支持的操作" class="table-of-contents__link toc-highlight">支持的操作</a></li><li><a href="#使用示例" class="table-of-contents__link toc-highlight">使用示例</a></li><li><a href="#技术细节" class="table-of-contents__link toc-highlight">技术细节</a></li></ul></li><li><a href="#工作原理" class="table-of-contents__link toc-highlight">工作原理</a><ul><li><a href="#架构" class="table-of-contents__link toc-highlight">架构</a></li><li><a href="#两种浏览器控制方式" class="table-of-contents__link toc-highlight">两种浏览器控制方式</a></li><li><a href="#前置条件" class="table-of-contents__link toc-highlight">前置条件</a></li></ul></li><li><a href="#规划中的平台" class="table-of-contents__link toc-highlight">规划中的平台</a><ul><li><a href="#小红书下一步重点" class="table-of-contents__link toc-highlight">小红书（下一步重点）</a></li><li><a href="#微博" class="table-of-contents__link toc-highlight">微博</a></li><li><a href="#b站" class="table-of-contents__link toc-highlight">B站</a></li><li><a href="#抖音网页版" class="table-of-contents__link toc-highlight">抖音（网页版）</a></li><li><a href="#今日头条" class="table-of-contents__link toc-highlight">今日头条</a></li></ul></li><li><a href="#与传统-rpa-的区别" class="table-of-contents__link toc-highlight">与传统 RPA 的区别</a></li><li><a href="#注意事项" class="table-of-contents__link toc-highlight">注意事项</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

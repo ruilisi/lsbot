@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cli-reference" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Command Line Reference | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/cli-reference"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Command Line Reference | lingti-bot"><meta data-rh="true" name="description" content="Complete command line reference for lingti-bot."><meta data-rh="true" property="og:description" content="Complete command line reference for lingti-bot."><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/cli-reference"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/cli-reference" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/cli-reference" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Command Line Reference","item":"https://ruilisi.github.io/lingti-bot/cli-reference"}]}</script><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/lingti-bot/relay"><span title="快速上手" class="categoryLinkLabel_W154">快速上手</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/relay"><span title="云中继（lingti-bot relay）" class="linkLabel_WmDU">云中继（lingti-bot relay）</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/configuration"><span title="配置优先级" class="linkLabel_WmDU">配置优先级</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/ai-providers"><span title="Supported AI Providers / 支持的 AI 服务" class="linkLabel_WmDU">Supported AI Providers / 支持的 AI 服务</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/lingti-bot/cli-reference"><span title="Command Line Reference" class="linkLabel_WmDU">Command Line Reference</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/chat-platforms"><span title="平台接入" class="categoryLinkLabel_W154">平台接入</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/chat-platforms"><span title="Supported Chat Platforms / 支持的聊天平台" class="linkLabel_WmDU">Supported Chat Platforms / 支持的聊天平台</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/feishu-integration"><span title="飞书集成指南" class="linkLabel_WmDU">飞书集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wecom-integration"><span title="企业微信集成指南" class="linkLabel_WmDU">企业微信集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wechat-integration"><span title="微信公众号一键接入指南" class="linkLabel_WmDU">微信公众号一键接入指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/slack-integration"><span title="Slack Integration" class="linkLabel_WmDU">Slack Integration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/dingtalk-integration"><span title="钉钉（DingTalk）集成指南" class="linkLabel_WmDU">钉钉（DingTalk）集成指南</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/gateway"><span title="部署方式" class="categoryLinkLabel_W154">部署方式</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/browser-automation"><span title="功能" class="categoryLinkLabel_W154">功能</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/roadmap"><span title="开发路线图" class="linkLabel_WmDU">开发路线图</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/lingti-bot/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">快速上手</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Command Line Reference</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>Command Line Reference</h1></header>
+<p>Complete command line reference for lingti-bot.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="table-of-contents">Table of Contents<a href="#table-of-contents" class="hash-link" aria-label="Table of Contents的直接链接" title="Table of Contents的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="#global-options" class="">Global Options</a></li>
+<li class=""><a href="#commands" class="">Commands</a>
+<ul>
+<li class=""><a href="#channels" class="">channels</a> — Manage platform credentials</li>
+<li class=""><a href="#agents" class="">agents</a> — Manage agents and routing bindings</li>
+<li class=""><a href="#gateway" class="">gateway</a> — Start everything (unified run command)</li>
+<li class=""><a href="#serve" class="">serve</a> — Start MCP server</li>
+<li class=""><a href="#relay" class="">relay</a> — Cloud relay connection</li>
+<li class=""><a href="#doctor" class="">doctor</a> — Check system health</li>
+<li class=""><a href="#skills" class="">skills</a> — Manage modular skills</li>
+<li class=""><a href="#version" class="">version</a> — Show version</li>
+</ul>
+</li>
+<li class=""><a href="#router-deprecated" class="">router (deprecated)</a></li>
+<li class=""><a href="#environment-variables" class="">Environment Variables</a></li>
+<li class=""><a href="#ai-providers" class="">AI Providers</a></li>
+<li class=""><a href="#configuration-file" class="">Configuration File</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="global-options">Global Options<a href="#global-options" class="hash-link" aria-label="Global Options的直接链接" title="Global Options的直接链接" translate="no">​</a></h2>
+<p>These options are available for all commands:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>-h, --help</code></td><td></td><td>Show help for any command</td></tr><tr><td><code>--log</code></td><td><code>info</code></td><td>Log level: trace, debug, info, warn, error, fatal, panic</td></tr><tr><td><code>-y, --yes</code></td><td><code>false</code></td><td>Auto-approve all operations (skip confirmation prompts)</td></tr><tr><td><code>--no-files</code></td><td><code>false</code></td><td>Disable all file operation tools</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="commands">Commands<a href="#commands" class="hash-link" aria-label="Commands的直接链接" title="Commands的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="channels">channels<a href="#channels" class="hash-link" aria-label="channels的直接链接" title="channels的直接链接" translate="no">​</a></h3>
+<p>Manage platform channel credentials stored in <code>~/.lingti.yaml</code>. Credentials saved here are automatically loaded by <code>gateway</code> — no flags needed at startup.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels &lt;subcommand&gt;</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="channels-add">channels add<a href="#channels-add" class="hash-link" aria-label="channels add的直接链接" title="channels add的直接链接" translate="no">​</a></h4>
+<p>Add or update credentials for a platform channel.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">name</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">credential flags</span><span class="token punctuation" style="color:#393A34">]</span><br></span></code></pre></div></div>
+<p><strong>Required flag:</strong> <code>--channel &lt;name&gt;</code> — the platform to configure.</p>
+<p><strong>Platform credential flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Channel</th><th>Flags</th></tr></thead><tbody><tr><td><code>telegram</code></td><td><code>--token</code></td></tr><tr><td><code>slack</code></td><td><code>--bot-token</code>, <code>--app-token</code></td></tr><tr><td><code>discord</code></td><td><code>--token</code></td></tr><tr><td><code>feishu</code></td><td><code>--app-id</code>, <code>--app-secret</code></td></tr><tr><td><code>dingtalk</code></td><td><code>--client-id</code>, <code>--client-secret</code></td></tr><tr><td><code>wecom</code></td><td><code>--corp-id</code>, <code>--agent-id</code>, <code>--secret</code>, <code>--token</code>, <code>--aes-key</code>, <code>--port</code></td></tr><tr><td><code>whatsapp</code></td><td><code>--phone-id</code>, <code>--access-token</code>, <code>--verify-token</code></td></tr><tr><td><code>line</code></td><td><code>--channel-secret</code>, <code>--channel-token</code></td></tr><tr><td><code>teams</code></td><td><code>--app-id</code>, <code>--app-password</code>, <code>--tenant-id</code></td></tr><tr><td><code>matrix</code></td><td><code>--homeserver-url</code>, <code>--user-id</code>, <code>--access-token</code></td></tr><tr><td><code>mattermost</code></td><td><code>--server-url</code>, <code>--token</code>, <code>--team-name</code></td></tr><tr><td><code>signal</code></td><td><code>--api-url</code>, <code>--phone-number</code></td></tr><tr><td><code>imessage</code></td><td><code>--bluebubbles-url</code>, <code>--bluebubbles-password</code></td></tr><tr><td><code>twitch</code></td><td><code>--token</code>, <code>--channel-name</code>, <code>--bot-name</code></td></tr><tr><td><code>nostr</code></td><td><code>--private-key</code>, <code>--relays</code></td></tr><tr><td><code>zalo</code></td><td><code>--app-id</code>, <code>--secret-key</code>, <code>--access-token</code></td></tr><tr><td><code>nextcloud</code></td><td><code>--server-url</code>, <code>--username</code>, <code>--password</code>, <code>--room-token</code></td></tr><tr><td><code>googlechat</code></td><td><code>--project-id</code>, <code>--credentials-file</code></td></tr><tr><td><code>webapp</code></td><td><code>--port</code>, <code>--auth-token</code></td></tr></tbody></table>
+<p><strong>Examples:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Add Telegram</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> telegram </span><span class="token parameter variable" style="color:#36acaa">--token</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">123456</span><span class="token plain">:ABC-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add Slack</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> slack </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --bot-token xoxb-xxx </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --app-token xapp-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add Discord</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> discord </span><span class="token parameter variable" style="color:#36acaa">--token</span><span class="token plain"> MTxxxxxxxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add WeCom</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> wecom </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --corp-id CORP_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --agent-id AGENT_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--secret</span><span class="token plain"> SECRET </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--token</span><span class="token plain"> TOKEN </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --aes-key AES_KEY </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--port</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Enable built-in web chat UI on port 8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> webapp </span><span class="token parameter variable" style="color:#36acaa">--port</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">8080</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="channels-list">channels list<a href="#channels-list" class="hash-link" aria-label="channels list的直接链接" title="channels list的直接链接" translate="no">​</a></h4>
+<p>Show a table of all platforms with their configuration status.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels list</span><br></span></code></pre></div></div>
+<p><strong>Output:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">CHANNEL       STATUS  DETAIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">-------       ------  ------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">telegram      ✓       123456:ABC-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">slack         ✓       xoxb-xxx...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">discord       ✗</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">feishu        ✗</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="channels-remove">channels remove<a href="#channels-remove" class="hash-link" aria-label="channels remove的直接链接" title="channels remove的直接链接" translate="no">​</a></h4>
+<p>Remove all credentials for a platform from <code>~/.lingti.yaml</code>.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels remove </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">name</span><span class="token operator" style="color:#393A34">&gt;</span><br></span></code></pre></div></div>
+<p><strong>Example:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels remove </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> telegram</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agents">agents<a href="#agents" class="hash-link" aria-label="agents的直接链接" title="agents的直接链接" translate="no">​</a></h3>
+<p>Manage named agents and their routing bindings. Each agent has its own isolated workspace, AI model, and instructions. Routing bindings control which agent handles messages from which platform or channel.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents &lt;subcommand&gt;</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="agents-add">agents add<a href="#agents-add" class="hash-link" aria-label="agents add的直接链接" title="agents add的直接链接" translate="no">​</a></h4>
+<p>Add a new agent to <code>~/.lingti.yaml</code>. Creates the workspace directory if it doesn&#x27;t exist.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">id</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">flags</span><span class="token punctuation" style="color:#393A34">]</span><br></span></code></pre></div></div>
+<p><strong>Arguments:</strong> <code>&lt;id&gt;</code> — unique agent identifier (required, positional).</p>
+<p><strong>Flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>--workspace &lt;dir&gt;</code></td><td><code>~/.lingti/agents/&lt;id&gt;</code></td><td>Working directory for this agent</td></tr><tr><td><code>--model &lt;id&gt;</code></td><td><em>(inherited)</em></td><td>Model override (e.g. <code>claude-opus-4-6</code>)</td></tr><tr><td><code>--provider &lt;name&gt;</code></td><td><em>(inherited)</em></td><td>AI provider override</td></tr><tr><td><code>--api-key &lt;key&gt;</code></td><td><em>(inherited)</em></td><td>API key override</td></tr><tr><td><code>--instructions &lt;text-or-path&gt;</code></td><td></td><td>Inline instructions text, or path to a file</td></tr><tr><td><code>--default</code></td><td><code>false</code></td><td>Mark as the default agent</td></tr><tr><td><code>--allow-tools &lt;list&gt;</code></td><td></td><td>Comma-separated tool whitelist (empty = allow all)</td></tr><tr><td><code>--deny-tools &lt;list&gt;</code></td><td></td><td>Comma-separated tool blacklist</td></tr></tbody></table>
+<p><strong>Examples:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Add a default agent using inherited AI settings</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> main </span><span class="token parameter variable" style="color:#36acaa">--default</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add a work agent with a specific model and custom instructions</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> work </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> claude-opus-4-6 </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--instructions</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;You are a focused work assistant. Be concise.&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add an agent that reads instructions from a file</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> support </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--instructions</span><span class="token plain"> ~/.lingti/support-instructions.txt </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--workspace</span><span class="token plain"> ~/my-support-workspace</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add a restricted agent that can only use read-only tools</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token builtin class-name">readonly</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --allow-tools </span><span class="token string" style="color:#e3116c">&quot;read,glob,grep,shell_read&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Add an agent that cannot write or edit files</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> safe </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --deny-tools </span><span class="token string" style="color:#e3116c">&quot;write,edit,shell&quot;</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="agents-list">agents list<a href="#agents-list" class="hash-link" aria-label="agents list的直接链接" title="agents list的直接链接" translate="no">​</a></h4>
+<p>List all configured agents. Add <code>--bindings</code> to also show routing bindings.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents list </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">--bindings</span><span class="token punctuation" style="color:#393A34">]</span><br></span></code></pre></div></div>
+<p><strong>Flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody><tr><td><code>-b, --bindings</code></td><td>Also show routing bindings table</td></tr></tbody></table>
+<p><strong>Example output:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ID            DEFAULT   MODEL                 PROVIDER              WORKSPACE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--            -------   -----                 --------              ---------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">main          ✓         (inherited)           (inherited)           /Users/alex/.lingti/agents/main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">work                    claude-opus-4-6       (inherited)           /Users/alex/.lingti/agents/work</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AGENT         PLATFORM      CHANNEL_ID</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">-----         --------      ----------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">main          telegram</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">work          slack         C_WORK_CHANNEL</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="agents-bind">agents bind<a href="#agents-bind" class="hash-link" aria-label="agents bind的直接链接" title="agents bind的直接链接" translate="no">​</a></h4>
+<p>Add routing bindings that direct messages from a platform (or specific channel) to a named agent.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">--agent </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">id</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">spec</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">--bind </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">spec</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">.</span><span class="token punctuation" style="color:#393A34">]</span><br></span></code></pre></div></div>
+<p><strong>Flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody><tr><td><code>--agent &lt;id&gt;</code></td><td>Agent ID (defaults to the config default agent)</td></tr><tr><td><code>--bind &lt;spec&gt;</code></td><td>Binding spec: <code>&lt;platform&gt;</code> or <code>&lt;platform&gt;:&lt;channelID&gt;</code> (repeatable)</td></tr></tbody></table>
+<p><strong>Binding spec format:</strong></p>
+<ul>
+<li class=""><code>telegram</code> — all messages from Telegram</li>
+<li class=""><code>slack:C_WORK</code> — only messages from the Slack channel with ID <code>C_WORK</code></li>
+</ul>
+<p><strong>Examples:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Bind all Telegram traffic to the default agent</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> telegram</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Bind a specific Slack channel to the &#x27;work&#x27; agent</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--agent</span><span class="token plain"> work </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> slack:C_WORK_CHANNEL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Bind multiple platforms to one agent at once</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--agent</span><span class="token plain"> work </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> slack:C_WORK </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> discord:1234567890</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="agents-unbind">agents unbind<a href="#agents-unbind" class="hash-link" aria-label="agents unbind的直接链接" title="agents unbind的直接链接" translate="no">​</a></h4>
+<p>Remove routing bindings for an agent.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents unbind </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">--agent </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">id</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">--bind </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">spec</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">.</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> --all</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<p><strong>Flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody><tr><td><code>--agent &lt;id&gt;</code></td><td>Agent ID (defaults to the config default agent)</td></tr><tr><td><code>--bind &lt;spec&gt;</code></td><td>Specific binding to remove (repeatable)</td></tr><tr><td><code>--all</code></td><td>Remove all bindings for this agent</td></tr></tbody></table>
+<p><strong>Examples:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Remove a specific binding</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents unbind </span><span class="token parameter variable" style="color:#36acaa">--agent</span><span class="token plain"> work </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> slack:C_WORK</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Remove all bindings for an agent</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents unbind </span><span class="token parameter variable" style="color:#36acaa">--agent</span><span class="token plain"> work </span><span class="token parameter variable" style="color:#36acaa">--all</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="gateway">gateway<a href="#gateway" class="hash-link" aria-label="gateway的直接链接" title="gateway的直接链接" translate="no">​</a></h3>
+<p>The unified run command. Starts all configured platform bots and the WebSocket server in a single process.</p>
+<p><strong>What gateway does:</strong></p>
+<ol>
+<li class="">Reads <code>~/.lingti.yaml</code> for platform credentials and agent definitions</li>
+<li class="">Registers all configured platforms (Telegram, Slack, Discord, etc.)</li>
+<li class="">Starts the WebSocket server on <code>:18789</code> (unless <code>--no-ws</code>)</li>
+<li class="">Routes incoming messages to the correct agent based on bindings</li>
+<li class="">Writes <code>~/.lingti/gateway.pid</code> for use by <code>gateway restart</code></li>
+</ol>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">flags</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway restart</span><br></span></code></pre></div></div>
+<p><strong>Flags:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Env Var</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>--addr</code></td><td><code>GATEWAY_ADDR</code></td><td><code>:18789</code></td><td>WebSocket server address</td></tr><tr><td><code>--auth-token</code></td><td><code>GATEWAY_AUTH_TOKEN</code></td><td></td><td>Single WebSocket auth token</td></tr><tr><td><code>--auth-tokens</code></td><td><code>GATEWAY_AUTH_TOKENS</code></td><td></td><td>Comma-separated WebSocket auth tokens</td></tr><tr><td><code>--no-ws</code></td><td></td><td><code>false</code></td><td>Disable WebSocket server (platform bots only)</td></tr><tr><td><code>--provider</code></td><td><code>AI_PROVIDER</code></td><td><code>claude</code></td><td>AI provider</td></tr><tr><td><code>--api-key</code></td><td><code>AI_API_KEY</code></td><td></td><td>AI API key (required)</td></tr><tr><td><code>--base-url</code></td><td><code>AI_BASE_URL</code></td><td></td><td>Custom AI API base URL</td></tr><tr><td><code>--model</code></td><td><code>AI_MODEL</code></td><td></td><td>Model name</td></tr><tr><td><code>--instructions</code></td><td></td><td></td><td>Path to custom instructions file</td></tr><tr><td><code>--call-timeout</code></td><td><code>AI_CALL_TIMEOUT</code></td><td><code>90</code></td><td>AI API call timeout in seconds</td></tr><tr><td><code>--debug-dir</code></td><td><code>BROWSER_DEBUG_DIR</code></td><td></td><td>Directory for browser debug screenshots</td></tr><tr><td><code>--webapp-port</code></td><td><code>WEBAPP_PORT</code></td><td><code>0</code></td><td>Web chat UI port (0 = disabled)</td></tr></tbody></table>
+<p>All platform credential flags are also available (<code>--telegram-token</code>, <code>--slack-bot-token</code>, etc.) as overrides — these take precedence over <code>~/.lingti.yaml</code>. See the <a href="#platform-flags" class="">Platform Flags</a> section.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="typical-workflow">Typical workflow<a href="#typical-workflow" class="hash-link" aria-label="Typical workflow的直接链接" title="Typical workflow的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Step 1: Save credentials once</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> telegram </span><span class="token parameter variable" style="color:#36acaa">--token</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">123456</span><span class="token plain">:ABC-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot channels </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--channel</span><span class="token plain"> slack --bot-token xoxb-</span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">. --app-token xapp-</span><span class="token punctuation" style="color:#393A34">..</span><span class="token plain">.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Step 2: (Optional) Configure agents and routing</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> main </span><span class="token parameter variable" style="color:#36acaa">--default</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token function" style="color:#d73a49">add</span><span class="token plain"> work </span><span class="token parameter variable" style="color:#36acaa">--model</span><span class="token plain"> claude-opus-4-6</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> telegram               </span><span class="token comment" style="color:#999988;font-style:italic"># → main (default)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot agents </span><span class="token builtin class-name">bind</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">--agent</span><span class="token plain"> work </span><span class="token parameter variable" style="color:#36acaa">--bind</span><span class="token plain"> slack     </span><span class="token comment" style="color:#999988;font-style:italic"># → work agent</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Step 3: Start everything</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway --api-key sk-ant-xxx</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="using-flags-directly-docker--ci">Using flags directly (Docker / CI)<a href="#using-flags-directly-docker--ci" class="hash-link" aria-label="Using flags directly (Docker / CI)的直接链接" title="Using flags directly (Docker / CI)的直接链接" translate="no">​</a></h4>
+<p>Flags override <code>~/.lingti.yaml</code>, so you can run without a config file:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key sk-ant-xxx </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --telegram-token </span><span class="token number" style="color:#36acaa">123456</span><span class="token plain">:ABC-xxx </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --slack-bot-token xoxb-xxx </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --slack-app-token xapp-xxx</span><br></span></code></pre></div></div>
+<p>Or via environment variables:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">sk-ant-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">TELEGRAM_BOT_TOKEN</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">123456</span><span class="token plain">:ABC-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="disable-websocket-server">Disable WebSocket server<a href="#disable-websocket-server" class="hash-link" aria-label="Disable WebSocket server的直接链接" title="Disable WebSocket server的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Platform bots only — no WebSocket API</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway --no-ws --api-key sk-ant-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Or via env var (empty string disables it)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token assign-left variable" style="color:#36acaa">GATEWAY_ADDR</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;&quot;</span><span class="token plain"> lingti-bot gateway --api-key sk-ant-xxx</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="web-chat-ui">Web chat UI<a href="#web-chat-ui" class="hash-link" aria-label="Web chat UI的直接链接" title="Web chat UI的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Serve web chat UI on port 8080 in addition to everything else</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway --webapp-port </span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"> --api-key sk-ant-xxx</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="reload-config-without-restart">Reload config without restart<a href="#reload-config-without-restart" class="hash-link" aria-label="Reload config without restart的直接链接" title="Reload config without restart的直接链接" translate="no">​</a></h4>
+<p>After saving changes to <code>~/.lingti.yaml</code> (e.g. adding a channel), signal the running gateway to reload:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway restart</span><br></span></code></pre></div></div>
+<p>This sends <code>SIGHUP</code> to the running gateway process via <code>~/.lingti/gateway.pid</code>.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="gateway-restart">gateway restart<a href="#gateway-restart" class="hash-link" aria-label="gateway restart的直接链接" title="gateway restart的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway restart</span><br></span></code></pre></div></div>
+<p>Reads <code>~/.lingti/gateway.pid</code>, sends <code>SIGHUP</code> to the process. The gateway logs <code>[Gateway] Received SIGHUP, reloading config...</code> and re-reads its configuration.</p>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="platform-flags">Platform Flags<a href="#platform-flags" class="hash-link" aria-label="Platform Flags的直接链接" title="Platform Flags的直接链接" translate="no">​</a></h3>
+<p>All platform credentials can be passed as flags to <code>gateway</code> for one-off overrides or Docker deployments. They follow the same 3-tier priority: <strong>CLI flag &gt; environment variable &gt; <code>~/.lingti.yaml</code></strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>Flag</th><th>Env Var</th></tr></thead><tbody><tr><td>Slack</td><td><code>--slack-bot-token</code></td><td><code>SLACK_BOT_TOKEN</code></td></tr><tr><td>Slack</td><td><code>--slack-app-token</code></td><td><code>SLACK_APP_TOKEN</code></td></tr><tr><td>Telegram</td><td><code>--telegram-token</code></td><td><code>TELEGRAM_BOT_TOKEN</code></td></tr><tr><td>Discord</td><td><code>--discord-token</code></td><td><code>DISCORD_BOT_TOKEN</code></td></tr><tr><td>Feishu</td><td><code>--feishu-app-id</code></td><td><code>FEISHU_APP_ID</code></td></tr><tr><td>Feishu</td><td><code>--feishu-app-secret</code></td><td><code>FEISHU_APP_SECRET</code></td></tr><tr><td>DingTalk</td><td><code>--dingtalk-client-id</code></td><td><code>DINGTALK_CLIENT_ID</code></td></tr><tr><td>DingTalk</td><td><code>--dingtalk-client-secret</code></td><td><code>DINGTALK_CLIENT_SECRET</code></td></tr><tr><td>WeCom</td><td><code>--wecom-corp-id</code></td><td><code>WECOM_CORP_ID</code></td></tr><tr><td>WeCom</td><td><code>--wecom-agent-id</code></td><td><code>WECOM_AGENT_ID</code></td></tr><tr><td>WeCom</td><td><code>--wecom-secret</code></td><td><code>WECOM_SECRET</code></td></tr><tr><td>WeCom</td><td><code>--wecom-token</code></td><td><code>WECOM_TOKEN</code></td></tr><tr><td>WeCom</td><td><code>--wecom-aes-key</code></td><td><code>WECOM_AES_KEY</code></td></tr><tr><td>WeCom</td><td><code>--wecom-port</code></td><td><code>WECOM_PORT</code></td></tr><tr><td>WhatsApp</td><td><code>--whatsapp-phone-id</code></td><td><code>WHATSAPP_PHONE_NUMBER_ID</code></td></tr><tr><td>WhatsApp</td><td><code>--whatsapp-access-token</code></td><td><code>WHATSAPP_ACCESS_TOKEN</code></td></tr><tr><td>WhatsApp</td><td><code>--whatsapp-verify-token</code></td><td><code>WHATSAPP_VERIFY_TOKEN</code></td></tr><tr><td>LINE</td><td><code>--line-channel-secret</code></td><td><code>LINE_CHANNEL_SECRET</code></td></tr><tr><td>LINE</td><td><code>--line-channel-token</code></td><td><code>LINE_CHANNEL_TOKEN</code></td></tr><tr><td>Teams</td><td><code>--teams-app-id</code></td><td><code>TEAMS_APP_ID</code></td></tr><tr><td>Teams</td><td><code>--teams-app-password</code></td><td><code>TEAMS_APP_PASSWORD</code></td></tr><tr><td>Teams</td><td><code>--teams-tenant-id</code></td><td><code>TEAMS_TENANT_ID</code></td></tr><tr><td>Matrix</td><td><code>--matrix-homeserver-url</code></td><td><code>MATRIX_HOMESERVER_URL</code></td></tr><tr><td>Matrix</td><td><code>--matrix-user-id</code></td><td><code>MATRIX_USER_ID</code></td></tr><tr><td>Matrix</td><td><code>--matrix-access-token</code></td><td><code>MATRIX_ACCESS_TOKEN</code></td></tr><tr><td>Mattermost</td><td><code>--mattermost-server-url</code></td><td><code>MATTERMOST_SERVER_URL</code></td></tr><tr><td>Mattermost</td><td><code>--mattermost-token</code></td><td><code>MATTERMOST_TOKEN</code></td></tr><tr><td>Mattermost</td><td><code>--mattermost-team-name</code></td><td><code>MATTERMOST_TEAM_NAME</code></td></tr><tr><td>Signal</td><td><code>--signal-api-url</code></td><td><code>SIGNAL_API_URL</code></td></tr><tr><td>Signal</td><td><code>--signal-phone-number</code></td><td><code>SIGNAL_PHONE_NUMBER</code></td></tr><tr><td>iMessage</td><td><code>--bluebubbles-url</code></td><td><code>BLUEBUBBLES_URL</code></td></tr><tr><td>iMessage</td><td><code>--bluebubbles-password</code></td><td><code>BLUEBUBBLES_PASSWORD</code></td></tr><tr><td>Twitch</td><td><code>--twitch-token</code></td><td><code>TWITCH_TOKEN</code></td></tr><tr><td>Twitch</td><td><code>--twitch-channel</code></td><td><code>TWITCH_CHANNEL</code></td></tr><tr><td>Twitch</td><td><code>--twitch-bot-name</code></td><td><code>TWITCH_BOT_NAME</code></td></tr><tr><td>NOSTR</td><td><code>--nostr-private-key</code></td><td><code>NOSTR_PRIVATE_KEY</code></td></tr><tr><td>NOSTR</td><td><code>--nostr-relays</code></td><td><code>NOSTR_RELAYS</code></td></tr><tr><td>Zalo</td><td><code>--zalo-app-id</code></td><td><code>ZALO_APP_ID</code></td></tr><tr><td>Zalo</td><td><code>--zalo-secret-key</code></td><td><code>ZALO_SECRET_KEY</code></td></tr><tr><td>Zalo</td><td><code>--zalo-access-token</code></td><td><code>ZALO_ACCESS_TOKEN</code></td></tr><tr><td>Nextcloud</td><td><code>--nextcloud-server-url</code></td><td><code>NEXTCLOUD_SERVER_URL</code></td></tr><tr><td>Nextcloud</td><td><code>--nextcloud-username</code></td><td><code>NEXTCLOUD_USERNAME</code></td></tr><tr><td>Nextcloud</td><td><code>--nextcloud-password</code></td><td><code>NEXTCLOUD_PASSWORD</code></td></tr><tr><td>Nextcloud</td><td><code>--nextcloud-room-token</code></td><td><code>NEXTCLOUD_ROOM_TOKEN</code></td></tr><tr><td>Google Chat</td><td><code>--googlechat-project-id</code></td><td><code>GOOGLE_CHAT_PROJECT_ID</code></td></tr><tr><td>Google Chat</td><td><code>--googlechat-credentials-file</code></td><td><code>GOOGLE_CHAT_CREDENTIALS_FILE</code></td></tr><tr><td>Webapp</td><td><code>--webapp-port</code></td><td><code>WEBAPP_PORT</code></td></tr></tbody></table>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="serve">serve<a href="#serve" class="hash-link" aria-label="serve的直接链接" title="serve的直接链接" translate="no">​</a></h3>
+<p>Start the MCP (Model Context Protocol) server for integration with Claude Desktop, Cursor, and other MCP clients.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot serve</span><br></span></code></pre></div></div>
+<p><strong>Configuration for Claude Desktop</strong> (<code>~/Library/Application Support/Claude/claude_desktop_config.json</code>):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;mcpServers&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lingti-bot&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;command&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/path/to/lingti-bot&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;args&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;serve&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="relay">relay<a href="#relay" class="hash-link" aria-label="relay的直接链接" title="relay的直接链接" translate="no">​</a></h3>
+<p>Connect to the lingti-bot cloud relay service — no public server needed. See <a class="" href="/lingti-bot/gateway-vs-relay">Gateway vs Relay</a>.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">flags</span><span class="token punctuation" style="color:#393A34">]</span><br></span></code></pre></div></div>
+<p><strong>Supported platforms:</strong> feishu, slack, wechat, wecom</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>Env Var</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>--platform</code></td><td><code>RELAY_PLATFORM</code></td><td></td><td>Platform: feishu, slack, wechat, wecom (required)</td></tr><tr><td><code>--user-id</code></td><td><code>RELAY_USER_ID</code></td><td></td><td>Your user ID from <code>/whoami</code></td></tr><tr><td><code>--provider</code></td><td><code>AI_PROVIDER</code></td><td><code>claude</code></td><td>AI provider</td></tr><tr><td><code>--api-key</code></td><td><code>AI_API_KEY</code></td><td></td><td>AI API key (required)</td></tr><tr><td><code>--server</code></td><td><code>RELAY_SERVER_URL</code></td><td><code>wss://bot.lingti.com/ws</code></td><td>Relay server URL</td></tr></tbody></table>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="doctor">doctor<a href="#doctor" class="hash-link" aria-label="doctor的直接链接" title="doctor的直接链接" translate="no">​</a></h3>
+<p>Run diagnostic checks on configuration, credentials, connectivity, and required tools.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot doctor</span><br></span></code></pre></div></div>
+<p><strong>Checks:</strong> config file, AI API key, AI connectivity, platform credentials, required binaries, browser CDP, MCP servers, temp directory.</p>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="skills">skills<a href="#skills" class="hash-link" aria-label="skills的直接链接" title="skills的直接链接" translate="no">​</a></h3>
+<p>Manage modular skill extensions.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills list</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">name</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot skills remove </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">name</span><span class="token operator" style="color:#393A34">&gt;</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="version">version<a href="#version" class="hash-link" aria-label="version的直接链接" title="version的直接链接" translate="no">​</a></h3>
+<p>Show version information.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot version</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="router-deprecated">router (deprecated)<a href="#router-deprecated" class="hash-link" aria-label="router (deprecated)的直接链接" title="router (deprecated)的直接链接" translate="no">​</a></h2>
+<blockquote>
+<p>⚠️ <strong><code>router</code> is deprecated.</strong> The command is still present but prints a migration guide and exits. Use <code>gateway</code> instead — it includes all router functionality plus the WebSocket server.</p>
+</blockquote>
+<p>Running <code>lingti-bot gateway</code> (with or without flags) prints:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">WARNING: &#x27;router&#x27; is deprecated and will be removed in a future release.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Use the new &#x27;channels&#x27;, &#x27;agents&#x27;, and &#x27;gateway&#x27; commands instead:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # 1. Save your platform credentials to ~/.lingti.yaml</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  lingti-bot channels add --channel telegram --token YOUR_BOT_TOKEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  lingti-bot channels add --channel slack --bot-token xoxb-... --app-token xapp-...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # 2. Add an agent (optional — skip if using env vars / flags only)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  lingti-bot agents add main --default</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # 3. Start everything</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  lingti-bot gateway --api-key YOUR_API_KEY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # Or keep passing flags/env vars directly (all router flags work on gateway):</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  lingti-bot gateway --telegram-token YOUR_BOT_TOKEN --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p><strong>Migration is straightforward:</strong> every flag that <code>router</code> accepted (<code>--telegram-token</code>, <code>--api-key</code>, <code>--provider</code>, <code>--webapp-port</code>, etc.) is available on <code>gateway</code> with the same name.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="environment-variables">Environment Variables<a href="#environment-variables" class="hash-link" aria-label="Environment Variables的直接链接" title="Environment Variables的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-provider">AI Provider<a href="#ai-provider" class="hash-link" aria-label="AI Provider的直接链接" title="AI Provider的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>AI_PROVIDER</code></td><td>Provider name: <code>claude</code>, <code>deepseek</code>, <code>kimi</code>, <code>qwen</code>, etc.</td></tr><tr><td><code>AI_API_KEY</code></td><td>API key</td></tr><tr><td><code>AI_BASE_URL</code></td><td>Custom base URL</td></tr><tr><td><code>AI_MODEL</code></td><td>Model name override</td></tr><tr><td><code>AI_CALL_TIMEOUT</code></td><td>API call timeout in seconds (default: 90)</td></tr></tbody></table>
+<p><strong>Legacy aliases (also accepted):</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Maps to</th></tr></thead><tbody><tr><td><code>ANTHROPIC_API_KEY</code></td><td><code>AI_API_KEY</code></td></tr><tr><td><code>ANTHROPIC_OAUTH_TOKEN</code></td><td><code>AI_API_KEY</code></td></tr><tr><td><code>ANTHROPIC_BASE_URL</code></td><td><code>AI_BASE_URL</code></td></tr><tr><td><code>ANTHROPIC_MODEL</code></td><td><code>AI_MODEL</code></td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="gateway-websocket-server">Gateway (WebSocket Server)<a href="#gateway-websocket-server" class="hash-link" aria-label="Gateway (WebSocket Server)的直接链接" title="Gateway (WebSocket Server)的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>GATEWAY_ADDR</code></td><td><code>:18789</code></td><td>Listen address</td></tr><tr><td><code>GATEWAY_AUTH_TOKEN</code></td><td></td><td>Single auth token</td></tr><tr><td><code>GATEWAY_AUTH_TOKENS</code></td><td></td><td>Comma-separated auth tokens</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="browser-debug">Browser Debug<a href="#browser-debug" class="hash-link" aria-label="Browser Debug的直接链接" title="Browser Debug的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>BROWSER_DEBUG</code></td><td>Set to <code>1</code> or <code>true</code> to enable debug screenshots</td></tr><tr><td><code>BROWSER_DEBUG_DIR</code></td><td>Directory for debug screenshots</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="webapp">Webapp<a href="#webapp" class="hash-link" aria-label="Webapp的直接链接" title="Webapp的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>WEBAPP_PORT</code></td><td>Web chat UI port (0 = disabled)</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-providers">AI Providers<a href="#ai-providers" class="hash-link" aria-label="AI Providers的直接链接" title="AI Providers的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="claude-anthropic">Claude (Anthropic)<a href="#claude-anthropic" class="hash-link" aria-label="Claude (Anthropic)的直接链接" title="Claude (Anthropic)的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_PROVIDER</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">claude</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">sk-ant-api03-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_MODEL</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">claude-sonnet-4-6  </span><span class="token comment" style="color:#999988;font-style:italic"># optional</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="deepseek">DeepSeek<a href="#deepseek" class="hash-link" aria-label="DeepSeek的直接链接" title="DeepSeek的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_PROVIDER</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">deepseek</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">sk-xxx</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kimi-moonshot">Kimi (Moonshot)<a href="#kimi-moonshot" class="hash-link" aria-label="Kimi (Moonshot)的直接链接" title="Kimi (Moonshot)的直接链接" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_PROVIDER</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">kimi</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">sk-xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_MODEL</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">moonshot-v1-8k  </span><span class="token comment" style="color:#999988;font-style:italic"># optional</span><br></span></code></pre></div></div>
+<p>See <a class="" href="/AI-PROVIDERS.md">AI-PROVIDERS.md</a> for the full list of 16+ supported providers.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="configuration-file">Configuration File<a href="#configuration-file" class="hash-link" aria-label="Configuration File的直接链接" title="Configuration File的直接链接" translate="no">​</a></h2>
+<p>All settings can be stored in <code>~/.lingti.yaml</code>. The 3-tier resolution order is:</p>
+<p><strong>CLI flag &gt; environment variable &gt; <code>~/.lingti.yaml</code></strong></p>
+<p>Example configuration with agents and bindings:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">ai</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">provider</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">api_key</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> sk</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">ant</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">model</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">sonnet</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">4</span><span class="token punctuation" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">6</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">platforms</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">telegram</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">token</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;123456:ABC-xxx&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">slack</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">bot_token</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> xoxb</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">app_token</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> xapp</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">xxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">agents</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">default</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">workspace</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> ~/.lingti/agents/main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> work</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">workspace</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> ~/.lingti/agents/work</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">model</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> claude</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">opus</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">4</span><span class="token punctuation" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">6</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">instructions</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;You are a focused work assistant. Keep answers brief.&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">deny_tools</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">write</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> edit</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> shell</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">bindings</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">agent_id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">match</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> telegram</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">agent_id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> work</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">match</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> slack</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">channel_id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> C_WORK_CHANNEL</span><br></span></code></pre></div></div>
+<p>See <a class="" href="/CONFIGURATION.md">CONFIGURATION.md</a> for the complete config file reference.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="see-also">See Also<a href="#see-also" class="hash-link" aria-label="See Also的直接链接" title="See Also的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a class="" href="/lingti-bot/gateway">gateway.md</a> — WebSocket protocol reference</li>
+<li class=""><a class="" href="/CONFIGURATION.md">CONFIGURATION.md</a> — Full config file reference</li>
+<li class=""><a class="" href="/lingti-bot/chat-platforms">chat-platforms.md</a> — Platform-specific setup guides</li>
+<li class=""><a class="" href="/AI-PROVIDERS.md">AI-PROVIDERS.md</a> — All supported AI providers</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/cli-reference.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/lingti-bot/ai-providers"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">Supported AI Providers / 支持的 AI 服务</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/lingti-bot/chat-platforms"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">Supported Chat Platforms / 支持的聊天平台</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#table-of-contents" class="table-of-contents__link toc-highlight">Table of Contents</a></li><li><a href="#global-options" class="table-of-contents__link toc-highlight">Global Options</a></li><li><a href="#commands" class="table-of-contents__link toc-highlight">Commands</a><ul><li><a href="#channels" class="table-of-contents__link toc-highlight">channels</a></li><li><a href="#agents" class="table-of-contents__link toc-highlight">agents</a></li><li><a href="#gateway" class="table-of-contents__link toc-highlight">gateway</a></li><li><a href="#platform-flags" class="table-of-contents__link toc-highlight">Platform Flags</a></li><li><a href="#serve" class="table-of-contents__link toc-highlight">serve</a></li><li><a href="#relay" class="table-of-contents__link toc-highlight">relay</a></li><li><a href="#doctor" class="table-of-contents__link toc-highlight">doctor</a></li><li><a href="#skills" class="table-of-contents__link toc-highlight">skills</a></li><li><a href="#version" class="table-of-contents__link toc-highlight">version</a></li></ul></li><li><a href="#router-deprecated" class="table-of-contents__link toc-highlight">router (deprecated)</a></li><li><a href="#environment-variables" class="table-of-contents__link toc-highlight">Environment Variables</a><ul><li><a href="#ai-provider" class="table-of-contents__link toc-highlight">AI Provider</a></li><li><a href="#gateway-websocket-server" class="table-of-contents__link toc-highlight">Gateway (WebSocket Server)</a></li><li><a href="#browser-debug" class="table-of-contents__link toc-highlight">Browser Debug</a></li><li><a href="#webapp" class="table-of-contents__link toc-highlight">Webapp</a></li></ul></li><li><a href="#ai-providers" class="table-of-contents__link toc-highlight">AI Providers</a><ul><li><a href="#claude-anthropic" class="table-of-contents__link toc-highlight">Claude (Anthropic)</a></li><li><a href="#deepseek" class="table-of-contents__link toc-highlight">DeepSeek</a></li><li><a href="#kimi-moonshot" class="table-of-contents__link toc-highlight">Kimi (Moonshot)</a></li></ul></li><li><a href="#configuration-file" class="table-of-contents__link toc-highlight">Configuration File</a></li><li><a href="#see-also" class="table-of-contents__link toc-highlight">See Also</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

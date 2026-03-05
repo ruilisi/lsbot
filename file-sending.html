@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-file-sending" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">文件发送指南 | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/file-sending"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="文件发送指南 | lingti-bot"><meta data-rh="true" name="description" content="lingti-bot 支持通过自然语言在聊天平台中传输本地文件。用户只需对 AI 说&quot;把桌面上的 xxx 文件发给我&quot;，即可接收文件。"><meta data-rh="true" property="og:description" content="lingti-bot 支持通过自然语言在聊天平台中传输本地文件。用户只需对 AI 说&quot;把桌面上的 xxx 文件发给我&quot;，即可接收文件。"><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/file-sending"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/file-sending" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/file-sending" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"文件发送指南","item":"https://ruilisi.github.io/lingti-bot/file-sending"}]}</script><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/relay"><span title="快速上手" class="categoryLinkLabel_W154">快速上手</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/relay"><span title="云中继（lingti-bot relay）" class="linkLabel_WmDU">云中继（lingti-bot relay）</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/configuration"><span title="配置优先级" class="linkLabel_WmDU">配置优先级</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/ai-providers"><span title="Supported AI Providers / 支持的 AI 服务" class="linkLabel_WmDU">Supported AI Providers / 支持的 AI 服务</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cli-reference"><span title="Command Line Reference" class="linkLabel_WmDU">Command Line Reference</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/chat-platforms"><span title="平台接入" class="categoryLinkLabel_W154">平台接入</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/chat-platforms"><span title="Supported Chat Platforms / 支持的聊天平台" class="linkLabel_WmDU">Supported Chat Platforms / 支持的聊天平台</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/feishu-integration"><span title="飞书集成指南" class="linkLabel_WmDU">飞书集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wecom-integration"><span title="企业微信集成指南" class="linkLabel_WmDU">企业微信集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wechat-integration"><span title="微信公众号一键接入指南" class="linkLabel_WmDU">微信公众号一键接入指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/slack-integration"><span title="Slack Integration" class="linkLabel_WmDU">Slack Integration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/dingtalk-integration"><span title="钉钉（DingTalk）集成指南" class="linkLabel_WmDU">钉钉（DingTalk）集成指南</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/gateway"><span title="部署方式" class="categoryLinkLabel_W154">部署方式</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/lingti-bot/browser-automation"><span title="功能" class="categoryLinkLabel_W154">功能</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/browser-automation"><span title="浏览器自动化" class="linkLabel_WmDU">浏览器自动化</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/social-platform-automation"><span title="社交平台自动化" class="linkLabel_WmDU">社交平台自动化</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/skills"><span title="Skills" class="linkLabel_WmDU">Skills</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cron-jobs"><span title="定时任务指南" class="linkLabel_WmDU">定时任务指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/lingti-bot/file-sending"><span title="文件发送指南" class="linkLabel_WmDU">文件发送指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/auto-approval"><span title="Auto-Approval Mode (--yes)" class="linkLabel_WmDU">Auto-Approval Mode (--yes)</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/roadmap"><span title="开发路线图" class="linkLabel_WmDU">开发路线图</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/lingti-bot/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">功能</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">文件发送指南</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>文件发送指南</h1></header>
+<p>lingti-bot 支持通过自然语言在聊天平台中传输本地文件。用户只需对 AI 说&quot;把桌面上的 xxx 文件发给我&quot;，即可接收文件。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="平台支持">平台支持<a href="#平台支持" class="hash-link" aria-label="平台支持的直接链接" title="平台支持的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>图片</th><th>语音</th><th>视频</th><th>任意文件</th><th>额外配置</th></tr></thead><tbody><tr><td>企业微信 (WeCom)</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>无需额外配置</td></tr><tr><td>微信公众号</td><td>✅</td><td>✅</td><td>✅</td><td>⚠️ 文本预览</td><td>无需额外配置（可选优化）</td></tr><tr><td>飞书 / Slack</td><td>—</td><td>—</td><td>—</td><td>—</td><td>暂不支持</td></tr></tbody></table>
+<ul>
+<li class=""><strong>企业微信</strong>：支持所有文件类型，包括文档、压缩包等任意格式</li>
+<li class=""><strong>微信公众号</strong>：支持图片/语音/视频直接发送；不支持的文件类型（如 .md、.pdf、.docx）会以文本预览形式发送（截取前 500 字）</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="企业微信-wecom">企业微信 (WeCom)<a href="#企业微信-wecom" class="hash-link" aria-label="企业微信 (WeCom)的直接链接" title="企业微信 (WeCom)的直接链接" translate="no">​</a></h2>
+<p>企业微信通过 WeCom API 发送文件，relay 模式下自动启用（已配置 Corp ID + Secret）。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wecom </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-corp-id YOUR_CORP_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-agent-id YOUR_AGENT_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-secret YOUR_SECRET </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-token YOUR_TOKEN </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wecom-aes-key YOUR_AES_KEY </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p>支持的媒体类型：<code>image</code>、<code>voice</code>、<code>video</code>、<code>file</code>（任意文件）。</p>
+<p>详细配置：<a class="" href="/lingti-bot/wecom-integration">企业微信集成指南</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="微信公众号">微信公众号<a href="#微信公众号" class="hash-link" aria-label="微信公众号的直接链接" title="微信公众号的直接链接" translate="no">​</a></h2>
+<p>微信公众号支持两种文件发送方式。两种方式都使用微信<a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html" target="_blank" rel="noopener noreferrer" class="">发送客服消息</a>发送媒体消息，区别在于<strong>谁来调用微信 API</strong>。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="背景主动回复-vs-发送客服消息">背景：主动回复 vs 发送客服消息<a href="#背景主动回复-vs-发送客服消息" class="hash-link" aria-label="背景：主动回复 vs 发送客服消息的直接链接" title="背景：主动回复 vs 发送客服消息的直接链接" translate="no">​</a></h3>
+<p>微信公众号支持两种消息发送机制：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>主动回复</th><th>发送客服消息（又称被动回复）</th></tr></thead><tbody><tr><td><strong>工作方式</strong></td><td>主动调用微信 HTTP API 推送消息</td><td>用户发消息后 48 小时内直接返回 XML 响应</td></tr><tr><td><strong>发送时机</strong></td><td>随时随地可以发送</td><td>必须在用户发消息后的 48 小时内回复</td></tr><tr><td><strong>需要凭据</strong></td><td>需要 access_token（通过 AppID + AppSecret 获取）</td><td>不需要（直接返回 XML）</td></tr><tr><td><strong>媒体文件</strong></td><td>先上传素材获取 media_id，再发送</td><td>需要 media_id，但无法在 48 小时内完成上传</td></tr><tr><td><strong>公众号与 Bot 关系</strong></td><td>一个公众号只能给一个 Bot 使用</td><td>一个公众号可以给多个 Bots 使用</td></tr></tbody></table>
+<blockquote>
+<p><strong>关键区别</strong>：发送媒体文件必须先通过临时素材上传接口获取 <code>media_id</code>，这个接口同样需要 <code>access_token</code>。因此，<strong>发送媒体文件必须走主动回复接口</strong>，都需要 access_token。</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="方式一服务端中转默认无需额外配置">方式一：服务端中转（默认，无需额外配置）<a href="#方式一服务端中转默认无需额外配置" class="hash-link" aria-label="方式一：服务端中转（默认，无需额外配置）的直接链接" title="方式一：服务端中转（默认，无需额外配置）的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p><strong>零配置即可使用</strong> — 不需要提供任何公众号凭据</p>
+</blockquote>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 和普通文本对话完全一样的启动方式，不需要额外参数</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --user-id YOUR_USER_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wechat </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p><strong>工作原理：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">┌──────────────┐    ② base64    ┌─────────────────┐  ③ 上传素材   ┌──────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  本地客户端   │ ────────────▶ │  云中继服务器     │ ───────────▶ │   微信 API   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  lingti-bot  │   webhook     │  bot.lingti.com  │  ④ 发送消息   │              │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  读取本地文件 │              │  使用灵缇小秘凭据 │ ◀─────────── │              │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└──────────────┘              └─────────────────┘               └──────────────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       ① AI 调用                                                       │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       file_send                                                       │ ⑤ 推送消息</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       读取文件                                                        ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                                ┌──────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                                │  微信公众号   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                                │  用户收到图片 │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                                └──────────────┘</span><br></span></code></pre></div></div>
+<ol>
+<li class="">AI 调用 <code>file_send</code> 工具，客户端读取本地文件</li>
+<li class="">客户端将文件 base64 编码后通过 webhook 发送到云中继服务器 <code>bot.lingti.com</code></li>
+<li class="">云中继服务器使用<strong>灵缇小秘公众号自身的 AppID/AppSecret</strong> 获取 access_token</li>
+<li class="">服务器调用微信临时素材上传接口获取 <code>media_id</code>，再通过客服消息接口发送给用户</li>
+<li class="">用户在公众号中收到图片/语音/视频消息</li>
+</ol>
+<p><strong>优点：</strong></p>
+<ul>
+<li class="">零配置，开箱即用，不需要你拥有自己的公众号</li>
+<li class="">用户侧体验与方式二完全一致</li>
+</ul>
+<p><strong>限制：</strong></p>
+<ul>
+<li class="">文件需要通过网络传输到云中继服务器（base64 编码后体积增大约 33%）</li>
+<li class="">依赖云中继服务器的可用性</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="方式二客户端直传可选需自己的公众号凭据">方式二：客户端直传（可选，需自己的公众号凭据）<a href="#方式二客户端直传可选需自己的公众号凭据" class="hash-link" aria-label="方式二：客户端直传（可选，需自己的公众号凭据）的直接链接" title="方式二：客户端直传（可选，需自己的公众号凭据）的直接链接" translate="no">​</a></h3>
+<blockquote>
+<p><strong>需要配置</strong> <code>--wechat-app-id</code> 和 <code>--wechat-app-secret</code></p>
+</blockquote>
+<p>如果你拥有自己的已认证微信公众号或服务号，可以配置客户端直接调用微信 API，跳过云中继服务器。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --user-id YOUR_USER_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wechat </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wechat-app-id YOUR_APP_ID </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --wechat-app-secret YOUR_APP_SECRET </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p>也可使用环境变量：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">WECHAT_APP_ID</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;wx1234567890abcdef&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">WECHAT_APP_SECRET</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;your-app-secret&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot relay --user-id YOUR_USER_ID </span><span class="token parameter variable" style="color:#36acaa">--platform</span><span class="token plain"> wechat --api-key YOUR_API_KEY</span><br></span></code></pre></div></div>
+<p><strong>工作原理：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">┌──────────────┐  ② 上传素材   ┌──────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  本地客户端   │ ───────────▶ │   微信 API   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  lingti-bot  │  ③ 发送消息   │              │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  直接调用API │ ◀─────────── │              │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└──────────────┘              └──────────────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       ① AI 调用                      │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       file_send                      │ ④ 推送消息</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">       读取文件                       ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                               ┌──────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                               │  微信公众号   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                               │  用户收到图片 │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                               └──────────────┘</span><br></span></code></pre></div></div>
+<ol>
+<li class="">AI 调用 <code>file_send</code> 工具，客户端读取本地文件</li>
+<li class="">客户端使用<strong>你自己的 AppID/AppSecret</strong> 获取 access_token，直接上传素材</li>
+<li class="">客户端通过客服消息接口发送媒体消息</li>
+<li class="">用户在公众号中收到图片/语音/视频消息</li>
+</ol>
+<p><strong>获取凭据：</strong></p>
+<ol>
+<li class="">登录<a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener noreferrer" class="">微信公众平台</a></li>
+<li class="">进入「设置与开发」→「基本配置」</li>
+<li class="">获取 <strong>AppID</strong> 和 <strong>AppSecret</strong></li>
+</ol>
+<p><strong>优点：</strong></p>
+<ul>
+<li class="">文件直接从本地上传到微信，不经过云中继服务器，速度更快</li>
+<li class="">不依赖云中继服务器的可用性</li>
+<li class="">数据不经过第三方服务器</li>
+</ul>
+<p><strong>限制：</strong></p>
+<ul>
+<li class="">需要拥有自己的已认证微信公众号或服务号</li>
+<li class="">需要额外配置 AppID 和 AppSecret</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="两种方式对比">两种方式对比<a href="#两种方式对比" class="hash-link" aria-label="两种方式对比的直接链接" title="两种方式对比的直接链接" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>方式一：服务端中转</th><th>方式二：客户端直传</th></tr></thead><tbody><tr><td><strong>额外配置</strong></td><td>无需</td><td>需要 AppID + AppSecret</td></tr><tr><td><strong>需要自己的公众号</strong></td><td>不需要</td><td>需要</td></tr><tr><td><strong>传输路径</strong></td><td>本地 → 云中继 → 微信</td><td>本地 → 微信</td></tr><tr><td><strong>速度</strong></td><td>稍慢（多一跳中转）</td><td>更快（直传）</td></tr><tr><td><strong>隐私</strong></td><td>文件经过云中继服务器</td><td>文件不经过第三方</td></tr><tr><td><strong>可用性</strong></td><td>依赖云中继服务</td><td>仅依赖微信 API</td></tr><tr><td><strong>适用场景</strong></td><td>快速上手、无自己公众号</td><td>有自己公众号、重视隐私/速度</td></tr></tbody></table>
+<blockquote>
+<p>当同时配置了 AppID/AppSecret 时，客户端优先使用<strong>方式二（直传）</strong>。未配置时自动回退到<strong>方式一（服务端中转）</strong>。</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="支持的媒体类型">支持的媒体类型<a href="#支持的媒体类型" class="hash-link" aria-label="支持的媒体类型的直接链接" title="支持的媒体类型的直接链接" translate="no">​</a></h3>
+<p>微信公众号客服消息接口<a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html" target="_blank" rel="noopener noreferrer" class="">仅支持以下媒体类型</a>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>文件类型</th><th>扩展名</th><th>发送方式</th><th>说明</th></tr></thead><tbody><tr><td>图片</td><td>.jpg .jpeg .png .gif .bmp</td><td>图片消息</td><td>直接发送，用户可查看/保存</td></tr><tr><td>语音</td><td>.amr .mp3 .speex</td><td>语音消息</td><td>直接发送</td></tr><tr><td>视频</td><td>.mp4</td><td>视频消息</td><td>直接发送</td></tr><tr><td>其他</td><td>.md .txt .pdf .docx 等</td><td>⚠️ 文本预览</td><td>截取前 500 字以文本消息发送</td></tr></tbody></table>
+<p>与企业微信不同，<strong>公众号 API 没有通用的 <code>file</code> 类型</strong>。企业微信的应用消息接口支持发送任意文件附件（<code>msgtype: file</code>），但公众号客服消息接口不提供此能力，这是微信平台本身的限制。</p>
+<p>对于不支持的文件类型（如 .md、.pdf、.docx），lingti-bot 会读取文件内容并以文本消息形式发送预览。由于微信文本消息有字数限制，内容会被截取至前 500 字并标注&quot;内容过长，已截断&quot;。这个行为在两种方式下是一致的。</p>
+<p>详细配置：<a class="" href="/lingti-bot/wechat-integration">微信公众号接入指南</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="工作原理">工作原理<a href="#工作原理" class="hash-link" aria-label="工作原理的直接链接" title="工作原理的直接链接" translate="no">​</a></h2>
+<ol>
+<li class="">用户发送类似&quot;把桌面上的 a.png 发给我&quot;的消息</li>
+<li class="">AI 调用 <code>file_send</code> 工具，指定文件路径和媒体类型</li>
+<li class="">relay 客户端根据平台类型和配置选择发送方式：
+<ul>
+<li class=""><strong>企业微信</strong>：调用 WeCom 临时素材上传 API → 发送应用消息</li>
+<li class=""><strong>微信公众号（方式二：有 AppID）</strong>：客户端直接上传素材 → 通过客服消息接口发送</li>
+<li class=""><strong>微信公众号（方式一：无 AppID）</strong>：base64 编码文件 → 通过 webhook 发送到云中继 → 服务端上传并发送</li>
+<li class=""><strong>不支持的文件类型</strong>：读取文件内容 → 以文本消息发送预览（截取前 500 字）</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="配置参数">配置参数<a href="#配置参数" class="hash-link" aria-label="配置参数的直接链接" title="配置参数的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>参数</th><th>环境变量</th><th>平台</th><th>说明</th></tr></thead><tbody><tr><td><code>--wechat-app-id</code></td><td><code>WECHAT_APP_ID</code></td><td>微信公众号</td><td>公众号 AppID（可选，用于客户端直传）</td></tr><tr><td><code>--wechat-app-secret</code></td><td><code>WECHAT_APP_SECRET</code></td><td>微信公众号</td><td>公众号 AppSecret（可选，用于客户端直传）</td></tr><tr><td><code>--wecom-corp-id</code></td><td><code>WECOM_CORP_ID</code></td><td>企业微信</td><td>企业 ID</td></tr><tr><td><code>--wecom-secret</code></td><td><code>WECOM_SECRET</code></td><td>企业微信</td><td>应用 Secret</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/file-sending.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/lingti-bot/cron-jobs"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">定时任务指南</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/lingti-bot/auto-approval"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">Auto-Approval Mode (--yes)</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#平台支持" class="table-of-contents__link toc-highlight">平台支持</a></li><li><a href="#企业微信-wecom" class="table-of-contents__link toc-highlight">企业微信 (WeCom)</a></li><li><a href="#微信公众号" class="table-of-contents__link toc-highlight">微信公众号</a><ul><li><a href="#背景主动回复-vs-发送客服消息" class="table-of-contents__link toc-highlight">背景：主动回复 vs 发送客服消息</a></li><li><a href="#方式一服务端中转默认无需额外配置" class="table-of-contents__link toc-highlight">方式一：服务端中转（默认，无需额外配置）</a></li><li><a href="#方式二客户端直传可选需自己的公众号凭据" class="table-of-contents__link toc-highlight">方式二：客户端直传（可选，需自己的公众号凭据）</a></li><li><a href="#两种方式对比" class="table-of-contents__link toc-highlight">两种方式对比</a></li><li><a href="#支持的媒体类型" class="table-of-contents__link toc-highlight">支持的媒体类型</a></li></ul></li><li><a href="#工作原理" class="table-of-contents__link toc-highlight">工作原理</a></li><li><a href="#配置参数" class="table-of-contents__link toc-highlight">配置参数</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

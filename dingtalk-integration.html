@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-dingtalk-integration" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">钉钉（DingTalk）集成指南 | lingti-bot</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://ruilisi.github.io/lingti-bot/dingtalk-integration"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="钉钉（DingTalk）集成指南 | lingti-bot"><meta data-rh="true" name="description" content="本指南介绍如何将 lingti-bot 接入钉钉机器人。"><meta data-rh="true" property="og:description" content="本指南介绍如何将 lingti-bot 接入钉钉机器人。"><link data-rh="true" rel="icon" href="/lingti-bot/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruilisi.github.io/lingti-bot/dingtalk-integration"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/dingtalk-integration" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruilisi.github.io/lingti-bot/dingtalk-integration" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"钉钉（DingTalk）集成指南","item":"https://ruilisi.github.io/lingti-bot/dingtalk-integration"}]}</script><link rel="stylesheet" href="/lingti-bot/assets/css/styles.ad3d35f5.css">
+<script src="/lingti-bot/assets/js/runtime~main.e0b722b4.js" defer="defer"></script>
+<script src="/lingti-bot/assets/js/main.30c49e16.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lingti-bot/"><b class="navbar__title text--truncate">lingti-bot</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lingti-bot/intro">文档</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" href="/lingti-bot/relay"><span title="快速上手" class="categoryLinkLabel_W154">快速上手</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/relay"><span title="云中继（lingti-bot relay）" class="linkLabel_WmDU">云中继（lingti-bot relay）</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/configuration"><span title="配置优先级" class="linkLabel_WmDU">配置优先级</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/ai-providers"><span title="Supported AI Providers / 支持的 AI 服务" class="linkLabel_WmDU">Supported AI Providers / 支持的 AI 服务</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/cli-reference"><span title="Command Line Reference" class="linkLabel_WmDU">Command Line Reference</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/lingti-bot/chat-platforms"><span title="平台接入" class="categoryLinkLabel_W154">平台接入</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/chat-platforms"><span title="Supported Chat Platforms / 支持的聊天平台" class="linkLabel_WmDU">Supported Chat Platforms / 支持的聊天平台</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/feishu-integration"><span title="飞书集成指南" class="linkLabel_WmDU">飞书集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wecom-integration"><span title="企业微信集成指南" class="linkLabel_WmDU">企业微信集成指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/wechat-integration"><span title="微信公众号一键接入指南" class="linkLabel_WmDU">微信公众号一键接入指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/lingti-bot/slack-integration"><span title="Slack Integration" class="linkLabel_WmDU">Slack Integration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/lingti-bot/dingtalk-integration"><span title="钉钉（DingTalk）集成指南" class="linkLabel_WmDU">钉钉（DingTalk）集成指南</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/gateway"><span title="部署方式" class="categoryLinkLabel_W154">部署方式</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/lingti-bot/browser-automation"><span title="功能" class="categoryLinkLabel_W154">功能</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lingti-bot/roadmap"><span title="开发路线图" class="linkLabel_WmDU">开发路线图</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/lingti-bot/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">平台接入</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">钉钉（DingTalk）集成指南</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>钉钉（DingTalk）集成指南</h1></header>
+<blockquote>
+<p>本指南介绍如何将 lingti-bot 接入钉钉机器人。</p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tldr">TL;DR<a href="#tldr" class="hash-link" aria-label="TL;DR的直接链接" title="TL;DR的直接链接" translate="no">​</a></h2>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 1. 安装</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># macOS / Linux / WSL:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">curl</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-fsSL</span><span class="token plain"> https://files.lingti.com/install-bot.sh </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">bash</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Windows (PowerShell):</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">irm https://cli.lingti.com/install.ps1 </span><span class="token parameter variable" style="color:#36acaa">-OutFile</span><span class="token plain"> install.ps1</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> .</span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain">install.ps1 </span><span class="token parameter variable" style="color:#36acaa">-Bot</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 2. 启动（使用 Stream 模式，无需公网服务器）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">DINGTALK_CLIENT_ID</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;your-app-key&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">DINGTALK_CLIENT_SECRET</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;your-app-secret&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_PROVIDER</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;deepseek&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="架构图">架构图<a href="#架构图" class="hash-link" aria-label="架构图的直接链接" title="架构图的直接链接" translate="no">​</a></h2>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">┌─────────────────┐     Stream (WSS)      ┌─────────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   钉钉服务器     │ ◄──────────────────► │   lingti-bot    │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   (DingTalk)    │                       │   (本地运行)     │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└─────────────────┘                       └────────┬────────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                                   ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                          ┌─────────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                          │    AI Provider  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                          │ (Claude/DeepSeek)│</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                          └─────────────────┘</span><br></span></code></pre></div></div>
+<p><strong>关键优势</strong>：钉钉使用 Stream 模式（WebSocket），无需公网服务器、无需配置回调 URL。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="前置条件">前置条件<a href="#前置条件" class="hash-link" aria-label="前置条件的直接链接" title="前置条件的直接链接" translate="no">​</a></h2>
+<ol>
+<li class="">钉钉开发者账号</li>
+<li class="">企业内部应用（或第三方企业应用）</li>
+<li class="">AI Provider API Key（Claude、DeepSeek 等）</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="配置步骤">配置步骤<a href="#配置步骤" class="hash-link" aria-label="配置步骤的直接链接" title="配置步骤的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第一步创建钉钉应用">第一步：创建钉钉应用<a href="#第一步创建钉钉应用" class="hash-link" aria-label="第一步：创建钉钉应用的直接链接" title="第一步：创建钉钉应用的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">登录 <a href="https://open-dev.dingtalk.com/" target="_blank" rel="noopener noreferrer" class="">钉钉开发者后台</a></li>
+<li class="">点击顶部导航「应用开发」</li>
+<li class="">在「应用开发指引」中，找到第 2 步「创建应用」，点击「创建」按钮</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="创建钉钉应用" src="/lingti-bot/assets/images/dingtalk-create-app-f4b1c59ce419adcbbb60ee9e82a924d6.png" width="1902" height="794" class="img_ev3q"></p>
+<ol start="4">
+<li class="">选择「企业应用」标签页，点击「创建快捷应用」</li>
+<li class="">填写应用信息：
+<ul>
+<li class="">应用名称：如 &quot;灵小缇&quot;</li>
+<li class="">应用描述：如 &quot;基于 AI 的智能问答机器人&quot;</li>
+</ul>
+</li>
+<li class="">创建完成后，进入应用详情页，在「凭证与基础信息」中找到：
+<ul>
+<li class=""><strong>Client ID</strong>（原 AppKey）→ 对应 <code>DINGTALK_CLIENT_ID</code></li>
+<li class=""><strong>Client Secret</strong>（原 AppSecret）→ 对应 <code>DINGTALK_CLIENT_SECRET</code></li>
+</ul>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="应用凭证" src="/lingti-bot/assets/images/dingtalk-credentials-e334b23f23a9f7ca76b93e7517af801d.png" width="1999" height="837" class="img_ev3q"></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第二步配置机器人能力">第二步：配置机器人能力<a href="#第二步配置机器人能力" class="hash-link" aria-label="第二步：配置机器人能力的直接链接" title="第二步：配置机器人能力的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">在应用详情页，点击「添加应用能力」</li>
+<li class="">选择「机器人」能力</li>
+<li class="">配置机器人信息：
+<ul>
+<li class="">机器人名称</li>
+<li class="">机器人头像</li>
+<li class="">机器人简介</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三步开启-stream-模式">第三步：开启 Stream 模式<a href="#第三步开启-stream-模式" class="hash-link" aria-label="第三步：开启 Stream 模式的直接链接" title="第三步：开启 Stream 模式的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">在「机器人」配置页面</li>
+<li class="">找到「消息接收模式」</li>
+<li class="">选择 <strong>Stream 模式</strong>（推荐）</li>
+<li class="">如果只看到 HTTP 模式，请检查是否有 Stream 模式的入口，或联系钉钉支持</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：Stream 模式是推荐的接入方式，无需配置公网回调地址。</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第四步发布应用">第四步：发布应用<a href="#第四步发布应用" class="hash-link" aria-label="第四步：发布应用的直接链接" title="第四步：发布应用的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">在「版本管理与发布」页面</li>
+<li class="">点击「创建新版本」</li>
+<li class="">填写版本信息</li>
+<li class="">提交发布（内部应用通常无需审核）</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第五步配置-lingti-bot">第五步：配置 lingti-bot<a href="#第五步配置-lingti-bot" class="hash-link" aria-label="第五步：配置 lingti-bot的直接链接" title="第五步：配置 lingti-bot的直接链接" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="环境变量方式推荐">环境变量方式（推荐）<a href="#环境变量方式推荐" class="hash-link" aria-label="环境变量方式（推荐）的直接链接" title="环境变量方式（推荐）的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 钉钉凭据</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">DINGTALK_CLIENT_ID</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;dingxxxxxx&quot;</span><span class="token plain">      </span><span class="token comment" style="color:#999988;font-style:italic"># AppKey</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">DINGTALK_CLIENT_SECRET</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;xxxxxxxx&quot;</span><span class="token plain">     </span><span class="token comment" style="color:#999988;font-style:italic"># AppSecret</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># AI 配置</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_PROVIDER</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;deepseek&quot;</span><span class="token plain">                </span><span class="token comment" style="color:#999988;font-style:italic"># 或 claude、kimi</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">AI_API_KEY</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 启动</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="命令行参数方式">命令行参数方式<a href="#命令行参数方式" class="hash-link" aria-label="命令行参数方式的直接链接" title="命令行参数方式的直接链接" translate="no">​</a></h4>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lingti-bot gateway </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --dingtalk-client-id </span><span class="token string" style="color:#e3116c">&quot;dingxxxxxx&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --dingtalk-client-secret </span><span class="token string" style="color:#e3116c">&quot;xxxxxxxx&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token parameter variable" style="color:#36acaa">--provider</span><span class="token plain"> deepseek </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  --api-key </span><span class="token string" style="color:#e3116c">&quot;sk-xxx&quot;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第六步测试机器人">第六步：测试机器人<a href="#第六步测试机器人" class="hash-link" aria-label="第六步：测试机器人的直接链接" title="第六步：测试机器人的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">在钉钉客户端中</li>
+<li class="">找到已发布的应用机器人</li>
+<li class="">发送消息测试：
+<ul>
+<li class=""><strong>单聊</strong>：直接发送消息</li>
+<li class=""><strong>群聊</strong>：@机器人 发送消息</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="效果展示">效果展示<a href="#效果展示" class="hash-link" aria-label="效果展示的直接链接" title="效果展示的直接链接" translate="no">​</a></h2>
+<p>配置完成后，你可以在钉钉中与机器人对话：</p>
+<p><img decoding="async" loading="lazy" alt="钉钉机器人效果" src="/lingti-bot/assets/images/dingtalk-bot-demo-c68b55c8ba1b8481099679419c261e0f.png" width="1176" height="1698" class="img_ev3q"></p>
+<p>机器人支持多种功能，包括：</p>
+<ul>
+<li class="">查看桌面文件</li>
+<li class="">创建日历事件或提醒事项</li>
+<li class="">搜索网页信息</li>
+<li class="">管理系统任务</li>
+<li class="">以及其他 AI 助手能力</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="环境变量">环境变量<a href="#环境变量" class="hash-link" aria-label="环境变量的直接链接" title="环境变量的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>变量名</th><th>说明</th><th>必填</th></tr></thead><tbody><tr><td><code>DINGTALK_CLIENT_ID</code></td><td>钉钉应用的 AppKey</td><td>✅</td></tr><tr><td><code>DINGTALK_CLIENT_SECRET</code></td><td>钉钉应用的 AppSecret</td><td>✅</td></tr><tr><td><code>AI_PROVIDER</code></td><td>AI 提供商 (claude/deepseek/kimi)</td><td>❌</td></tr><tr><td><code>AI_API_KEY</code></td><td>AI API 密钥</td><td>✅</td></tr><tr><td><code>AI_BASE_URL</code></td><td>自定义 API 地址</td><td>❌</td></tr><tr><td><code>AI_MODEL</code></td><td>指定模型名称</td><td>❌</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="消息类型支持">消息类型支持<a href="#消息类型支持" class="hash-link" aria-label="消息类型支持的直接链接" title="消息类型支持的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>消息类型</th><th>接收</th><th>发送</th></tr></thead><tbody><tr><td>文本消息</td><td>✅</td><td>✅</td></tr><tr><td>Markdown</td><td>❌</td><td>✅</td></tr><tr><td>图片</td><td>❌</td><td>❌</td></tr><tr><td>文件</td><td>❌</td><td>❌</td></tr><tr><td>语音</td><td>❌</td><td>❌</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="常见问题">常见问题<a href="#常见问题" class="hash-link" aria-label="常见问题的直接链接" title="常见问题的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-连接失败">1. 连接失败<a href="#1-连接失败" class="hash-link" aria-label="1. 连接失败的直接链接" title="1. 连接失败的直接链接" translate="no">​</a></h3>
+<p><strong>症状</strong>：启动后提示 &quot;failed to start DingTalk stream client&quot;</p>
+<p><strong>排查步骤</strong>：</p>
+<ol>
+<li class="">检查 AppKey 和 AppSecret 是否正确</li>
+<li class="">确认应用已发布</li>
+<li class="">确认已开启 Stream 模式</li>
+<li class="">检查网络是否能访问 <code>*.dingtalk.com</code></li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-收不到消息">2. 收不到消息<a href="#2-收不到消息" class="hash-link" aria-label="2. 收不到消息的直接链接" title="2. 收不到消息的直接链接" translate="no">​</a></h3>
+<p><strong>症状</strong>：机器人在线但收不到用户消息</p>
+<p><strong>排查步骤</strong>：</p>
+<ol>
+<li class="">确认机器人能力已添加</li>
+<li class="">确认应用版本已发布</li>
+<li class="">群聊场景下，确认用户有 @机器人</li>
+<li class="">检查日志中是否有消息回调</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-群聊中不响应">3. 群聊中不响应<a href="#3-群聊中不响应" class="hash-link" aria-label="3. 群聊中不响应的直接链接" title="3. 群聊中不响应的直接链接" translate="no">​</a></h3>
+<p><strong>症状</strong>：单聊正常，群聊不响应</p>
+<p><strong>原因</strong>：群聊需要 @机器人 才会响应</p>
+<p><strong>解决方案</strong>：在群聊中使用 &quot;@机器人名称 你的问题&quot; 的格式</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-响应超时">4. 响应超时<a href="#4-响应超时" class="hash-link" aria-label="4. 响应超时的直接链接" title="4. 响应超时的直接链接" translate="no">​</a></h3>
+<p><strong>症状</strong>：消息发送后很久才收到回复，或无回复</p>
+<p><strong>可能原因</strong>：</p>
+<ol>
+<li class="">AI API 响应慢</li>
+<li class="">网络延迟</li>
+</ol>
+<p><strong>解决方案</strong>：</p>
+<ol>
+<li class="">尝试更换 AI 提供商</li>
+<li class="">检查网络连接</li>
+<li class="">查看 lingti-bot 日志</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="与其他方案对比">与其他方案对比<a href="#与其他方案对比" class="hash-link" aria-label="与其他方案对比的直接链接" title="与其他方案对比的直接链接" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>lingti-bot</th><th>自建服务</th></tr></thead><tbody><tr><td>公网服务器</td><td>❌ 不需要</td><td>✅ 需要</td></tr><tr><td>回调 URL 配置</td><td>❌ 不需要</td><td>✅ 需要</td></tr><tr><td>Stream 模式</td><td>✅ 原生支持</td><td>需自行实现</td></tr><tr><td>AI 集成</td><td>✅ 内置</td><td>需自行开发</td></tr><tr><td>部署复杂度</td><td>低</td><td>高</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="安全建议">安全建议<a href="#安全建议" class="hash-link" aria-label="安全建议的直接链接" title="安全建议的直接链接" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>保护凭据</strong>：不要将 AppKey 和 AppSecret 提交到代码仓库</li>
+<li class=""><strong>最小权限</strong>：只申请必要的应用权限</li>
+<li class=""><strong>本地运行</strong>：AI API Key 仅在本地使用，不经过第三方服务器</li>
+<li class=""><strong>日志脱敏</strong>：生产环境注意日志中不要记录敏感信息</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="相关文档">相关文档<a href="#相关文档" class="hash-link" aria-label="相关文档的直接链接" title="相关文档的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://open.dingtalk.com/document/" target="_blank" rel="noopener noreferrer" class="">钉钉开发者文档</a></li>
+<li class=""><a href="https://open.dingtalk.com/document/orgapp/stream-mode-introduction" target="_blank" rel="noopener noreferrer" class="">Stream 模式说明</a></li>
+<li class=""><a class="" href="/lingti-bot/feishu-integration">飞书集成指南</a></li>
+<li class=""><a class="" href="/lingti-bot/wecom-integration">企业微信集成指南</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/ruilisi/lingti-bot/edit/master/docs/dingtalk-integration.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/lingti-bot/slack-integration"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">Slack Integration</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/lingti-bot/gateway"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">Gateway</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#tldr" class="table-of-contents__link toc-highlight">TL;DR</a></li><li><a href="#架构图" class="table-of-contents__link toc-highlight">架构图</a></li><li><a href="#前置条件" class="table-of-contents__link toc-highlight">前置条件</a></li><li><a href="#配置步骤" class="table-of-contents__link toc-highlight">配置步骤</a><ul><li><a href="#第一步创建钉钉应用" class="table-of-contents__link toc-highlight">第一步：创建钉钉应用</a></li><li><a href="#第二步配置机器人能力" class="table-of-contents__link toc-highlight">第二步：配置机器人能力</a></li><li><a href="#第三步开启-stream-模式" class="table-of-contents__link toc-highlight">第三步：开启 Stream 模式</a></li><li><a href="#第四步发布应用" class="table-of-contents__link toc-highlight">第四步：发布应用</a></li><li><a href="#第五步配置-lingti-bot" class="table-of-contents__link toc-highlight">第五步：配置 lingti-bot</a></li><li><a href="#第六步测试机器人" class="table-of-contents__link toc-highlight">第六步：测试机器人</a></li></ul></li><li><a href="#效果展示" class="table-of-contents__link toc-highlight">效果展示</a></li><li><a href="#环境变量" class="table-of-contents__link toc-highlight">环境变量</a></li><li><a href="#消息类型支持" class="table-of-contents__link toc-highlight">消息类型支持</a></li><li><a href="#常见问题" class="table-of-contents__link toc-highlight">常见问题</a><ul><li><a href="#1-连接失败" class="table-of-contents__link toc-highlight">1. 连接失败</a></li><li><a href="#2-收不到消息" class="table-of-contents__link toc-highlight">2. 收不到消息</a></li><li><a href="#3-群聊中不响应" class="table-of-contents__link toc-highlight">3. 群聊中不响应</a></li><li><a href="#4-响应超时" class="table-of-contents__link toc-highlight">4. 响应超时</a></li></ul></li><li><a href="#与其他方案对比" class="table-of-contents__link toc-highlight">与其他方案对比</a></li><li><a href="#安全建议" class="table-of-contents__link toc-highlight">安全建议</a></li><li><a href="#相关文档" class="table-of-contents__link toc-highlight">相关文档</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">快速上手</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/relay">云中继</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/configuration">配置参考</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/ai-providers">AI 提供商</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">平台接入</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/feishu-integration">飞书</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wecom-integration">企业微信</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/wechat-integration">微信公众号</a></li><li class="footer__item"><a class="footer__link-item" href="/lingti-bot/slack-integration">Slack</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">更多</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/ruilisi/lingti-bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://cli.lingti.com/bot" target="_blank" rel="noopener noreferrer" class="footer__link-item">官网<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ruilisi. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

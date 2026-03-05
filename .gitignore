@@ -34,3 +34,8 @@ dist
 *.local.json
 *.env
 .claude/worktrees/
+
+# Docusaurus
+website/node_modules/
+website/build/
+website/.docusaurus/

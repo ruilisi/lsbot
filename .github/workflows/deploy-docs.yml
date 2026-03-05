@@ -1,0 +1,56 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'website/**'
+      - 'docs/**'
+      - '*.md'
+      - 'RELAY.md'
+      - 'CONFIGURATION.md'
+      - 'AI-PROVIDERS.md'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Sync docs from repo root
+        run: |
+          cp README.md website/docs/intro.md
+          cp RELAY.md website/docs/relay.md
+          cp CONFIGURATION.md website/docs/configuration.md
+          cp AI-PROVIDERS.md website/docs/ai-providers.md
+          cp README_EN.md website/docs/intro-en.md
+          for f in cli-reference chat-platforms gateway-vs-relay gateway cloud-relay \
+                   feishu-integration wecom-integration wechat-integration slack-integration \
+                   dingtalk-integration browser-automation social-platform-automation \
+                   skills cron-jobs file-sending auto-approval roadmap; do
+            [ -f "docs/${f}.md" ] && cp "docs/${f}.md" "website/docs/${f}.md"
+          done
+          # Copy images
+          cp -r docs/images website/docs/images
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: website
+
+      - name: Build
+        run: npm run build
+        working-directory: website
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/build

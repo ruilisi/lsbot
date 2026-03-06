@@ -29,37 +29,58 @@ Supports WeCom, Feishu, DingTalk, Slack, Telegram, Discord, WhatsApp, LINE, Team
 
 > 🐕⚡ **Why "Lingti"?** Lingti (灵缇) means Greyhound in Chinese - the fastest dog in the world, known for agility and loyalty. Lingti Bot is equally agile and efficient, your faithful AI assistant.
 
-## Installation
+## Quick Start
 
-### macOS / Linux / WSL
+**Two steps — no platform account, no public server required:**
+
+**Step 1: Install**
 
 ```bash
+# macOS / Linux / WSL
 curl -fsSL https://files.lingti.com/install-bot.sh | bash
+
+# Windows (PowerShell)
+irm https://files.lingti.com/install-bot.ps1 | iex
 ```
 
-### Windows (PowerShell)
-
-```powershell
-irm https://cli.lingti.com/install.ps1 | iex
-```
-
-After installation, run the interactive setup wizard:
+**Step 2: Run relay with your AI provider and key**
 
 ```bash
-lingti-bot onboard
+lingti-bot relay --provider deepseek --api-key sk-xxx
 ```
 
-Once configured, start with no arguments needed:
+It immediately prints your personal bot page:
+
+```
+Your bot page: https://bot.lingti.com/bots/xxx
+```
+
+Open the link to chat with your bot in the browser — one command, no platform setup needed.
+
+> Supported `--provider` values: `deepseek`, `claude`, `kimi`, `minimax`, `gemini`, `openai`, and more. See [AI-PROVIDERS.md](AI-PROVIDERS.md).
+
+---
+
+### Advanced: Connect a Messaging Platform (WeCom, Feishu, etc.)
+
+To integrate with WeCom, Feishu, DingTalk, or other platforms, add the platform-specific flags:
 
 ```bash
-lingti-bot relay
+# WeCom (Enterprise WeChat)
+lingti-bot relay --platform wecom \
+  --wecom-corp-id ww... --wecom-agent-id 1000002 \
+  --wecom-secret xxx --wecom-token xxx --wecom-aes-key xxx \
+  --provider deepseek --api-key sk-xxx
+
+# Feishu
+lingti-bot relay --platform feishu \
+  --feishu-app-id cli_xxx --feishu-app-secret xxx \
+  --provider claude --api-key sk-ant-xxx
 ```
 
-Or pass arguments directly to run multiple instances or override saved config:
+See [Cloud Relay docs](docs/cloud-relay.md) for all platforms.
 
-```bash
-lingti-bot relay --platform wecom --provider deepseek --api-key sk-xxx
-```
+### Installation
 
 ## Examples
 

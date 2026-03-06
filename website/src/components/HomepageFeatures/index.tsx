@@ -5,50 +5,79 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  emoji: string;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'One Command to Start',
+    emoji: '⚡',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Run <code>lingti-bot relay --provider deepseek --api-key sk-xxx</code> and get your
+        personal bot page at <code>https://bot.lingti.com/bots/xxx</code> instantly.
+        No platform account, no server, no domain needed.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: '19 Chat Platforms',
+    emoji: '🌐',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Connect to WeCom, Feishu, DingTalk, WeChat, Slack, Telegram, Discord, WhatsApp,
+        LINE, Teams, and more via cloud relay or self-hosted gateway.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: '16 AI Backends',
+    emoji: '🧠',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Switch between Claude, DeepSeek, Kimi, MiniMax, Gemini, OpenAI, and 10 more
+        providers per conversation. Supports Claude Extended Thinking out of the box.
+      </>
+    ),
+  },
+  {
+    title: '75+ MCP Tools',
+    emoji: '🛠️',
+    description: (
+      <>
+        Files, Shell, Git, GitHub, calendar, network, browser automation, social platform
+        automation, scheduled tasks — all available to your AI via MCP protocol.
+      </>
+    ),
+  },
+  {
+    title: 'Zero Dependency Binary',
+    emoji: '🚀',
+    description: (
+      <>
+        Single 30MB binary. No Node.js, no Python, no Docker required to run.
+        Works on macOS, Linux, Windows, ARM, MIPS — scp and run anywhere.
+      </>
+    ),
+  },
+  {
+    title: 'Built-in Web Chat UI',
+    emoji: '💬',
+    description: (
+      <>
+        No client app needed. Open the browser, get multiple parallel sessions each with
+        isolated AI memory. All sessions persist across page refreshes.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
+      <div className="text--center padding-horiz--md padding-vert--md">
+        <div className={styles.featureEmoji}>{emoji}</div>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>

@@ -30,37 +30,58 @@
 
 > 🐕⚡ **为什么叫"灵小缇"？** 灵缇犬（Greyhound）是世界上跑得最快的犬，以敏捷、忠诚著称。灵小缇同样敏捷高效，是你忠实的 AI 助手。
 
-## 安装
+## 快速开始
 
-### macOS / Linux / WSL
+**两步启动，无需平台账号，无需公网服务器：**
+
+**第一步：安装**
 
 ```bash
+# macOS / Linux / WSL
 curl -fsSL https://files.lingti.com/install-bot.sh | bash
+
+# Windows (PowerShell)
+irm https://files.lingti.com/install-bot.ps1 | iex
 ```
 
-### Windows (PowerShell)
-
-```powershell
-irm https://cli.lingti.com/install.ps1 | iex
-```
-
-安装完成后，通过交互式向导完成首次配置：
+**第二步：运行 relay，指定 AI 服务商和密钥**
 
 ```bash
-lingti-bot onboard
+lingti-bot relay --provider deepseek --api-key sk-xxx
 ```
 
-配置保存后，无需任何参数即可启动：
+启动后自动输出你的专属 Bot 页面：
+
+```
+Your bot page: https://bot.lingti.com/bots/xxx
+```
+
+打开链接即可在浏览器中与 Bot 对话 — 仅需一条命令，无需配置任何消息平台。
+
+> 支持的 `--provider`：`deepseek`、`claude`、`kimi`、`minimax`、`gemini`、`openai` 等，详见 [AI-PROVIDERS.md](AI-PROVIDERS.md)。
+
+---
+
+### 进阶：接入消息平台（企业微信、飞书等）
+
+如需接入企业微信、飞书、钉钉等平台，追加对应平台参数即可：
 
 ```bash
-lingti-bot relay
+# 企业微信
+lingti-bot relay --platform wecom \
+  --wecom-corp-id ww... --wecom-agent-id 1000002 \
+  --wecom-secret xxx --wecom-token xxx --wecom-aes-key xxx \
+  --provider deepseek --api-key sk-xxx
+
+# 飞书
+lingti-bot relay --platform feishu \
+  --feishu-app-id cli_xxx --feishu-app-secret xxx \
+  --provider claude --api-key sk-ant-xxx
 ```
 
-也可以通过命令行参数直接启动，适合运行多个实例或覆盖已有配置：
+详见 [云中继文档](docs/cloud-relay.md)。
 
-```bash
-lingti-bot relay --platform wecom --provider deepseek --api-key sk-xxx
-```
+### 安装方式
 
 ## 样例
 

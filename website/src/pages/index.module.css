@@ -20,4 +20,72 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.quickStart {
+  max-width: 640px;
+  margin: 2rem auto;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.quickStartLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.stepNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.stepTitle {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-bottom: 0.4rem;
+}
+
+.code {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.82rem;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.output {
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+  opacity: 0.9;
 }

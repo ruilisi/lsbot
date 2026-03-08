@@ -7,7 +7,7 @@ slug: /
 
 # lingti-bot (灵小缇 [bot.lingti.com](https://bot.lingti.com))
 
-> 🐕⚡「**极简至上 效率为王 一次编译 到处执行 一步接入**」的 AI Bot
+> 🐕⚡「**极简至上 效率为王 秒级接入 一链即用**」的 AI Bot
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

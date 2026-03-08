@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'lingti-bot',
-  tagline: '极简至上 · 效率为王 · 一次编译 · 到处执行',
+  tagline: '极简至上 · 效率为王 · 秒级接入 · 一链即用',
   favicon: 'img/favicon.ico',
 
   future: {

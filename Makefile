@@ -1,4 +1,4 @@
-VERSION := 1.9.5
+VERSION := 1.9.8
 BUILD := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 PROJECTNAME := lingti-bot
 GOBASE := $(shell pwd)

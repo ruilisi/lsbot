@@ -14,6 +14,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 //go:embed static/index.html
@@ -114,11 +115,11 @@ func (p *Platform) Start(ctx context.Context) error {
 	p.cfg.Port = port // update so Stop/logs reflect actual port
 	p.server = &http.Server{Handler: mux}
 
-	go func() {
+	sentryutil.Go("webapp server", func() {
 		if err := p.server.Serve(ln); err != nil && err != http.ErrServerClosed {
 			log.Printf("webapp: server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("webapp: listening on http://localhost:%d", port)
 	return nil

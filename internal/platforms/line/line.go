@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for LINE Messaging API
@@ -75,12 +76,12 @@ func (p *Platform) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("line webhook server", func() {
 		log.Printf("[LINE] Webhook server listening on :%d", p.config.WebhookPort)
 		if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Printf("[LINE] Server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[LINE] Platform started")
 	return nil

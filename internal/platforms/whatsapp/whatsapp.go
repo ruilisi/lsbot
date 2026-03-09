@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for WhatsApp Business Cloud API
@@ -76,12 +77,12 @@ func (p *Platform) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("whatsapp webhook server", func() {
 		log.Printf("[WhatsApp] Webhook server listening on :%d", p.config.WebhookPort)
 		if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Printf("[WhatsApp] Server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[WhatsApp] Connected, phone_number_id: %s", p.config.PhoneNumberID)
 	return nil

@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Zalo Official Account API
@@ -79,12 +80,12 @@ func (p *Platform) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("zalo webhook server", func() {
 		log.Printf("[Zalo] Webhook server listening on :%d", p.config.WebhookPort)
 		if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Printf("[Zalo] Server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[Zalo] Platform started, app_id: %s", p.config.AppID)
 	return nil

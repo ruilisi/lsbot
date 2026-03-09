@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Google Chat
@@ -69,12 +70,12 @@ func (p *Platform) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("googlechat webhook server", func() {
 		log.Printf("[GoogleChat] Webhook server listening on :%d", p.config.WebhookPort)
 		if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Printf("[GoogleChat] Server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[GoogleChat] Platform started, project: %s", p.config.ProjectID)
 	return nil

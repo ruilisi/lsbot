@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Microsoft Teams via Bot Framework
@@ -79,12 +80,12 @@ func (p *Platform) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("teams webhook server", func() {
 		log.Printf("[Teams] Webhook server listening on :%d", p.config.WebhookPort)
 		if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Printf("[Teams] Server error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[Teams] Platform started, app_id: %s", p.config.AppID)
 	return nil

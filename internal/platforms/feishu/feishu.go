@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 
 	lark "github.com/larksuite/oapi-sdk-go/v3"
 	larkcore "github.com/larksuite/oapi-sdk-go/v3/core"
@@ -75,11 +76,11 @@ func (p *Platform) SetMessageHandler(handler func(msg router.Message)) {
 func (p *Platform) Start(ctx context.Context) error {
 	p.ctx, p.cancel = context.WithCancel(ctx)
 
-	go func() {
+	sentryutil.Go("feishu websocket", func() {
 		if err := p.wsClient.Start(p.ctx); err != nil {
 			log.Printf("[Feishu] WebSocket error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[Feishu] Connected as bot: %s", p.botOpenID)
 	return nil

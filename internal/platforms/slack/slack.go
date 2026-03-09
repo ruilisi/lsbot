@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
 	"github.com/slack-go/slack/socketmode"
@@ -71,12 +72,12 @@ func (p *Platform) SetMessageHandler(handler func(msg router.Message)) {
 func (p *Platform) Start(ctx context.Context) error {
 	p.ctx, p.cancel = context.WithCancel(ctx)
 
-	go p.handleEvents()
-	go func() {
+	sentryutil.Go("slack handle events", p.handleEvents)
+	sentryutil.Go("slack socket mode", func() {
 		if err := p.socketClient.RunContext(p.ctx); err != nil {
 			log.Printf("[Slack] Socket mode error: %v", err)
 		}
-	}()
+	})
 
 	log.Printf("[Slack] Connected as bot user: %s", p.botUserID)
 	return nil

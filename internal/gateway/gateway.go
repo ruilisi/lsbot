@@ -11,6 +11,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 // MessageType defines the type of gateway message
@@ -156,10 +157,10 @@ func (g *Gateway) Start(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	go func() {
+	sentryutil.Go("gateway shutdown watcher", func() {
 		<-g.ctx.Done()
 		server.Shutdown(context.Background())
-	}()
+	})
 
 	logger.Info("[Gateway] Starting on %s", g.addr)
 	return server.ListenAndServe()
@@ -449,11 +450,11 @@ func (c *Client) handleChat(msg Message) {
 	}
 
 	// Stream responses
-	go func() {
+	sentryutil.Go("gateway stream responses", func() {
 		for resp := range respChan {
 			c.sendResponse(msg.ID, resp)
 		}
-	}()
+	})
 }
 
 // handleCommand handles command messages

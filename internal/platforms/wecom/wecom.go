@@ -15,6 +15,7 @@ import (
 
 	"github.com/pltanton/lingti-bot/internal/logger"
 	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/pltanton/lingti-bot/internal/sentryutil"
 )
 
 const (
@@ -116,12 +117,12 @@ func (p *Platform) Start(ctx context.Context) error {
 
 	// Start HTTP server (if configured)
 	if p.server != nil {
-		go func() {
+		sentryutil.Go("wecom callback server", func() {
 			logger.Info("[WeCom] Starting callback server on %s", p.server.Addr)
 			if err := p.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 				logger.Error("[WeCom] Server error: %v", err)
 			}
-		}()
+		})
 	}
 
 	logger.Info("[WeCom] Connected with CorpID: %s, AgentID: %s", p.corpID, p.agentID)

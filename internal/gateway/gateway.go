@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"slices"
 	"sync"
 	"time"
 
@@ -410,12 +411,7 @@ func (c *Client) handleAuth(msg Message) {
 		return
 	}
 
-	for _, allowed := range c.gateway.authTokens {
-		if payload.Token == allowed {
-			c.authorized = true
-			break
-		}
-	}
+	c.authorized = slices.Contains(c.gateway.authTokens, payload.Token)
 	if c.authorized {
 		c.sendAuthResult(true, "")
 	} else {
@@ -520,6 +516,11 @@ func (c *Client) sendMessage(msg Message) {
 		msg.ID = generateID()
 	}
 	data, _ := json.Marshal(msg)
+	defer func() {
+		if r := recover(); r != nil {
+			logger.Trace("[Gateway] Send on closed channel for client %s (client disconnected)", c.ID)
+		}
+	}()
 	select {
 	case c.send <- data:
 	default:

@@ -32,6 +32,12 @@
 
 > 🐕⚡ **为什么叫"灵小缇"？** 灵缇犬（Greyhound）是世界上跑得最快的犬，以敏捷、忠诚著称。灵小缇同样敏捷高效，是你忠实的 AI 助手。
 
+> **为什么不叫 lingtiClaw / lingclaw / ltclaw？**
+>
+> "Claw"的起源要追溯到 [OpenClaw](docs/openclaw-reference.md)。OpenClaw 的前身叫 **ClawdBot**，其名字从诞生之日起便有意蹭 **Claude**（目前最强编程智能体）的名气——"Clawd"与"Claude"发音高度相似。后来 Anthropic 向 ClawdBot 提起法律诉讼，团队被迫改名。为了保留"Clawd"的发音意向，他们在重重阻碍（甚至遭遇灰产抢注）之后，最终定下了 **OpenClaw** 这个名字。
+>
+> 所以，**"Claw"这个词，其实根植于"Claude"**。追根溯源，每一个带"Claw"（龙虾）的名字，都在向 Claude 致敬。这当然无可厚非——只是灵小缇想保留自己最朴素的定义：它就是一个 **Bot**。
+
 ## 快速开始
 
 **两步启动，无需平台账号，无需公网服务器：**

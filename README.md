@@ -68,17 +68,11 @@ Your bot page: https://bot.lingti.com/bots/xxx
 
 > 支持的 `--provider`：`deepseek`、`claude`、`kimi`、`minimax`、`gemini`、`openai` 等，详见 [AI-PROVIDERS.md](AI-PROVIDERS.md)。
 
-### 桌面客户端（可选）
+### 桌面客户端（MacOS/Windows）
 
-图形界面，开机自启，一键管理：
+桌面端不光拥有完整的安装、升级和使用Lingti Bot的交互界面，还提供了AI网关(类cc-switch)、AI加速(跨域传输更快更稳定)等**让AI更简单**的功能。
 
-| 平台 | 架构 | 下载 |
-|------|------|------|
-| Windows | x64 | [bot.lingti.com/download](https://bot.lingti.com/download) |
-| macOS | Apple Silicon (M 系列) | [bot.lingti.com/download](https://bot.lingti.com/download) |
-| macOS | Intel | [bot.lingti.com/download](https://bot.lingti.com/download) |
-
-> 命令行版本（`lingti-bot`）通过上方的安装脚本获取，桌面客户端为独立 GUI 程序。
+下载地址: [bot.lingti.com/download](https://bot.lingti.com/download)
 
 ---
 

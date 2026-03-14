@@ -3,6 +3,7 @@ package relay
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/xml"
@@ -51,6 +52,8 @@ type Config struct {
 	// WeChat Official Account credentials (when platform=wechat)
 	WeChatAppID     string
 	WeChatAppSecret string
+	// InsecureTLS skips TLS certificate verification (use when server uses self-signed cert)
+	InsecureTLS bool
 }
 
 // Platform implements router.Platform for cloud relay
@@ -503,6 +506,9 @@ func (p *Platform) connect() error {
 
 	dialer := websocket.Dialer{
 		HandshakeTimeout: 10 * time.Second,
+	}
+	if p.config.InsecureTLS {
+		dialer.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //nolint:gosec
 	}
 
 	conn, resp, err := dialer.DialContext(p.ctx, p.config.ServerURL, nil)

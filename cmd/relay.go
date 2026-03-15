@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"bufio"
 	"context"
 	"fmt"
 	"log"
@@ -31,6 +30,7 @@ var (
 	relayWebhookURL    string
 	relayRefreshBotID  bool
 	relayInsecure      bool
+	relayNoE2E         bool
 	relayE2EKeyFile    string
 	relayAIProvider    string
 	relayAPIKey        string
@@ -125,6 +125,7 @@ func init() {
 	relayCmd.Flags().IntVar(&relayCallTimeout, "call-timeout", 0, "Base timeout in seconds for each AI API call (default 90, or AI_CALL_TIMEOUT env)")
 	relayCmd.Flags().BoolVar(&relayRefreshBotID, "refresh-bot-id", false, "Generate a new bot ID (invalidates existing bot page links)")
 	relayCmd.Flags().BoolVar(&relayInsecure, "insecure", false, "Skip TLS certificate verification (use when server has self-signed cert)")
+	relayCmd.Flags().BoolVar(&relayNoE2E, "no-e2ee", false, "Disable end-to-end encryption (send messages in plaintext through relay)")
 	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lingti-e2e.pem)")
 
 	// WeCom credentials for cloud relay
@@ -344,52 +345,40 @@ func runRelay(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Resolve E2E key file: CLI flag → env → saved config → default path
-	// Only needed when BotID is set (bot page mode)
-	if cfgErr == nil && savedCfg.BotID != "" {
+	// Resolve E2E key file. E2EE is on by default when BotID is set (all relay
+	// traffic goes through bot.lingti.com, so encrypting end-to-end is the safe
+	// default). Use --no-e2ee to disable.
+	if !relayNoE2E && cfgErr == nil && savedCfg.BotID != "" {
 		if relayE2EKeyFile == "" {
 			relayE2EKeyFile = os.Getenv("E2E_KEY_FILE")
 		}
 		if relayE2EKeyFile == "" && savedCfg.E2EKeyFile != "" {
 			relayE2EKeyFile = savedCfg.E2EKeyFile
 		}
-		defaultKeyFile := filepath.Join(func() string {
-			h, err := os.UserHomeDir()
-			if err != nil {
-				return os.TempDir()
-			}
-			return h
-		}(), ".lingti-e2e.pem")
 		if relayE2EKeyFile == "" {
-			relayE2EKeyFile = defaultKeyFile
+			homeDir, _ := os.UserHomeDir()
+			if homeDir == "" {
+				homeDir = os.TempDir()
+			}
+			relayE2EKeyFile = filepath.Join(homeDir, ".lingti-e2e.pem")
 		}
-		// Check if the resolved key file exists
+		// Auto-generate key on first run — no prompt needed
 		if _, err := os.Stat(relayE2EKeyFile); os.IsNotExist(err) {
-			// Prompt user to generate a key
-			fmt.Printf("\nNo E2E key found at %s\n", relayE2EKeyFile)
-			fmt.Println("lingti-bot can generate one for you (stored locally, never sent to the server).")
-			fmt.Print("Generate now? [Y/n]: ")
-			scanner := bufio.NewScanner(os.Stdin)
-			scanner.Scan()
-			answer := strings.TrimSpace(scanner.Text())
-			if answer == "" || strings.ToLower(answer) == "y" {
-				priv, err := e2e.GenerateOrLoadKeyPair(relayE2EKeyFile)
-				if err != nil {
-					fmt.Fprintf(os.Stderr, "Error generating E2E key: %v\n", err)
-					os.Exit(1)
-				}
-				fmt.Printf("E2E key generated: %s\n", relayE2EKeyFile)
-				fmt.Printf("E2E fingerprint:   %s\n\n", e2e.Fingerprint(priv.PublicKey()))
-				// Save key file path to config
+			priv, err := e2e.GenerateOrLoadKeyPair(relayE2EKeyFile)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Warning: failed to generate E2E key: %v (continuing without E2EE)\n", err)
+				relayE2EKeyFile = ""
+			} else {
+				log.Printf("[E2E] Key generated: %s", relayE2EKeyFile)
+				log.Printf("[E2E] Fingerprint:   %s", e2e.Fingerprint(priv.PublicKey()))
 				savedCfg.E2EKeyFile = relayE2EKeyFile
 				if err := savedCfg.Save(); err != nil {
-					fmt.Fprintf(os.Stderr, "Warning: failed to save key file path to config: %v\n", err)
+					fmt.Fprintf(os.Stderr, "Warning: failed to save E2E key path to config: %v\n", err)
 				}
-			} else {
-				// User declined — don't use E2EE
-				relayE2EKeyFile = ""
 			}
 		}
+	} else if relayNoE2E {
+		relayE2EKeyFile = ""
 	}
 
 	// Validate required parameters

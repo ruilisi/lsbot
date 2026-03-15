@@ -5,8 +5,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/pltanton/lingti-bot/internal/config"
-	"github.com/pltanton/lingti-bot/internal/skills"
+	"github.com/ruilisi/lsbot/internal/config"
+	"github.com/ruilisi/lsbot/internal/skills"
 	"github.com/spf13/cobra"
 )
 
@@ -69,7 +69,7 @@ var skillsDisableCmd = &cobra.Command{
 var skillsDownloadCmd = &cobra.Command{
 	Use:   "download",
 	Short: "Download bundled skills from GitHub",
-	Long:  `Download the latest bundled skills from the lingti-bot GitHub repository into ~/.lingti/skills/.`,
+	Long:  `Download the latest bundled skills from the lsbot GitHub repository into ~/.lingti/skills/.`,
 	Run:   runSkillsDownload,
 }
 

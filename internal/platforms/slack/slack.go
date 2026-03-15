@@ -6,8 +6,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/pltanton/lingti-bot/internal/router"
-	"github.com/pltanton/lingti-bot/internal/sentryutil"
+	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
 	"github.com/slack-go/slack/socketmode"

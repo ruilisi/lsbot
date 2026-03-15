@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/router"
-	"github.com/pltanton/lingti-bot/internal/sentryutil"
+	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Microsoft Teams via Bot Framework

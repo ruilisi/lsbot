@@ -9,7 +9,7 @@ import (
 
 	"github.com/open-dingtalk/dingtalk-stream-sdk-go/chatbot"
 	"github.com/open-dingtalk/dingtalk-stream-sdk-go/client"
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/router"
 )
 
 // Platform implements router.Platform for DingTalk

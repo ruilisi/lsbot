@@ -12,13 +12,13 @@ import (
 	"syscall"
 
 	"github.com/google/uuid"
-	"github.com/pltanton/lingti-bot/internal/agent"
-	"github.com/pltanton/lingti-bot/internal/agent/mcpclient"
-	"github.com/pltanton/lingti-bot/internal/config"
-	cronpkg "github.com/pltanton/lingti-bot/internal/cron"
-	"github.com/pltanton/lingti-bot/internal/e2e"
-	"github.com/pltanton/lingti-bot/internal/platforms/relay"
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/agent"
+	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
+	"github.com/ruilisi/lsbot/internal/config"
+	cronpkg "github.com/ruilisi/lsbot/internal/cron"
+	"github.com/ruilisi/lsbot/internal/e2e"
+	"github.com/ruilisi/lsbot/internal/platforms/relay"
+	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/spf13/cobra"
 )
 
@@ -53,16 +53,16 @@ var (
 var relayCmd = &cobra.Command{
 	Use:   "relay",
 	Short: "Connect to the cloud relay service",
-	Long: `Connect to the lingti-bot cloud relay service to process messages
+	Long: `Connect to the lsbot cloud relay service to process messages
 using your local AI API key.
 
-This allows you to use the official lingti-bot service on Feishu/Slack/WeChat
+This allows you to use the official lsbot service on Feishu/Slack/WeChat
 without registering your own bot application.
 
 User Flow (Feishu/Slack/WeChat):
-  1. Follow the official lingti-bot on Feishu/Slack/WeChat
+  1. Follow the official lsbot on Feishu/Slack/WeChat
   2. Send /whoami to get your user ID
-  3. Run: lingti-bot relay --user-id <ID> --platform feishu
+  3. Run: lsbot relay --user-id <ID> --platform feishu
   4. Messages are processed locally with your AI API key
   5. Responses are sent back through the relay service
 
@@ -70,7 +70,7 @@ WeCom Cloud Relay:
   For WeCom, no user-id is needed - just provide your credentials.
   This command handles both callback verification AND message processing.
 
-  lingti-bot relay --platform wecom \
+  lsbot relay --platform wecom \
     --wecom-corp-id YOUR_CORP_ID \
     --wecom-agent-id YOUR_AGENT_ID \
     --wecom-secret YOUR_SECRET \

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/getsentry/sentry-go"
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 // RecoverAndReport recovers from a panic, logs it, and reports it to Sentry.

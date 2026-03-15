@@ -14,15 +14,15 @@ var quickstartCmd = &cobra.Command{
 Usage modes:
 
   1. Gateway (recommended — web-based setup at bot.lingti.com):
-     lingti-bot gateway       # Opens bot.lingti.com/bots/xxxx to connect platforms
+     lsbot gateway       # Opens bot.lingti.com/bots/xxxx to connect platforms
 
   2. MCP Server (for Claude Desktop / Cursor / Windsurf):
      Add to your MCP config (claude_desktop_config.json):
 
      {
        "mcpServers": {
-         "lingti-bot": {
-           "command": "/usr/local/bin/lingti-bot",
+         "lsbot": {
+           "command": "/usr/local/bin/lsbot",
            "args": ["serve"]
          }
        }
@@ -30,13 +30,13 @@ Usage modes:
 
 
   3. Cloud Relay (connect to Lingti cloud for Feishu/Slack bots):
-     lingti-bot relay         # Connect to cloud relay service
+     lsbot relay         # Connect to cloud relay service
 
 For more information:
-  lingti-bot help                       # Show all commands
-  lingti-bot <command> --help           # Help for specific command
-  https://bot.lingti.com            # Documentation
-  https://github.com/ruilisi/lingti-bot # Source code
+  lsbot help                       # Show all commands
+  lsbot <command> --help           # Help for specific command
+  https://bot.lingti.com               # Official website & docs
+  https://github.com/ruilisi/lsbot # Source code
 
 `)
 	},

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/router"
 )
 
 func TestCreateProvider_ValidProviders(t *testing.T) {

@@ -9,13 +9,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/agent/mcpclient"
-	"github.com/pltanton/lingti-bot/internal/config"
-	cronpkg "github.com/pltanton/lingti-bot/internal/cron"
-	"github.com/pltanton/lingti-bot/internal/logger"
-	"github.com/pltanton/lingti-bot/internal/router"
-	"github.com/pltanton/lingti-bot/internal/security"
-	"github.com/pltanton/lingti-bot/internal/skills"
+	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
+	"github.com/ruilisi/lsbot/internal/config"
+	cronpkg "github.com/ruilisi/lsbot/internal/cron"
+	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/security"
+	"github.com/ruilisi/lsbot/internal/skills"
 )
 
 // Agent processes messages using AI providers and tools

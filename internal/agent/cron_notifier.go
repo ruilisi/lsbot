@@ -1,8 +1,8 @@
 package agent
 
 import (
-	"github.com/pltanton/lingti-bot/internal/logger"
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/router"
 )
 
 // RouterCronNotifier implements cron.ChatNotifier by sending messages through the router

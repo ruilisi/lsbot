@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 // Message represents an incoming message from any platform

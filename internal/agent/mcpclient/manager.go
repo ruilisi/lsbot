@@ -1,5 +1,5 @@
 // Package mcpclient manages connections to external MCP servers and exposes
-// their tools to the lingti-bot agent.
+// their tools to the lsbot agent.
 package mcpclient
 
 import (
@@ -12,7 +12,7 @@ import (
 
 	mcpgo "github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 // ServerConfig describes one external MCP server.
@@ -141,7 +141,7 @@ func (s *serverConn) connect() error {
 	// MCP handshake
 	initReq := mcp.InitializeRequest{}
 	initReq.Params.ProtocolVersion = mcp.LATEST_PROTOCOL_VERSION
-	initReq.Params.ClientInfo = mcp.Implementation{Name: "lingti-bot", Version: "1.0"}
+	initReq.Params.ClientInfo = mcp.Implementation{Name: "lsbot", Version: "1.0"}
 	_, err = c.Initialize(ctx, initReq)
 	if err != nil {
 		_ = c.Close()

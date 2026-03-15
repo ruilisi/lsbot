@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/getsentry/sentry-go"
-	"github.com/pltanton/lingti-bot/cmd"
+	"github.com/ruilisi/lsbot/cmd"
 )
 
 // Build is set via ldflags at build time

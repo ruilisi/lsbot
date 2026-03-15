@@ -413,7 +413,7 @@ func DefaultConfig() *Config {
 		},
 		Logging: LoggingConfig{
 			Level: "info",
-			File:  "/tmp/lingti-bot.log",
+			File:  "/tmp/lsbot.log",
 		},
 	}
 }

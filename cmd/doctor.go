@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/config"
+	"github.com/ruilisi/lsbot/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +33,7 @@ type checkResult struct {
 }
 
 func runDoctor(cmd *cobra.Command, args []string) {
-	fmt.Println("lingti-bot doctor")
+	fmt.Println("lsbot doctor")
 	fmt.Println("=================")
 	fmt.Printf("OS: %s/%s, Go: %s\n\n", runtime.GOOS, runtime.GOARCH, runtime.Version())
 

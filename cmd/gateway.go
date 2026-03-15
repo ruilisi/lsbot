@@ -11,32 +11,32 @@ import (
 	"syscall"
 
 	"github.com/google/uuid"
-	"github.com/pltanton/lingti-bot/internal/agent"
-	"github.com/pltanton/lingti-bot/internal/browser"
-	"github.com/pltanton/lingti-bot/internal/config"
-	cronpkg "github.com/pltanton/lingti-bot/internal/cron"
-	"github.com/pltanton/lingti-bot/internal/gateway"
-	"github.com/pltanton/lingti-bot/internal/logger"
-	"github.com/pltanton/lingti-bot/internal/platforms/dingtalk"
-	"github.com/pltanton/lingti-bot/internal/platforms/discord"
-	"github.com/pltanton/lingti-bot/internal/platforms/feishu"
-	"github.com/pltanton/lingti-bot/internal/platforms/googlechat"
-	"github.com/pltanton/lingti-bot/internal/platforms/imessage"
-	"github.com/pltanton/lingti-bot/internal/platforms/line"
-	"github.com/pltanton/lingti-bot/internal/platforms/matrix"
-	"github.com/pltanton/lingti-bot/internal/platforms/mattermost"
-	"github.com/pltanton/lingti-bot/internal/platforms/nextcloud"
-	"github.com/pltanton/lingti-bot/internal/platforms/nostr"
-	signalplatform "github.com/pltanton/lingti-bot/internal/platforms/signal"
-	"github.com/pltanton/lingti-bot/internal/platforms/slack"
-	"github.com/pltanton/lingti-bot/internal/platforms/zalo"
-	"github.com/pltanton/lingti-bot/internal/platforms/teams"
-	"github.com/pltanton/lingti-bot/internal/platforms/telegram"
-	"github.com/pltanton/lingti-bot/internal/platforms/twitch"
-	"github.com/pltanton/lingti-bot/internal/platforms/webapp"
-	"github.com/pltanton/lingti-bot/internal/platforms/wecom"
-	"github.com/pltanton/lingti-bot/internal/platforms/whatsapp"
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/agent"
+	"github.com/ruilisi/lsbot/internal/browser"
+	"github.com/ruilisi/lsbot/internal/config"
+	cronpkg "github.com/ruilisi/lsbot/internal/cron"
+	"github.com/ruilisi/lsbot/internal/gateway"
+	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/platforms/dingtalk"
+	"github.com/ruilisi/lsbot/internal/platforms/discord"
+	"github.com/ruilisi/lsbot/internal/platforms/feishu"
+	"github.com/ruilisi/lsbot/internal/platforms/googlechat"
+	"github.com/ruilisi/lsbot/internal/platforms/imessage"
+	"github.com/ruilisi/lsbot/internal/platforms/line"
+	"github.com/ruilisi/lsbot/internal/platforms/matrix"
+	"github.com/ruilisi/lsbot/internal/platforms/mattermost"
+	"github.com/ruilisi/lsbot/internal/platforms/nextcloud"
+	"github.com/ruilisi/lsbot/internal/platforms/nostr"
+	signalplatform "github.com/ruilisi/lsbot/internal/platforms/signal"
+	"github.com/ruilisi/lsbot/internal/platforms/slack"
+	"github.com/ruilisi/lsbot/internal/platforms/zalo"
+	"github.com/ruilisi/lsbot/internal/platforms/teams"
+	"github.com/ruilisi/lsbot/internal/platforms/telegram"
+	"github.com/ruilisi/lsbot/internal/platforms/twitch"
+	"github.com/ruilisi/lsbot/internal/platforms/webapp"
+	"github.com/ruilisi/lsbot/internal/platforms/wecom"
+	"github.com/ruilisi/lsbot/internal/platforms/whatsapp"
+	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/spf13/cobra"
 )
 
@@ -1039,7 +1039,7 @@ func registerPlatforms(r *router.Router) {
 
 func setupBrowserDebug(debugDir string) error {
 	if debugDir == "" {
-		debugDir = filepath.Join(os.TempDir(), "lingti-bot")
+		debugDir = filepath.Join(os.TempDir(), "lsbot")
 	}
 	if err := os.MkdirAll(debugDir, 0755); err != nil {
 		return fmt.Errorf("failed to create debug directory: %w", err)

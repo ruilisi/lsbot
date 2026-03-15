@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 const (

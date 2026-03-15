@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/pltanton/lingti-bot/internal/config"
+	"github.com/ruilisi/lsbot/internal/config"
 
 	"github.com/go-rod/rod"
 	"github.com/go-rod/rod/lib/launcher"
@@ -49,7 +49,7 @@ func Instance() *Browser {
 		home, _ := os.UserHomeDir()
 		instance = &Browser{
 			headless: false,
-			dataDir:  filepath.Join(home, ".lingti-bot", "browser"),
+			dataDir:  filepath.Join(home, ".lsbot", "browser"),
 			refs:     make(map[int]RefEntry),
 		}
 	})

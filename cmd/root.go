@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pltanton/lingti-bot/internal/config"
-	"github.com/pltanton/lingti-bot/internal/logger"
-	"github.com/pltanton/lingti-bot/internal/mcp"
+	"github.com/ruilisi/lsbot/internal/config"
+	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/mcp"
 	"github.com/spf13/cobra"
 )
 

@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/liushuangls/go-anthropic/v2"
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 // debugTransport logs outgoing request headers (with redacted auth) for debugging.

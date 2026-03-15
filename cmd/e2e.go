@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/pltanton/lingti-bot/internal/config"
-	"github.com/pltanton/lingti-bot/internal/e2e"
+	"github.com/ruilisi/lsbot/internal/config"
+	"github.com/ruilisi/lsbot/internal/e2e"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +27,7 @@ var e2eKeygenCmd = &cobra.Command{
 	Short: "Generate a new E2EE key pair",
 	Long: `Generate a P-256 key pair and save it as a PEM file.
 Use --save to record the key file path in ~/.lingti.yaml so it is
-loaded automatically when running "lingti-bot relay".`,
+loaded automatically when running "lsbot relay".`,
 	Run: func(cmd *cobra.Command, args []string) {
 		keyFile := e2eKeygenPath
 		if keyFile == "" {
@@ -101,7 +101,7 @@ the fingerprint matches what is shown in the browser.`,
 		priv, err := e2e.LoadKeyPair(keyFile)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
-			fmt.Fprintln(os.Stderr, "Run 'lingti-bot e2e keygen' to create a key pair first.")
+			fmt.Fprintln(os.Stderr, "Run 'lsbot e2e keygen' to create a key pair first.")
 			os.Exit(1)
 		}
 

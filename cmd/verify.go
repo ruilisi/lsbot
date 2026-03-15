@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/platforms/relay"
+	"github.com/ruilisi/lsbot/internal/platforms/relay"
 	"github.com/spf13/cobra"
 )
 
@@ -40,7 +40,7 @@ Simplified workflow with 'relay':
   4. Messages are processed immediately with your AI provider
 
 Example (recommended):
-  lingti-bot relay --platform wecom \
+  lsbot relay --platform wecom \
     --wecom-corp-id YOUR_CORP_ID \
     --wecom-agent-id YOUR_AGENT_ID \
     --wecom-secret YOUR_SECRET \
@@ -206,7 +206,7 @@ func runVerify(cmd *cobra.Command, args []string) {
 	log.Println("")
 	log.Println("Use 'relay' instead - it handles both verification AND messages:")
 	log.Println("")
-	log.Printf("  lingti-bot relay --platform %s \\\n", verifyPlatform)
+	log.Printf("  lsbot relay --platform %s \\\n", verifyPlatform)
 	log.Printf("    --wecom-corp-id %s \\\n", verifyWeComCorpID)
 	log.Println("    --wecom-agent-id ... --wecom-secret ... \\")
 	log.Println("    --wecom-token ... --wecom-aes-key ... \\")

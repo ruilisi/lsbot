@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/router"
 )
 
 // Platform implements router.Platform for iMessage via BlueBubbles

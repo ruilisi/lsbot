@@ -1,4 +1,4 @@
-module github.com/pltanton/lingti-bot
+module github.com/ruilisi/lsbot
 
 go 1.24.0
 

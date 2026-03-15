@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/pltanton/lingti-bot/internal/router"
-	"github.com/pltanton/lingti-bot/internal/sentryutil"
+	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 //go:embed static/index.html

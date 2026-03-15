@@ -3,7 +3,7 @@ package routing
 import (
 	"testing"
 
-	"github.com/pltanton/lingti-bot/internal/config"
+	"github.com/ruilisi/lsbot/internal/config"
 )
 
 func TestResolveRoute_NoBindings(t *testing.T) {

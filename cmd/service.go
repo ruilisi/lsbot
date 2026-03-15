@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pltanton/lingti-bot/internal/service"
+	"github.com/ruilisi/lsbot/internal/service"
 	"github.com/spf13/cobra"
 )
 
 var serviceCmd = &cobra.Command{
 	Use:   "service",
-	Short: "Manage the lingti-bot service",
-	Long:  `Install, uninstall, start, stop, or check the status of the lingti-bot service.`,
+	Short: "Manage the lsbot service",
+	Long:  `Install, uninstall, start, stop, or check the status of the lsbot service.`,
 }
 
 var installCmd = &cobra.Command{
 	Use:   "install",
-	Short: "Install lingti-bot as a system service",
-	Long:  `Install lingti-bot as a system service (requires root/admin privileges).`,
+	Short: "Install lsbot as a system service",
+	Long:  `Install lsbot as a system service (requires root/admin privileges).`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Get current executable path
 		execPath, err := os.Executable()
@@ -26,7 +26,7 @@ var installCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fmt.Println("Installing lingti-bot service...")
+		fmt.Println("Installing lsbot service...")
 		if err := service.Install(execPath); err != nil {
 			fmt.Fprintf(os.Stderr, "Error installing service: %v\n", err)
 			os.Exit(1)
@@ -37,10 +37,10 @@ var installCmd = &cobra.Command{
 
 var uninstallCmd = &cobra.Command{
 	Use:   "uninstall",
-	Short: "Uninstall the lingti-bot service",
-	Long:  `Uninstall the lingti-bot service (requires root/admin privileges).`,
+	Short: "Uninstall the lsbot service",
+	Long:  `Uninstall the lsbot service (requires root/admin privileges).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Uninstalling lingti-bot service...")
+		fmt.Println("Uninstalling lsbot service...")
 		if err := service.Uninstall(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error uninstalling service: %v\n", err)
 			os.Exit(1)
@@ -51,7 +51,7 @@ var uninstallCmd = &cobra.Command{
 
 var startCmd = &cobra.Command{
 	Use:   "start",
-	Short: "Start the lingti-bot service",
+	Short: "Start the lsbot service",
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := service.Start(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error starting service: %v\n", err)
@@ -63,7 +63,7 @@ var startCmd = &cobra.Command{
 
 var stopCmd = &cobra.Command{
 	Use:   "stop",
-	Short: "Stop the lingti-bot service",
+	Short: "Stop the lsbot service",
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := service.Stop(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error stopping service: %v\n", err)
@@ -75,7 +75,7 @@ var stopCmd = &cobra.Command{
 
 var restartCmd = &cobra.Command{
 	Use:   "restart",
-	Short: "Restart the lingti-bot service",
+	Short: "Restart the lsbot service",
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := service.Restart(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error restarting service: %v\n", err)
@@ -87,14 +87,14 @@ var restartCmd = &cobra.Command{
 
 var statusCmd = &cobra.Command{
 	Use:   "status",
-	Short: "Check the status of the lingti-bot service",
+	Short: "Check the status of the lsbot service",
 	Run: func(cmd *cobra.Command, args []string) {
 		installed := service.IsInstalled()
 		running := service.IsRunning()
 
 		binaryPath, configPath := service.Paths()
 
-		fmt.Println("=== lingti-bot Service Status ===")
+		fmt.Println("=== lsbot Service Status ===")
 		fmt.Println()
 		fmt.Printf("Installed: %v\n", installed)
 		fmt.Printf("Running:   %v\n", running)

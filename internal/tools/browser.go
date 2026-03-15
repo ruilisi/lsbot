@@ -12,8 +12,8 @@ import (
 
 	"github.com/go-rod/rod/lib/proto"
 	"github.com/mark3labs/mcp-go/mcp"
-	"github.com/pltanton/lingti-bot/internal/browser"
-	"github.com/pltanton/lingti-bot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/browser"
+	"github.com/ruilisi/lsbot/internal/logger"
 )
 
 // BrowserStart launches a browser instance or connects to an existing Chrome.

@@ -13,7 +13,7 @@ import (
 
 const (
 	// GitHub tarball URL for the default branch
-	repoTarballURL = "https://github.com/ruilisi/lingti-bot/archive/refs/heads/master.tar.gz"
+	repoTarballURL = "https://github.com/ruilisi/lsbot/archive/refs/heads/master.tar.gz"
 	// Prefix inside the tarball for bundled skills
 	bundledSkillsPrefix = "bundled-skills/"
 )
@@ -57,7 +57,7 @@ func DownloadBundledSkills(destDir string) (int, error) {
 			return count, fmt.Errorf("tar read error: %w", err)
 		}
 
-		// Tarball entries look like: lingti-bot-master/bundled-skills/weather/SKILL.md
+		// Tarball entries look like: lsbot-master/bundled-skills/weather/SKILL.md
 		// Strip the repo prefix (first path component) to get: bundled-skills/weather/SKILL.md
 		parts := strings.SplitN(header.Name, "/", 2)
 		if len(parts) < 2 {

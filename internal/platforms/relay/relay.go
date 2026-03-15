@@ -18,11 +18,11 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/pltanton/lingti-bot/internal/debug"
-	"github.com/pltanton/lingti-bot/internal/e2e"
-	"github.com/pltanton/lingti-bot/internal/platforms/wechat"
-	"github.com/pltanton/lingti-bot/internal/platforms/wecom"
-	"github.com/pltanton/lingti-bot/internal/router"
+	"github.com/ruilisi/lsbot/internal/debug"
+	"github.com/ruilisi/lsbot/internal/e2e"
+	"github.com/ruilisi/lsbot/internal/platforms/wechat"
+	"github.com/ruilisi/lsbot/internal/platforms/wecom"
+	"github.com/ruilisi/lsbot/internal/router"
 )
 
 const (

@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/pltanton/lingti-bot/internal/config"
+	"github.com/ruilisi/lsbot/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -96,9 +96,9 @@ to a config file. After running onboard once, you can use 'relay' or 'router'
 without passing any flags.
 
 Usage:
-  lingti-bot onboard              # Interactive wizard
-  lingti-bot onboard --reset      # Clear config and start fresh
-  lingti-bot onboard --provider deepseek --api-key sk-xxx  # Non-interactive
+  lsbot onboard              # Interactive wizard
+  lsbot onboard --reset      # Clear config and start fresh
+  lsbot onboard --provider deepseek --api-key sk-xxx  # Non-interactive
 
 Config saved to:
   macOS: ~/Library/Preferences/Lingti/bot.yaml
@@ -487,7 +487,7 @@ func applyOnboardFlags(cfg *config.Config) {
 
 func runInteractiveWizard(cfg *config.Config) {
 	fmt.Println()
-	fmt.Println("  lingti-bot -- Interactive Setup")
+	fmt.Println("  lsbot -- Interactive Setup")
 	fmt.Println("  ───────────────────────────────────")
 
 	// Show existing config if present
@@ -906,7 +906,7 @@ func stepNextcloud(cfg *config.Config) {
 func stepWeChat(cfg *config.Config) {
 	fmt.Println()
 	fmt.Println("  WeChat works via the cloud relay service.")
-	fmt.Println("  1. Follow the official lingti-bot on WeChat")
+	fmt.Println("  1. Follow the official lsbot on WeChat")
 	fmt.Println("  2. Send /whoami to get your user ID")
 	fmt.Println("  3. Enter the user ID below")
 	fmt.Println()
@@ -986,22 +986,22 @@ func printOnboardSummary(cfg *config.Config) {
 	if cfg.Mode == "relay" {
 		if cfg.Relay.UserID != "" && cfg.Relay.Platform != "" {
 			fmt.Println("  To start the bot, run:")
-			fmt.Println("    lingti-bot relay")
+			fmt.Println("    lsbot relay")
 		} else if cfg.Relay.Platform == "wecom" {
 			fmt.Println("  To start the bot, run:")
-			fmt.Println("    lingti-bot relay --platform wecom")
+			fmt.Println("    lsbot relay --platform wecom")
 		} else {
 			fmt.Println("  To start the bot, run:")
-			fmt.Println("    lingti-bot relay --platform <platform> --user-id <your-id>")
+			fmt.Println("    lsbot relay --platform <platform> --user-id <your-id>")
 			fmt.Println()
 			fmt.Println("  Get your user ID by sending /whoami to the official bot.")
 		}
 	} else {
 		fmt.Println("  To start the bot, run:")
-		fmt.Println("    lingti-bot gateway")
+		fmt.Println("    lsbot gateway")
 	}
 	fmt.Println()
 	fmt.Println("  To reconfigure:")
-	fmt.Println("    lingti-bot onboard")
+	fmt.Println("    lsbot onboard")
 	fmt.Println()
 }

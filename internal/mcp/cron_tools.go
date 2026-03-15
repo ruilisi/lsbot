@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/mark3labs/mcp-go/mcp"
-	cronpkg "github.com/pltanton/lingti-bot/internal/cron"
+	cronpkg "github.com/ruilisi/lsbot/internal/cron"
 )
 
 var cronScheduler *cronpkg.Scheduler

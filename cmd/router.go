@@ -12,17 +12,17 @@ WARNING: 'router' is deprecated and will be removed in a future release.
 Use the new 'channels', 'agents', and 'gateway' commands instead:
 
   # 1. Save your platform credentials to ~/.lingti.yaml
-  lingti-bot channels add --channel telegram --token YOUR_BOT_TOKEN
-  lingti-bot channels add --channel slack --bot-token xoxb-... --app-token xapp-...
+  lsbot channels add --channel telegram --token YOUR_BOT_TOKEN
+  lsbot channels add --channel slack --bot-token xoxb-... --app-token xapp-...
 
   # 2. Add an agent (optional — skip if using env vars / flags only)
-  lingti-bot agents add main --default
+  lsbot agents add main --default
 
   # 3. Start everything
-  lingti-bot gateway --api-key YOUR_API_KEY
+  lsbot gateway --api-key YOUR_API_KEY
 
   # Or keep passing flags/env vars directly (all router flags work on gateway):
-  lingti-bot gateway --telegram-token YOUR_BOT_TOKEN --api-key YOUR_API_KEY
+  lsbot gateway --telegram-token YOUR_BOT_TOKEN --api-key YOUR_API_KEY
 
 `
 

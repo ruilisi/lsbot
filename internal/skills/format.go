@@ -39,12 +39,12 @@ func FormatList(report StatusReport, opts FormatListOptions) string {
 
 	if len(skills) == 0 {
 		if opts.Eligible {
-			return "No eligible skills found. Run `lingti-bot skills list` to see all skills."
+			return "No eligible skills found. Run `lsbot skills list` to see all skills."
 		}
 		return "No skills found.\n\nSkills are loaded from:\n" +
 			fmt.Sprintf("  Managed:   %s\n", ShortenHomePath(report.ManagedDir)) +
 			fmt.Sprintf("  Workspace: %s\n", ShortenHomePath(report.WorkspaceDir)) +
-			"\nRun `lingti-bot skills download` to download bundled skills from GitHub."
+			"\nRun `lsbot skills download` to download bundled skills from GitHub."
 	}
 
 	eligible, _, _ := report.CountByStatus()
@@ -107,7 +107,7 @@ func FormatInfo(report StatusReport, name string, asJSON bool) string {
 			data, _ := json.MarshalIndent(map[string]string{"error": "not found", "skill": name}, "", "  ")
 			return string(data)
 		}
-		return fmt.Sprintf("Skill %q not found. Run `lingti-bot skills list` to see available skills.", name)
+		return fmt.Sprintf("Skill %q not found. Run `lsbot skills list` to see available skills.", name)
 	}
 
 	if asJSON {

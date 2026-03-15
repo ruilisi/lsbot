@@ -9,12 +9,12 @@ import (
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
-	cronpkg "github.com/pltanton/lingti-bot/internal/cron"
-	"github.com/pltanton/lingti-bot/internal/security"
-	"github.com/pltanton/lingti-bot/internal/tools"
+	cronpkg "github.com/ruilisi/lsbot/internal/cron"
+	"github.com/ruilisi/lsbot/internal/security"
+	"github.com/ruilisi/lsbot/internal/tools"
 )
 
-const ServerName = "lingti-bot"
+const ServerName = "lsbot"
 
 // ServerVersion is set via ldflags at build time
 var ServerVersion = "1.9.9"

@@ -3,7 +3,7 @@
 // by scanning Bindings from most-specific to least-specific match.
 package routing
 
-import "github.com/pltanton/lingti-bot/internal/config"
+import "github.com/ruilisi/lsbot/internal/config"
 
 // RouteResult holds the resolved agent ID and a description of which binding matched.
 type RouteResult struct {

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pltanton/lingti-bot/internal/config"
+	"github.com/ruilisi/lsbot/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -209,7 +209,7 @@ var agentsListCmd = &cobra.Command{
 		}
 
 		if len(cfg.Agents) == 0 {
-			fmt.Println("No agents configured. Use 'lingti-bot agents add' to add one.")
+			fmt.Println("No agents configured. Use 'lsbot agents add' to add one.")
 			return nil
 		}
 

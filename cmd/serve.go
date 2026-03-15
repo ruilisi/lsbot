@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/mark3labs/mcp-go/server"
-	"github.com/pltanton/lingti-bot/internal/mcp"
+	"github.com/ruilisi/lsbot/internal/mcp"
 	"github.com/spf13/cobra"
 )
 

@@ -1,6 +1,6 @@
 VERSION := 1.9.9
 BUILD := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
-PROJECTNAME := lingti-bot
+PROJECTNAME := lsbot
 GOBASE := $(shell pwd)
 GOBIN := $(GOBASE)/dist
 GOARCH ?= $(shell go env GOARCH)

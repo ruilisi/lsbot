@@ -18,17 +18,20 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "lingti-bot",
-	Short: "MCP server for system resources",
-	Long: `lingti-bot is an MCP (Model Context Protocol) server that exposes
-computer system resources to AI assistants.
+	Use:   "lsbot",
+	Short: "Lingti Secure Bot — private AI on your own machine",
+	Long: `lsbot (Lingti Secure Bot) is a lean, secure AI bot that runs entirely
+on your machine. Your data never leaves your computer.
+
+All relay traffic is end-to-end encrypted. No chat server can read
+your messages or access files on your machine.
 
 It provides tools for:
   - File operations (read, write, list, search)
   - Shell command execution
   - System information (CPU, memory, disk)
   - Process management
-  - Network information`,
+  - Browser automation`,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		if configFile != "" {
 			config.SetConfigPath(configFile)

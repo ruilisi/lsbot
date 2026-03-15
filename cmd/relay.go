@@ -502,6 +502,30 @@ func runRelay(cmd *cobra.Command, args []string) {
 		modelName = "(default)"
 	}
 
+	// If any provider-related flag was explicitly set on the CLI, propagate
+	// the resolved values into savedCfg.AI and strip per-agent provider fields
+	// so all agents use the CLI provider. This ensures --provider/--api-key/
+	// --model always override whatever is configured in ~/.lingti.yaml agents.
+	if cfgErr == nil {
+		cliProviderFlags := []string{"provider", "api-key", "base-url", "model"}
+		for _, f := range cliProviderFlags {
+			if cmd.Flags().Changed(f) {
+				savedCfg.AI.Provider = relayAIProvider
+				savedCfg.AI.APIKey = relayAPIKey
+				savedCfg.AI.BaseURL = relayBaseURL
+				savedCfg.AI.Model = relayModel
+				// Strip per-agent provider fields so they inherit the CLI values
+				for i := range savedCfg.Agents {
+					savedCfg.Agents[i].Provider = ""
+					savedCfg.Agents[i].APIKey = ""
+					savedCfg.Agents[i].BaseURL = ""
+					savedCfg.Agents[i].Model = ""
+				}
+				break
+			}
+		}
+	}
+
 	// Create agent pool for per-platform/channel model overrides
 	pool := agent.NewAgentPool(aiAgent, agentCfg, savedCfg)
 

@@ -727,11 +727,21 @@ func (p *Platform) readLoop() {
 	}
 }
 
-// handleMessage processes an incoming message
+// handleMessage processes an incoming plain-text message.
+// When E2EE is active, bot-page messages must arrive as "encrypted" type; plain
+// "message" packets from botpage are rejected to enforce the security invariant.
 func (p *Platform) handleMessage(data []byte) {
 	var msg IncomingMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
 		log.Printf("[Relay] Failed to parse message: %v", err)
+		return
+	}
+
+	// Enforce E2EE: if we have a private key and this message originates from
+	// the bot page, it should have been delivered as type "encrypted". Receiving
+	// it in plaintext means the server sent it without encryption — drop it.
+	if p.e2ePrivKey != nil && msg.Platform == "botpage" {
+		log.Printf("[Relay] Rejected plain message from botpage channel %s (E2EE required)", msg.ChannelID)
 		return
 	}
 

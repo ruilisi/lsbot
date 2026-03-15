@@ -30,7 +30,7 @@ var (
 	relayWebhookURL    string
 	relayRefreshBotID  bool
 	relayInsecure      bool
-	relayNoE2E         bool
+	relayPlain         bool
 	relayE2EKeyFile    string
 	relayAIProvider    string
 	relayAPIKey        string
@@ -125,7 +125,7 @@ func init() {
 	relayCmd.Flags().IntVar(&relayCallTimeout, "call-timeout", 0, "Base timeout in seconds for each AI API call (default 90, or AI_CALL_TIMEOUT env)")
 	relayCmd.Flags().BoolVar(&relayRefreshBotID, "refresh-bot-id", false, "Generate a new bot ID (invalidates existing bot page links)")
 	relayCmd.Flags().BoolVar(&relayInsecure, "insecure", false, "Skip TLS certificate verification (use when server has self-signed cert)")
-	relayCmd.Flags().BoolVar(&relayNoE2E, "no-e2ee", false, "Disable end-to-end encryption (send messages in plaintext through relay)")
+	relayCmd.Flags().BoolVar(&relayPlain, "plain", false, "Disable end-to-end encryption (send messages in plaintext through relay)")
 	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lingti-e2e.pem)")
 
 	// WeCom credentials for cloud relay
@@ -348,7 +348,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 	// Resolve E2E key file. E2EE is on by default when BotID is set (all relay
 	// traffic goes through bot.lingti.com, so encrypting end-to-end is the safe
 	// default). Use --no-e2ee to disable.
-	if !relayNoE2E && cfgErr == nil && savedCfg.BotID != "" {
+	if !relayPlain && cfgErr == nil && savedCfg.BotID != "" {
 		if relayE2EKeyFile == "" {
 			relayE2EKeyFile = os.Getenv("E2E_KEY_FILE")
 		}
@@ -388,7 +388,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 				log.Printf("[E2E] Fingerprint:   %s", e2e.Fingerprint(priv.PublicKey()))
 			}
 		}
-	} else if relayNoE2E {
+	} else if relayPlain {
 		relayE2EKeyFile = ""
 	}
 

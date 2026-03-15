@@ -68,6 +68,20 @@ Your bot page: https://bot.lingti.com/bots/xxx
 
 > 支持的 `--provider`：`deepseek`、`claude`、`kimi`、`minimax`、`gemini`、`openai` 等，详见 [AI-PROVIDERS.md](AI-PROVIDERS.md)。
 
+#### 端到端加密（E2EE）
+
+Bot Page 默认启用**端到端加密**，relay 服务器（bot.lingti.com）无法读取消息内容：
+
+- bot 首次启动时，在 `~/.lingti-e2e.pem` 自动生成持久化 P-256 密钥，日志打印指纹：
+  ```
+  [Relay] E2E fingerprint: sha256:a3f7c91b2d4e8f06
+  ```
+- 浏览器打开 Bot Page 后自动协商会话密钥，状态栏出现**蓝色锁图标**，悬停显示指纹
+- 核对两端指纹一致，即可确认无中间人攻击
+- 使用 `--e2e-key-file` 可指定自定义密钥文件路径
+
+详情：[端到端加密文档](https://bot.lingti.com/docs/e2e-encryption)
+
 ### 桌面客户端（MacOS/Windows）
 
 桌面端不光拥有完整的安装、升级和使用Lingti Bot的交互界面，还提供了AI网关(类cc-switch)、AI加速(跨域传输更快更稳定)等**让AI更简单**的功能。

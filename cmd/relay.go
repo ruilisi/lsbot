@@ -29,6 +29,7 @@ var (
 	relayWebhookURL    string
 	relayRefreshBotID  bool
 	relayInsecure      bool
+	relayE2EKeyFile    string
 	relayAIProvider    string
 	relayAPIKey        string
 	relayBaseURL       string
@@ -122,6 +123,7 @@ func init() {
 	relayCmd.Flags().IntVar(&relayCallTimeout, "call-timeout", 0, "Base timeout in seconds for each AI API call (default 90, or AI_CALL_TIMEOUT env)")
 	relayCmd.Flags().BoolVar(&relayRefreshBotID, "refresh-bot-id", false, "Generate a new bot ID (invalidates existing bot page links)")
 	relayCmd.Flags().BoolVar(&relayInsecure, "insecure", false, "Skip TLS certificate verification (use when server has self-signed cert)")
+	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lingti-e2e.pem)")
 
 	// WeCom credentials for cloud relay
 	relayCmd.Flags().StringVar(&relayWeComCorpID, "wecom-corp-id", "", "WeCom Corp ID (or WECOM_CORP_ID env)")
@@ -487,6 +489,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 		AIModel:      modelName,
 		BotID:        relayBotID,
 		InsecureTLS:  relayInsecure,
+		E2EKeyFile:   relayE2EKeyFile,
 		WeComCorpID:     relayWeComCorpID,
 		WeComAgentID:    relayWeComAgentID,
 		WeComSecret:     relayWeComSecret,

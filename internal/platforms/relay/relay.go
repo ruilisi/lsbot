@@ -3,6 +3,7 @@ package relay
 import (
 	"bytes"
 	"context"
+	"crypto/ecdh"
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
@@ -18,6 +19,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/pltanton/lingti-bot/internal/debug"
+	"github.com/pltanton/lingti-bot/internal/e2e"
 	"github.com/pltanton/lingti-bot/internal/platforms/wechat"
 	"github.com/pltanton/lingti-bot/internal/platforms/wecom"
 	"github.com/pltanton/lingti-bot/internal/router"
@@ -43,6 +45,7 @@ type Config struct {
 	AIProvider string // AI provider name (e.g., "claude", "deepseek")
 	AIModel    string // AI model name
 	BotID      string // Persistent bot ID for bot page feature
+	E2EKeyFile string // Path to E2E PEM key file (default: ~/.lingti-e2e.pem)
 	// WeCom credentials for cloud relay (when platform=wecom)
 	WeComCorpID  string
 	WeComAgentID string
@@ -77,6 +80,10 @@ type Platform struct {
 	kfCursors   map[string]string
 	kfCursorsMu sync.Mutex
 	kfEnabled   bool
+	// E2EE
+	e2ePrivKey    *ecdh.PrivateKey
+	e2eSessions   map[string][]byte // channelID → 32-byte AES key
+	e2eSessionsMu sync.Mutex
 }
 
 // Protocol message types
@@ -90,6 +97,7 @@ type AuthMessage struct {
 	AIProvider    string `json:"ai_provider,omitempty"`
 	AIModel       string `json:"ai_model,omitempty"`
 	BotID         string `json:"bot_id,omitempty"`
+	E2EPubKey     string `json:"e2e_pubkey,omitempty"`
 	// WeCom credentials (for wecom platform)
 	WeComCorpID  string `json:"wecom_corp_id,omitempty"`
 	WeComAgentID string `json:"wecom_agent_id,omitempty"`
@@ -108,25 +116,27 @@ type AuthResult struct {
 
 // IncomingMessage is a message from the server
 type IncomingMessage struct {
-	Type      string            `json:"type"`
-	ID        string            `json:"id"`
-	Platform  string            `json:"platform"`
-	ChannelID string            `json:"channel_id"`
-	UserID    string            `json:"user_id"`
-	Username  string            `json:"username"`
-	Text      string            `json:"text"`
-	ThreadID  string            `json:"thread_id"`
-	Metadata  map[string]string `json:"metadata"`
+	Type       string            `json:"type"`
+	ID         string            `json:"id"`
+	Platform   string            `json:"platform"`
+	ChannelID  string            `json:"channel_id"`
+	UserID     string            `json:"user_id"`
+	Username   string            `json:"username"`
+	Text       string            `json:"text"`
+	ThreadID   string            `json:"thread_id"`
+	Metadata   map[string]string `json:"metadata"`
+	Ciphertext string            `json:"ciphertext,omitempty"`
 }
 
 // OutgoingResponse is sent via webhook
 type OutgoingResponse struct {
-	Type      string          `json:"type"`
-	MessageID string          `json:"message_id"`
-	Platform  string          `json:"platform"`
-	ChannelID string          `json:"channel_id"`
-	Text      string          `json:"text"`
-	Files     []OutgoingFile  `json:"files,omitempty"`
+	Type       string         `json:"type"`
+	MessageID  string         `json:"message_id"`
+	Platform   string         `json:"platform"`
+	ChannelID  string         `json:"channel_id"`
+	Text       string         `json:"text"`
+	Ciphertext string         `json:"ciphertext,omitempty"`
+	Files      []OutgoingFile `json:"files,omitempty"`
 }
 
 // OutgoingFile is a file attachment sent via webhook (base64-encoded)
@@ -184,7 +194,27 @@ func New(cfg Config) (*Platform, error) {
 		httpClient: &http.Client{
 			Timeout: 30 * time.Second,
 		},
-		kfCursors: make(map[string]string),
+		kfCursors:   make(map[string]string),
+		e2eSessions: make(map[string][]byte),
+	}
+
+	// Load or generate E2E key pair when BotID is set (bot page mode)
+	if cfg.BotID != "" {
+		keyFile := cfg.E2EKeyFile
+		if keyFile == "" {
+			homeDir, err := os.UserHomeDir()
+			if err != nil {
+				homeDir = os.TempDir()
+			}
+			keyFile = filepath.Join(homeDir, ".lingti-e2e.pem")
+		}
+		priv, err := e2e.GenerateOrLoadKeyPair(keyFile)
+		if err != nil {
+			log.Printf("[Relay] Warning: E2E key setup failed: %v", err)
+		} else {
+			p.e2ePrivKey = priv
+			log.Printf("[Relay] E2E fingerprint: %s", e2e.Fingerprint(priv.PublicKey()))
+		}
 	}
 
 	// Initialize MsgCrypt for WeCom platform (for local decryption)
@@ -398,6 +428,20 @@ func (p *Platform) sendWebhook(ctx context.Context, channelID string, resp route
 		Text:      resp.Text,
 	}
 
+	// If an E2EE session exists for this channel, encrypt the text
+	p.e2eSessionsMu.Lock()
+	sessionKey := p.e2eSessions[channelID]
+	p.e2eSessionsMu.Unlock()
+	if sessionKey != nil && resp.Text != "" {
+		ct, err := e2e.Encrypt(sessionKey, []byte(resp.Text))
+		if err != nil {
+			log.Printf("[Relay] E2E encrypt failed: %v", err)
+		} else {
+			outgoing.Text = ""
+			outgoing.Ciphertext = ct
+		}
+	}
+
 	body, err := json.Marshal(outgoing)
 	if err != nil {
 		return fmt.Errorf("failed to marshal response: %w", err)
@@ -531,6 +575,9 @@ func (p *Platform) connect() error {
 		WeComSecret:   p.config.WeComSecret,
 		WeComToken:    p.config.WeComToken,
 		WeComAESKey:   p.config.WeComAESKey,
+	}
+	if p.e2ePrivKey != nil {
+		authMsg.E2EPubKey = e2e.PublicKeyToBase64(p.e2ePrivKey.PublicKey())
 	}
 
 	debug.Log("Sending auth message")
@@ -668,6 +715,12 @@ func (p *Platform) readLoop() {
 			p.sendPong()
 		case "pong":
 			debug.Log("Received app-level pong")
+		case "key_init":
+			debug.Log("Received E2E key_init")
+			p.handleKeyInit(message)
+		case "encrypted":
+			debug.Log("Received encrypted message")
+			p.handleEncrypted(message)
 		case "message":
 			debug.Log("Received message, handling")
 			p.handleMessage(message)
@@ -938,6 +991,113 @@ func (p *Platform) handleKfEvent(token string) {
 		if p.messageHandler != nil {
 			p.messageHandler(routerMsg)
 		}
+	}
+}
+
+// handleKeyInit processes an E2EE key_init message from the browser.
+// It derives the shared session key and sends a key_ack response.
+func (p *Platform) handleKeyInit(data []byte) {
+	if p.e2ePrivKey == nil {
+		log.Printf("[Relay] Received key_init but E2E key not initialized")
+		return
+	}
+
+	var msg IncomingMessage
+	if err := json.Unmarshal(data, &msg); err != nil {
+		log.Printf("[Relay] key_init parse error: %v", err)
+		return
+	}
+
+	browserPub, err := e2e.PublicKeyFromBase64(msg.Ciphertext)
+	if err != nil {
+		log.Printf("[Relay] key_init: invalid browser pubkey: %v", err)
+		return
+	}
+
+	sessionKey, err := e2e.DeriveSessionKey(p.e2ePrivKey, browserPub)
+	if err != nil {
+		log.Printf("[Relay] key_init: ECDH failed: %v", err)
+		return
+	}
+
+	p.e2eSessionsMu.Lock()
+	p.e2eSessions[msg.ChannelID] = sessionKey
+	p.e2eSessionsMu.Unlock()
+
+	log.Printf("[Relay] E2EE session established with channel %s", msg.ChannelID)
+
+	// Send key_ack via webhook
+	ctx := context.Background()
+	platform := "botpage"
+	if msg.Platform != "" {
+		platform = msg.Platform
+	}
+	outgoing := OutgoingResponse{
+		Type:       "response",
+		Platform:   platform,
+		ChannelID:  msg.ChannelID,
+		Ciphertext: "key_ack",
+	}
+	body, _ := json.Marshal(outgoing)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, p.config.WebhookURL, bytes.NewReader(body))
+	if err != nil {
+		log.Printf("[Relay] key_ack: failed to create request: %v", err)
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-Session-ID", p.sessionID)
+	req.Header.Set("X-User-ID", p.config.UserID)
+	resp, err := p.httpClient.Do(req)
+	if err != nil {
+		log.Printf("[Relay] key_ack: webhook failed: %v", err)
+		return
+	}
+	resp.Body.Close()
+}
+
+// handleEncrypted decrypts an E2EE-encrypted browser message and dispatches it.
+func (p *Platform) handleEncrypted(data []byte) {
+	var msg IncomingMessage
+	if err := json.Unmarshal(data, &msg); err != nil {
+		log.Printf("[Relay] encrypted: parse error: %v", err)
+		return
+	}
+
+	p.e2eSessionsMu.Lock()
+	sessionKey := p.e2eSessions[msg.ChannelID]
+	p.e2eSessionsMu.Unlock()
+
+	if sessionKey == nil {
+		log.Printf("[Relay] encrypted: no session key for channel %s", msg.ChannelID)
+		return
+	}
+
+	plaintext, err := e2e.Decrypt(sessionKey, msg.Ciphertext)
+	if err != nil {
+		log.Printf("[Relay] encrypted: decrypt failed: %v", err)
+		return
+	}
+
+	log.Printf("[Relay] E2EE message from %s: decrypted %d bytes", msg.ChannelID, len(plaintext))
+
+	if p.messageHandler != nil {
+		metadata := msg.Metadata
+		if metadata == nil {
+			metadata = make(map[string]string)
+		}
+		metadata["message_id"] = msg.ID
+		metadata["actual_platform"] = "botpage"
+		metadata["e2ee"] = "true"
+
+		p.messageHandler(router.Message{
+			ID:        msg.ID,
+			Platform:  "relay",
+			ChannelID: msg.ChannelID,
+			UserID:    msg.UserID,
+			Username:  msg.Username,
+			Text:      string(plaintext),
+			Metadata:  metadata,
+		})
 	}
 }
 

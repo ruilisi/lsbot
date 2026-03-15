@@ -19,8 +19,8 @@ var (
 
 var rootCmd = &cobra.Command{
 	Use:   "lsbot",
-	Short: "Lingti Secure Bot — private AI on your own machine",
-	Long: `lsbot (Lingti Secure Bot) is a lean, secure AI bot that runs entirely
+	Short: "Lean Secure Bot — private AI on your own machine",
+	Long: `lsbot (Lean Secure Bot) is a lean, secure AI bot that runs entirely
 on your machine. Your data never leaves your computer.
 
 All relay traffic is end-to-end encrypted. No chat server can read

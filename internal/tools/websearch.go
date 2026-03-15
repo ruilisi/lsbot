@@ -25,7 +25,7 @@ func WebSearch(ctx context.Context, req mcp.CallToolRequest) (*mcp.CallToolResul
 
 	client := &http.Client{Timeout: 15 * time.Second}
 	req2, _ := http.NewRequestWithContext(ctx, "GET", searchURL, nil)
-	req2.Header.Set("User-Agent", "Mozilla/5.0 (compatible; LingtiBot/1.0)")
+	req2.Header.Set("User-Agent", "Mozilla/5.0 (compatible; lsbot/1.0)")
 
 	resp, err := client.Do(req2)
 	if err != nil {
@@ -144,7 +144,7 @@ func WebFetch(ctx context.Context, req mcp.CallToolRequest) (*mcp.CallToolResult
 	if err != nil {
 		return mcp.NewToolResultError(fmt.Sprintf("invalid URL: %v", err)), nil
 	}
-	req2.Header.Set("User-Agent", "Mozilla/5.0 (compatible; LingtiBot/1.0)")
+	req2.Header.Set("User-Agent", "Mozilla/5.0 (compatible; lsbot/1.0)")
 
 	resp, err := client.Do(req2)
 	if err != nil {

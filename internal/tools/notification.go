@@ -79,7 +79,7 @@ func notifyWindows(ctx context.Context, title, message string) (*mcp.CallToolRes
 		$xml.GetElementsByTagName("text")[0].AppendChild($xml.CreateTextNode("%s")) | Out-Null
 		$xml.GetElementsByTagName("text")[1].AppendChild($xml.CreateTextNode("%s")) | Out-Null
 		$toast = [Windows.UI.Notifications.ToastNotification]::new($xml)
-		[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("LingtiBot").Show($toast)
+		[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("lsbot").Show($toast)
 	`, title, message)
 
 	cmd := exec.CommandContext(ctx, "powershell", "-command", script)

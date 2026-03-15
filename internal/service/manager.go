@@ -225,7 +225,7 @@ func createLaunchdPlist(configPath, binaryPath string) error {
 }
 
 const systemdUnitTemplate = `[Unit]
-Description=Lingti Bot MCP Server
+Description=lsbot MCP Server
 After=network.target
 
 [Service]

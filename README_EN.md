@@ -10,7 +10,7 @@ English | [中文](./README.md)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/Website-cli.lingti.com-blue?style=flat)](https://bot.lingti.com)
 
-**Lingti Bot** is an all-in-one AI Bot platform featuring \*\*MCP Server\*\*, \*\*multi-platform messaging gateway\*\*, \*\*rich toolset\*\*, and \*\*intelligent conversation\*\*.
+**lsbot** is an all-in-one AI Bot platform featuring \*\*MCP Server\*\*, \*\*multi-platform messaging gateway\*\*, \*\*rich toolset\*\*, and \*\*intelligent conversation\*\*.
 
 **Core Advantages:**
 - 🚀 **Zero Dependency** — Single 30MB binary, no Node.js/Python runtime needed, just `scp` and run
@@ -27,7 +27,7 @@ English | [中文](./README.md)
 
 Supports WeCom, Feishu, DingTalk, Slack, Telegram, Discord, WhatsApp, LINE, Teams, and more — [19 chat platforms](docs/chat-platforms.md) in total — plus a built-in **browser Web Chat UI** with multiple parallel sessions. Either **5-minute cloud relay** or [OpenClaw](docs/openclaw-reference.md)-style **self-hosted deployment**. Check [Roadmap](docs/roadmap.md) for more features.
 
-> 🐕⚡ **Why "Lingti"?** Lingti (灵缇) means Greyhound in Chinese - the fastest dog in the world, known for agility and loyalty. Lingti Bot is equally agile and efficient, your faithful AI assistant.
+> 🐕⚡ **Why "Lingti"?** Lingti (灵缇) means Greyhound in Chinese - the fastest dog in the world, known for agility and loyalty. lsbot is equally agile and efficient, your faithful AI assistant.
 
 ## Quick Start
 

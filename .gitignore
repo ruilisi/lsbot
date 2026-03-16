@@ -39,3 +39,4 @@ dist
 website/node_modules/
 website/build/
 website/.docusaurus/
+.superpowers/

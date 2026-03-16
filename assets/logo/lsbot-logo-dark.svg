@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 100" width="340" height="100">
+  <title>lsbot — Lean &amp; Secure Bot</title>
+  <!-- Shield -->
+  <path d="M38 5 L64 16 L64 44 Q64 66 38 78 Q12 66 12 44 L12 16 Z"
+        fill="rgba(74,222,128,0.07)" stroke="#4ade80" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- ls inside shield -->
+  <text x="38" y="51" font-family="'Courier New',Courier,monospace" font-size="22" font-weight="700"
+        fill="#4ade80" text-anchor="middle" letter-spacing="1">ls</text>
+  <!-- bot wordmark -->
+  <text x="80" y="57" font-family="'Courier New',Courier,monospace" font-size="42" font-weight="700"
+        fill="#e6edf3" letter-spacing="-1">bot</text>
+  <!-- Primary slogan: bright, bold -->
+  <text x="80" y="76" font-family="'Courier New',Courier,monospace" font-size="11.5" font-weight="700"
+        fill="#4ade80" letter-spacing="1.5">Lean &amp; Secure Bot</text>
+  <!-- Secondary slogan: dimmed -->
+  <text x="80" y="91" font-family="'Courier New',Courier,monospace" font-size="9.5"
+        fill="#374151" letter-spacing="1.2">Your AI, Your Data.</text>
+</svg>

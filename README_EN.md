@@ -2,32 +2,36 @@ English | [中文](./README.md)
 
 ---
 
-# lingti-bot (Lingti) 🐕⚡
+# lsbot — Lean & Secure Bot
 
-> 🐕⚡ **Minimal · Efficient · Compile Once Run Anywhere · Lightning Integration** AI Bot
+> **Lean. Secure. Yours.**
+
+<div align="center">
+  <img src="assets/logo/lsbot-banner-dark.svg" alt="lsbot — Lean & Secure Bot" width="360" />
+</div>
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Website](https://img.shields.io/badge/Website-cli.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![Website](https://img.shields.io/badge/Website-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
 
-**lsbot** is an all-in-one AI Bot platform featuring \*\*MCP Server\*\*, \*\*multi-platform messaging gateway\*\*, \*\*rich toolset\*\*, and \*\*intelligent conversation\*\*.
+**lsbot** is a lean, secure AI Bot — single static binary, zero dependencies, end-to-end encrypted by default. Your data stays on your machine.
 
 **Core Advantages:**
-- 🚀 **Zero Dependency** — Single 30MB binary, no Node.js/Python runtime needed, just `scp` and run
-- ☁️ **Cloud Relay** — No public server, domain registration, or HTTPS certificate needed, 5-min setup for WeCom/WeChat
-- 🤖 **Browser Automation** — Built-in CDP protocol control, snapshot-then-act pattern, no Puppeteer/Playwright installation
-- 🛠️ **75+ MCP Tools** — Covers files, Shell, system, network, calendar, Git, GitHub, and more
-- 🌏 **China Platform Native** — DingTalk, Feishu, WeCom, WeChat Official Account ready out-of-box
-- 💬 **Built-in Web Chat UI** — Open in any browser, no client needed. Supports **multiple simultaneous sessions** each with isolated AI memory, persists across page refreshes
-- 🔌 **Embedded Friendly** — Compile to ARM/MIPS, easy deployment to Raspberry Pi, routers, NAS
-- 🧠 **Multi-AI Backend** — [16 AI providers](AI-PROVIDERS.md) including Claude, DeepSeek, Kimi, MiniMax, Gemini, OpenAI, with per-platform/channel model overrides
-- 🔬 **Claude Extended Thinking** — Native Anthropic Thinking API support, real chain-of-thought reasoning via `/think high`
-- 🐳 **Docker Support** — Multi-stage Dockerfile and docker-compose.yml for containerized deployment
-- 🩺 **Health Diagnostics** — `lingti-bot doctor` checks config, connectivity, dependencies in one command
+- **End-to-End Encrypted** — E2EE on by default (P-256 ECDH + AES-256-GCM), out-of-band key verification
+- **Single Static Binary** — ~15MB, no Node.js/Python runtime, no package manager, just `scp` and run
+- **Local-First** — All data stays on your machine; nothing is uploaded to the cloud
+- **Cloud Relay** — No public server, domain registration, or HTTPS certificate needed; 5-min setup for WeCom/WeChat
+- **Browser Automation** — Built-in CDP protocol control, snapshot-then-act pattern, no Puppeteer/Playwright installation
+- **75+ MCP Tools** — Covers files, Shell, system, network, calendar, Git, GitHub, and more
+- **China Platform Native** — DingTalk, Feishu, WeCom, WeChat Official Account ready out-of-box
+- **Built-in Web Chat UI** — Open in any browser, no client needed. Supports **multiple simultaneous sessions** each with isolated AI memory, persists across page refreshes
+- **Embedded Friendly** — Compile to ARM/MIPS, easy deployment to Raspberry Pi, routers, NAS
+- **Multi-AI Backend** — [16 AI providers](AI-PROVIDERS.md) including Claude, DeepSeek, Kimi, MiniMax, Gemini, OpenAI, with per-platform/channel model overrides
+- **Claude Extended Thinking** — Native Anthropic Thinking API support, real chain-of-thought reasoning via `/think high`
+- **Docker Support** — Multi-stage Dockerfile and docker-compose.yml for containerized deployment
+- **Health Diagnostics** — `lsbot doctor` checks config, connectivity, dependencies in one command
 
 Supports WeCom, Feishu, DingTalk, Slack, Telegram, Discord, WhatsApp, LINE, Teams, and more — [19 chat platforms](docs/chat-platforms.md) in total — plus a built-in **browser Web Chat UI** with multiple parallel sessions. Either **5-minute cloud relay** or [OpenClaw](docs/openclaw-reference.md)-style **self-hosted deployment**. Check [Roadmap](docs/roadmap.md) for more features.
-
-> 🐕⚡ **Why "Lingti"?** Lingti (灵缇) means Greyhound in Chinese - the fastest dog in the world, known for agility and loyalty. lsbot is equally agile and efficient, your faithful AI assistant.
 
 ## Quick Start
 
@@ -46,7 +50,7 @@ irm https://files.lingti.com/install-bot.ps1 | iex
 **Step 2: Run relay with your AI provider and key**
 
 ```bash
-lingti-bot relay --provider deepseek --api-key sk-xxx
+lsbot relay --provider deepseek --api-key sk-xxx
 ```
 
 It immediately prints your personal bot page:
@@ -67,13 +71,13 @@ To integrate with WeCom, Feishu, DingTalk, or other platforms, add the platform-
 
 ```bash
 # WeCom (Enterprise WeChat)
-lingti-bot relay --platform wecom \
+lsbot relay --platform wecom \
   --wecom-corp-id ww... --wecom-agent-id 1000002 \
   --wecom-secret xxx --wecom-token xxx --wecom-aes-key xxx \
   --provider deepseek --api-key sk-xxx
 
 # Feishu
-lingti-bot relay --platform feishu \
+lsbot relay --platform feishu \
   --feishu-app-id cli_xxx --feishu-app-secret xxx \
   --provider claude --api-key sk-ant-xxx
 ```
@@ -92,34 +96,35 @@ See [Cloud Relay docs](docs/cloud-relay.md) for all platforms.
 <td width="33%"><img src="docs/images/demo-chat-3.png" alt="Information Search" /></td>
 </tr>
 <tr>
-<td align="center"><sub>💬 Smart Chat</sub></td>
-<td align="center"><sub>📁 WeCom File Transfer</sub></td>
-<td align="center"><sub>🔍 Information Search</sub></td>
+<td align="center"><sub>Smart Chat</sub></td>
+<td align="center"><sub>WeCom File Transfer</sub></td>
+<td align="center"><sub>Information Search</sub></td>
 </tr>
 </table>
 
-<summary>📺 <b>Background Running Demo</b> — <code>make && dist/lingti-bot gateway</code></summary>
+<summary><b>Background Running Demo</b> — <code>make && dist/lsbot gateway</code></summary>
 <br>
 <img src="docs/images/demo-terminal.png" alt="Terminal Demo" />
 <p><sub>Clone, compile and run directly, paired with DeepSeek model, processing DingTalk messages in real-time</sub></p>
 
-## Why lingti-bot?
+## Why lsbot?
 
-**Single Binary, Zero Dependencies, Local-First**
+**Security-First. Single Binary. Local-First.**
 
-Unlike traditional Bot frameworks that require Docker, databases, or complex runtime environments, lingti-bot achieves the ultimate in simplicity:
+Unlike traditional Bot frameworks that require Docker, databases, or complex runtime environments, lsbot is built around three core principles:
 
-1. **Zero Dependencies** — One 30MB binary file, no external dependencies, `scp` to any server and run
-2. **Embedded Friendly** — Pure Go implementation, compilable to ARM/MIPS, deployable to Raspberry Pi, routers, NAS
-3. **Plain Text Output** — No colored terminal output, avoiding extra rendering libraries or terminal compatibility issues
-4. **Code Restraint** — Every line of code has a clear reason to exist, rejecting over-design
-5. **Cloud Relay Boost** — No need for self-hosted web server, cloud relay completes WeChat Official Account and WeCom callback verification in seconds, Bot goes live immediately
+1. **End-to-End Encrypted by Default** — P-256 ECDH key exchange + AES-256-GCM message encryption, enabled automatically on every relay session. Use `--plain` only when connecting to legacy infrastructure that cannot negotiate E2EE.
+2. **Single Static Binary** — ~15MB binary, no external dependencies. `scp` to any server and run immediately.
+3. **Local-First** — All your data stays on your machine. No telemetry, no cloud sync, no third-party data exposure.
+4. **Out-of-Band Key Verification** — Public key fingerprint is printed on relay start so you can verify the connection independently of the relay server.
+5. **Embedded Friendly** — Pure Go implementation, compilable to ARM/MIPS, deployable to Raspberry Pi, routers, NAS.
+6. **Code Restraint** — Every line of code has a clear reason to exist, rejecting over-design.
 
 ```bash
 # Clone, compile, run
-git clone https://github.com/ruilisi/lingti-bot.git
-cd lingti-bot && make
-./dist/lingti-bot gateway --provider deepseek --api-key sk-xxx
+git clone https://github.com/ruilisi/lsbot.git
+cd lsbot && make
+./dist/lsbot gateway --provider deepseek --api-key sk-xxx
 ```
 
 ### Single Binary
@@ -129,7 +134,7 @@ cd lingti-bot && make
 make build
 
 # Ready to use
-./dist/lingti-bot serve
+./dist/lsbot serve
 ```
 
 No Docker, no database, no cloud service required.
@@ -157,18 +162,18 @@ Core functions support macOS, Linux, Windows. macOS users can enjoy native calen
 
 ### MCP Server — Claude Desktop Native Integration
 
-lingti-bot is primarily an **MCP (Model Context Protocol) Server** that provides rich local tools for Claude Desktop and other MCP-compatible clients.
+lsbot is primarily an **MCP (Model Context Protocol) Server** that provides rich local tools for Claude Desktop and other MCP-compatible clients.
 
 **Quick Start:**
-1. Install lingti-bot:
+1. Install lsbot:
    - macOS / Linux / WSL: `curl -fsSL https://files.lingti.com/install-bot.sh | bash`
    - Windows (PowerShell): `irm https://cli.lingti.com/install.ps1 -OutFile install.ps1; .\install.ps1 -Bot`
 2. Configure Claude Desktop MCP: `~/.config/Claude/claude_desktop_config.json`
    ```json
    {
      "mcpServers": {
-       "lingti-bot": {
-         "command": "lingti-bot",
+       "lsbot": {
+         "command": "lsbot",
          "args": ["serve"]
        }
      }
@@ -178,31 +183,31 @@ lingti-bot is primarily an **MCP (Model Context Protocol) Server** that provides
 
 ### Multi-Platform Gateway — Message Router
 
-In addition to MCP mode, lingti-bot can also run as a **message router**, connecting multiple messaging platforms simultaneously.
+In addition to MCP mode, lsbot can also run as a **message router**, connecting multiple messaging platforms simultaneously.
 
 **Supported Platforms:**
 
 | Platform | Connection Method | Setup | File Sending | Status |
 |----------|-------------------|-------|-------------|--------|
-| **WeCom** | Callback API | Cloud Relay / Self-hosted | ✅ All formats | ✅ |
-| **WeChat Official** | Cloud Relay | 10 seconds | ✅ Image/Voice/Video | ✅ |
-| **DingTalk** | Stream Mode | One-click | 🔜 Planned | ✅ |
-| **Feishu/Lark** | WebSocket | One-click | 🔜 Planned | ✅ |
-| **Slack** | Socket Mode | One-click | 🔜 Planned | ✅ |
-| **Telegram** | Bot API | One-click | 🔜 Planned | ✅ |
-| **Discord** | Gateway | One-click | 🔜 Planned | ✅ |
-| **WhatsApp** | Webhook + Graph API | Self-hosted | 🔜 Planned | ✅ |
-| **LINE** | Webhook + Push API | Self-hosted | 🔜 Planned | ✅ |
-| **Microsoft Teams** | Bot Framework | Self-hosted | 🔜 Planned | ✅ |
-| **Matrix / Element** | HTTP Sync | Self-hosted | 🔜 Planned | ✅ |
-| **Google Chat** | Webhook + REST | Self-hosted | 🔜 Planned | ✅ |
-| **Mattermost** | WebSocket + REST | Self-hosted | 🔜 Planned | ✅ |
-| **iMessage** | BlueBubbles | Self-hosted | 🔜 Planned | ✅ |
-| **Signal** | signal-cli REST | Self-hosted | 🔜 Planned | ✅ |
+| **WeCom** | Callback API | Cloud Relay / Self-hosted | All formats | ✅ |
+| **WeChat Official** | Cloud Relay | 10 seconds | Image/Voice/Video | ✅ |
+| **DingTalk** | Stream Mode | One-click | Planned | ✅ |
+| **Feishu/Lark** | WebSocket | One-click | Planned | ✅ |
+| **Slack** | Socket Mode | One-click | Planned | ✅ |
+| **Telegram** | Bot API | One-click | Planned | ✅ |
+| **Discord** | Gateway | One-click | Planned | ✅ |
+| **WhatsApp** | Webhook + Graph API | Self-hosted | Planned | ✅ |
+| **LINE** | Webhook + Push API | Self-hosted | Planned | ✅ |
+| **Microsoft Teams** | Bot Framework | Self-hosted | Planned | ✅ |
+| **Matrix / Element** | HTTP Sync | Self-hosted | Planned | ✅ |
+| **Google Chat** | Webhook + REST | Self-hosted | Planned | ✅ |
+| **Mattermost** | WebSocket + REST | Self-hosted | Planned | ✅ |
+| **iMessage** | BlueBubbles | Self-hosted | Planned | ✅ |
+| **Signal** | signal-cli REST | Self-hosted | Planned | ✅ |
 | **Twitch** | IRC | Self-hosted | — | ✅ |
-| **NOSTR** | WebSocket Relays | Self-hosted | 🔜 Planned | ✅ |
-| **Zalo** | Webhook + REST | Self-hosted | 🔜 Planned | ✅ |
-| **Nextcloud Talk** | HTTP Polling | Self-hosted | 🔜 Planned | ✅ |
+| **NOSTR** | WebSocket Relays | Self-hosted | Planned | ✅ |
+| **Zalo** | Webhook + REST | Self-hosted | Planned | ✅ |
+| **Nextcloud Talk** | HTTP Polling | Self-hosted | Planned | ✅ |
 | **Web Chat UI** | WebSocket (built-in) | `--webapp-port` | — | ✅ |
 
 > File sending details (setup, supported types, limitations): [File Sending Guide](docs/file-sending.md)
@@ -231,11 +236,11 @@ Covers all aspects of daily work, making AI your all-around assistant.
 Use standard Cron expressions to schedule periodic tasks for true unattended automation.
 
 **Core Features:**
-- 🕐 Support standard Cron expressions (minute, hour, day, month, weekday)
-- 💾 Task persistence, auto-resume after restart
-- 🔄 Pause/resume task execution
-- 📊 Record execution status and error information
-- 🛠️ Call any MCP tool
+- Support standard Cron expressions (minute, hour, day, month, weekday)
+- Task persistence, auto-resume after restart
+- Pause/resume task execution
+- Record execution status and error information
+- Call any MCP tool
 
 **Quick Examples:**
 
@@ -291,7 +296,7 @@ Task configuration saved to `~/.lingti.db` (SQLite), auto-resume after MCP servi
 No client apps needed. Start the web chat interface with a single flag:
 
 ```bash
-lingti-bot gateway --provider deepseek --api-key sk-xxx --webapp-port 8080
+lsbot gateway --provider deepseek --api-key sk-xxx --webapp-port 8080
 # Open http://localhost:8080
 ```
 
@@ -332,22 +337,22 @@ platforms:
 **Via environment variable:**
 
 ```bash
-WEBAPP_PORT=8080 lingti-bot gateway --provider deepseek --api-key sk-xxx
+WEBAPP_PORT=8080 lsbot gateway --provider deepseek --api-key sk-xxx
 ```
 
 ### Skills — Modular Capability Packs
 
-Skills are modular capability packs that teach lingti-bot how to use external tools. Each skill is a directory containing a `SKILL.md` file with YAML frontmatter for metadata and Markdown body for AI instructions.
+Skills are modular capability packs that teach lsbot how to use external tools. Each skill is a directory containing a `SKILL.md` file with YAML frontmatter for metadata and Markdown body for AI instructions.
 
 ```bash
 # List all discovered skills
-lingti-bot skills
+lsbot skills
 
 # Check readiness status
-lingti-bot skills check
+lsbot skills check
 
 # Get details on a specific skill
-lingti-bot skills info github
+lsbot skills info github
 ```
 
 Ships with 8 bundled skills: Discord, GitHub, Slack, Peekaboo (macOS UI automation), Tmux, Weather, 1Password, and Obsidian. Supports user-custom and project-specific skills.
@@ -380,10 +385,10 @@ Supports **15 AI providers** covering mainstream LLM platforms globally:
 
 ```bash
 # Specify provider via command line
-lingti-bot gateway --provider qwen --api-key "sk-xxx" --model "qwen-plus"
+lsbot gateway --provider qwen --api-key "sk-xxx" --model "qwen-plus"
 
 # Override default model
-lingti-bot relay --provider openai --api-key "sk-xxx" --model "gpt-4o-mini"
+lsbot relay --provider openai --api-key "sk-xxx" --model "gpt-4o-mini"
 ```
 
 ## Documentation
@@ -405,6 +410,6 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contact
 
-- Website: [cli.lingti.com](https://bot.lingti.com)
+- Website: [bot.lingti.com](https://bot.lingti.com)
 - Email: `jiefeng@ruc.edu.cn` / `jiefeng.hopkins@gmail.com`
-- GitHub: [github.com/ruilisi/lingti-bot](https://github.com/ruilisi/lingti-bot)
+- GitHub: [github.com/ruilisi/lsbot](https://github.com/ruilisi/lsbot)

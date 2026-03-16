@@ -8,7 +8,7 @@
 
 # lsbot — Lean & Secure Bot
 
-> **我们不能相信任何聊天服务器，也不能允许把我们电脑上最重要的数据分享给任何聊天服务器。**
+> **不需要信任的地方，就不应该建立信任依赖。**
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

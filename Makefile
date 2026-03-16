@@ -5,8 +5,8 @@ GOBASE := $(shell pwd)
 GOBIN := $(GOBASE)/dist
 GOARCH ?= $(shell go env GOARCH)
 GOOS ?= $(shell go env GOOS)
-LDFLAGS=-ldflags "-X github.com/pltanton/lingti-bot/internal/mcp.ServerVersion=$(VERSION) -X main.Build=$(BUILD) -w -s"
-LDFLAGS_DEBUG=-ldflags "-X github.com/pltanton/lingti-bot/internal/mcp.ServerVersion=$(VERSION) -X main.Build=$(BUILD) -X github.com/pltanton/lingti-bot/internal/debug.enabled=true"
+LDFLAGS=-ldflags "-X github.com/pltanton/lsbot/internal/mcp.ServerVersion=$(VERSION) -X main.Build=$(BUILD) -w -s"
+LDFLAGS_DEBUG=-ldflags "-X github.com/pltanton/lsbot/internal/mcp.ServerVersion=$(VERSION) -X main.Build=$(BUILD) -X github.com/pltanton/lsbot/internal/debug.enabled=true"
 GOBUILD=go build $(LDFLAGS)
 GOBUILD_DEBUG=go build $(LDFLAGS_DEBUG)
 

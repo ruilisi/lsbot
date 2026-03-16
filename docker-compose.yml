@@ -1,5 +1,5 @@
 services:
-  lingti-bot:
+  lsbot:
     build: .
     restart: unless-stopped
     volumes:

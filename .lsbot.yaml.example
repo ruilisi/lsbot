@@ -1,4 +1,4 @@
-# lingti-bot-example.yaml
+# lsbot-example.yaml
 # Copy this file to ~/.lsbot.yaml and fill in your credentials.
 # Only configure sections relevant to your setup — everything is optional.
 #
@@ -54,7 +54,7 @@ providers:
 
 # ── Agents ────────────────────────────────────────────────────────────────────
 # Each agent is an independent AI persona with its own provider, instructions,
-# and workspace directory. Use `lingti-bot agents add` to add interactively.
+# and workspace directory. Use `lsbot agents add` to add interactively.
 #
 # Fields:
 #   id           — unique key, referenced in bindings
@@ -94,7 +94,7 @@ agents:
 # Rules are checked top-to-bottom; first match wins.
 # If no binding matches, the agent marked default:true is used.
 #
-# Use `lingti-bot agents bind <agent-id> --bind <platform>[:<channel_id>]` to add.
+# Use `lsbot agents bind <agent-id> --bind <platform>[:<channel_id>]` to add.
 
 bindings:
   - agent_id: coder
@@ -113,7 +113,7 @@ bindings:
     match: {}
 
 # ── Relay ─────────────────────────────────────────────────────────────────────
-# Run lingti-bot as a bot on one platform.
+# Run lsbot as a bot on one platform.
 # platform: wecom | feishu | slack | wechat
 
 relay:
@@ -122,7 +122,7 @@ relay:
 
 # ── Platforms ─────────────────────────────────────────────────────────────────
 # Fill in credentials for whichever platform(s) you use.
-# Use `lingti-bot channels add` to configure interactively.
+# Use `lsbot channels add` to configure interactively.
 # Unused platforms can be left commented out or removed entirely.
 
 platforms:
@@ -214,7 +214,7 @@ security:
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging:
   level: info           # debug | info | warn | error
-  file: /tmp/lingti-bot.log
+  file: /tmp/lsbot.log
 
 # ── Browser automation ────────────────────────────────────────────────────────
 # browser:

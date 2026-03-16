@@ -8,12 +8,12 @@ COPY . .
 ARG VERSION=dev
 ARG BUILD=unknown
 RUN CGO_ENABLED=0 go build \
-    -ldflags="-X github.com/pltanton/lingti-bot/internal/mcp.ServerVersion=${VERSION} -X main.Build=${BUILD} -w -s" \
-    -o /lingti-bot .
+    -ldflags="-X github.com/pltanton/lsbot/internal/mcp.ServerVersion=${VERSION} -X main.Build=${BUILD} -w -s" \
+    -o /lsbot .
 
 # Stage 2: Runtime
 FROM alpine:3.21
 RUN apk add --no-cache ca-certificates tzdata
-COPY --from=builder /lingti-bot /usr/local/bin/lingti-bot
-ENTRYPOINT ["lingti-bot"]
+COPY --from=builder /lsbot /usr/local/bin/lsbot
+ENTRYPOINT ["lsbot"]
 CMD ["router"]

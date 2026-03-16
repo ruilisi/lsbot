@@ -1,9 +1,9 @@
-# 云中继（`lingti-bot relay`）
+# 云中继（`lsbot relay`）
 
-云中继是运行 lingti-bot 的**首选方式**。在本地运行一条命令，AI bot 就能接入所有支持的聊天平台——无需服务器、无需公网 IP、无需配置防火墙。
+云中继是运行 lsbot 的**首选方式**。在本地运行一条命令，AI bot 就能接入所有支持的聊天平台——无需服务器、无需公网 IP、无需配置防火墙。
 
 ```
-聊天平台 → lsbot.org（云中继，国内：bot.lingti.com）←WebSocket→ lingti-bot relay（你的电脑）→ AI
+聊天平台 → lsbot.org（云中继，国内：bot.lingti.com）←WebSocket→ lsbot relay（你的电脑）→ AI
 ```
 
 你的电脑主动向 `lsbot.org`（国内：`bot.lingti.com`）发起出站 WebSocket 连接，由云端服务器承接平台的回调请求。所有 AI 推理均在本地完成，API Key 不会离开你的机器。
@@ -30,12 +30,12 @@
 
 ### Bot Page——无需任何平台账号，三步搞定
 
-这是上手 lingti-bot 最简单的方式。无需注册任何聊天平台，打开浏览器就能用。
+这是上手 lsbot 最简单的方式。无需注册任何聊天平台，打开浏览器就能用。
 
 **第一步：配置 AI**
 
 ```bash
-lingti-bot agents add mybot \
+lsbot agents add mybot \
   --provider minimax \
   --api-key your-minimax-api-key \
   --default
@@ -44,7 +44,7 @@ lingti-bot agents add mybot \
 **第二步：启动云中继**
 
 ```bash
-lingti-bot relay
+lsbot relay
 ```
 
 启动后终端会打印你的专属链接：
@@ -66,7 +66,7 @@ lingti-bot relay
 微信搜索公众号 **灵缇小秘**，关注后发送任意消息获取你的 `user-id`，然后：
 
 ```bash
-lingti-bot relay \
+lsbot relay \
   --platform wechat \
   --user-id <你的-user-id> \
   --provider deepseek \
@@ -78,7 +78,7 @@ lingti-bot relay \
 ### 企业微信
 
 ```bash
-lingti-bot relay --platform wecom \
+lsbot relay --platform wecom \
   --wecom-corp-id ww1234567890abcdef \
   --wecom-agent-id 1000002 \
   --wecom-secret "your-secret" \
@@ -95,7 +95,7 @@ lingti-bot relay --platform wecom \
 ### 飞书
 
 ```bash
-lingti-bot relay --platform feishu \
+lsbot relay --platform feishu \
   --feishu-app-id cli_xxx \
   --feishu-app-secret xxx \
   --user-id your-id \
@@ -108,7 +108,7 @@ lingti-bot relay --platform feishu \
 ### Slack
 
 ```bash
-lingti-bot relay --platform slack \
+lsbot relay --platform slack \
   --slack-bot-token xoxb-xxx \
   --slack-app-token xapp-xxx \
   --user-id your-id \
@@ -130,7 +130,7 @@ lingti-bot relay --platform slack \
 
 ```bash
 # 不需要 --platform，bot page 可以独立运行
-lingti-bot relay \
+lsbot relay \
   --user-id your-id \
   --provider deepseek \
   --api-key sk-xxx
@@ -139,7 +139,7 @@ lingti-bot relay \
 轮换 UUID（使现有分享链接失效）：
 
 ```bash
-lingti-bot relay --refresh-bot-id
+lsbot relay --refresh-bot-id
 ```
 
 加上 `--refresh-bot-id` 后，会立即生成新的 UUID 并保存到 `~/.lsbot.yaml`，打印新链接后退出，不启动 relay 服务。旧链接立即失效。
@@ -183,7 +183,7 @@ lingti-bot relay --refresh-bot-id
 
 ## 配置文件
 
-将凭据写入 `~/.lsbot.yaml`，之后只需 `lingti-bot relay` 即可启动：
+将凭据写入 `~/.lsbot.yaml`，之后只需 `lsbot relay` 即可启动：
 
 ```yaml
 relay:
@@ -207,7 +207,7 @@ platforms:
 之后：
 
 ```bash
-lingti-bot relay
+lsbot relay
 ```
 
 ---
@@ -215,7 +215,7 @@ lingti-bot relay
 ## 工作原理
 
 ```
-1. lingti-bot relay 向 wss://lsbot.org/ws 建立 WebSocket 连接（国内：wss://bot.lingti.com/ws）
+1. lsbot relay 向 wss://lsbot.org/ws 建立 WebSocket 连接（国内：wss://bot.lingti.com/ws）
 2. 携带 user_id、platform 和平台凭据进行认证
 3. 云中继服务器为你的平台注册公网端点
    （例如企业微信回调：https://lsbot.org/wecom，国内：https://bot.lingti.com/wecom）
@@ -253,9 +253,9 @@ AI API Key 只在第 4–5 步本地使用，不经过云中继服务器。
 
 **解决方案：**
 
-1. **自建中继服务器** — 在自己的 VPS 上运行 `lingti-bot-server`，把自己的 IP 加入企业可信 IP。参考 [lingti-bot-server](https://github.com/ruilisi/lingti-bot-server)。
+1. **自建中继服务器** — 在自己的 VPS 上运行 `lsbot-server`，把自己的 IP 加入企业可信 IP。参考 [lsbot-server](https://github.com/ruilisi/lsbot-server)。
 
-2. **改用 `gateway` 模式** — 如果你有公网服务器，直接运行 `lingti-bot gateway`。企业微信回调直接打到你的服务器，不经过共享 IP。
+2. **改用 `gateway` 模式** — 如果你有公网服务器，直接运行 `lsbot gateway`。企业微信回调直接打到你的服务器，不经过共享 IP。
 
 3. **换用其他平台** — 微信公众号（`--platform wechat`）没有这个 IP 问题，飞书和 Slack 的云中继也不存在此问题。
 
@@ -268,7 +268,7 @@ AI API Key 只在第 4–5 步本地使用，不经过云中继服务器。
 ### macOS / Linux（nohup）
 
 ```bash
-nohup lingti-bot relay > ~/.lingti/relay.log 2>&1 &
+nohup lsbot relay > ~/.lingti/relay.log 2>&1 &
 echo $! > ~/.lingti/relay.pid
 ```
 
@@ -279,18 +279,18 @@ kill $(cat ~/.lingti/relay.pid)
 
 ### Linux（systemd）
 
-创建 `/etc/systemd/system/lingti-bot-relay.service`：
+创建 `/etc/systemd/system/lsbot-relay.service`：
 
 ```ini
 [Unit]
-Description=lingti-bot Cloud Relay
+Description=lsbot Cloud Relay
 After=network.target
 
 [Service]
 Type=simple
 User=ubuntu
-EnvironmentFile=/etc/lingti-bot/env
-ExecStart=/usr/local/bin/lingti-bot relay
+EnvironmentFile=/etc/lsbot/env
+ExecStart=/usr/local/bin/lsbot relay
 Restart=always
 RestartSec=5
 
@@ -298,7 +298,7 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-环境变量文件 `/etc/lingti-bot/env`：
+环境变量文件 `/etc/lsbot/env`：
 ```bash
 RELAY_USER_ID=your-id
 AI_PROVIDER=deepseek
@@ -312,8 +312,8 @@ WECOM_AES_KEY=your-aes-key
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable --now lingti-bot-relay
-sudo journalctl -u lingti-bot-relay -f
+sudo systemctl enable --now lsbot-relay
+sudo journalctl -u lsbot-relay -f
 ```
 
 ---
@@ -355,7 +355,7 @@ sudo journalctl -u lingti-bot-relay -f
 → 确认平台管理后台的回调 URL 已正确配置并指向 `bot.lingti.com`。
 
 **企业微信回调验证失败**
-→ 确保在企业微信后台点击「保存」*之前*，`lingti-bot relay` 已经在运行。云中继服务器需要活跃的 WebSocket 连接才能处理验证请求。
+→ 确保在企业微信后台点击「保存」*之前*，`lsbot relay` 已经在运行。云中继服务器需要活跃的 WebSocket 连接才能处理验证请求。
 
 **企业微信验证通过后发送回复失败**
 → 参见上方 [企业微信 IP 策略](#企业微信-ip-策略)。
@@ -364,7 +364,7 @@ sudo journalctl -u lingti-bot-relay -f
 → 检查网络状况。客户端会自动重连。如果运行在会休眠的设备上，建议改用服务器或 VPS。
 
 **Bot page 显示"bot offline"**
-→ relay 客户端未连接，或 `bot_id` 未注册。重启 `lingti-bot relay`，确认 URL 中的 UUID 与启动时打印的一致。
+→ relay 客户端未连接，或 `bot_id` 未注册。重启 `lsbot relay`，确认 URL 中的 UUID 与启动时打印的一致。
 
 ---
 

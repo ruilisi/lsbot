@@ -1,8 +1,8 @@
 # Supported AI Providers / 支持的 AI 服务
 
-lingti-bot 支持 **16 种 AI 服务**，涵盖国内外主流大模型平台及本地模型，按需切换。所有 provider 均通过 `--provider` 参数指定，也可在 `lingti-bot onboard` 交互式向导中选择。
+lsbot 支持 **16 种 AI 服务**，涵盖国内外主流大模型平台及本地模型，按需切换。所有 provider 均通过 `--provider` 参数指定，也可在 `lsbot onboard` 交互式向导中选择。
 
-lingti-bot supports **16 AI providers** covering mainstream LLM platforms globally plus local models. Select via `--provider` flag or the `lingti-bot onboard` interactive wizard.
+lsbot supports **16 AI providers** covering mainstream LLM platforms globally plus local models. Select via `--provider` flag or the `lsbot onboard` interactive wizard.
 
 ## Provider List / 服务列表
 
@@ -12,8 +12,6 @@ lingti-bot supports **16 AI providers** covering mainstream LLM platforms global
 | 2 | `qwen` | Qwen / 通义千问 | `qwen-plus` | `https://dashscope.aliyuncs.com/compatible-mode/v1` | [bailian.console.aliyun.com](https://bailian.console.aliyun.com/) |
 | 3 | `claude` | Claude (Anthropic) | `claude-sonnet-4-20250514` | Anthropic native API | [console.anthropic.com](https://console.anthropic.com/) |
 | 4 | `kimi` | Kimi / Moonshot / 月之暗面 | `kimi-k2.5` | `https://api.moonshot.cn/v1` | [platform.moonshot.cn](https://platform.moonshot.cn/) |
-
-> **Kimi thinking models / Kimi 思考模型：** 默认模型已升级为 `kimi-k2.5`（思考模型）。lingti-bot 会自动在对话历史中保留 `reasoning_content`，确保 tool call 多轮对话正常工作。如需使用非思考模型，可指定 `--model moonshot-v1-8k`。
 | 5 | `minimax` | MiniMax / 海螺 AI | `MiniMax-Text-01` | `https://api.minimax.chat/v1` | [platform.minimaxi.com](https://platform.minimaxi.com/) |
 | 6 | `doubao` | Doubao / 豆包 (ByteDance) | `doubao-pro-32k` | `https://ark.cn-beijing.volces.com/api/v3` | [console.volcengine.com/ark](https://console.volcengine.com/ark) |
 | 7 | `zhipu` | Zhipu / 智谱 GLM | `glm-4-flash` | `https://open.bigmodel.cn/api/paas/v4` | [open.bigmodel.cn](https://open.bigmodel.cn/) |
@@ -26,6 +24,8 @@ lingti-bot supports **16 AI providers** covering mainstream LLM platforms global
 | 14 | `siliconflow` | SiliconFlow / 硅基流动 (aggregator) | `Qwen/Qwen2.5-72B-Instruct` | `https://api.siliconflow.cn/v1` | [cloud.siliconflow.cn](https://cloud.siliconflow.cn/) |
 | 15 | `grok` | Grok (xAI) | `grok-2-latest` | `https://api.x.ai/v1` | [console.x.ai](https://console.x.ai/) |
 | 16 | `ollama` | Ollama (local / 本地) | `llama3.2` | `http://localhost:11434/v1` | No API key needed / 无需密钥 |
+
+> **Kimi thinking models / Kimi 思考模型：** 默认模型已升级为 `kimi-k2.5`（思考模型）。lsbot 会自动在对话历史中保留 `reasoning_content`，确保 tool call 多轮对话正常工作。如需使用非思考模型，可指定 `--model moonshot-v1-8k`。
 
 ## Aliases / 别名
 
@@ -49,17 +49,17 @@ lingti-bot supports **16 AI providers** covering mainstream LLM platforms global
 
 ```bash
 # Interactive wizard / 交互式向导
-lingti-bot onboard
+lsbot onboard
 
 # Command line / 命令行指定
-lingti-bot relay --provider deepseek --api-key sk-xxx
-lingti-bot gateway --provider openai --api-key sk-xxx --model gpt-4o
+lsbot relay --provider deepseek --api-key sk-xxx
+lsbot gateway --provider openai --api-key sk-xxx --model gpt-4o
 
 # Custom base URL / 自定义 API 地址
-lingti-bot relay --provider siliconflow --api-key sk-xxx --base-url https://api.siliconflow.cn/v1
+lsbot relay --provider siliconflow --api-key sk-xxx --base-url https://api.siliconflow.cn/v1
 
 # Override default model / 覆盖默认模型
-lingti-bot relay --provider qwen --api-key sk-xxx --model qwen-max
+lsbot relay --provider qwen --api-key sk-xxx --model qwen-max
 ```
 
 ---
@@ -99,7 +99,7 @@ ai:
 
 ### Resolution / 解析规则
 
-When `--provider` is specified (CLI or config), lingti-bot resolves the name:
+When `--provider` is specified (CLI or config), lsbot resolves the name:
 
 1. **Exact key match** — `--provider my-kimi` matches `providers.my-kimi` directly
 2. **Provider type match** — `--provider kimi` scans entries for `.provider == "kimi"`
@@ -109,13 +109,13 @@ CLI flags `--api-key`, `--base-url`, `--model` still override individual fields 
 
 ```bash
 # Use named provider directly
-lingti-bot relay --provider my-kimi
+lsbot relay --provider my-kimi
 
 # Use provider type (finds first matching entry)
-lingti-bot relay --provider kimi
+lsbot relay --provider kimi
 
 # Override model on a named provider
-lingti-bot relay --provider my-kimi --model moonshot-v1-8k
+lsbot relay --provider my-kimi --model moonshot-v1-8k
 ```
 
 ### Benefits / 优势
@@ -129,13 +129,13 @@ lingti-bot relay --provider my-kimi --model moonshot-v1-8k
 
 ## Per-Platform AI Overrides / 按平台覆盖 AI 设置（旧格式）
 
-lingti-bot 的独有功能：可以为不同消息平台或频道指定不同的 AI 服务。一个实例同时服务多个平台，每个平台使用最适合的模型。
+lsbot 的独有功能：可以为不同消息平台或频道指定不同的 AI 服务。一个实例同时服务多个平台，每个平台使用最适合的模型。
 
-A unique lingti-bot feature: assign different AI providers to different messaging platforms or channels. One instance serves multiple platforms, each using its best-fit model.
+A unique lsbot feature: assign different AI providers to different messaging platforms or channels. One instance serves multiple platforms, each using its best-fit model.
 
 ### How It Works / 工作原理
 
-在 `~/.lsbot.yaml` 中配置 `ai.overrides` 数组。当收到消息时，lingti-bot 按以下优先级匹配：
+在 `~/.lsbot.yaml` 中配置 `ai.overrides` 数组。当收到消息时，lsbot 按以下优先级匹配：
 
 1. **platform + channel_id** — 最精确，匹配特定平台的特定频道
 2. **platform only** — 匹配该平台的所有消息
@@ -354,9 +354,9 @@ ai:
 
 ### Example 7: Complex Multi-Platform Setup / 复杂多平台配置
 
-一个 lingti-bot 实例服务 4 个平台，各用不同模型：
+一个 lsbot 实例服务 4 个平台，各用不同模型：
 
-One lingti-bot instance serving 4 platforms with different models:
+One lsbot instance serving 4 platforms with different models:
 
 ```yaml
 ai:
@@ -506,15 +506,15 @@ sudo systemctl stop ollama
 
 ```bash
 # Default model (llama3.2) / 默认模型
-lingti-bot relay --provider ollama
+lsbot relay --provider ollama
 
 # Specify a model / 指定模型
-lingti-bot relay --provider ollama --model mistral
-lingti-bot relay --provider ollama --model qwen2.5:7b
-lingti-bot relay --provider ollama --model deepseek-r1:8b
+lsbot relay --provider ollama --model mistral
+lsbot relay --provider ollama --model qwen2.5:7b
+lsbot relay --provider ollama --model deepseek-r1:8b
 
 # Connect to a remote Ollama instance / 连接远程实例
-lingti-bot relay --provider ollama --base-url http://192.168.1.100:11434/v1
+lsbot relay --provider ollama --base-url http://192.168.1.100:11434/v1
 ```
 
 ### Available Models / 可用模型

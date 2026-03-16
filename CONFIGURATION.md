@@ -1,6 +1,6 @@
 # 配置优先级
 
-lingti-bot 采用三层配置解析机制，优先级从高到低：
+lsbot 采用三层配置解析机制，优先级从高到低：
 
 ```
 命令行参数  >  环境变量  >  配置文件 (~/.lsbot.yaml)
@@ -10,7 +10,7 @@ lingti-bot 采用三层配置解析机制，优先级从高到低：
 
 - **命令行参数**始终优先，适合临时覆盖或运行多个实例
 - **环境变量**适合 CI/CD 或容器化部署
-- **配置文件**适合日常使用，通过 `lingti-bot onboard` 生成
+- **配置文件**适合日常使用，通过 `lsbot onboard` 生成
 
 ## 示例
 
@@ -36,7 +36,7 @@ lingti-bot 采用三层配置解析机制，优先级从高到低：
 通过交互式向导生成：
 
 ```bash
-lingti-bot onboard
+lsbot onboard
 ```
 
 ### 完整结构
@@ -62,7 +62,7 @@ providers:
 
 # ── Agents（推荐）────────────────────────────────────────────────────────────
 # 每个 Agent 是独立的 AI 人格单元，拥有独立的 provider、指令、工作目录。
-# 用 `lingti-bot agents add` 交互式创建，或直接在此配置。
+# 用 `lsbot agents add` 交互式创建，或直接在此配置。
 #
 # 字段：
 #   id           — 唯一标识，bindings 中引用
@@ -98,7 +98,7 @@ agents:
 # ── Bindings（推荐）──────────────────────────────────────────────────────────
 # 将消息来源（平台 + 频道）路由到指定 agent。
 # 规则从上到下匹配，第一个命中的生效。无匹配时使用 default agent。
-# 用 `lingti-bot agents bind <id> --bind <platform>[:<channel_id>]` 添加。
+# 用 `lsbot agents bind <id> --bind <platform>[:<channel_id>]` 添加。
 bindings:
   - agent_id: coder
     comment: "Slack #dev 频道 → coder agent"
@@ -270,15 +270,15 @@ security:
 ### 日常使用：配置文件
 
 ```bash
-lingti-bot onboard        # 首次配置
-lingti-bot relay           # 之后无需任何参数
+lsbot onboard        # 首次配置
+lsbot relay           # 之后无需任何参数
 ```
 
 ### 临时覆盖：命令行参数
 
 ```bash
 # 配置文件用 deepseek，临时切换到 qwen 测试
-lingti-bot relay --provider qwen --model qwen-plus
+lsbot relay --provider qwen --model qwen-plus
 ```
 
 ### 容器部署：Docker Compose
@@ -288,24 +288,24 @@ lingti-bot relay --provider qwen --model qwen-plus
 AI_API_KEY=sk-xxx TELEGRAM_BOT_TOKEN=xxx docker compose up -d
 
 # 或直接 docker run
-docker run -e AI_PROVIDER=deepseek -e AI_API_KEY=sk-xxx lingti-bot gateway
+docker run -e AI_PROVIDER=deepseek -e AI_API_KEY=sk-xxx lsbot gateway
 ```
 
 挂载配置文件以使用 overrides 和其他高级功能：
 
 ```bash
 docker run -v ~/.lsbot.yaml:/root/.lsbot.yaml:ro \
-  -e AI_API_KEY=sk-xxx lingti-bot gateway
+  -e AI_API_KEY=sk-xxx lsbot gateway
 ```
 
 ### 多实例运行：命令行参数覆盖
 
 ```bash
 # 实例 1: 企业微信
-lingti-bot relay --platform wecom --provider deepseek --api-key sk-aaa
+lsbot relay --platform wecom --provider deepseek --api-key sk-aaa
 
 # 实例 2: 飞书（不同 provider）
-lingti-bot relay --platform feishu --user-id xxx --provider claude --api-key sk-bbb
+lsbot relay --platform feishu --user-id xxx --provider claude --api-key sk-bbb
 ```
 
 ### 本地模型：Ollama
@@ -314,11 +314,11 @@ Ollama 在本地运行大模型，无需 API 密钥：
 
 ```bash
 # 使用默认模型 (llama3.2)
-lingti-bot relay --provider ollama
+lsbot relay --provider ollama
 
 # 指定模型
-lingti-bot relay --provider ollama --model mistral
+lsbot relay --provider ollama --model mistral
 
 # 连接远程 Ollama 实例
-lingti-bot relay --provider ollama --base-url http://remote-host:11434/v1
+lsbot relay --provider ollama --base-url http://remote-host:11434/v1
 ```

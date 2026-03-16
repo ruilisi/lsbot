@@ -39,7 +39,7 @@ var (
 
 var agentsAddCmd = &cobra.Command{
 	Use:   "add [id]",
-	Short: "Add a new agent to ~/.lingti.yaml",
+	Short: "Add a new agent to ~/.lsbot.yaml",
 	Args:  cobra.MaximumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		id := ""

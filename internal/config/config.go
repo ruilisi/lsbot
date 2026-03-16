@@ -426,7 +426,7 @@ func ConfigDir() string {
 // overridePath is set via SetConfigPath to use a custom config file location.
 var overridePath string
 
-// SetConfigPath overrides the default ~/.lingti.yaml path for all Load() calls.
+// SetConfigPath overrides the default ~/.lsbot.yaml path for all Load() calls.
 func SetConfigPath(path string) {
 	overridePath = path
 }
@@ -436,7 +436,7 @@ func ConfigPath() string {
 		return overridePath
 	}
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lingti.yaml")
+	return filepath.Join(home, ".lsbot.yaml")
 }
 
 func Load() (*Config, error) {

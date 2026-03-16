@@ -126,7 +126,7 @@ func init() {
 	relayCmd.Flags().BoolVar(&relayRefreshBotID, "refresh-bot-id", false, "Generate a new bot ID (invalidates existing bot page links)")
 	relayCmd.Flags().BoolVar(&relayInsecure, "insecure", false, "Skip TLS certificate verification (use when server has self-signed cert)")
 	relayCmd.Flags().BoolVar(&relayPlain, "plain", false, "Disable end-to-end encryption (send messages in plaintext through relay)")
-	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lingti-e2e.pem)")
+	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lsbot.pem)")
 
 	// WeCom credentials for cloud relay
 	relayCmd.Flags().StringVar(&relayWeComCorpID, "wecom-corp-id", "", "WeCom Corp ID (or WECOM_CORP_ID env)")
@@ -360,7 +360,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 			if homeDir == "" {
 				homeDir = os.TempDir()
 			}
-			relayE2EKeyFile = filepath.Join(homeDir, ".lingti-e2e.pem")
+			relayE2EKeyFile = filepath.Join(homeDir, ".lsbot.pem")
 		}
 		// Auto-generate key on first run — no prompt needed
 		if _, err := os.Stat(relayE2EKeyFile); os.IsNotExist(err) {
@@ -505,7 +505,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 	// If any provider-related flag was explicitly set on the CLI, propagate
 	// the resolved values into savedCfg.AI and strip per-agent provider fields
 	// so all agents use the CLI provider. This ensures --provider/--api-key/
-	// --model always override whatever is configured in ~/.lingti.yaml agents.
+	// --model always override whatever is configured in ~/.lsbot.yaml agents.
 	if cfgErr == nil {
 		cliProviderFlags := []string{"provider", "api-key", "base-url", "model"}
 		for _, f := range cliProviderFlags {

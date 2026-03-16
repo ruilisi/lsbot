@@ -40,12 +40,12 @@ const (
 type Config struct {
 	UserID     string // From /whoami
 	Platform   string // "feishu", "slack", or "wechat"
-	ServerURL  string // WebSocket URL (default: wss://bot.lingti.com/ws)
-	WebhookURL string // Webhook URL (default: https://bot.lingti.com/webhook)
+	ServerURL  string // WebSocket URL (default: wss://lsbot.org/ws)
+	WebhookURL string // Webhook URL (default: https://lsbot.org/webhook)
 	AIProvider string // AI provider name (e.g., "claude", "deepseek")
 	AIModel    string // AI model name
 	BotID      string // Persistent bot ID for bot page feature
-	E2EKeyFile string // Path to E2E PEM key file (default: ~/.lingti-e2e.pem)
+	E2EKeyFile string // Path to E2E PEM key file (default: ~/.lsbot.pem)
 	// WeCom credentials for cloud relay (when platform=wecom)
 	WeComCorpID  string
 	WeComAgentID string

@@ -42,13 +42,13 @@ func runDoctor(cmd *cobra.Command, args []string) {
 	// 1. Config file
 	cfg, err := config.Load()
 	if err != nil {
-		results = append(results, checkResult{"Config file (~/.lingti.yaml)", false, err.Error()})
+		results = append(results, checkResult{"Config file (~/.lsbot.yaml)", false, err.Error()})
 	} else {
 		_, statErr := os.Stat(config.ConfigPath())
 		if os.IsNotExist(statErr) {
-			results = append(results, checkResult{"Config file (~/.lingti.yaml)", true, "not found, using defaults"})
+			results = append(results, checkResult{"Config file (~/.lsbot.yaml)", true, "not found, using defaults"})
 		} else {
-			results = append(results, checkResult{"Config file (~/.lingti.yaml)", true, "loaded"})
+			results = append(results, checkResult{"Config file (~/.lsbot.yaml)", true, "loaded"})
 		}
 	}
 

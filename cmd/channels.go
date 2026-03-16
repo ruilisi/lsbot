@@ -70,7 +70,7 @@ func anyFlagChanged(cmd *cobra.Command, names ...string) bool {
 
 var channelsAddCmd = &cobra.Command{
 	Use:   "add",
-	Short: "Add or update channel credentials in ~/.lingti.yaml",
+	Short: "Add or update channel credentials in ~/.lsbot.yaml",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if channelName == "" {
 			// interactive: pick platform
@@ -409,7 +409,7 @@ var channelsListCmd = &cobra.Command{
 
 var channelsRemoveCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "Remove channel credentials from ~/.lingti.yaml",
+	Short: "Remove channel credentials from ~/.lsbot.yaml",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if channelName == "" {
 			return fmt.Errorf("--channel is required")

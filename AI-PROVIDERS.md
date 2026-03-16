@@ -135,7 +135,7 @@ A unique lingti-bot feature: assign different AI providers to different messagin
 
 ### How It Works / 工作原理
 
-在 `~/.lingti.yaml` 中配置 `ai.overrides` 数组。当收到消息时，lingti-bot 按以下优先级匹配：
+在 `~/.lsbot.yaml` 中配置 `ai.overrides` 数组。当收到消息时，lingti-bot 按以下优先级匹配：
 
 1. **platform + channel_id** — 最精确，匹配特定平台的特定频道
 2. **platform only** — 匹配该平台的所有消息

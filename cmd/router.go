@@ -11,7 +11,7 @@ const routerDeprecationNotice = `
 WARNING: 'router' is deprecated and will be removed in a future release.
 Use the new 'channels', 'agents', and 'gateway' commands instead:
 
-  # 1. Save your platform credentials to ~/.lingti.yaml
+  # 1. Save your platform credentials to ~/.lsbot.yaml
   lsbot channels add --channel telegram --token YOUR_BOT_TOKEN
   lsbot channels add --channel slack --bot-token xoxb-... --app-token xapp-...
 

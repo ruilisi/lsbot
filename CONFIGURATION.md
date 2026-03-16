@@ -3,7 +3,7 @@
 lingti-bot 采用三层配置解析机制，优先级从高到低：
 
 ```
-命令行参数  >  环境变量  >  配置文件 (~/.lingti.yaml)
+命令行参数  >  环境变量  >  配置文件 (~/.lsbot.yaml)
 ```
 
 每个配置项按此顺序查找，找到即停止。这意味着：
@@ -20,7 +20,7 @@ lingti-bot 采用三层配置解析机制，优先级从高到低：
 |--------|------|------|
 | 1 | `--provider deepseek` | 命令行参数 |
 | 2 | `AI_PROVIDER=deepseek` | 环境变量 |
-| 3 | `ai.provider: deepseek` | ~/.lingti.yaml |
+| 3 | `ai.provider: deepseek` | ~/.lsbot.yaml |
 
 ```bash
 # 配置文件中设置了 provider: qwen
@@ -31,7 +31,7 @@ lingti-bot 采用三层配置解析机制，优先级从高到低：
 
 ## 配置文件
 
-默认路径：`~/.lingti.yaml`
+默认路径：`~/.lsbot.yaml`
 
 通过交互式向导生成：
 
@@ -294,7 +294,7 @@ docker run -e AI_PROVIDER=deepseek -e AI_API_KEY=sk-xxx lingti-bot gateway
 挂载配置文件以使用 overrides 和其他高级功能：
 
 ```bash
-docker run -v ~/.lingti.yaml:/root/.lingti.yaml:ro \
+docker run -v ~/.lsbot.yaml:/root/.lsbot.yaml:ro \
   -e AI_API_KEY=sk-xxx lingti-bot gateway
 ```
 

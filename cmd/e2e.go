@@ -26,7 +26,7 @@ var e2eKeygenCmd = &cobra.Command{
 	Use:   "keygen",
 	Short: "Generate a new E2EE key pair",
 	Long: `Generate a P-256 key pair and save it as a PEM file.
-Use --save to record the key file path in ~/.lingti.yaml so it is
+Use --save to record the key file path in ~/.lsbot.yaml so it is
 loaded automatically when running "lsbot relay".`,
 	Run: func(cmd *cobra.Command, args []string) {
 		keyFile := e2eKeygenPath
@@ -36,7 +36,7 @@ loaded automatically when running "lsbot relay".`,
 				fmt.Fprintf(os.Stderr, "Error: cannot determine home dir: %v\n", err)
 				os.Exit(1)
 			}
-			keyFile = filepath.Join(homeDir, ".lingti-e2e.pem")
+			keyFile = filepath.Join(homeDir, ".lsbot.pem")
 		}
 
 		// Don't overwrite an existing key without explicit path
@@ -95,7 +95,7 @@ the fingerprint matches what is shown in the browser.`,
 				fmt.Fprintf(os.Stderr, "Error: cannot determine home dir: %v\n", err)
 				os.Exit(1)
 			}
-			keyFile = filepath.Join(homeDir, ".lingti-e2e.pem")
+			keyFile = filepath.Join(homeDir, ".lsbot.pem")
 		}
 
 		priv, err := e2e.LoadKeyPair(keyFile)
@@ -115,9 +115,9 @@ func init() {
 	rootCmd.AddCommand(e2eCmd)
 
 	e2eCmd.AddCommand(e2eKeygenCmd)
-	e2eKeygenCmd.Flags().StringVar(&e2eKeygenPath, "path", "", "Path to save the PEM key file (default: ~/.lingti-e2e.pem)")
-	e2eKeygenCmd.Flags().BoolVar(&e2eKeygenSave, "save", false, "Save key file path to ~/.lingti.yaml")
+	e2eKeygenCmd.Flags().StringVar(&e2eKeygenPath, "path", "", "Path to save the PEM key file (default: ~/.lsbot.pem)")
+	e2eKeygenCmd.Flags().BoolVar(&e2eKeygenSave, "save", false, "Save key file path to ~/.lsbot.yaml")
 
 	e2eCmd.AddCommand(e2ePubkeyCmd)
-	e2ePubkeyCmd.Flags().StringVar(&e2ePubkeyFile, "key-file", "", "Path to the PEM key file (default: ~/.lingti-e2e.pem)")
+	e2ePubkeyCmd.Flags().StringVar(&e2ePubkeyFile, "key-file", "", "Path to the PEM key file (default: ~/.lsbot.pem)")
 }

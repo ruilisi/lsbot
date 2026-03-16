@@ -3,7 +3,7 @@ services:
     build: .
     restart: unless-stopped
     volumes:
-      - ${HOME}/.lingti.yaml:/root/.lingti.yaml:ro
+      - ${HOME}/.lsbot.yaml:/root/.lsbot.yaml:ro
       - lingti-data:/root/.lingti
     environment:
       - AI_PROVIDER=${AI_PROVIDER:-claude}

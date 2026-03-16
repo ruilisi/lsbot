@@ -6,12 +6,12 @@ Read `TODO.md` at the start of each session. When asked to work on TODOs, pick t
 
 ## Configuration Resolution Order
 
-All configuration in lingti-bot follows a strict three-tier priority: **CLI flags > environment variables > config file (`~/.lingti.yaml`)**. See [CONFIGURATION.md](CONFIGURATION.md) for full details.
+All configuration in lingti-bot follows a strict three-tier priority: **CLI flags > environment variables > config file (`~/.lsbot.yaml`)**. See [CONFIGURATION.md](CONFIGURATION.md) for full details.
 
 When adding new configurable parameters, you MUST follow this pattern:
 1. Accept a CLI flag (highest priority)
 2. Fall back to an environment variable
-3. Fall back to `~/.lingti.yaml` config file (lowest priority)
+3. Fall back to `~/.lsbot.yaml` config file (lowest priority)
 
 Never skip a tier or change the resolution order. This is a core architectural invariant.
 

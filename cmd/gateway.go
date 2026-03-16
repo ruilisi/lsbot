@@ -112,7 +112,7 @@ var gatewayCmd = &cobra.Command{
 	Long: `Start all configured platform bots and the WebSocket gateway server.
 
 The gateway is the unified run command that:
-  - Starts all platform bots configured in ~/.lingti.yaml (telegram, slack, discord, etc.)
+  - Starts all platform bots configured in ~/.lsbot.yaml (telegram, slack, discord, etc.)
   - Starts the WebSocket server on :18789 by default (use --no-ws to disable)
   - Optionally serves the web chat UI (use --webapp-port)
 
@@ -258,7 +258,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Load ~/.lingti.yaml and apply config-file fallbacks
+	// Load ~/.lsbot.yaml and apply config-file fallbacks
 	savedCfg, cfgErr := config.Load()
 	if cfgErr == nil {
 		applyRouterConfigFallbacks(savedCfg)

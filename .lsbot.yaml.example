@@ -1,9 +1,9 @@
 # lingti-bot-example.yaml
-# Copy this file to ~/.lingti.yaml and fill in your credentials.
+# Copy this file to ~/.lsbot.yaml and fill in your credentials.
 # Only configure sections relevant to your setup — everything is optional.
 #
 # Usage:
-#   cp .lingti.yaml.example ~/.lingti.yaml
+#   cp .lsbot.yaml.example ~/.lsbot.yaml
 
 # ── AI Providers ──────────────────────────────────────────────────────────────
 # Define named providers; reference them by key in agents or relay.provider.

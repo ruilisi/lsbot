@@ -48,7 +48,7 @@ It provides tools for:
 
 func init() {
 	rootCmd.PersistentFlags().StringVar(&configFile, "config", "",
-		"Config file path (default: ~/.lingti.yaml)")
+		"Config file path (default: ~/.lsbot.yaml)")
 	rootCmd.PersistentFlags().StringVar(&logLevel, "log", "info",
 		"Log level: trace, debug, info, warn, error, fatal, panic")
 	rootCmd.PersistentFlags().BoolVarP(&autoApprove, "yes", "y", false,

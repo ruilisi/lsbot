@@ -17,7 +17,7 @@ import (
 	"os"
 )
 
-const hkdfSalt = "lingti-e2e-v1"
+const hkdfSalt = "lsbot-e2e-v1"
 
 // GenerateOrLoadKeyPair loads a P-256 key pair from path if it exists,
 // otherwise generates one, saves it, and returns it.

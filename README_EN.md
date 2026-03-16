@@ -12,9 +12,12 @@ English | [中文](./README.md)
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Website](https://img.shields.io/badge/Website-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![Website](https://img.shields.io/badge/Website-lsbot.org-blue?style=flat)](https://lsbot.org)
+[![CN Mirror](https://img.shields.io/badge/CN%20Mirror-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
 
 **lsbot** is a lean, secure AI Bot — single static binary, zero dependencies, end-to-end encrypted by default. Your data stays on your machine.
+
+> 📖 **Docs: [lsbot.org/docs](https://lsbot.org/docs)** | China Mainland mirror: [bot.lingti.com](https://bot.lingti.com)
 
 **Core Advantages:**
 - **End-to-End Encrypted** — E2EE on by default (P-256 ECDH + AES-256-GCM), out-of-band key verification
@@ -56,10 +59,13 @@ lsbot relay --provider deepseek --api-key sk-xxx
 It immediately prints your personal bot page:
 
 ```
-Your bot page: https://bot.lingti.com/bots/xxx
+Your bot page: https://lsbot.org/bots/xxx
+E2E fingerprint: sha256:a3f7c91b2d4e8f06
 ```
 
 Open the link to chat with your bot in the browser — one command, no platform setup needed.
+
+> China Mainland users: your bot page is also accessible at `https://bot.lingti.com/bots/xxx`.
 
 > Supported `--provider` values: `deepseek`, `claude`, `kimi`, `minimax`, `gemini`, `openai`, and more. See [AI-PROVIDERS.md](AI-PROVIDERS.md).
 
@@ -167,7 +173,7 @@ lsbot is primarily an **MCP (Model Context Protocol) Server** that provides rich
 **Quick Start:**
 1. Install lsbot:
    - macOS / Linux / WSL: `curl -fsSL https://files.lingti.com/install-lsbot.sh | bash`
-   - Windows (PowerShell): `irm https://cli.lingti.com/install.ps1 -OutFile install.ps1; .\install.ps1 -Bot`
+   - Windows (PowerShell): `irm https://files.lingti.com/install-lsbot.ps1 | iex`
 2. Configure Claude Desktop MCP: `~/.config/Claude/claude_desktop_config.json`
    ```json
    {
@@ -215,6 +221,8 @@ In addition to MCP mode, lsbot can also run as a **message router**, connecting 
 > Full list with config details and env vars: [Chat Platforms](docs/chat-platforms.md)
 
 **Cloud Relay Advantage:** No public server, no domain registration, no HTTPS certificate, no firewall configuration, 5 minutes to complete integration.
+
+> Relay servers: **lsbot.org** (International) · **bot.lingti.com** (China Mainland mirror). All relay traffic is end-to-end encrypted — the relay sees only ciphertext.
 
 ### MCP Toolset — 75+ Local System Tools
 
@@ -328,7 +336,7 @@ Browser tab (http://localhost:8080)
 **Via config file:**
 
 ```yaml
-# ~/.lingti.yaml
+# ~/.lsbot.yaml
 platforms:
   webapp:
     port: 8080
@@ -410,6 +418,6 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contact
 
-- Website: [bot.lingti.com](https://bot.lingti.com)
+- Website: [lsbot.org](https://lsbot.org) | China Mainland mirror: [bot.lingti.com](https://bot.lingti.com)
 - Email: `jiefeng@ruc.edu.cn` / `jiefeng.hopkins@gmail.com`
 - GitHub: [github.com/ruilisi/lsbot](https://github.com/ruilisi/lsbot)

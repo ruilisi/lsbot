@@ -12,9 +12,10 @@
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Website](https://img.shields.io/badge/官网-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![Website](https://img.shields.io/badge/Website-lsbot.org-blue?style=flat)](https://lsbot.org)
+[![CN Mirror](https://img.shields.io/badge/国内镜像-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
 
-> 📖 **文档：[bot.lingti.com/docs](https://bot.lingti.com/docs)**
+> 📖 **文档：[lsbot.org/docs](https://lsbot.org/docs)** | 国内镜像：[bot.lingti.com/docs](https://bot.lingti.com/docs)
 
 ---
 
@@ -71,17 +72,17 @@ lsbot relay --provider deepseek --api-key sk-xxx
 
 一条命令启动安全 Bot：
 
-1. 首次运行自动在 `~/.lingti-e2e.pem` 生成持久化 P-256 密钥对
+1. 首次运行自动在 `~/.lsbot.pem` 生成持久化 P-256 密钥对
 2. 通过 WebSocket 连接中继服务器
 3. 仅发布**公钥**——私钥永远不离开你的机器
 4. 每一条响应在离开你的进程前加密
 5. 每一条消息到达你的进程后解密
 
-`bot.lingti.com` 的中继服务器只看到密文。它无法读取你的消息，无法记录你的对话，无法推断你在使用哪些工具或访问哪些文件。
+中继服务器（lsbot.org，国内镜像 bot.lingti.com）只看到密文。它无法读取你的消息，无法记录你的对话，无法推断你在使用哪些工具或访问哪些文件。
 
 ```bash
 lsbot e2e pubkey
-# Key file:    ~/.lingti-e2e.pem
+# Key file:    ~/.lsbot.pem
 # Public key:  BK3x9f2...
 # Fingerprint: sha256:29f8954f
 ```
@@ -104,7 +105,7 @@ lsbot e2e pubkey
 
 你的 AI Bot 可以访问你的终端、你的文件、你的代码库。它知道你在做什么项目，知道你的工作流程，知道你的私人文档。**这些信息通过一个你不控制的服务器转发——这不是可接受的风险，这是一个架构缺陷。**
 
-lsbot 的设计前提是：中继服务器是不可信的。这不是对 bot.lingti.com 的不信任，而是一个工程原则：**不需要信任的地方，就不应该建立信任依赖。**
+lsbot 的设计前提是：中继服务器是不可信的。这不是对 lsbot.org 或 bot.lingti.com 的不信任，而是一个工程原则：**不需要信任的地方，就不应该建立信任依赖。**
 
 ---
 
@@ -115,15 +116,15 @@ lsbot 没有云端数据库。
 | 数据 | 存储位置 | 云端是否存在 |
 |---|---|:---:|
 | 对话历史 | 浏览器 IndexedDB（本地） | ❌ |
-| E2EE 私钥 | `~/.lingti-e2e.pem` | ❌ |
-| 配置文件 | `~/.lingti.yaml` | ❌ |
-| AI API 密钥 | `~/.lingti.yaml` | ❌ |
+| E2EE 私钥 | `~/.lsbot.pem` | ❌ |
+| 配置文件 | `~/.lsbot.yaml` | ❌ |
+| AI API 密钥 | `~/.lsbot.yaml` | ❌ |
 | Cron 任务数据库 | `~/.lingti.db` | ❌ |
 | 技能文件 | `~/.lingti/skills/` | ❌ |
 
-云中继服务器（`bot.lingti.com`）只做一件事：**路由加密后的消息**。它不保存任何内容，不分析任何内容，不记录任何内容。消息转发后立即丢弃。
+云中继服务器（`lsbot.org`，国内镜像 `bot.lingti.com`）只做一件事：**路由加密后的消息**。它不保存任何内容，不分析任何内容，不记录任何内容。消息转发后立即丢弃。
 
-即使 bot.lingti.com 明天关闭，你所有的数据、配置、历史记录都完好无损在你的机器上。这不是承诺，这是架构决定的结果。
+即使中继服务器明天关闭，你所有的数据、配置、历史记录都完好无损在你的机器上。这不是承诺，这是架构决定的结果。
 
 ---
 
@@ -150,9 +151,11 @@ lsbot relay --provider deepseek --api-key sk-xxx
 启动后自动输出你的专属 Bot 页面：
 
 ```
-Your bot page: https://bot.lingti.com/bots/xxx
+Your bot page: https://lsbot.org/bots/xxx
 E2E fingerprint: sha256:a3f7c91b2d4e8f06
 ```
+
+> 国内用户：Bot 页面也可通过 `https://bot.lingti.com/bots/xxx` 访问。
 
 打开链接，点击状态栏的 **Secure** → 粘贴公钥 → 核对指纹，即可在浏览器中与 Bot 进行端到端加密对话。
 
@@ -160,9 +163,9 @@ E2E fingerprint: sha256:a3f7c91b2d4e8f06
 
 #### 端到端加密（E2EE）
 
-Bot Page 默认启用**端到端加密**，relay 服务器（bot.lingti.com）无法读取消息内容：
+Bot Page 默认启用**端到端加密**，relay 服务器（lsbot.org / bot.lingti.com）无法读取消息内容：
 
-- bot 首次启动时，在 `~/.lingti-e2e.pem` 自动生成持久化 P-256 密钥，日志打印指纹
+- bot 首次启动时，在 `~/.lsbot.pem` 自动生成持久化 P-256 密钥，日志打印指纹
 - 浏览器打开 Bot Page，点击状态栏 **Secure** 进入设置面板
 - 从终端运行 `lsbot e2e pubkey`，将公钥粘贴到面板，核对指纹一致后点击 **Activate**
 - 状态栏出现**蓝色锁图标**，此后页面刷新自动恢复加密（密钥存储在浏览器本地）
@@ -181,13 +184,13 @@ lsbot e2e pubkey
 lsbot e2e keygen --save
 ```
 
-详情：[端到端加密文档](https://bot.lingti.com/docs/e2e-encryption)
+详情：[端到端加密文档](https://lsbot.org/docs/e2e-encryption)
 
 ### 桌面客户端（MacOS/Windows）
 
 桌面端不光拥有完整的安装、升级和使用 lsbot 的交互界面，还提供了 AI 网关、AI 加速等功能。
 
-下载地址: [bot.lingti.com/download](https://bot.lingti.com/download)
+下载地址: [lsbot.org/download](https://lsbot.org/download)
 
 ---
 
@@ -208,7 +211,7 @@ lsbot relay --platform feishu \
   --provider claude --api-key sk-ant-xxx
 ```
 
-详见 [云中继文档](https://bot.lingti.com/docs/cloud-relay)。
+详见 [云中继文档](https://lsbot.org/docs/cloud-relay)。
 
 ---
 
@@ -229,15 +232,15 @@ lsbot relay --platform feishu \
 | **中国平台** | 原生支持飞书/企微/钉钉 | 需自行集成 |
 | **云中继** | ✅ 免自建服务器 | ❌ 需自建 Web 服务 |
 
-> 详细功能对比：[OpenClaw vs lsbot 技术特性对比](https://bot.lingti.com/docs/openclaw-feature-comparison)
+> 详细功能对比：[OpenClaw vs lsbot 技术特性对比](https://lsbot.org/docs/openclaw-feature-comparison)
 
 ### 核心能力
 
 - 🔒 **端到端加密，默认开启** — P-256 ECDH + AES-256-GCM，中继服务器只路由密文
 - 🚀 **零依赖部署** — 单个 ~15MB 二进制文件，无需 Node.js/Python 运行时
-- ☁️ **[云中继](https://bot.lingti.com/docs/cloud-relay)加持** — 无需公网服务器、域名备案、HTTPS 证书，5 分钟接入企业微信/微信公众号
-- 🤖 **[浏览器自动化](https://bot.lingti.com/docs/browser-automation)** — 内置完整 CDP 控制引擎，无需 Puppeteer/Playwright/Node.js
-- 🌐 **[社交平台自动化](https://bot.lingti.com/docs/social-platform-automation)** — AI 代操作知乎、小红书等内容平台
+- ☁️ **[云中继](https://lsbot.org/docs/cloud-relay)加持** — 无需公网服务器、域名备案、HTTPS 证书，5 分钟接入企业微信/微信公众号
+- 🤖 **[浏览器自动化](https://lsbot.org/docs/browser-automation)** — 内置完整 CDP 控制引擎，无需 Puppeteer/Playwright/Node.js
+- 🌐 **[社交平台自动化](https://lsbot.org/docs/social-platform-automation)** — AI 代操作知乎、小红书等内容平台
 - 🛠️ **75+ MCP 工具** — 覆盖文件、Shell、系统、网络、日历、Git、GitHub 等全场景
 - 🌏 **中国平台原生支持** — 钉钉、飞书、企业微信、微信公众号开箱即用
 - 💬 **[内置 Web 聊天界面](#web-chat-ui)** — 无需任何客户端，浏览器直开，支持多会话并行
@@ -249,15 +252,15 @@ lsbot relay --platform feishu \
 
 ## 样例
 
-> 📺 **完整演示、截图和使用示例，请访问：[bot.lingti.com/docs/examples](https://bot.lingti.com/docs/examples)**
+> 📺 **完整演示、截图和使用示例，请访问：[bot.lingti.com/docs/examples](https://lsbot.org/docs/examples)**
 
 主要功能演示：
 
-- **[内置 Web 聊天界面](https://bot.lingti.com/docs/examples#web-chat-ui)** — 多会话并行，零配置，`--webapp-port 8080` 一键启用
-- **[定时任务](https://bot.lingti.com/docs/examples#cron-jobs)** — 用自然语言创建 Cron Job，AI 自动生成内容
-- **[企业微信文件助手](https://bot.lingti.com/docs/examples#wecom-file)** — 自然语言管理和传输文件
-- **[社交平台自动化](https://bot.lingti.com/docs/examples#social-automation)** — AI 代操作知乎、小红书等内容平台
-- **[浏览器自动化](https://bot.lingti.com/docs/examples#browser-automation)** — 自然语言驾驭 Chrome，无需 Puppeteer/Node.js
+- **[内置 Web 聊天界面](https://lsbot.org/docs/examples#web-chat-ui)** — 多会话并行，零配置，`--webapp-port 8080` 一键启用
+- **[定时任务](https://lsbot.org/docs/examples#cron-jobs)** — 用自然语言创建 Cron Job，AI 自动生成内容
+- **[企业微信文件助手](https://lsbot.org/docs/examples#wecom-file)** — 自然语言管理和传输文件
+- **[社交平台自动化](https://lsbot.org/docs/examples#social-automation)** — AI 代操作知乎、小红书等内容平台
+- **[浏览器自动化](https://lsbot.org/docs/examples#browser-automation)** — 自然语言驾驭 Chrome，无需 Puppeteer/Node.js
 
 ---
 
@@ -353,7 +356,7 @@ lsbot 实现了完整的 [MCP (Model Context Protocol)](https://modelcontextprot
 | **Nextcloud Talk** | HTTP Polling | 自建 | 🔜 计划中 | ✅ |
 | **Web 聊天界面** | WebSocket | `--webapp-port` | — | ✅ |
 
-> 完整列表（含配置参数、环境变量）：[聊天平台列表](https://bot.lingti.com/docs/chat-platforms)
+> 完整列表（含配置参数、环境变量）：[聊天平台列表](https://lsbot.org/docs/chat-platforms)
 
 ### MCP 工具集 — 75+ 本地系统工具
 
@@ -375,7 +378,7 @@ lsbot 实现了完整的 [MCP (Model Context Protocol)](https://modelcontextprot
 | **音乐控制** | 7 | 播放、暂停、切歌、音量、搜索 (macOS) |
 | **Git** | 4 | 状态、日志、差异、分支 |
 | **GitHub** | 6 | PR 列表/详情、Issue 管理、仓库信息 |
-| **[浏览器自动化](https://bot.lingti.com/docs/browser-automation)** | 14 | CDP 控制引擎，可接管已有 Chrome，快照定位、点击/输入/JS、多标签页、截图 |
+| **[浏览器自动化](https://lsbot.org/docs/browser-automation)** | 14 | CDP 控制引擎，可接管已有 Chrome，快照定位、点击/输入/JS、多标签页、截图 |
 | **定时任务** | 5 | 创建、列表、删除、暂停、恢复计划任务 |
 
 ### 健康诊断
@@ -390,7 +393,7 @@ lsbot doctor
 OS: darwin/arm64, Go: go1.24.0
 
 Checks:
-  ✓ Config file (~/.lingti.yaml) — loaded
+  ✓ Config file (~/.lsbot.yaml) — loaded
   ✓ AI API key — set (sk-ant-a..., provider: claude)
   ✓ AI provider connectivity — reachable (HTTP 200)
   ✓ Platform credentials — wecom, telegram
@@ -437,7 +440,7 @@ lsbot skills info github
 
 内置 8 个 Skills：Discord、GitHub、Slack、Peekaboo（macOS UI 自动化）、Tmux、天气、1Password、Obsidian。
 
-详细文档：[Skills 指南](https://bot.lingti.com/docs/skills)
+详细文档：[Skills 指南](https://lsbot.org/docs/skills)
 
 ### 功能速览表
 
@@ -445,7 +448,7 @@ lsbot skills info github
 |------|------|------|
 | **端到端加密** | P-256 ECDH + AES-256-GCM | 默认开启，中继服务器只路由密文 |
 | **MCP Server** | 标准 MCP 协议服务器 | 兼容 Claude Desktop、Cursor、Windsurf 等 |
-| **多平台消息网关** | [19 种聊天平台](https://bot.lingti.com/docs/chat-platforms) | 微信公众号、企业微信、Slack、飞书一键接入 |
+| **多平台消息网关** | [19 种聊天平台](https://lsbot.org/docs/chat-platforms) | 微信公众号、企业微信、Slack、飞书一键接入 |
 | **[Web 聊天界面](#web-chat-ui)** | 内置浏览器 UI | 多会话并行，独立记忆隔离，Markdown 渲染 |
 | **MCP 工具集** | 75+ 本地系统工具 | 文件、Shell、系统、网络、日历、Git、GitHub |
 | **Skills** | 模块化能力扩展 | 8 个内置 Skill，支持自定义和项目级扩展 |
@@ -463,8 +466,10 @@ lsbot skills info github
 **工作原理：**
 
 ```
-企业微信(用户消息) --> bot.lingti.com(云中继，只看密文) --WebSocket--> lsbot(本地AI处理)
+企业微信(用户消息) --> lsbot.org(云中继，只看密文) --WebSocket--> lsbot(本地AI处理)
 ```
+
+> 国内用户可使用镜像节点 `bot.lingti.com`，效果相同。
 
 | | 传统方案 | 云中继方案 |
 |---|---|---|
@@ -475,12 +480,12 @@ lsbot skills info github
 | AI处理位置 | 服务器 | **本地** |
 | 数据安全 | 云端存储 | **本地处理 + E2EE** |
 
-> 📖 [云中继技术方案详解](https://bot.lingti.com/docs/cloud-relay)
+> 📖 [云中继技术方案详解](https://lsbot.org/docs/cloud-relay)
 
 ### 微信公众号
 
 微信搜索公众号「**灵缇小秘**」，关注后发送任意消息获取接入教程。
-详细教程：[微信公众号接入指南](https://bot.lingti.com/docs/wechat-integration)
+详细教程：[微信公众号接入指南](https://lsbot.org/docs/wechat-integration)
 
 ### 企业微信
 
@@ -495,7 +500,7 @@ lsbot relay --platform wecom \
   --api-key YOUR_API_KEY
 ```
 
-详细教程：[企业微信集成指南](https://bot.lingti.com/docs/wecom-integration)
+详细教程：[企业微信集成指南](https://lsbot.org/docs/wecom-integration)
 
 ### 钉钉
 
@@ -622,7 +627,7 @@ make build  # 或: make darwin-arm64 / make linux-amd64
 **手动下载**
 
 - **命令行版本**：前往 [GitHub Releases](https://github.com/ruilisi/lsbot/releases) 下载
-- **桌面客户端**（Windows x64 / macOS Apple Silicon / macOS Intel）：前往 [bot.lingti.com/download](https://bot.lingti.com/download) 下载
+- **桌面客户端**（Windows x64 / macOS Apple Silicon / macOS Intel）：前往 [lsbot.org/download](https://lsbot.org/download) 下载
 
 **支持的目标平台：**
 
@@ -639,7 +644,7 @@ make build  # 或: make darwin-arm64 / make linux-amd64
 
 ## 配置优先级
 
-所有配置项按以下优先级解析：**命令行参数 > 环境变量 > 配置文件 (`~/.lingti.yaml`)**
+所有配置项按以下优先级解析：**命令行参数 > 环境变量 > 配置文件 (`~/.lsbot.yaml`)**
 
 完整的环境变量、命令行参数、配置文件对照表：[配置优先级](CONFIGURATION.md)
 
@@ -649,15 +654,15 @@ make build  # 或: make darwin-arm64 / make linux-amd64
 
 - [配置优先级](CONFIGURATION.md)
 - [AI 服务列表](AI-PROVIDERS.md) — 16 种 AI 服务详情、API Key 获取、别名
-- [端到端加密](https://bot.lingti.com/docs/e2e-encryption) — E2EE 架构、密钥管理、指纹验证
-- [聊天平台列表](https://bot.lingti.com/docs/chat-platforms) — 19 种聊天平台详情
-- [命令行参考](https://bot.lingti.com/docs/cli-reference) — 完整的命令行使用文档
-- [Skills 指南](https://bot.lingti.com/docs/skills)
-- [浏览器自动化指南](https://bot.lingti.com/docs/browser-automation) — CDP 引擎完整参考
-- [社交平台自动化指南](https://bot.lingti.com/docs/social-platform-automation)
-- [定时任务指南](https://bot.lingti.com/docs/cron-jobs)
-- [云中继技术方案详解](https://bot.lingti.com/docs/cloud-relay)
-- [OpenClaw 技术特性对比](https://bot.lingti.com/docs/openclaw-feature-comparison)
+- [端到端加密](https://lsbot.org/docs/e2e-encryption) — E2EE 架构、密钥管理、指纹验证
+- [聊天平台列表](https://lsbot.org/docs/chat-platforms) — 19 种聊天平台详情
+- [命令行参考](https://lsbot.org/docs/cli-reference) — 完整的命令行使用文档
+- [Skills 指南](https://lsbot.org/docs/skills)
+- [浏览器自动化指南](https://lsbot.org/docs/browser-automation) — CDP 引擎完整参考
+- [社交平台自动化指南](https://lsbot.org/docs/social-platform-automation)
+- [定时任务指南](https://lsbot.org/docs/cron-jobs)
+- [云中继技术方案详解](https://lsbot.org/docs/cloud-relay)
+- [OpenClaw 技术特性对比](https://lsbot.org/docs/openclaw-feature-comparison)
 
 ---
 
@@ -678,4 +683,4 @@ MIT License
 
 ---
 
-**lsbot** — Lean & Secure Bot · [bot.lingti.com](https://bot.lingti.com) · [GitHub](https://github.com/ruilisi/lsbot)
+**lsbot** — Lean & Secure Bot · [lsbot.org](https://lsbot.org) · [bot.lingti.com（国内）](https://bot.lingti.com) · [GitHub](https://github.com/ruilisi/lsbot)

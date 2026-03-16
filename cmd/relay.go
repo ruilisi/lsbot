@@ -80,7 +80,7 @@ WeCom Cloud Relay:
     --api-key YOUR_API_KEY
 
   1. Run this command first
-  2. Configure callback URL in WeCom: https://bot.lingti.com/wecom
+  2. Configure callback URL in WeCom: https://lsbot.org/wecom  (CN: https://bot.lingti.com/wecom)
   3. Save config in WeCom - verification will succeed automatically
   4. Messages will be processed with your AI provider
 
@@ -113,9 +113,9 @@ func init() {
 
 	relayCmd.Flags().StringVar(&relayUserID, "user-id", "", "User ID from /whoami (required, or RELAY_USER_ID env)")
 	relayCmd.Flags().StringVar(&relayPlatform, "platform", "", "Platform: feishu, slack, wechat, or wecom (required, or RELAY_PLATFORM env)")
-	relayCmd.Flags().StringVar(&relayHost, "host", "", "Base URL of the relay server (e.g. http://localhost:8080 or https://bot.lingti.com); sets --server and --webhook")
-	relayCmd.Flags().StringVar(&relayServerURL, "server", "", "WebSocket URL (default: wss://bot.lingti.com/ws, or RELAY_SERVER_URL env)")
-	relayCmd.Flags().StringVar(&relayWebhookURL, "webhook", "", "Webhook URL (default: https://bot.lingti.com/webhook, or RELAY_WEBHOOK_URL env)")
+	relayCmd.Flags().StringVar(&relayHost, "host", "", "Base URL of the relay server (e.g. http://localhost:8080 or https://lsbot.org); sets --server and --webhook")
+	relayCmd.Flags().StringVar(&relayServerURL, "server", "", "WebSocket URL (default: wss://lsbot.org/ws, or RELAY_SERVER_URL env; CN: wss://bot.lingti.com/ws)")
+	relayCmd.Flags().StringVar(&relayWebhookURL, "webhook", "", "Webhook URL (default: https://lsbot.org/webhook, or RELAY_WEBHOOK_URL env; CN: https://bot.lingti.com/webhook)")
 	relayCmd.Flags().StringVar(&relayAIProvider, "provider", "", "AI provider: claude, deepseek, kimi, qwen (or AI_PROVIDER env)")
 	relayCmd.Flags().StringVar(&relayAPIKey, "api-key", "", "AI API key (or AI_API_KEY env)")
 	relayCmd.Flags().StringVar(&relayBaseURL, "base-url", "", "Custom API base URL (or AI_BASE_URL env)")
@@ -333,7 +333,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 			}
 		}
 		if relayRefreshBotID {
-			botBase := "https://bot.lingti.com"
+			botBase := "https://lsbot.org"
 			if relayHost != "" {
 				botBase = strings.TrimRight(relayHost, "/")
 				if !strings.HasPrefix(botBase, "http") {
@@ -442,7 +442,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 		}
 		if len(missing) > 0 {
 			fmt.Fprintf(os.Stderr, "Error: WeCom credentials required for cloud relay: %v\n", missing)
-			fmt.Fprintln(os.Stderr, "Configure callback URL in WeCom: https://bot.lingti.com/wecom")
+			fmt.Fprintln(os.Stderr, "Configure callback URL in WeCom: https://lsbot.org/wecom  (CN: https://bot.lingti.com/wecom)")
 			os.Exit(1)
 		}
 	}
@@ -590,7 +590,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 	log.Printf("Relay connected. User: %s, Platform: %s", relayUserID, relayPlatform)
 	log.Printf("AI Provider: %s, Model: %s", providerName, modelName)
 	if relayBotID != "" {
-		botBase := "https://bot.lingti.com"
+		botBase := "https://lsbot.org"
 		if relayHost != "" {
 			botBase = strings.TrimRight(relayHost, "/")
 			if !strings.HasPrefix(botBase, "http") {

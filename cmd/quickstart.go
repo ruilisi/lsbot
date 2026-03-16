@@ -13,8 +13,8 @@ var quickstartCmd = &cobra.Command{
 		fmt.Print(`
 Usage modes:
 
-  1. Gateway (recommended — web-based setup at bot.lingti.com):
-     lsbot gateway       # Opens bot.lingti.com/bots/xxxx to connect platforms
+  1. Gateway (recommended — web-based setup at lsbot.org):
+     lsbot gateway       # Opens lsbot.org/bots/xxxx to connect platforms
 
   2. MCP Server (for Claude Desktop / Cursor / Windsurf):
      Add to your MCP config (claude_desktop_config.json):
@@ -35,7 +35,8 @@ Usage modes:
 For more information:
   lsbot help                       # Show all commands
   lsbot <command> --help           # Help for specific command
-  https://bot.lingti.com               # Official website & docs
+  https://lsbot.org                    # Official website & docs
+  https://bot.lingti.com               # CN mirror
   https://github.com/ruilisi/lsbot # Source code
 
 `)

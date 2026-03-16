@@ -272,7 +272,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 				fmt.Fprintf(os.Stderr, "Warning: failed to save bot ID: %v\n", err)
 			}
 		}
-		fmt.Printf("[Gateway] Your bot page: https://bot.lingti.com/bots/%s\n", savedCfg.BotID)
+		fmt.Printf("[Gateway] Your bot page: https://lsbot.org/bots/%s\n", savedCfg.BotID)
 	}
 
 	debugEnabled := logger.IsDebug()

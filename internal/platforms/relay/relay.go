@@ -28,7 +28,7 @@ import (
 const (
 	DefaultServerURL  = "wss://bot.lingti.com/ws"
 	DefaultWebhookURL = "https://bot.lingti.com/webhook"
-	ClientVersion     = "1.9.9"
+	ClientVersion     = "2.0.0"
 
 	writeTimeout      = 10 * time.Second
 	readTimeout       = 60 * time.Second

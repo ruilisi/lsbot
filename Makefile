@@ -1,4 +1,4 @@
-VERSION := 1.9.9
+VERSION := 2.0.0
 BUILD := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 PROJECTNAME := lsbot
 GOBASE := $(shell pwd)

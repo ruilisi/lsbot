@@ -41,10 +41,10 @@ Supports WeCom, Feishu, DingTalk, Slack, Telegram, Discord, WhatsApp, LINE, Team
 
 ```bash
 # macOS / Linux / WSL
-curl -fsSL https://files.lingti.com/install-bot.sh | bash
+curl -fsSL https://files.lingti.com/install-lsbot.sh | bash
 
 # Windows (PowerShell)
-irm https://files.lingti.com/install-bot.ps1 | iex
+irm https://files.lingti.com/install-lsbot.ps1 | iex
 ```
 
 **Step 2: Run relay with your AI provider and key**
@@ -166,7 +166,7 @@ lsbot is primarily an **MCP (Model Context Protocol) Server** that provides rich
 
 **Quick Start:**
 1. Install lsbot:
-   - macOS / Linux / WSL: `curl -fsSL https://files.lingti.com/install-bot.sh | bash`
+   - macOS / Linux / WSL: `curl -fsSL https://files.lingti.com/install-lsbot.sh | bash`
    - Windows (PowerShell): `irm https://cli.lingti.com/install.ps1 -OutFile install.ps1; .\install.ps1 -Bot`
 2. Configure Claude Desktop MCP: `~/.config/Claude/claude_desktop_config.json`
    ```json

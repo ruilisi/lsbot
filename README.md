@@ -135,10 +135,10 @@ lsbot 没有云端数据库。
 
 ```bash
 # macOS / Linux / WSL
-curl -fsSL https://files.lingti.com/install-bot.sh | bash
+curl -fsSL https://files.lingti.com/install-lsbot.sh | bash
 
 # Windows (PowerShell)
-irm https://files.lingti.com/install-bot.ps1 | iex
+irm https://files.lingti.com/install-lsbot.ps1 | iex
 ```
 
 **第二步：运行**

@@ -7,7 +7,7 @@ English | [中文](./README.md)
 > **Lean. Secure. Yours.**
 
 <div align="center">
-  <img src="assets/logo/lsbot-banner-dark.svg" alt="lsbot — Lean & Secure Bot" width="360" />
+  <img src="https://files.lingti.com/images/lsbot-banner-dark.svg" alt="lsbot — Lean & Secure Bot" width="360" />
 </div>
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)

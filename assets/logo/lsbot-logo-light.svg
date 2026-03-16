@@ -4,7 +4,7 @@
   <path d="M38 5 L64 16 L64 44 Q64 66 38 78 Q12 66 12 44 L12 16 Z"
         fill="rgba(74,222,128,0.12)" stroke="#22c55e" stroke-width="1.8" stroke-linejoin="round"/>
   <!-- ls inside shield -->
-  <text x="38" y="51" font-family="'Courier New',Courier,monospace" font-size="22" font-weight="700"
+  <text x="38" y="53" font-family="'Courier New',Courier,monospace" font-size="34" font-weight="700"
         fill="#16a34a" text-anchor="middle" letter-spacing="1">ls</text>
   <!-- bot wordmark -->
   <text x="80" y="57" font-family="'Courier New',Courier,monospace" font-size="42" font-weight="700"

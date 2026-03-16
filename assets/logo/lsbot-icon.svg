@@ -4,6 +4,6 @@
   <path d="M32 3 L58 13 L58 42 Q58 62 32 70 Q6 62 6 42 L6 13 Z"
         fill="rgba(74,222,128,0.10)" stroke="#4ade80" stroke-width="2.2" stroke-linejoin="round"/>
   <!-- ls in monospace, centred -->
-  <text x="32" y="45" font-family="'Courier New',Courier,monospace" font-size="21" font-weight="700"
+  <text x="32" y="47" font-family="'Courier New',Courier,monospace" font-size="34" font-weight="700"
         fill="#4ade80" text-anchor="middle" letter-spacing="1">ls</text>
 </svg>

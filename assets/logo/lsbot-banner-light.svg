@@ -5,7 +5,7 @@
   <!-- Shield icon -->
   <path d="M30 8 L52 17 L52 42 Q52 58 30 66 Q8 58 8 42 L8 17 Z"
         fill="rgba(74,222,128,0.12)" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="30" y="46" font-family="'Courier New',Courier,monospace" font-size="19" font-weight="700"
+  <text x="30" y="47" font-family="'Courier New',Courier,monospace" font-size="30" font-weight="700"
         fill="#16a34a" text-anchor="middle">ls</text>
   <!-- Wordmark + slogans -->
   <text x="66" y="34" font-family="'Courier New',Courier,monospace" font-size="26" font-weight="700"

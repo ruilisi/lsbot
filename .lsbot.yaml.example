@@ -119,6 +119,8 @@ bindings:
 relay:
   platform: wecom
   provider: kimi        # references a key in providers above
+  # server_url: wss://lsbot.org/ws          # override default (wss://bot.lingti.com/ws)
+  # webhook_url: https://lsbot.org/webhook  # override default (https://bot.lingti.com/webhook)
 
 # ── Platforms ─────────────────────────────────────────────────────────────────
 # Fill in credentials for whichever platform(s) you use.

@@ -3,10 +3,10 @@
 云中继是运行 lsbot 的**首选方式**。在本地运行一条命令，AI bot 就能接入所有支持的聊天平台——无需服务器、无需公网 IP、无需配置防火墙。
 
 ```
-聊天平台 → lsbot.org（云中继，国内：bot.lingti.com）←WebSocket→ lsbot relay（你的电脑）→ AI
+聊天平台 → bot.lingti.com（云中继，国际：lsbot.org）←WebSocket→ lsbot relay（你的电脑）→ AI
 ```
 
-你的电脑主动向 `lsbot.org`（国内：`bot.lingti.com`）发起出站 WebSocket 连接，由云端服务器承接平台的回调请求。所有 AI 推理均在本地完成，API Key 不会离开你的机器。
+你的电脑主动向 `bot.lingti.com`（国际：`lsbot.org`）发起出站 WebSocket 连接，由云端服务器承接平台的回调请求。所有 AI 推理均在本地完成，API Key 不会离开你的机器。
 
 ---
 
@@ -18,7 +18,7 @@
 | 企业微信（WeCom） | ✅ | 注意 [IP 策略限制](#企业微信-ip-策略) |
 | 飞书（Feishu / Lark） | ✅ | |
 | Slack | ✅ | |
-| Bot Page（`lsbot.org/bots/<id>`） | ✅ | 浏览器直接访问，无需平台账号 |
+| Bot Page（`bot.lingti.com/bots/<id>`） | ✅ | 浏览器直接访问，无需平台账号 |
 
 其他平台（Telegram、Discord、钉钉、WhatsApp 等）通过 [`gateway`](docs/gateway-vs-relay.md) 接入。
 
@@ -50,7 +50,7 @@ lsbot relay
 启动后终端会打印你的专属链接：
 
 ```
-[Relay] Your bot page: https://lsbot.org/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+[Relay] Your bot page: https://bot.lingti.com/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 **第三步：打开网页开始聊天**
@@ -123,7 +123,7 @@ lsbot relay --platform slack \
 每个 relay 实例都有一个持久 UUID，保存在 `~/.lsbot.yaml`。启动时会打印：
 
 ```
-[Relay] Your bot page: https://lsbot.org/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+[Relay] Your bot page: https://bot.lingti.com/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 任何人拿到这个链接，就能在浏览器里打开多标签对话界面，直接与你的 bot 聊天。无需登录、无需安装任何应用。UUID 既是标识符也是访问凭证——把链接分享给谁，谁就能访问。
@@ -151,8 +151,8 @@ lsbot relay --refresh-bot-id
 ```
 --user-id        relay 用户 ID（必填，或 RELAY_USER_ID 环境变量）
 --platform       feishu | slack | wechat | wecom（仅用 bot page 时可省略）
---server         WebSocket 地址（默认：wss://lsbot.org/ws，国内：wss://bot.lingti.com/ws）
---webhook        Webhook 地址（默认：https://lsbot.org/webhook，国内：https://bot.lingti.com/webhook）
+--server         WebSocket 地址（默认：wss://bot.lingti.com/ws，国际：wss://lsbot.org/ws）
+--webhook        Webhook 地址（默认：https://bot.lingti.com/webhook，国际：https://lsbot.org/webhook）
 
 --provider       AI 提供商：claude、deepseek、kimi、qwen、minimax、ollama 等
 --api-key        AI API Key（或 AI_API_KEY 环境变量）
@@ -189,6 +189,9 @@ lsbot relay --refresh-bot-id
 relay:
   platform: wecom
   user_id: your-id
+  # 可选：指定中继服务器（默认 bot.lingti.com，国际节点用 lsbot.org）
+  # server_url: wss://lsbot.org/ws
+  # webhook_url: https://lsbot.org/webhook
 
 ai:
   provider: deepseek
@@ -215,12 +218,12 @@ lsbot relay
 ## 工作原理
 
 ```
-1. lsbot relay 向 wss://lsbot.org/ws 建立 WebSocket 连接（国内：wss://bot.lingti.com/ws）
+1. lsbot relay 向 wss://bot.lingti.com/ws 建立 WebSocket 连接（国际：wss://lsbot.org/ws）
 2. 携带 user_id、platform 和平台凭据进行认证
 3. 云中继服务器为你的平台注册公网端点
-   （例如企业微信回调：https://lsbot.org/wecom，国内：https://bot.lingti.com/wecom）
+   （例如企业微信回调：https://bot.lingti.com/wecom，国际：https://lsbot.org/wecom）
 4. 平台消息送达云中继 → 通过 WebSocket 转发到你的本地机器
-5. 本地 AI 处理完成 → POST 响应到 https://lsbot.org/webhook（国内：https://bot.lingti.com/webhook）
+5. 本地 AI 处理完成 → POST 响应到 https://bot.lingti.com/webhook（国际：https://lsbot.org/webhook）
 6. 云中继服务器调用平台 API 将回复发送给用户
 ```
 

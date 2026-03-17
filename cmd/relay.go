@@ -80,7 +80,7 @@ WeCom Cloud Relay:
     --api-key YOUR_API_KEY
 
   1. Run this command first
-  2. Configure callback URL in WeCom: https://lsbot.org/wecom  (CN: https://bot.lingti.com/wecom)
+  2. Configure callback URL in WeCom: https://bot.lingti.com/wecom  (INT: https://lsbot.org/wecom)
   3. Save config in WeCom - verification will succeed automatically
   4. Messages will be processed with your AI provider
 
@@ -113,9 +113,9 @@ func init() {
 
 	relayCmd.Flags().StringVar(&relayUserID, "user-id", "", "User ID from /whoami (required, or RELAY_USER_ID env)")
 	relayCmd.Flags().StringVar(&relayPlatform, "platform", "", "Platform: feishu, slack, wechat, or wecom (required, or RELAY_PLATFORM env)")
-	relayCmd.Flags().StringVar(&relayHost, "host", "", "Base URL of the relay server (e.g. http://localhost:8080 or https://lsbot.org); sets --server and --webhook")
-	relayCmd.Flags().StringVar(&relayServerURL, "server", "", "WebSocket URL (default: wss://lsbot.org/ws, or RELAY_SERVER_URL env; CN: wss://bot.lingti.com/ws)")
-	relayCmd.Flags().StringVar(&relayWebhookURL, "webhook", "", "Webhook URL (default: https://lsbot.org/webhook, or RELAY_WEBHOOK_URL env; CN: https://bot.lingti.com/webhook)")
+	relayCmd.Flags().StringVar(&relayHost, "host", "", "Base URL of the relay server (e.g. http://localhost:8080 or https://bot.lingti.com); sets --server and --webhook")
+	relayCmd.Flags().StringVar(&relayServerURL, "server", "", "WebSocket URL (default: wss://bot.lingti.com/ws, or RELAY_SERVER_URL env; INT: wss://lsbot.org/ws)")
+	relayCmd.Flags().StringVar(&relayWebhookURL, "webhook", "", "Webhook URL (default: https://bot.lingti.com/webhook, or RELAY_WEBHOOK_URL env; INT: https://lsbot.org/webhook)")
 	relayCmd.Flags().StringVar(&relayAIProvider, "provider", "", "AI provider: claude, deepseek, kimi, qwen (or AI_PROVIDER env)")
 	relayCmd.Flags().StringVar(&relayAPIKey, "api-key", "", "AI API key (or AI_API_KEY env)")
 	relayCmd.Flags().StringVar(&relayBaseURL, "base-url", "", "Custom API base URL (or AI_BASE_URL env)")
@@ -297,6 +297,12 @@ func runRelay(cmd *cobra.Command, args []string) {
 		if relayUserID == "" && savedCfg.Relay.UserID != "" {
 			relayUserID = savedCfg.Relay.UserID
 		}
+		if relayServerURL == "" && savedCfg.Relay.ServerURL != "" {
+			relayServerURL = savedCfg.Relay.ServerURL
+		}
+		if relayWebhookURL == "" && savedCfg.Relay.WebhookURL != "" {
+			relayWebhookURL = savedCfg.Relay.WebhookURL
+		}
 		if relayPlatform == "" && savedCfg.Mode == "relay" {
 			// Infer platform from saved platform credentials
 			if savedCfg.Platforms.WeCom.CorpID != "" {
@@ -333,7 +339,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 			}
 		}
 		if relayRefreshBotID {
-			botBase := "https://lsbot.org"
+			botBase := "https://bot.lingti.com"
 			if relayHost != "" {
 				botBase = strings.TrimRight(relayHost, "/")
 				if !strings.HasPrefix(botBase, "http") {
@@ -346,7 +352,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 	}
 
 	// Resolve E2E key file. E2EE is on by default when BotID is set (all relay
-	// traffic goes through bot.lingti.com, so encrypting end-to-end is the safe
+	// traffic goes through the relay server, so encrypting end-to-end is the safe
 	// default). Use --no-e2ee to disable.
 	if !relayPlain && cfgErr == nil && savedCfg.BotID != "" {
 		if relayE2EKeyFile == "" {
@@ -442,7 +448,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 		}
 		if len(missing) > 0 {
 			fmt.Fprintf(os.Stderr, "Error: WeCom credentials required for cloud relay: %v\n", missing)
-			fmt.Fprintln(os.Stderr, "Configure callback URL in WeCom: https://lsbot.org/wecom  (CN: https://bot.lingti.com/wecom)")
+			fmt.Fprintln(os.Stderr, "Configure callback URL in WeCom: https://bot.lingti.com/wecom  (INT: https://lsbot.org/wecom)")
 			os.Exit(1)
 		}
 	}

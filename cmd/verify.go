@@ -35,7 +35,7 @@ processing in a single command. There's no need to run verify separately.
 
 Simplified workflow with 'relay':
   1. Run 'relay' with your credentials and AI provider
-  2. Configure callback URL in the platform (e.g., https://lsbot.org/wecom  or CN: https://bot.lingti.com/wecom)
+  2. Configure callback URL in the platform (e.g., https://bot.lingti.com/wecom  or INT: https://lsbot.org/wecom)
   3. Save config - verification succeeds automatically
   4. Messages are processed immediately with your AI provider
 
@@ -58,7 +58,7 @@ func init() {
 	rootCmd.AddCommand(verifyCmd)
 
 	verifyCmd.Flags().StringVar(&verifyPlatform, "platform", "", "Platform: wecom (required)")
-	verifyCmd.Flags().StringVar(&verifyServerURL, "server", "", "WebSocket URL (default: wss://lsbot.org/ws; CN: wss://bot.lingti.com/ws)")
+	verifyCmd.Flags().StringVar(&verifyServerURL, "server", "", "WebSocket URL (default: wss://bot.lingti.com/ws; INT: wss://lsbot.org/ws)")
 	verifyCmd.Flags().IntVar(&verifyTimeout, "timeout", 300, "Timeout in seconds (default: 300)")
 
 	// WeCom credentials
@@ -179,7 +179,7 @@ func runVerify(cmd *cobra.Command, args []string) {
 	log.Println("")
 	switch verifyPlatform {
 	case "wecom":
-		log.Println("    https://lsbot.org/wecom  (CN: https://bot.lingti.com/wecom)")
+		log.Println("    https://bot.lingti.com/wecom  (INT: https://lsbot.org/wecom)")
 	}
 	log.Println("")
 	log.Println("When you save the configuration, the platform will send a")

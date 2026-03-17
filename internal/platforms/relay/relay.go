@@ -26,8 +26,8 @@ import (
 )
 
 const (
-	DefaultServerURL  = "wss://lsbot.org/ws"
-	DefaultWebhookURL = "https://lsbot.org/webhook"
+	DefaultServerURL  = "wss://bot.lingti.com/ws"
+	DefaultWebhookURL = "https://bot.lingti.com/webhook"
 	ClientVersion     = "2.0.0"
 
 	writeTimeout      = 10 * time.Second
@@ -40,8 +40,8 @@ const (
 type Config struct {
 	UserID     string // From /whoami
 	Platform   string // "feishu", "slack", or "wechat"
-	ServerURL  string // WebSocket URL (default: wss://lsbot.org/ws)
-	WebhookURL string // Webhook URL (default: https://lsbot.org/webhook)
+	ServerURL  string // WebSocket URL (default: wss://bot.lingti.com/ws)
+	WebhookURL string // Webhook URL (default: https://bot.lingti.com/webhook)
 	AIProvider string // AI provider name (e.g., "claude", "deepseek")
 	AIModel    string // AI model name
 	BotID      string // Persistent bot ID for bot page feature

@@ -502,6 +502,20 @@ lsbot relay --platform wecom \
 
 详细教程：[企业微信集成指南](https://lsbot.org/docs/wecom-integration)
 
+### 飞书
+
+飞书原生支持 WebSocket 长连接，无需公网服务器：
+
+```bash
+lsbot gateway \
+  --feishu-app-id cli_your_app_id \
+  --feishu-app-secret your_app_secret \
+  --provider minimax \
+  --api-key YOUR_API_KEY
+```
+
+详细教程：[飞书集成指南](https://lsbot.org/docs/feishu-integration)
+
 ### 钉钉
 
 ```bash

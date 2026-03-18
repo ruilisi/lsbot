@@ -653,7 +653,6 @@ func applyRouterConfigFallbacks(savedCfg *config.Config) {
 				if aiCallTimeout == 0 && savedCfg.AI.CallTimeoutSecs > 0 {
 					aiCallTimeout = savedCfg.AI.CallTimeoutSecs
 				}
-				return
 			}
 		}
 	}

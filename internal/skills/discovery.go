@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/ruilisi/lsbot/internal/config"
 	"gopkg.in/yaml.v3"
 )
 
@@ -18,6 +19,7 @@ type SkillSource string
 const (
 	SourceBundled   SkillSource = "bundled"
 	SourceManaged   SkillSource = "managed"
+	SourceHub       SkillSource = "hub"
 	SourceWorkspace SkillSource = "workspace"
 	SourceExtra     SkillSource = "extra"
 )
@@ -207,7 +209,11 @@ func DiscoverSkills(disabledList []string, extraDirs []string) []SkillEntry {
 	managedDir := managedSkillsDir()
 	loadSkillsFromDir(managedDir, SourceManaged, disabled, skills)
 
-	// 4. Workspace skills (highest precedence)
+	// 4. Hub skills (~/.lsbot/skills/)
+	hubDir := config.HubSkillsDir()
+	loadSkillsFromDir(hubDir, SourceHub, disabled, skills)
+
+	// 5. Workspace skills (highest precedence)
 	if cwd, err := os.Getwd(); err == nil {
 		workspaceDir := filepath.Join(cwd, "skills")
 		loadSkillsFromDir(workspaceDir, SourceWorkspace, disabled, skills)

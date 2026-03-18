@@ -67,6 +67,17 @@ func SkillsDir() string {
 	return filepath.Join(home, ".lingti", "skills")
 }
 
+// HubDir returns ~/.lsbot/ — the lsbot data directory
+func HubDir() string {
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, ".lsbot")
+}
+
+// HubSkillsDir returns ~/.lsbot/skills/ — where hub-installed skills live
+func HubSkillsDir() string {
+	return filepath.Join(HubDir(), "skills")
+}
+
 // MCPServerConfig describes one external MCP server to connect to.
 type MCPServerConfig struct {
 	Name    string   `yaml:"name"`

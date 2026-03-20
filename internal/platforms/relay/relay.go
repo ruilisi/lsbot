@@ -28,7 +28,7 @@ import (
 const (
 	DefaultServerURL  = "wss://bot.lingti.com/ws"
 	DefaultWebhookURL = "https://bot.lingti.com/webhook"
-	ClientVersion     = "2.0.2"
+	ClientVersion     = "2.0.4"
 
 	writeTimeout      = 10 * time.Second
 	readTimeout       = 60 * time.Second
@@ -45,7 +45,7 @@ type Config struct {
 	AIProvider string // AI provider name (e.g., "claude", "deepseek")
 	AIModel    string // AI model name
 	BotID      string // Persistent bot ID for bot page feature
-	E2EKeyFile string // Path to E2E PEM key file (default: ~/.lsbot.pem)
+	E2EKeyFile string // Path to E2E PEM key file (default: ~/.lsbot-e2e.pem)
 	// WeCom credentials for cloud relay (when platform=wecom)
 	WeComCorpID  string
 	WeComAgentID string

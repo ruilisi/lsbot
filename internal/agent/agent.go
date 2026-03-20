@@ -16,6 +16,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/security"
 	"github.com/ruilisi/lsbot/internal/skills"
+	"github.com/ruilisi/lsbot/internal/userprofile"
 )
 
 // Agent processes messages using AI providers and tools
@@ -508,6 +509,10 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 - cron_pause: Pause a scheduled task
 - cron_resume: Resume a paused scheduled task
 
+### Memory & Profile
+- profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
+- memory_write: Persist important facts about the user to long-term memory (replaces full MEMORY.md content)
+
 ### Browser Automation (snapshot-then-act pattern)
 - browser_start: Start new browser or connect to existing Chrome via cdp_url (e.g. "127.0.0.1:9222")
 - browser_navigate: Navigate to a URL (auto-connects to Chrome on port 9222 if available, otherwise launches new)
@@ -631,6 +636,34 @@ Correct workflow:
 9. **Progress updates** — For iterative/multi-step tasks (e.g., commenting on multiple articles, processing a list), output a brief status message after each completed item (e.g., "✅ 已完成第3篇，继续下一篇"). The user will see these updates in real time.
 
 Current date: %s%s%s`, autoApprovalNotice, runtime.GOOS, runtime.GOARCH, homeDir, homeDir, homeDir, homeDir, msg.Username, time.Now().Format("2006-01-02"), thinkingPrompt, formatSkillsSection())
+
+	// Inject user profile and long-term memory
+	profile, _ := userprofile.Load()
+	memory := userprofile.LoadMemory()
+
+	if profile.IsOnboarded() {
+		tz := profile.Timezone
+		if tz == "" {
+			tz = "UTC"
+		}
+		systemPrompt += fmt.Sprintf("\n\n## User Profile\n- Nickname: %s\n- Timezone: %s\n  Use this timezone when displaying times, creating calendar events, or scheduling tasks.",
+			profile.Nickname, tz)
+	}
+
+	if memory != "" {
+		systemPrompt += "\n\n## Your Memory About This User\n" + memory
+	}
+
+	if !profile.IsOnboarded() {
+		systemPrompt = `## ONBOARDING REQUIRED
+This is your first time talking to this user. Before doing ANYTHING else, greet them warmly and ask:
+1. What nickname should I call you?
+2. What is your timezone? (e.g., Asia/Shanghai, America/New_York, Europe/London)
+
+Once you have both answers, call the profile_update tool to save them. Then proceed normally.
+
+` + systemPrompt
+	}
 
 	if a.customInstructions != "" {
 		systemPrompt += "\n\n## Custom Instructions\n" + a.customInstructions
@@ -1486,6 +1519,30 @@ func (a *Agent) buildToolsList() []Tool {
 		},
 	}
 
+	// === MEMORY & PROFILE ===
+	tools = append(tools,
+		Tool{
+			Name:        "profile_update",
+			Description: "Update the user's persistent profile (nickname and/or timezone). Call this after collecting onboarding info or when the user asks to change their name/timezone.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"nickname": map[string]string{"type": "string", "description": "User's preferred nickname"},
+					"timezone": map[string]string{"type": "string", "description": "User's timezone (e.g. Asia/Shanghai, America/New_York)"},
+				},
+			}),
+		},
+		Tool{
+			Name:        "memory_write",
+			Description: "Persist notes about the user to long-term memory (MEMORY.md). Call this whenever you learn something important to remember: preferences, facts, context. Pass the COMPLETE updated memory content (not just a diff) — this replaces the previous memory.",
+			InputSchema: jsonSchema(map[string]any{
+				"type":       "object",
+				"properties": map[string]any{"content": map[string]string{"type": "string", "description": "Full MEMORY.md content to persist"}},
+				"required":   []string{"content"},
+			}),
+		},
+	)
+
 	// Append tools from external MCP servers
 	for _, t := range a.mcpManager.AllTools() {
 		schema := json.RawMessage(t.InputSchema)
@@ -1537,6 +1594,31 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 	var args map[string]any
 	if err := json.Unmarshal(input, &args); err != nil {
 		return fmt.Sprintf("Error parsing arguments: %v", err)
+	}
+
+	// Handle profile and memory tools
+	switch name {
+	case "profile_update":
+		p, _ := userprofile.Load()
+		if n, ok := args["nickname"].(string); ok && n != "" {
+			p.Nickname = n
+		}
+		if tz, ok := args["timezone"].(string); ok && tz != "" {
+			p.Timezone = tz
+		}
+		if p.CreatedAt.IsZero() {
+			p.CreatedAt = time.Now()
+		}
+		if err := p.Save(); err != nil {
+			return `{"error": "failed to save profile: ` + err.Error() + `"}`
+		}
+		return `{"ok": true, "nickname": "` + p.Nickname + `", "timezone": "` + p.Timezone + `"}`
+	case "memory_write":
+		content, _ := args["content"].(string)
+		if err := userprofile.WriteMemory(content); err != nil {
+			return `{"error": "` + err.Error() + `"}`
+		}
+		return `{"ok": true}`
 	}
 
 	// Handle cron tools that need Agent context

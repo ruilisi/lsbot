@@ -126,7 +126,7 @@ func init() {
 	relayCmd.Flags().BoolVar(&relayRefreshBotID, "refresh-bot-id", false, "Generate a new bot ID (invalidates existing bot page links)")
 	relayCmd.Flags().BoolVar(&relayInsecure, "insecure", false, "Skip TLS certificate verification (use when server has self-signed cert)")
 	relayCmd.Flags().BoolVar(&relayPlain, "plain", false, "Disable end-to-end encryption (send messages in plaintext through relay)")
-	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lsbot.pem)")
+	relayCmd.Flags().StringVar(&relayE2EKeyFile, "e2e-key-file", "", "Path to E2E PEM key file (default: ~/.lsbot-e2e.pem)")
 
 	// WeCom credentials for cloud relay
 	relayCmd.Flags().StringVar(&relayWeComCorpID, "wecom-corp-id", "", "WeCom Corp ID (or WECOM_CORP_ID env)")
@@ -290,10 +290,8 @@ func runRelay(cmd *cobra.Command, args []string) {
 		if relayCallTimeout == 0 && savedCfg.AI.CallTimeoutSecs > 0 {
 			relayCallTimeout = savedCfg.AI.CallTimeoutSecs
 		}
-		// Read relay-specific config (platform, user-id) from saved config
-		if relayPlatform == "" && savedCfg.Relay.Platform != "" {
-			relayPlatform = savedCfg.Relay.Platform
-		}
+		// Read relay-specific config (platform, user-id) from saved config.
+		relayPlatform, relayUserID = applyRelayPlatformFallback(relayPlatform, relayUserID, savedCfg.Relay.Platform, savedCfg.BotID)
 		if relayUserID == "" && savedCfg.Relay.UserID != "" {
 			relayUserID = savedCfg.Relay.UserID
 		}
@@ -366,7 +364,17 @@ func runRelay(cmd *cobra.Command, args []string) {
 			if homeDir == "" {
 				homeDir = os.TempDir()
 			}
-			relayE2EKeyFile = filepath.Join(homeDir, ".lsbot.pem")
+			newPath := filepath.Join(homeDir, ".lsbot-e2e.pem")
+			// Migrate from legacy path if new path doesn't exist yet
+			legacyPath := filepath.Join(homeDir, ".lingti-e2e.pem")
+			if _, err := os.Stat(newPath); os.IsNotExist(err) {
+				if _, err2 := os.Stat(legacyPath); err2 == nil {
+					if err3 := os.Rename(legacyPath, newPath); err3 == nil {
+						log.Printf("[E2E] Migrated key file: %s → %s", legacyPath, newPath)
+					}
+				}
+			}
+			relayE2EKeyFile = newPath
 		}
 		// Auto-generate key on first run — no prompt needed
 		if _, err := os.Stat(relayE2EKeyFile); os.IsNotExist(err) {
@@ -596,7 +604,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 	log.Printf("Relay connected. User: %s, Platform: %s", relayUserID, relayPlatform)
 	log.Printf("AI Provider: %s, Model: %s", providerName, modelName)
 	if relayBotID != "" {
-		botBase := "https://lsbot.org"
+		botBase := "https://bot.lingti.com"
 		if relayHost != "" {
 			botBase = strings.TrimRight(relayHost, "/")
 			if !strings.HasPrefix(botBase, "http") {
@@ -615,4 +623,14 @@ func runRelay(cmd *cobra.Command, args []string) {
 	log.Println("Shutting down...")
 	cronScheduler.Stop()
 	r.Stop()
+}
+
+// applyRelayPlatformFallback applies the config-file relay.platform fallback,
+// but skips it when in bot-page-only mode (botID set and no explicit platform/userID).
+// This prevents relay.platform from the config overriding bot-page-only mode.
+func applyRelayPlatformFallback(platform, userID, cfgPlatform, botID string) (string, string) {
+	if platform == "" && cfgPlatform != "" && !(botID != "" && userID == "") {
+		platform = cfgPlatform
+	}
+	return platform, userID
 }

@@ -36,7 +36,7 @@ loaded automatically when running "lsbot relay".`,
 				fmt.Fprintf(os.Stderr, "Error: cannot determine home dir: %v\n", err)
 				os.Exit(1)
 			}
-			keyFile = filepath.Join(homeDir, ".lsbot.pem")
+			keyFile = filepath.Join(homeDir, ".lsbot-e2e.pem")
 		}
 
 		// Don't overwrite an existing key without explicit path
@@ -95,7 +95,15 @@ the fingerprint matches what is shown in the browser.`,
 				fmt.Fprintf(os.Stderr, "Error: cannot determine home dir: %v\n", err)
 				os.Exit(1)
 			}
-			keyFile = filepath.Join(homeDir, ".lsbot.pem")
+			newPath := filepath.Join(homeDir, ".lsbot-e2e.pem")
+			// Migrate from legacy path if new path doesn't exist yet
+			legacyPath := filepath.Join(homeDir, ".lingti-e2e.pem")
+			if _, statErr := os.Stat(newPath); os.IsNotExist(statErr) {
+				if _, statErr2 := os.Stat(legacyPath); statErr2 == nil {
+					_ = os.Rename(legacyPath, newPath)
+				}
+			}
+			keyFile = newPath
 		}
 
 		priv, err := e2e.LoadKeyPair(keyFile)
@@ -115,9 +123,9 @@ func init() {
 	rootCmd.AddCommand(e2eCmd)
 
 	e2eCmd.AddCommand(e2eKeygenCmd)
-	e2eKeygenCmd.Flags().StringVar(&e2eKeygenPath, "path", "", "Path to save the PEM key file (default: ~/.lsbot.pem)")
+	e2eKeygenCmd.Flags().StringVar(&e2eKeygenPath, "path", "", "Path to save the PEM key file (default: ~/.lsbot-e2e.pem)")
 	e2eKeygenCmd.Flags().BoolVar(&e2eKeygenSave, "save", false, "Save key file path to ~/.lsbot.yaml")
 
 	e2eCmd.AddCommand(e2ePubkeyCmd)
-	e2ePubkeyCmd.Flags().StringVar(&e2ePubkeyFile, "key-file", "", "Path to the PEM key file (default: ~/.lsbot.pem)")
+	e2ePubkeyCmd.Flags().StringVar(&e2ePubkeyFile, "key-file", "", "Path to the PEM key file (default: ~/.lsbot-e2e.pem)")
 }

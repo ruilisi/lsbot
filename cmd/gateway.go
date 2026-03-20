@@ -18,6 +18,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/gateway"
 	"github.com/ruilisi/lsbot/internal/logger"
 	"github.com/ruilisi/lsbot/internal/platforms/dingtalk"
+	"github.com/ruilisi/lsbot/internal/platforms/relay"
 	"github.com/ruilisi/lsbot/internal/platforms/discord"
 	"github.com/ruilisi/lsbot/internal/platforms/feishu"
 	"github.com/ruilisi/lsbot/internal/platforms/googlechat"
@@ -347,6 +348,32 @@ func runGateway(cmd *cobra.Command, args []string) {
 	}
 
 	registerPlatforms(r)
+
+	// Connect outbound to bot.lingti.com so the bot page receives messages
+	if cfgErr == nil && savedCfg.BotID != "" {
+		providerName := aiProvider
+		if providerName == "" {
+			providerName = "claude"
+		}
+		modelName := aiModel
+		if modelName == "" {
+			modelName = "(default)"
+		}
+		relayPlatform, err := relay.New(relay.Config{
+			UserID:     savedCfg.BotID,
+			ServerURL:  relay.DefaultServerURL,
+			WebhookURL: relay.DefaultWebhookURL,
+			AIProvider: providerName,
+			AIModel:    modelName,
+			BotID:      savedCfg.BotID,
+		})
+		if err != nil {
+			logger.Warn("[Gateway] Failed to create relay client: %v", err)
+		} else {
+			r.Register(relayPlatform)
+			logger.Info("[Gateway] Relay client connecting to %s", relay.DefaultServerURL)
+		}
+	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

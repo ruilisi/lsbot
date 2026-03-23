@@ -479,26 +479,49 @@ func runRelay(cmd *cobra.Command, args []string) {
 		modelName = "(default)"
 	}
 
-	// If any provider-related flag was explicitly set on the CLI, propagate
-	// the resolved values into savedCfg.AI and strip per-agent provider fields
-	// so all agents use the CLI provider. This ensures --provider/--api-key/
-	// --model always override whatever is configured in ~/.lsbot.yaml agents.
+	// Propagate the resolved AI values back into savedCfg so the AgentPool
+	// uses the correct provider when routing messages.
+	//
+	// CLI flags → strip all per-agent provider fields so every agent uses
+	// the CLI-supplied provider (existing behaviour).
+	//
+	// relay.provider (no CLI flags) → update only the default agent entry so
+	// it uses the resolved provider; other agents keep their own config.
 	if cfgErr == nil {
 		cliProviderFlags := []string{"provider", "api-key", "base-url", "model"}
+		cliOverride := false
 		for _, f := range cliProviderFlags {
 			if cmd.Flags().Changed(f) {
-				savedCfg.AI.Provider = relayAIProvider
-				savedCfg.AI.APIKey = relayAPIKey
-				savedCfg.AI.BaseURL = relayBaseURL
-				savedCfg.AI.Model = relayModel
-				// Strip per-agent provider fields so they inherit the CLI values
-				for i := range savedCfg.Agents {
-					savedCfg.Agents[i].Provider = ""
-					savedCfg.Agents[i].APIKey = ""
-					savedCfg.Agents[i].BaseURL = ""
-					savedCfg.Agents[i].Model = ""
-				}
+				cliOverride = true
 				break
+			}
+		}
+
+		savedCfg.AI.Provider = relayAIProvider
+		savedCfg.AI.APIKey = relayAPIKey
+		savedCfg.AI.BaseURL = relayBaseURL
+		savedCfg.AI.Model = relayModel
+
+		if cliOverride {
+			// CLI explicitly set — force all agents onto this provider
+			for i := range savedCfg.Agents {
+				savedCfg.Agents[i].Provider = ""
+				savedCfg.Agents[i].APIKey = ""
+				savedCfg.Agents[i].BaseURL = ""
+				savedCfg.Agents[i].Model = ""
+			}
+		} else {
+			// relay.provider set — update only the default agent entry so it
+			// picks up the resolved provider instead of its own hardcoded one.
+			defaultID := savedCfg.DefaultAgentID()
+			for i := range savedCfg.Agents {
+				if savedCfg.Agents[i].ID == defaultID {
+					savedCfg.Agents[i].Provider = relayAIProvider
+					savedCfg.Agents[i].APIKey = relayAPIKey
+					savedCfg.Agents[i].BaseURL = relayBaseURL
+					savedCfg.Agents[i].Model = relayModel
+					break
+				}
 			}
 		}
 	}

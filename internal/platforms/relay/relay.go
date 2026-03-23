@@ -23,12 +23,13 @@ import (
 	"github.com/ruilisi/lsbot/internal/platforms/wechat"
 	"github.com/ruilisi/lsbot/internal/platforms/wecom"
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 const (
 	DefaultServerURL  = "wss://bot.lingti.com/ws"
 	DefaultWebhookURL = "https://bot.lingti.com/webhook"
-	ClientVersion     = "2.0.4"
+	ClientVersion     = "2.0.5"
 
 	writeTimeout      = 10 * time.Second
 	readTimeout       = 60 * time.Second
@@ -64,6 +65,7 @@ type Platform struct {
 	config         Config
 	conn           *websocket.Conn
 	connMu         sync.Mutex
+	writeMu        sync.Mutex
 	sessionID      string
 	messageHandler func(msg router.Message)
 	httpClient     *http.Client
@@ -240,7 +242,7 @@ func New(cfg Config) (*Platform, error) {
 				p.kfEnabled = true
 				log.Printf("[Relay] WeCom KF messaging enabled")
 				// Initialize KF cursors to skip historical messages
-				go p.initKfCursors()
+				sentryutil.Go("relay initKfCursors", p.initKfCursors)
 			} else {
 				log.Printf("[Relay] WeCom KF messaging not available (no permission)")
 			}
@@ -277,11 +279,11 @@ func (p *Platform) Start(ctx context.Context) error {
 
 	// Start read loop
 	p.wg.Add(1)
-	go p.readLoop()
+	sentryutil.Go("relay readLoop", p.readLoop)
 
 	// Start heartbeat
 	p.wg.Add(1)
-	go p.heartbeat()
+	sentryutil.Go("relay heartbeat", p.heartbeat)
 
 	log.Printf("[Relay] Connected to %s as user %s (%s)", p.config.ServerURL, p.config.UserID, p.config.Platform)
 	return nil
@@ -295,7 +297,9 @@ func (p *Platform) Stop() error {
 
 	p.connMu.Lock()
 	if p.conn != nil {
+		p.writeMu.Lock()
 		p.conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
+		p.writeMu.Unlock()
 		p.conn.Close()
 	}
 	p.connMu.Unlock()
@@ -611,7 +615,10 @@ func (p *Platform) connect() error {
 		debug.Log("Received ping from server")
 		conn.SetReadDeadline(time.Now().Add(readTimeout))
 		conn.SetWriteDeadline(time.Now().Add(writeTimeout))
-		return conn.WriteMessage(websocket.PongMessage, []byte(appData))
+		p.writeMu.Lock()
+		err := conn.WriteMessage(websocket.PongMessage, []byte(appData))
+		p.writeMu.Unlock()
+		return err
 	})
 
 	p.connMu.Lock()
@@ -1121,15 +1128,19 @@ func (p *Platform) handleError(data []byte) {
 // sendPong sends a pong response
 func (p *Platform) sendPong() {
 	p.connMu.Lock()
-	defer p.connMu.Unlock()
+	conn := p.conn
+	p.connMu.Unlock()
 
-	if p.conn == nil {
+	if conn == nil {
 		return
 	}
 
 	pong := PingPong{Type: "pong"}
-	p.conn.SetWriteDeadline(time.Now().Add(writeTimeout))
-	if err := p.conn.WriteJSON(pong); err != nil {
+	p.writeMu.Lock()
+	conn.SetWriteDeadline(time.Now().Add(writeTimeout))
+	err := conn.WriteJSON(pong)
+	p.writeMu.Unlock()
+	if err != nil {
 		log.Printf("[Relay] Failed to send pong: %v", err)
 	}
 }
@@ -1171,8 +1182,11 @@ func (p *Platform) sendPing() {
 
 	debug.Log("Sending WebSocket ping")
 	// Use WebSocket-level ping for better proxy/load balancer compatibility
+	p.writeMu.Lock()
 	conn.SetWriteDeadline(time.Now().Add(writeTimeout))
-	if err := conn.WriteMessage(websocket.PingMessage, nil); err != nil {
+	err := conn.WriteMessage(websocket.PingMessage, nil)
+	p.writeMu.Unlock()
+	if err != nil {
 		debug.Log("sendPing error: %v", err)
 		log.Printf("[Relay] Failed to send ping: %v", err)
 	} else {

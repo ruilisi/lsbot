@@ -19,25 +19,47 @@ import (
 	"github.com/ruilisi/lsbot/internal/logger"
 )
 
-// debugTransport logs outgoing request headers (with redacted auth) for debugging.
+// debugTransport logs outgoing HTTP requests and responses at debug level.
+// It redacts the Authorization header value, showing only the first/last 4 chars.
 type debugTransport struct {
+	name string
 	base http.RoundTripper
 }
 
 func (d *debugTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	if logger.IsDebug() {
-		dump, _ := httputil.DumpRequestOut(req, true)
-		log.Printf("[Claude OAuth DEBUG] Request:\n%s", string(dump[:min(len(dump), 500)]))
-		_ = os.WriteFile("/tmp/claude-request-dump.txt", dump, 0644)
-		log.Printf("[Claude OAuth DEBUG] Full request written to /tmp/claude-request-dump.txt")
+		auth := req.Header.Get("Authorization")
+		authSummary := "(missing)"
+		if auth != "" {
+			if idx := len(auth); idx > 12 {
+				authSummary = auth[:8] + "..." + auth[idx-4:]
+			} else {
+				authSummary = "(present)"
+			}
+		}
+		name := d.name
+		if name == "" {
+			name = "http"
+		}
+		logger.Debug("[%s] → %s %s  Authorization: %s", name, req.Method, req.URL, authSummary)
+
+		// Also write full dump for claude oauth debug
+		if name == "claude-oauth" {
+			dump, _ := httputil.DumpRequestOut(req, true)
+			_ = os.WriteFile("/tmp/claude-request-dump.txt", dump, 0644)
+			log.Printf("[Claude OAuth DEBUG] Full request written to /tmp/claude-request-dump.txt")
+		}
 	}
 	resp, err := d.base.RoundTrip(req)
 	if logger.IsDebug() {
+		name := d.name
+		if name == "" {
+			name = "http"
+		}
 		if err != nil {
-			log.Printf("[Claude OAuth DEBUG] Transport error: %v", err)
+			logger.Debug("[%s] ← error: %v", name, err)
 		} else {
-			respDump, _ := httputil.DumpResponse(resp, false)
-			log.Printf("[Claude OAuth DEBUG] Response status: %d\n%s", resp.StatusCode, string(respDump[:min(len(respDump), 500)]))
+			logger.Debug("[%s] ← %s", name, resp.Status)
 		}
 	}
 	return resp, err
@@ -157,7 +179,7 @@ func NewClaudeProvider(cfg ClaudeConfig) (*ClaudeProvider, error) {
 		// Disable HTTP/2 by setting TLSNextProto to empty map.
 		transport.TLSNextProto = make(map[string]func(string, *tls.Conn) http.RoundTripper)
 		opts = append(opts, anthropic.WithHTTPClient(&http.Client{
-			Transport: &debugTransport{base: transport},
+			Transport: &debugTransport{name: "claude-oauth", base: transport},
 		}))
 	}
 

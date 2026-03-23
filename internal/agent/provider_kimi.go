@@ -4,7 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 
+	"github.com/ruilisi/lsbot/internal/logger"
 	"github.com/sashabaranov/go-openai"
 )
 
@@ -31,6 +33,13 @@ func NewKimiProvider(cfg KimiConfig) (*KimiProvider, error) {
 	if cfg.APIKey == "" {
 		return nil, fmt.Errorf("API key is required")
 	}
+	if logger.IsDebug() {
+		keyPreview := cfg.APIKey
+		if len(keyPreview) > 8 {
+			keyPreview = keyPreview[:4] + "..." + keyPreview[len(keyPreview)-4:]
+		}
+		logger.Debug("[kimi] NewKimiProvider: key=%s baseURL=%s model=%s", keyPreview, cfg.BaseURL, cfg.Model)
+	}
 
 	if cfg.Model == "" {
 		cfg.Model = kimiDefaultModel
@@ -41,11 +50,16 @@ func NewKimiProvider(cfg KimiConfig) (*KimiProvider, error) {
 		baseURL = kimiDefaultBaseURL
 	}
 
-	config := openai.DefaultConfig(cfg.APIKey)
-	config.BaseURL = baseURL
+	oacfg := openai.DefaultConfig(cfg.APIKey)
+	oacfg.BaseURL = baseURL
+	if logger.IsDebug() {
+		oacfg.HTTPClient = &http.Client{
+			Transport: &debugTransport{name: "kimi", base: http.DefaultTransport},
+		}
+	}
 
 	return &KimiProvider{
-		client: openai.NewClientWithConfig(config),
+		client: openai.NewClientWithConfig(oacfg),
 		model:  cfg.Model,
 	}, nil
 }

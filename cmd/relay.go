@@ -479,14 +479,6 @@ func runRelay(cmd *cobra.Command, args []string) {
 		modelName = "(default)"
 	}
 
-	// Propagate the resolved AI values back into savedCfg so the AgentPool
-	// uses the correct provider when routing messages.
-	//
-	// CLI flags → strip all per-agent provider fields so every agent uses
-	// the CLI-supplied provider (existing behaviour).
-	//
-	// relay.provider (no CLI flags) → update only the default agent entry so
-	// it uses the resolved provider; other agents keep their own config.
 	if cfgErr == nil {
 		cliProviderFlags := []string{"provider", "api-key", "base-url", "model"}
 		cliOverride := false
@@ -496,34 +488,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 				break
 			}
 		}
-
-		savedCfg.AI.Provider = relayAIProvider
-		savedCfg.AI.APIKey = relayAPIKey
-		savedCfg.AI.BaseURL = relayBaseURL
-		savedCfg.AI.Model = relayModel
-
-		if cliOverride {
-			// CLI explicitly set — force all agents onto this provider
-			for i := range savedCfg.Agents {
-				savedCfg.Agents[i].Provider = ""
-				savedCfg.Agents[i].APIKey = ""
-				savedCfg.Agents[i].BaseURL = ""
-				savedCfg.Agents[i].Model = ""
-			}
-		} else {
-			// relay.provider set — update only the default agent entry so it
-			// picks up the resolved provider instead of its own hardcoded one.
-			defaultID := savedCfg.DefaultAgentID()
-			for i := range savedCfg.Agents {
-				if savedCfg.Agents[i].ID == defaultID {
-					savedCfg.Agents[i].Provider = relayAIProvider
-					savedCfg.Agents[i].APIKey = relayAPIKey
-					savedCfg.Agents[i].BaseURL = relayBaseURL
-					savedCfg.Agents[i].Model = relayModel
-					break
-				}
-			}
-		}
+		applyResolvedAIToConfig(savedCfg, relayAIProvider, relayAPIKey, relayBaseURL, relayModel, cliOverride)
 	}
 
 	// Create agent pool for per-platform/channel model overrides
@@ -614,6 +579,42 @@ func runRelay(cmd *cobra.Command, args []string) {
 // applyRelayPlatformFallback applies the config-file relay.platform fallback,
 // but skips it when in bot-page-only mode (botID set and no explicit platform/userID).
 // This prevents relay.platform from the config overriding bot-page-only mode.
+// applyResolvedAIToConfig writes the resolved AI values into cfg so the
+// AgentPool uses the correct provider when routing messages.
+//
+// cliOverride=true (CLI flag was set): forces ALL agents onto the resolved
+// provider by clearing their per-agent fields.
+//
+// cliOverride=false (relay.provider or fallback): updates only the default
+// agent entry; other agents keep their own config.
+func applyResolvedAIToConfig(cfg *config.Config, provider, apiKey, baseURL, model string, cliOverride bool) {
+	cfg.AI.Provider = provider
+	cfg.AI.APIKey = apiKey
+	cfg.AI.BaseURL = baseURL
+	cfg.AI.Model = model
+
+	if cliOverride {
+		for i := range cfg.Agents {
+			cfg.Agents[i].Provider = ""
+			cfg.Agents[i].APIKey = ""
+			cfg.Agents[i].BaseURL = ""
+			cfg.Agents[i].Model = ""
+		}
+		return
+	}
+
+	defaultID := cfg.DefaultAgentID()
+	for i := range cfg.Agents {
+		if cfg.Agents[i].ID == defaultID {
+			cfg.Agents[i].Provider = provider
+			cfg.Agents[i].APIKey = apiKey
+			cfg.Agents[i].BaseURL = baseURL
+			cfg.Agents[i].Model = model
+			break
+		}
+	}
+}
+
 // resolveRelayAI returns the effective (provider, apiKey, baseURL, model) for
 // the relay command by applying config resolution in priority order:
 //  1. Explicit values already set (CLI flags / env vars) — never overwritten

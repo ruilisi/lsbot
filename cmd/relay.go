@@ -244,43 +244,9 @@ func runRelay(cmd *cobra.Command, args []string) {
 	// Fallback to saved config file
 	savedCfg, cfgErr := config.Load()
 	if cfgErr == nil {
-		// Resolve named provider: CLI --provider > env > relay.provider > ai.provider
-		providerRef := relayAIProvider
-		resolved, found := savedCfg.ResolveProvider(providerRef)
-		if found {
-			if relayAIProvider == "" {
-				relayAIProvider = resolved.Provider
-			}
-			if relayAPIKey == "" {
-				relayAPIKey = resolved.APIKey
-			}
-			if relayBaseURL == "" {
-				relayBaseURL = resolved.BaseURL
-			}
-			if relayModel == "" {
-				relayModel = resolved.Model
-			}
-		}
-
-		// Fall back to the default agent's AI config for any fields still unset.
-		if len(savedCfg.Agents) > 0 {
-			defaultID := savedCfg.DefaultAgentID()
-			if entry, ok := savedCfg.FindAgent(defaultID); ok {
-				ai := savedCfg.ResolveAgentAI(entry)
-				if relayAIProvider == "" && ai.Provider != "" {
-					relayAIProvider = ai.Provider
-				}
-				if relayAPIKey == "" {
-					relayAPIKey = ai.APIKey
-				}
-				if relayBaseURL == "" {
-					relayBaseURL = ai.BaseURL
-				}
-				if relayModel == "" {
-					relayModel = ai.Model
-				}
-			}
-		}
+		relayAIProvider, relayAPIKey, relayBaseURL, relayModel = resolveRelayAI(
+			savedCfg, relayAIProvider, relayAPIKey, relayBaseURL, relayModel,
+		)
 		if relayMaxRounds == 0 && savedCfg.AI.MaxRounds > 0 {
 			relayMaxRounds = savedCfg.AI.MaxRounds
 		}
@@ -625,6 +591,51 @@ func runRelay(cmd *cobra.Command, args []string) {
 // applyRelayPlatformFallback applies the config-file relay.platform fallback,
 // but skips it when in bot-page-only mode (botID set and no explicit platform/userID).
 // This prevents relay.platform from the config overriding bot-page-only mode.
+// resolveRelayAI returns the effective (provider, apiKey, baseURL, model) for
+// the relay command by applying config resolution in priority order:
+//  1. Explicit values already set (CLI flags / env vars) — never overwritten
+//  2. Named provider from relay.provider / ai.provider (including agent lookup)
+//  3. Default agent — fills any fields still empty after step 2
+func resolveRelayAI(cfg *config.Config, provider, apiKey, baseURL, model string) (string, string, string, string) {
+	// Step 2: resolve named provider
+	resolved, found := cfg.ResolveProvider(provider)
+	if found {
+		if provider == "" {
+			provider = resolved.Provider
+		}
+		if apiKey == "" {
+			apiKey = resolved.APIKey
+		}
+		if baseURL == "" {
+			baseURL = resolved.BaseURL
+		}
+		if model == "" {
+			model = resolved.Model
+		}
+	}
+
+	// Step 3: fill remaining gaps from the default agent
+	if len(cfg.Agents) > 0 {
+		defaultID := cfg.DefaultAgentID()
+		if entry, ok := cfg.FindAgent(defaultID); ok {
+			ai := cfg.ResolveAgentAI(entry)
+			if provider == "" && ai.Provider != "" {
+				provider = ai.Provider
+			}
+			if apiKey == "" {
+				apiKey = ai.APIKey
+			}
+			if baseURL == "" {
+				baseURL = ai.BaseURL
+			}
+			if model == "" {
+				model = ai.Model
+			}
+		}
+	}
+	return provider, apiKey, baseURL, model
+}
+
 func applyRelayPlatformFallback(platform, userID, cfgPlatform, botID string) (string, string) {
 	if platform == "" && cfgPlatform != "" && !(botID != "" && userID == "") {
 		platform = cfgPlatform

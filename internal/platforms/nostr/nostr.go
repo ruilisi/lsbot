@@ -11,6 +11,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for NOSTR protocol
@@ -63,7 +64,8 @@ func (p *Platform) Start(ctx context.Context) error {
 		if relay == "" {
 			continue
 		}
-		go p.connectRelay(relay)
+		r := relay
+		sentryutil.Go("nostr connectRelay", func() { p.connectRelay(r) })
 	}
 
 	log.Printf("[NOSTR] Connecting to relays: %s", p.config.Relays)

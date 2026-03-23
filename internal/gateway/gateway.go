@@ -144,7 +144,7 @@ func (g *Gateway) Start(ctx context.Context) error {
 	g.ctx, g.cancel = context.WithCancel(ctx)
 
 	// Start the hub
-	go g.run()
+	sentryutil.Go("gateway hub run", g.run)
 
 	// HTTP server
 	mux := http.NewServeMux()
@@ -233,8 +233,8 @@ func (g *Gateway) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 
 	g.register <- client
 
-	go client.writePump()
-	go client.readPump()
+	sentryutil.Go("gateway client writePump", client.writePump)
+	sentryutil.Go("gateway client readPump", client.readPump)
 }
 
 // handleHealth returns health status

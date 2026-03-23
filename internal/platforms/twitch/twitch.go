@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Twitch IRC chat
@@ -63,7 +64,7 @@ func (p *Platform) Start(ctx context.Context) error {
 		return fmt.Errorf("failed to connect to Twitch: %w", err)
 	}
 
-	go p.readLoop()
+	sentryutil.Go("twitch readLoop", p.readLoop)
 
 	log.Printf("[Twitch] Connected to channel #%s as %s", p.config.Channel, p.config.BotName)
 	return nil
@@ -154,7 +155,7 @@ func (p *Platform) readLoop() {
 			log.Printf("[Twitch] Reconnect failed: %v", err)
 			return
 		}
-		go p.readLoop()
+		sentryutil.Go("twitch readLoop", p.readLoop)
 	}
 }
 

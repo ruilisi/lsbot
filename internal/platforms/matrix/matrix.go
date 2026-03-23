@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Matrix (Element)
@@ -71,7 +72,7 @@ func (p *Platform) Start(ctx context.Context) error {
 		return fmt.Errorf("initial sync failed: %w", err)
 	}
 
-	go p.syncLoop()
+	sentryutil.Go("matrix syncLoop", p.syncLoop)
 
 	log.Printf("[Matrix] Connected as %s to %s", p.config.UserID, p.config.HomeserverURL)
 	return nil

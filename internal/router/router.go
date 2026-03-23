@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Message represents an incoming message from any platform
@@ -94,7 +95,7 @@ func (r *Router) Register(platform Platform) {
 
 	// Set up message handling for this platform
 	platform.SetMessageHandler(func(msg Message) {
-		go r.handleMessage(msg)
+		sentryutil.Go("router handleMessage", func() { r.handleMessage(msg) })
 	})
 
 	logger.Info("[Router] Registered platform: %s", name)

@@ -8,6 +8,7 @@ import (
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Telegram
@@ -59,7 +60,7 @@ func (p *Platform) Start(ctx context.Context) error {
 
 	updates := p.bot.GetUpdatesChan(u)
 
-	go p.handleUpdates(updates)
+	sentryutil.Go("telegram handleUpdates", func() { p.handleUpdates(updates) })
 
 	log.Printf("[Telegram] Connected as bot: @%s", p.bot.Self.UserName)
 	return nil

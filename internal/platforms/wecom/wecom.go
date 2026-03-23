@@ -113,7 +113,7 @@ func (p *Platform) Start(ctx context.Context) error {
 	}
 
 	// Start token refresh goroutine
-	go p.tokenRefreshLoop()
+	sentryutil.Go("wecom tokenRefreshLoop", p.tokenRefreshLoop)
 
 	// Start HTTP server (if configured)
 	if p.server != nil {

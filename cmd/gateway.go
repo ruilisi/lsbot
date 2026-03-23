@@ -17,6 +17,7 @@ import (
 	cronpkg "github.com/ruilisi/lsbot/internal/cron"
 	"github.com/ruilisi/lsbot/internal/gateway"
 	"github.com/ruilisi/lsbot/internal/logger"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 	"github.com/ruilisi/lsbot/internal/platforms/dingtalk"
 	"github.com/ruilisi/lsbot/internal/platforms/relay"
 	"github.com/ruilisi/lsbot/internal/platforms/discord"
@@ -408,7 +409,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 
 		gw.SetMessageHandler(func(ctx context.Context, clientID, sessionID, text string) (<-chan gateway.ResponsePayload, error) {
 			respChan := make(chan gateway.ResponsePayload, 1)
-			go func() {
+			sentryutil.Go("gateway handleMessage", func() {
 				defer close(respChan)
 				msg := router.Message{
 					ID:        sessionID,
@@ -433,15 +434,15 @@ func runGateway(cmd *cobra.Command, args []string) {
 					SessionID: sessionID,
 					Done:      true,
 				}
-			}()
+			})
 			return respChan, nil
 		})
 
-		go func() {
+		sentryutil.Go("gateway start", func() {
 			if err := gw.Start(ctx); err != nil {
 				logger.Error("Gateway WebSocket error: %v", err)
 			}
-		}()
+		})
 
 		logger.Info("[Gateway] WebSocket server started on %s", gatewayAddr)
 		total := len(gatewayAuthTokens)

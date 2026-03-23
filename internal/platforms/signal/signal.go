@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Signal via signal-cli REST API
@@ -63,7 +64,7 @@ func (p *Platform) SetMessageHandler(handler func(msg router.Message)) {
 func (p *Platform) Start(ctx context.Context) error {
 	p.ctx, p.cancel = context.WithCancel(ctx)
 
-	go p.pollLoop()
+	sentryutil.Go("signal pollLoop", p.pollLoop)
 
 	log.Printf("[Signal] Connected to %s, phone: %s", p.config.APIURL, p.config.PhoneNumber)
 	return nil

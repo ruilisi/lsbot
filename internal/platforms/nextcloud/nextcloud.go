@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Nextcloud Talk
@@ -77,7 +78,7 @@ func (p *Platform) Start(ctx context.Context) error {
 		log.Printf("[Nextcloud] Warning: failed to get last message ID: %v", err)
 	}
 
-	go p.pollLoop()
+	sentryutil.Go("nextcloud pollLoop", p.pollLoop)
 
 	log.Printf("[Nextcloud] Connected to %s, room: %s", p.config.ServerURL, p.config.RoomToken)
 	return nil

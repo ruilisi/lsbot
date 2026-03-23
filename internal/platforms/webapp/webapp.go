@@ -228,12 +228,14 @@ func (p *Platform) serveWS(w http.ResponseWriter, r *http.Request) {
 		switch msg.Type {
 		case "message":
 			if p.messageHandler != nil && msg.Text != "" {
-				go p.messageHandler(router.Message{
-					Platform:  "webapp",
-					ChannelID: msg.SessionID,
-					UserID:    "user",
-					Username:  "User",
-					Text:      msg.Text,
+				sentryutil.Go("webapp messageHandler", func() {
+					p.messageHandler(router.Message{
+						Platform:  "webapp",
+						ChannelID: msg.SessionID,
+						UserID:    "user",
+						Username:  "User",
+						Text:      msg.Text,
+					})
 				})
 			}
 		case "clear":

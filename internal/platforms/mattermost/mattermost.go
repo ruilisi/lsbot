@@ -14,6 +14,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/sentryutil"
 )
 
 // Platform implements router.Platform for Mattermost
@@ -75,7 +76,7 @@ func (p *Platform) Start(ctx context.Context) error {
 		return fmt.Errorf("failed to connect WebSocket: %w", err)
 	}
 
-	go p.listenWebSocket()
+	sentryutil.Go("mattermost listenWebSocket", p.listenWebSocket)
 
 	log.Printf("[Mattermost] Connected to %s as user %s", p.config.ServerURL, p.botUserID)
 	return nil

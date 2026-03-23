@@ -198,7 +198,21 @@ func (c *Config) ResolveProvider(name string) (ProviderEntry, bool) {
 			Model:    c.AI.Model,
 		}, true
 	}
-	// Provider name doesn't match ai: block — return entry with just the provider name
+
+	// 4. Search agents by ID or provider type
+	for _, a := range c.Agents {
+		if strings.EqualFold(a.ID, name) || strings.EqualFold(a.Provider, name) {
+			ai := c.ResolveAgentAI(a)
+			return ProviderEntry{
+				Provider: ai.Provider,
+				APIKey:   ai.APIKey,
+				BaseURL:  ai.BaseURL,
+				Model:    ai.Model,
+			}, true
+		}
+	}
+
+	// Provider name doesn't match anything — return entry with just the provider name
 	// so CLI overrides (--api-key, --model) can fill in the rest
 	return ProviderEntry{Provider: name}, true
 }

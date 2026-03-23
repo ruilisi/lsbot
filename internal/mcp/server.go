@@ -17,7 +17,7 @@ import (
 const ServerName = "lsbot"
 
 // ServerVersion is set via ldflags at build time
-var ServerVersion = "2.0.5"
+var ServerVersion = "2.0.6"
 
 // ToolHandler is a function that handles tool calls
 type ToolHandler func(ctx context.Context, req mcp.CallToolRequest) (*mcp.CallToolResult, error)
@@ -70,11 +70,11 @@ func NewServer(opts ...SecurityOptions) *Server {
 		log.Printf("[CRON] Warning: Failed to get home directory: %v", err)
 		homeDir = os.TempDir()
 	}
-	cronPath := filepath.Join(homeDir, ".lingti.db")
+	cronPath := filepath.Join(homeDir, ".lsbot.db")
 	cronStore, err := cronpkg.NewStore(cronPath)
 	if err != nil {
 		log.Printf("[CRON] Warning: Failed to open cron store: %v", err)
-		cronStore, _ = cronpkg.NewStore(filepath.Join(os.TempDir(), "lingti.db"))
+		cronStore, _ = cronpkg.NewStore(filepath.Join(os.TempDir(), "lsbot.db"))
 	}
 	s.cronScheduler = cronpkg.NewScheduler(cronStore, s, nil, s)
 

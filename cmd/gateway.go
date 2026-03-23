@@ -136,7 +136,7 @@ Environment variables:
 
 func gatewayRestart() error {
 	home, _ := os.UserHomeDir()
-	pidFile := filepath.Join(home, ".lingti", "gateway.pid")
+	pidFile := filepath.Join(home, ".lsbot", "gateway.pid")
 	data, err := os.ReadFile(pidFile)
 	if err != nil {
 		return fmt.Errorf("could not read PID file %s: %w", pidFile, err)
@@ -159,7 +159,7 @@ func gatewayRestart() error {
 
 func writePIDFile() {
 	home, _ := os.UserHomeDir()
-	dir := filepath.Join(home, ".lingti")
+	dir := filepath.Join(home, ".lsbot")
 	_ = os.MkdirAll(dir, 0755)
 	pidFile := filepath.Join(dir, "gateway.pid")
 	_ = os.WriteFile(pidFile, []byte(strconv.Itoa(os.Getpid())), 0644)
@@ -167,7 +167,7 @@ func writePIDFile() {
 
 func removePIDFile() {
 	home, _ := os.UserHomeDir()
-	_ = os.Remove(filepath.Join(home, ".lingti", "gateway.pid"))
+	_ = os.Remove(filepath.Join(home, ".lsbot", "gateway.pid"))
 }
 
 func init() {
@@ -335,7 +335,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 	if err != nil {
 		homeDir = os.TempDir()
 	}
-	cronPath := filepath.Join(homeDir, ".lingti.db")
+	cronPath := filepath.Join(homeDir, ".lsbot.db")
 	cronStore, err := cronpkg.NewStore(cronPath)
 	if err != nil {
 		logger.Error("Failed to open cron store: %v", err)

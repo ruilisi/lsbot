@@ -101,8 +101,7 @@ Usage:
   lsbot onboard --provider deepseek --api-key sk-xxx  # Non-interactive
 
 Config saved to:
-  macOS: ~/Library/Preferences/Lingti/bot.yaml
-  Linux: ~/.config/lingti/bot.yaml`,
+  ~/.lsbot.yaml`,
 	Run: runOnboard,
 }
 

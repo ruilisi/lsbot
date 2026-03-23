@@ -205,7 +205,7 @@ func DiscoverSkills(disabledList []string, extraDirs []string) []SkillEntry {
 		loadSkillsFromDir(dir, SourceExtra, disabled, skills)
 	}
 
-	// 3. Managed skills (~/.lingti/skills/)
+	// 3. Managed skills (~/.lsbot/skills/)
 	managedDir := managedSkillsDir()
 	loadSkillsFromDir(managedDir, SourceManaged, disabled, skills)
 
@@ -317,7 +317,7 @@ func looksLikeSkillsDir(dir string) bool {
 // managedSkillsDir returns the user-level skills directory
 func managedSkillsDir() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lingti", "skills")
+	return filepath.Join(home, ".lsbot", "skills")
 }
 
 // HasBinary checks if a binary exists in PATH

@@ -97,7 +97,7 @@ type Registry struct {
 func NewRegistry(skillDir string) *Registry {
 	if skillDir == "" {
 		home, _ := os.UserHomeDir()
-		skillDir = filepath.Join(home, ".lingti", "skills")
+		skillDir = filepath.Join(home, ".lsbot", "skills")
 	}
 
 	return &Registry{

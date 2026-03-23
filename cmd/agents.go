@@ -105,7 +105,7 @@ var agentsAddCmd = &cobra.Command{
 			home, _ := os.UserHomeDir()
 			defaultWS := existing.Workspace
 			if defaultWS == "" {
-				defaultWS = filepath.Join(home, ".lingti", "agents", id)
+				defaultWS = filepath.Join(home, ".lsbot", "agents", id)
 			}
 			agentWorkspace = promptText("Workspace directory", defaultWS)
 		} else if existingIdx >= 0 {
@@ -139,7 +139,7 @@ var agentsAddCmd = &cobra.Command{
 		workspace := agentWorkspace
 		if workspace == "" {
 			home, _ := os.UserHomeDir()
-			workspace = filepath.Join(home, ".lingti", "agents", id)
+			workspace = filepath.Join(home, ".lsbot", "agents", id)
 		}
 		// Expand ~ manually
 		if strings.HasPrefix(workspace, "~/") {
@@ -376,7 +376,7 @@ func init() {
 	agentsCmd.AddCommand(agentsUnbindCmd)
 
 	// agents add flags
-	agentsAddCmd.Flags().StringVar(&agentWorkspace, "workspace", "", "Workspace directory (default: ~/.lingti/agents/<id>)")
+	agentsAddCmd.Flags().StringVar(&agentWorkspace, "workspace", "", "Workspace directory (default: ~/.lsbot/agents/<id>)")
 	agentsAddCmd.Flags().StringVar(&agentModel, "model", "", "Model override for this agent")
 	agentsAddCmd.Flags().StringVar(&agentProvider, "provider", "", "AI provider override")
 	agentsAddCmd.Flags().StringVar(&agentAPIKey, "api-key", "", "API key override")

@@ -64,7 +64,7 @@ type SkillsConfig struct {
 // SkillsDir returns the managed skills directory path
 func SkillsDir() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lingti", "skills")
+	return filepath.Join(home, ".lsbot", "skills")
 }
 
 // HubDir returns ~/.lsbot/ — the lsbot data directory
@@ -433,7 +433,7 @@ func DefaultConfig() *Config {
 
 func ConfigDir() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lingti")
+	return filepath.Join(home, ".lsbot")
 }
 
 // overridePath is set via SetConfigPath to use a custom config file location.

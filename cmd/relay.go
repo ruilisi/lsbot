@@ -649,7 +649,10 @@ func resolveRelayAI(cfg *config.Config, provider, apiKey, baseURL, model string)
 			if apiKey == "" {
 				apiKey = ai.APIKey
 			}
-			if baseURL == "" {
+			// Only inherit baseURL from default agent when providers match.
+			// Base URLs are provider-specific; inheriting across providers routes
+			// requests to the wrong endpoint (e.g. kimi hitting minimax's URL).
+			if baseURL == "" && strings.EqualFold(provider, ai.Provider) {
 				baseURL = ai.BaseURL
 			}
 			if model == "" {

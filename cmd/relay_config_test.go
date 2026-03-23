@@ -31,6 +31,7 @@ func TestResolveRelayAI(t *testing.T) {
 		inModel      string
 		wantProvider string
 		wantAPIKey   string
+		wantBaseURL  string
 		wantModel    string
 	}{
 		{
@@ -50,6 +51,7 @@ func TestResolveRelayAI(t *testing.T) {
 			},
 			wantProvider: "minimax",
 			wantAPIKey:   "minimax-key",
+			wantBaseURL:  "https://api.minimax.chat/v1",
 			wantModel:    "MiniMax-M2.5",
 		},
 		{
@@ -61,6 +63,7 @@ func TestResolveRelayAI(t *testing.T) {
 			inProvider:   "minimax",
 			wantProvider: "minimax",
 			wantAPIKey:   "minimax-key",
+			wantBaseURL:  "https://api.minimax.chat/v1",
 			wantModel:    "MiniMax-M2.5",
 		},
 		{
@@ -87,16 +90,32 @@ func TestResolveRelayAI(t *testing.T) {
 			wantAPIKey:   "kimi-key2",
 			wantModel:    "kimi-k2.5",
 		},
+		{
+			// Regression: kimi has no base_url; default agent (minimax) has one.
+			// resolveRelayAI must NOT inherit minimax's base_url for kimi.
+			name: "kimi provider must not inherit minimax base_url from default agent",
+			cfg: &config.Config{
+				Relay:  config.RelayConfig{Provider: "kimi"},
+				Agents: []config.AgentEntry{defaultAgent, kimiAgent},
+			},
+			wantProvider: "kimi",
+			wantAPIKey:   "kimi-key",
+			wantBaseURL:  "", // kimi has no base_url; must not get minimax's URL
+			wantModel:    "kimi-k2.5",
+		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotProvider, gotAPIKey, _, gotModel := resolveRelayAI(tt.cfg, tt.inProvider, tt.inAPIKey, tt.inBaseURL, tt.inModel)
+			gotProvider, gotAPIKey, gotBaseURL, gotModel := resolveRelayAI(tt.cfg, tt.inProvider, tt.inAPIKey, tt.inBaseURL, tt.inModel)
 			if gotProvider != tt.wantProvider {
 				t.Errorf("provider = %q, want %q", gotProvider, tt.wantProvider)
 			}
 			if gotAPIKey != tt.wantAPIKey {
 				t.Errorf("apiKey = %q, want %q", gotAPIKey, tt.wantAPIKey)
+			}
+			if gotBaseURL != tt.wantBaseURL {
+				t.Errorf("baseURL = %q, want %q", gotBaseURL, tt.wantBaseURL)
 			}
 			if gotModel != tt.wantModel {
 				t.Errorf("model = %q, want %q", gotModel, tt.wantModel)

@@ -1036,21 +1036,27 @@ func (p *Platform) handleKeyInit(data []byte) {
 	log.Printf("[Relay] E2EE session established with channel %s", msg.ChannelID)
 
 	// Send key_ack via webhook
-	ctx := context.Background()
 	platform := "botpage"
 	if msg.Platform != "" {
 		platform = msg.Platform
 	}
+	p.sendWebhookMessage(msg.ChannelID, platform, "key_ack")
+}
+
+// sendWebhookMessage sends a control message (e.g. key_ack, key_error) to the
+// relay server via webhook so it is forwarded to the web client.
+func (p *Platform) sendWebhookMessage(channelID, platform, msgType string) {
 	outgoing := OutgoingResponse{
 		Type:       "response",
 		Platform:   platform,
-		ChannelID:  msg.ChannelID,
-		Ciphertext: "key_ack",
+		ChannelID:  channelID,
+		Ciphertext: msgType,
 	}
 	body, _ := json.Marshal(outgoing)
+	ctx := context.Background()
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, p.config.WebhookURL, bytes.NewReader(body))
 	if err != nil {
-		log.Printf("[Relay] key_ack: failed to create request: %v", err)
+		log.Printf("[Relay] %s: failed to create request: %v", msgType, err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
@@ -1058,7 +1064,7 @@ func (p *Platform) handleKeyInit(data []byte) {
 	req.Header.Set("X-User-ID", p.config.UserID)
 	resp, err := p.httpClient.Do(req)
 	if err != nil {
-		log.Printf("[Relay] key_ack: webhook failed: %v", err)
+		log.Printf("[Relay] %s: webhook failed: %v", msgType, err)
 		return
 	}
 	resp.Body.Close()
@@ -1084,6 +1090,12 @@ func (p *Platform) handleEncrypted(data []byte) {
 	plaintext, err := e2e.Decrypt(sessionKey, msg.Ciphertext)
 	if err != nil {
 		log.Printf("[Relay] encrypted: decrypt failed: %v", err)
+		// Notify the web client so it can re-initiate key exchange.
+		platform := "botpage"
+		if msg.Platform != "" {
+			platform = msg.Platform
+		}
+		p.sendWebhookMessage(msg.ChannelID, platform, "key_error")
 		return
 	}
 

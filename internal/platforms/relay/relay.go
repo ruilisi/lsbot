@@ -86,8 +86,10 @@ type Platform struct {
 	e2ePrivKey    *ecdh.PrivateKey
 	e2eSessions   map[string][]byte // channelID → 32-byte AES key
 	e2eSessionsMu sync.Mutex
-	// botpage undelivered message cache: connID → queued outgoing responses
-	botpageCache   map[string][]OutgoingResponse
+	// botpage undelivered message cache: connID → queued plaintext entries
+	// We store plaintext (not ciphertext) so we can re-encrypt with the new
+	// E2EE session key when the mobile client reconnects.
+	botpageCache   map[string][]botpageCacheEntry
 	botpageCacheMu sync.Mutex
 }
 
@@ -163,6 +165,14 @@ type PingPong struct {
 	Type string `json:"type"`
 }
 
+// botpageCacheEntry holds a plaintext botpage message that could not be delivered.
+type botpageCacheEntry struct {
+	channelID string
+	platform  string
+	text      string // original plaintext (before E2EE encryption)
+	msgType   string // "key_ack" or "" for normal messages
+}
+
 // RawWeComMessage is received from server with raw encrypted WeCom XML
 type RawWeComMessage struct {
 	Type         string `json:"type"` // "wecom_raw"
@@ -201,7 +211,7 @@ func New(cfg Config) (*Platform, error) {
 		},
 		kfCursors:    make(map[string]string),
 		e2eSessions:  make(map[string][]byte),
-		botpageCache: make(map[string][]OutgoingResponse),
+		botpageCache: make(map[string][]botpageCacheEntry),
 	}
 
 	// Load E2E key pair when a key file is configured
@@ -467,7 +477,8 @@ func (p *Platform) sendWebhook(ctx context.Context, channelID string, resp route
 	}
 
 	// For botpage responses, check if the mobile client was reachable.
-	// If not delivered, cache locally so we can replay on resend.
+	// If not delivered, cache the plaintext locally so we can re-encrypt with
+	// the new E2EE session key when the mobile client reconnects.
 	if outgoing.Platform == "botpage" {
 		var webhookResp struct {
 			Delivered bool   `json:"delivered"`
@@ -478,8 +489,16 @@ func (p *Platform) sendWebhook(ctx context.Context, channelID string, resp route
 			if connID == "" {
 				connID = outgoing.ChannelID
 			}
+			// Determine the original plaintext. resp.Text holds it before encryption.
+			// For control messages (key_ack), store the ciphertext field as the msgType.
+			entry := botpageCacheEntry{
+				channelID: outgoing.ChannelID,
+				platform:  outgoing.Platform,
+				text:      resp.Text,
+				msgType:   outgoing.Ciphertext, // "key_ack" or ""
+			}
 			p.botpageCacheMu.Lock()
-			p.botpageCache[connID] = append(p.botpageCache[connID], outgoing)
+			p.botpageCache[connID] = append(p.botpageCache[connID], entry)
 			p.botpageCacheMu.Unlock()
 			debug.Log("[Relay] Botpage message cached for connID=%s (mobile offline)", connID)
 		}
@@ -1164,6 +1183,8 @@ func (p *Platform) handleError(data []byte) {
 }
 
 // handleResend replays cached botpage messages to a reconnected mobile client.
+// Messages are re-encrypted with the current E2EE session key so the new session
+// can decrypt them (the old ciphertext would fail with the new session key).
 func (p *Platform) handleResend(data []byte) {
 	var msg IncomingMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
@@ -1182,9 +1203,35 @@ func (p *Platform) handleResend(data []byte) {
 		return
 	}
 
-	log.Printf("[Relay] Replaying %d cached message(s) to connID=%s", len(cached), connID)
+	// Look up the current E2EE session key for this channel (established after reconnect).
+	p.e2eSessionsMu.Lock()
+	sessionKey := p.e2eSessions[connID]
+	p.e2eSessionsMu.Unlock()
+
+	log.Printf("[Relay] Replaying %d cached message(s) to connID=%s (e2ee=%v)", len(cached), connID, sessionKey != nil)
 	ctx := context.Background()
-	for _, outgoing := range cached {
+	for _, entry := range cached {
+		outgoing := OutgoingResponse{
+			Type:      "response",
+			Platform:  entry.platform,
+			ChannelID: entry.channelID,
+		}
+
+		switch {
+		case entry.msgType == "key_ack":
+			outgoing.Ciphertext = "key_ack"
+		case sessionKey != nil && entry.text != "":
+			// Re-encrypt with current session key
+			ct, err := e2e.Encrypt(sessionKey, []byte(entry.text))
+			if err != nil {
+				log.Printf("[Relay] resend: re-encrypt failed: %v", err)
+				continue
+			}
+			outgoing.Ciphertext = ct
+		default:
+			outgoing.Text = entry.text
+		}
+
 		body, err := json.Marshal(outgoing)
 		if err != nil {
 			log.Printf("[Relay] resend: marshal error: %v", err)

@@ -86,6 +86,9 @@ type Platform struct {
 	e2ePrivKey    *ecdh.PrivateKey
 	e2eSessions   map[string][]byte // channelID → 32-byte AES key
 	e2eSessionsMu sync.Mutex
+	// botpage undelivered message cache: connID → queued outgoing responses
+	botpageCache   map[string][]OutgoingResponse
+	botpageCacheMu sync.Mutex
 }
 
 // Protocol message types
@@ -196,8 +199,9 @@ func New(cfg Config) (*Platform, error) {
 		httpClient: &http.Client{
 			Timeout: 30 * time.Second,
 		},
-		kfCursors:   make(map[string]string),
-		e2eSessions: make(map[string][]byte),
+		kfCursors:    make(map[string]string),
+		e2eSessions:  make(map[string][]byte),
+		botpageCache: make(map[string][]OutgoingResponse),
 	}
 
 	// Load E2E key pair when a key file is configured
@@ -462,6 +466,25 @@ func (p *Platform) sendWebhook(ctx context.Context, channelID string, resp route
 		return fmt.Errorf("webhook returned status %d", httpResp.StatusCode)
 	}
 
+	// For botpage responses, check if the mobile client was reachable.
+	// If not delivered, cache locally so we can replay on resend.
+	if outgoing.Platform == "botpage" {
+		var webhookResp struct {
+			Delivered bool   `json:"delivered"`
+			ConnID    string `json:"conn_id"`
+		}
+		if err := json.NewDecoder(httpResp.Body).Decode(&webhookResp); err == nil && !webhookResp.Delivered {
+			connID := webhookResp.ConnID
+			if connID == "" {
+				connID = outgoing.ChannelID
+			}
+			p.botpageCacheMu.Lock()
+			p.botpageCache[connID] = append(p.botpageCache[connID], outgoing)
+			p.botpageCacheMu.Unlock()
+			debug.Log("[Relay] Botpage message cached for connID=%s (mobile offline)", connID)
+		}
+	}
+
 	return nil
 }
 
@@ -723,6 +746,9 @@ func (p *Platform) readLoop() {
 		case "message":
 			debug.Log("Received message, handling")
 			p.handleMessage(message)
+		case "resend":
+			debug.Log("Received resend request")
+			p.handleResend(message)
 		case "wecom_raw":
 			debug.Log("Received raw WeCom message, decrypting locally")
 			p.handleRawWeComMessage(message)
@@ -1134,6 +1160,50 @@ func (p *Platform) handleError(data []byte) {
 		log.Printf("[Relay] Server error [%s]: %s", errMsg.Code, errMsg.Message)
 	} else {
 		log.Printf("[Relay] Server error: %s", errMsg.Message)
+	}
+}
+
+// handleResend replays cached botpage messages to a reconnected mobile client.
+func (p *Platform) handleResend(data []byte) {
+	var msg IncomingMessage
+	if err := json.Unmarshal(data, &msg); err != nil {
+		log.Printf("[Relay] resend: parse error: %v", err)
+		return
+	}
+
+	connID := msg.ChannelID
+	p.botpageCacheMu.Lock()
+	cached := p.botpageCache[connID]
+	delete(p.botpageCache, connID)
+	p.botpageCacheMu.Unlock()
+
+	if len(cached) == 0 {
+		debug.Log("[Relay] resend: no cached messages for connID=%s", connID)
+		return
+	}
+
+	log.Printf("[Relay] Replaying %d cached message(s) to connID=%s", len(cached), connID)
+	ctx := context.Background()
+	for _, outgoing := range cached {
+		body, err := json.Marshal(outgoing)
+		if err != nil {
+			log.Printf("[Relay] resend: marshal error: %v", err)
+			continue
+		}
+		req, err := http.NewRequestWithContext(ctx, http.MethodPost, p.config.WebhookURL, bytes.NewReader(body))
+		if err != nil {
+			log.Printf("[Relay] resend: request error: %v", err)
+			continue
+		}
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("X-Session-ID", p.sessionID)
+		req.Header.Set("X-User-ID", p.config.UserID)
+		httpResp, err := p.httpClient.Do(req)
+		if err != nil {
+			log.Printf("[Relay] resend: webhook error: %v", err)
+			continue
+		}
+		httpResp.Body.Close()
 	}
 }
 

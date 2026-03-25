@@ -1,4 +1,4 @@
-VERSION := 2.1.2
+VERSION := 2.1.3
 BUILD := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 PROJECTNAME := lsbot
 GOBASE := $(shell pwd)
@@ -101,6 +101,10 @@ lint:
 # Run locally (for development)
 run:
 	go run . serve
+
+# relay-debug: dev mode with verbose logging and live reload on code changes
+relay-debug:
+	$(shell go env GOPATH)/bin/air -- relay --log debug
 
 # Show version
 version:

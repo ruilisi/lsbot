@@ -230,7 +230,7 @@ ai:
   mcp_servers:
     - name: chrome
       command: npx
-      args: ["chrome-devtools-mcp", "--browserUrl=http://127.0.0.1:9222"]
+      args: ["-y", "chrome-devtools-mcp@latest", "--browser-url=http://127.0.0.1:9222", "--no-usage-statistics"]
     # - name: my_server
     #   url: http://localhost:3000/sse
 

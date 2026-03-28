@@ -1,0 +1,25 @@
+root = "."
+tmp_dir = "dist/air"
+
+[build]
+  cmd = "go build -o ./dist/lsbot ."
+  bin = "./dist/lsbot"
+  delay = 1000
+  exclude_dir = ["dist", "tmp"]
+  include_ext = ["go"]
+  kill_delay = "0s"
+  rerun = false
+  rerun_delay = 500
+
+[log]
+  main_only = false
+  time = false
+
+[color]
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[misc]
+  clean_on_exit = true

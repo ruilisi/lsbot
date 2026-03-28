@@ -572,21 +572,19 @@ func runRelay(cmd *cobra.Command, args []string) {
 				type qrPayload struct {
 					ID  string `json:"id"`
 					Key string `json:"key"`
-					URL string `json:"url"`
+					URL string `json:"url,omitempty"`
 				}
-				payload, _ := json.Marshal(qrPayload{
+				p := qrPayload{
 					ID:  relayBotID,
 					Key: e2e.PublicKeyToBase64(priv.PublicKey()),
-					URL: botBase,
-				})
-				fmt.Println("\n[Relay] Scan with lsbot mobile to add this bot:")
-				qrterminal.GenerateWithConfig(string(payload), qrterminal.Config{
-					Level:     qrterminal.L,
-					Writer:    os.Stdout,
-					BlackChar: qrterminal.BLACK,
-					WhiteChar: qrterminal.WHITE,
-					QuietZone: 1,
-				})
+				}
+				// Only include URL when it's not the default
+				if botBase != "https://bot.lingti.com" {
+					p.URL = botBase
+				}
+				payload, _ := json.Marshal(p)
+				fmt.Println("[Relay] Scan with lsbot mobile to add this bot:")
+				qrterminal.GenerateHalfBlock(string(payload), qrterminal.L, os.Stdout)
 			}
 		}
 	}

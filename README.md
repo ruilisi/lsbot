@@ -192,6 +192,23 @@ lsbot e2e keygen --save
 
 下载地址: [lsbot.org/download](https://lsbot.org/download)
 
+### 移动端 App（Android / iOS）
+
+lsbot 官方 Android App 已发布，iOS 版本开发中。手机端支持端对端加密聊天，通过**扫描 QR Code** 一键配对 Bot，无需手动输入 Bot ID 或复制公钥。
+
+下载：[lsbot.org/download](https://lsbot.org/download)
+
+Bot 启动后终端会自动打印配对 QR Code：
+
+```
+[Relay] Scan with lsbot mobile to add this bot:
+██████████████...
+```
+
+打开 App → 添加 Bot → 扫描，即可建立端对端加密连接。
+
+详细文档：[移动端使用指南](https://lsbot.org/docs/mobile-app)
+
 ---
 
 ### 进阶：接入消息平台（企业微信、飞书等）
@@ -236,6 +253,7 @@ lsbot relay --platform feishu \
 
 ### 核心能力
 
+- 📱 **[移动端 App](https://lsbot.org/docs/mobile-app)** — Android 已发布，iOS 开发中；扫码配对，E2EE 加密聊天
 - 🔒 **端到端加密，默认开启** — P-256 ECDH + AES-256-GCM，中继服务器只路由密文
 - 🚀 **零依赖部署** — 单个 ~15MB 二进制文件，无需 Node.js/Python 运行时
 - ☁️ **[云中继](https://lsbot.org/docs/cloud-relay)加持** — 无需公网服务器、域名备案、HTTPS 证书，5 分钟接入企业微信/微信公众号
@@ -446,6 +464,7 @@ lsbot skills info github
 
 | 模块 | 说明 | 特点 |
 |------|------|------|
+| **[移动端 App](https://lsbot.org/docs/mobile-app)** | Android 已发布，iOS 开发中 | QR Code 扫码配对，E2EE 加密，本地消息历史 |
 | **端到端加密** | P-256 ECDH + AES-256-GCM | 默认开启，中继服务器只路由密文 |
 | **MCP Server** | 标准 MCP 协议服务器 | 兼容 Claude Desktop、Cursor、Windsurf 等 |
 | **多平台消息网关** | [19 种聊天平台](https://lsbot.org/docs/chat-platforms) | 微信公众号、企业微信、Slack、飞书一键接入 |

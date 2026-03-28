@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"syscall"
 
 	"github.com/google/uuid"
+	qrterminal "github.com/mdp/qrterminal/v3"
 	"github.com/ruilisi/lsbot/internal/agent"
 	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
 	"github.com/ruilisi/lsbot/internal/config"
@@ -563,6 +565,30 @@ func runRelay(cmd *cobra.Command, args []string) {
 			}
 		}
 		fmt.Printf("[Relay] Your bot page: %s/bots/%s\n", botBase, relayBotID)
+
+		// Print QR code for mobile pairing (only when E2E is enabled)
+		if relayE2EKeyFile != "" {
+			if priv, err := e2e.LoadKeyPair(relayE2EKeyFile); err == nil {
+				type qrPayload struct {
+					ID  string `json:"id"`
+					Key string `json:"key"`
+					URL string `json:"url"`
+				}
+				payload, _ := json.Marshal(qrPayload{
+					ID:  relayBotID,
+					Key: e2e.PublicKeyToBase64(priv.PublicKey()),
+					URL: botBase,
+				})
+				fmt.Println("\n[Relay] Scan with lsbot mobile to add this bot:")
+				qrterminal.GenerateWithConfig(string(payload), qrterminal.Config{
+					Level:     qrterminal.L,
+					Writer:    os.Stdout,
+					BlackChar: qrterminal.BLACK,
+					WhiteChar: qrterminal.WHITE,
+					QuietZone: 1,
+				})
+			}
+		}
 	}
 	log.Println("Press Ctrl+C to stop.")
 

@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/ruilisi/lsbot/internal/config"
+	"github.com/ruilisi/lsbot/internal/termui"
 	"github.com/spf13/cobra"
 )
 
@@ -151,9 +152,9 @@ func runDoctor(cmd *cobra.Command, args []string) {
 	fmt.Println("Checks:")
 	passed, failed := 0, 0
 	for _, r := range results {
-		icon := "\033[32m✓\033[0m"
+		icon := termui.Colorize(termui.Green, "✓")
 		if !r.ok {
-			icon = "\033[31m✗\033[0m"
+			icon = termui.Colorize(termui.Red, "✗")
 			failed++
 		} else {
 			passed++

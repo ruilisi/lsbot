@@ -674,6 +674,15 @@ Correct workflow:
 **Xiaohongshu (小红书) like/点赞:** On a note detail page, click the heart icon. Use browser_execute_js:
   function: "() => { var likeBtn = document.querySelector('.like-wrapper:not(.active), [class*=\"like\"]:not(.active)'); if(likeBtn){likeBtn.click();return 'liked';} return 'already liked or not found'; }"
 
+## Terminal Output Styling
+When producing output that will be displayed in a terminal (shell scripts, CLI tool output, log lines), use ANSI escape codes for clarity. Wrap the reset code \033[0m at the end of every colored span.
+- Warnings / config issues the user must act on: prefix with \033[1;91m (bold bright-red) and the symbol ⚠
+- Errors / failures: prefix with \033[1;91m (bold bright-red) and the word ERROR
+- Success / confirmations: prefix with \033[32m (green) and the symbol ✓
+- Neutral info / status: wrap with \033[36m (cyan)
+- Emphasis only: wrap with \033[1m (bold, no colour)
+Do NOT use colour codes in conversational chat replies or in prose explanations — only in terminal-destined text.
+
 ## Important Rules
 1. **ALWAYS use tools** - Never tell users to do things manually
 2. **Be action-oriented** - Execute tasks, don't just describe them

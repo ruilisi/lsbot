@@ -5,17 +5,19 @@ import (
 	"fmt"
 	"slices"
 	"strings"
+
+	"github.com/ruilisi/lsbot/internal/termui"
 )
 
-// ANSI color codes
+// local aliases so callers in this file don't change
 const (
-	colorReset  = "\033[0m"
-	colorGreen  = "\033[32m"
-	colorYellow = "\033[33m"
-	colorRed    = "\033[31m"
-	colorGray   = "\033[90m"
-	colorBold   = "\033[1m"
-	colorCyan   = "\033[36m"
+	colorReset  = termui.Reset
+	colorGreen  = termui.Green
+	colorYellow = termui.Yellow
+	colorRed    = termui.Red
+	colorGray   = termui.Gray
+	colorBold   = termui.Bold
+	colorCyan   = termui.Cyan
 )
 
 // FormatListOptions controls the list output

@@ -20,6 +20,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/e2e"
 	"github.com/ruilisi/lsbot/internal/platforms/relay"
 	"github.com/ruilisi/lsbot/internal/router"
+	"github.com/ruilisi/lsbot/internal/termui"
 	"github.com/spf13/cobra"
 )
 
@@ -248,6 +249,23 @@ func runRelay(cmd *cobra.Command, args []string) {
 		relayAIProvider, relayAPIKey, relayBaseURL, relayModel = resolveRelayAI(
 			savedCfg, relayAIProvider, relayAPIKey, relayBaseURL, relayModel,
 		)
+
+		// Warn when relay.provider is set in config AND there are agents with a default,
+		// but relay.provider points to a different agent — the default agent's credentials
+		// get overwritten by the relay.provider agent's values, which confuses users.
+		// Skip the warning when provider/api-key were passed via CLI (intentional override).
+		providerOverriddenByCLI := cmd.Flags().Changed("provider") || cmd.Flags().Changed("api-key")
+		if !providerOverriddenByCLI && savedCfg.Relay.Provider != "" && len(savedCfg.Agents) > 0 {
+			defaultID := savedCfg.DefaultAgentID()
+			if defaultID != "" && defaultID != savedCfg.Relay.Provider {
+				termui.Warn(
+					"Config conflict: relay.provider=%q but agent %q has default: true.\n"+
+						"relay.provider wins and overwrites the default agent's API key and base_url.\n"+
+						"Fix: set relay.provider: %s  (or remove relay.provider to use the default agent automatically)",
+					savedCfg.Relay.Provider, defaultID, defaultID)
+			}
+		}
+
 		if relayMaxRounds == 0 && savedCfg.AI.MaxRounds > 0 {
 			relayMaxRounds = savedCfg.AI.MaxRounds
 		}

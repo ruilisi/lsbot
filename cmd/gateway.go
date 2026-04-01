@@ -104,6 +104,7 @@ var (
 	aiModel              string
 	aiInstructions       string
 	aiCallTimeout        int
+	aiProviderFallbacks  []string // fallback provider names, resolved from config
 	browserDebugDir      string
 	webappPort           int
 )
@@ -303,6 +304,10 @@ func runGateway(cmd *cobra.Command, args []string) {
 		logger.Info("Loaded custom instructions from %s (%d bytes)", aiInstructions, len(data))
 	}
 
+	var fallbackCfgs []agent.Config
+	if cfgErr == nil {
+		fallbackCfgs = buildFallbackAgentConfigs(savedCfg, aiProviderFallbacks)
+	}
 	agentCfg := agent.Config{
 		Provider:           aiProvider,
 		APIKey:             aiAPIKey,
@@ -313,6 +318,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 		AllowedPaths:       loadAllowedPaths(),
 		DisableFileTools:   loadDisableFileTools(),
 		CallTimeoutSecs:    aiCallTimeout,
+		Fallbacks:          fallbackCfgs,
 	}
 	aiAgent, err := agent.New(agentCfg)
 	if err != nil {
@@ -699,6 +705,9 @@ func applyRouterConfigFallbacks(savedCfg *config.Config) {
 		if aiModel == "" {
 			aiModel = resolved.Model
 		}
+		if len(resolved.Fallbacks) > 0 {
+			aiProviderFallbacks = resolved.Fallbacks
+		}
 	}
 	if aiCallTimeout == 0 && savedCfg.AI.CallTimeoutSecs > 0 {
 		aiCallTimeout = savedCfg.AI.CallTimeoutSecs
@@ -846,6 +855,25 @@ func applyRouterConfigFallbacks(savedCfg *config.Config) {
 	if webappPort == 0 && p.Webapp.Port != 0 {
 		webappPort = p.Webapp.Port
 	}
+}
+
+// buildFallbackAgentConfigs resolves a list of provider names from the config
+// and returns agent.Config entries suitable for the Fallbacks field.
+func buildFallbackAgentConfigs(cfg *config.Config, fallbackNames []string) []agent.Config {
+	var result []agent.Config
+	for _, name := range fallbackNames {
+		entry, found := cfg.ResolveProvider(name)
+		if !found || entry.APIKey == "" {
+			continue
+		}
+		result = append(result, agent.Config{
+			Provider: entry.Provider,
+			APIKey:   entry.APIKey,
+			BaseURL:  entry.BaseURL,
+			Model:    entry.Model,
+		})
+	}
+	return result
 }
 
 // registerPlatforms registers all configured platforms with the router.

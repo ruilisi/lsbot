@@ -453,6 +453,12 @@ func runRelay(cmd *cobra.Command, args []string) {
 	}
 
 	// Create the AI agent
+	var fallbackCfgs []agent.Config
+	if cfgErr == nil {
+		if resolved, found := savedCfg.ResolveProvider(relayAIProvider); found && len(resolved.Fallbacks) > 0 {
+			fallbackCfgs = buildFallbackAgentConfigs(savedCfg, resolved.Fallbacks)
+		}
+	}
 	agentCfg := agent.Config{
 		Provider:           relayAIProvider,
 		APIKey:             relayAPIKey,
@@ -464,6 +470,7 @@ func runRelay(cmd *cobra.Command, args []string) {
 		MaxToolRounds:      relayMaxRounds,
 		CallTimeoutSecs:    relayCallTimeout,
 		MCPServers:         mcpServers,
+		Fallbacks:          fallbackCfgs,
 	}
 	aiAgent, err := agent.New(agentCfg)
 	if err != nil {

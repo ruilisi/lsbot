@@ -22,6 +22,7 @@ import (
 // Agent processes messages using AI providers and tools
 type Agent struct {
 	provider           Provider
+	fallbackProviders  []Provider // ordered fallbacks tried when quota is exhausted
 	memory             *ConversationMemory
 	sessions           *SessionStore
 	autoApprove        bool
@@ -52,6 +53,7 @@ type Config struct {
 	AllowTools         []string // Tool whitelist; empty = allow all
 	DenyTools          []string // Tool blacklist; applied after allowlist
 	Workspace          string   // Working directory for this agent
+	Fallbacks          []Config // Ordered fallback provider configs tried when quota is exhausted
 }
 
 // New creates a new Agent with the specified provider
@@ -69,8 +71,20 @@ func New(cfg Config) (*Agent, error) {
 	if maxRounds <= 0 {
 		maxRounds = 100
 	}
+
+	var fallbackProviders []Provider
+	for _, fbCfg := range cfg.Fallbacks {
+		fbProvider, err := createProvider(fbCfg)
+		if err != nil {
+			logger.Warn("[Agent] Failed to create fallback provider %s: %v", fbCfg.Provider, err)
+			continue
+		}
+		fallbackProviders = append(fallbackProviders, fbProvider)
+	}
+
 	return &Agent{
 		provider:           provider,
+		fallbackProviders:  fallbackProviders,
 		memory:             NewMemory(50, 60*time.Minute), // Keep 50 messages, 60 min TTL
 		sessions:           NewSessionStore(),
 		autoApprove:        cfg.AutoApprove,
@@ -205,6 +219,45 @@ func createProvider(cfg Config) (Provider, error) {
 		}
 		return nil, fmt.Errorf("unknown provider: %s (supported: claude, deepseek, kimi, qwen, minimax, doubao, zhipu, openai, gemini, yi, stepfun, siliconflow, grok, baichuan, spark, hunyuan, ollama)", cfg.Provider)
 	}
+}
+
+// isQuotaError returns true when the error is due to insufficient API quota or balance.
+func isQuotaError(err error) bool {
+	if err == nil {
+		return false
+	}
+	msg := strings.ToLower(err.Error())
+	quotaKeywords := []string{
+		"quota", "balance", "insufficient", "credits",
+		"余额", "欠费", "账户余额", "insufficient_quota",
+	}
+	for _, kw := range quotaKeywords {
+		if strings.Contains(msg, kw) {
+			return true
+		}
+	}
+	// HTTP 402 Payment Required is always a quota error
+	return strings.Contains(msg, "402")
+}
+
+// chatWithFallback calls the primary provider and, if a quota error is detected,
+// retries with each fallback provider in order.
+func (a *Agent) chatWithFallback(ctx context.Context, req ChatRequest) (ChatResponse, error) {
+	resp, err := a.provider.Chat(ctx, req)
+	if err == nil || !isQuotaError(err) {
+		return resp, err
+	}
+	for _, fb := range a.fallbackProviders {
+		logger.Info("[Agent] Provider %s quota insufficient, falling back to %s", a.provider.Name(), fb.Name())
+		resp, err = fb.Chat(ctx, req)
+		if err == nil {
+			return resp, nil
+		}
+		if !isQuotaError(err) {
+			return resp, err
+		}
+	}
+	return ChatResponse{}, fmt.Errorf("all providers exhausted: %w", err)
 }
 
 // handleBuiltinCommand handles special commands without calling AI
@@ -669,8 +722,8 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 		systemPrompt += "\n\n## Custom Instructions\n" + a.customInstructions
 	}
 
-	// Call AI provider
-	resp, err := a.provider.Chat(ctx, ChatRequest{
+	// Call AI provider (with quota-based fallback)
+	resp, err := a.chatWithFallback(ctx, ChatRequest{
 		Messages:       messages,
 		SystemPrompt:   systemPrompt,
 		Tools:          tools,
@@ -768,13 +821,13 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 			ThinkingBudget: thinkingBudget,
 		}
 		callCtx, callCancel := context.WithTimeout(ctx, callTimeout)
-		resp, err = a.provider.Chat(callCtx, chatReq)
+		resp, err = a.chatWithFallback(callCtx, chatReq)
 		callCancel()
 		// Retry once on timeout — the API may have been temporarily slow.
 		if err != nil && ctx.Err() == nil && (strings.Contains(err.Error(), "deadline exceeded") || strings.Contains(err.Error(), "context canceled")) {
 			logger.Warn("[Agent] AI call timed out (round %d), retrying once...", round+2)
 			callCtx2, callCancel2 := context.WithTimeout(ctx, callTimeout)
-			resp, err = a.provider.Chat(callCtx2, chatReq)
+			resp, err = a.chatWithFallback(callCtx2, chatReq)
 			callCancel2()
 		}
 		if err != nil {

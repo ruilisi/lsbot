@@ -28,10 +28,11 @@ type Config struct {
 
 // ProviderEntry defines a named AI provider configuration.
 type ProviderEntry struct {
-	Provider string `yaml:"provider,omitempty"`
-	APIKey   string `yaml:"api_key,omitempty"`
-	BaseURL  string `yaml:"base_url,omitempty"`
-	Model    string `yaml:"model,omitempty"`
+	Provider  string   `yaml:"provider,omitempty"`
+	APIKey    string   `yaml:"api_key,omitempty"`
+	BaseURL   string   `yaml:"base_url,omitempty"`
+	Model     string   `yaml:"model,omitempty"`
+	Fallbacks []string `yaml:"fallbacks,omitempty"` // ordered list of fallback provider names when quota is exhausted
 }
 
 // BrowserConfig configures browser automation.

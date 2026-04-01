@@ -116,14 +116,14 @@ var gatewayCmd = &cobra.Command{
 
 The gateway is the unified run command that:
   - Starts all platform bots configured in ~/.lsbot.yaml (telegram, slack, discord, etc.)
-  - Starts the WebSocket server on :18789 by default (use --no-ws to disable)
+  - Starts the WebSocket server on :28788 by default (use --no-ws to disable)
   - Optionally serves the web chat UI (use --webapp-port)
 
 Subcommands:
   restart   Send SIGHUP to a running gateway to reload config
 
 Environment variables:
-  GATEWAY_ADDR        Address for WebSocket server (default: :18789)
+  GATEWAY_ADDR        Address for WebSocket server (default: :28788)
   GATEWAY_AUTH_TOKEN  Single authentication token
   GATEWAY_AUTH_TOKENS Comma-separated authentication tokens`,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -174,7 +174,7 @@ func removePIDFile() {
 func init() {
 	rootCmd.AddCommand(gatewayCmd)
 
-	gatewayCmd.Flags().StringVar(&gatewayAddr, "addr", "", "WebSocket gateway address (or GATEWAY_ADDR env, default: :18789)")
+	gatewayCmd.Flags().StringVar(&gatewayAddr, "addr", "", "WebSocket gateway address (or GATEWAY_ADDR env, default: :28788)")
 	gatewayCmd.Flags().StringVar(&gatewayAuthToken, "auth-token", "", "Single authentication token (or GATEWAY_AUTH_TOKEN env)")
 	gatewayCmd.Flags().StringSliceVar(&gatewayAuthTokens, "auth-tokens", nil, "Multiple authentication tokens (or GATEWAY_AUTH_TOKENS env)")
 	gatewayCmd.Flags().BoolVar(&gatewayNoWS, "no-ws", false, "Disable WebSocket server")
@@ -245,7 +245,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 	if gatewayAddr == "" {
 		gatewayAddr = os.Getenv("GATEWAY_ADDR")
 		if gatewayAddr == "" {
-			gatewayAddr = ":18789"
+			gatewayAddr = ":28788"
 		}
 	}
 	if gatewayAuthToken == "" {

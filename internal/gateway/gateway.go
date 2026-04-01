@@ -91,7 +91,7 @@ type Gateway struct {
 
 // Config holds gateway configuration
 type Config struct {
-	Addr       string   // Address to listen on, e.g., ":18789"
+	Addr       string   // Address to listen on, e.g., ":28788"
 	AuthToken  string   // Single auth token (backward-compat; merged with AuthTokens)
 	AuthTokens []string // Multiple allowed auth tokens; any one grants access
 }
@@ -99,7 +99,7 @@ type Config struct {
 // New creates a new Gateway
 func New(cfg Config) *Gateway {
 	if cfg.Addr == "" {
-		cfg.Addr = ":18789"
+		cfg.Addr = ":28788"
 	}
 
 	// Merge single AuthToken into the list for backward compatibility

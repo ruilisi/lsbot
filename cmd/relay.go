@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -576,22 +575,34 @@ func runRelay(cmd *cobra.Command, args []string) {
 		// Print QR code for mobile pairing (only when E2E is enabled)
 		if relayE2EKeyFile != "" {
 			if priv, err := e2e.LoadKeyPair(relayE2EKeyFile); err == nil {
-				type qrPayload struct {
-					ID  string `json:"id"`
-					Key string `json:"key"`
-					URL string `json:"url,omitempty"`
+				// Compact binary payload: 0x01 (version) + 16B UUID + 33B compressed P-256 pubkey = 50 bytes
+				// This produces a V3 QR code (29x29) vs V7 (45x45) for JSON, ~40% smaller.
+				pubRaw := priv.PublicKey().Bytes() // 65-byte uncompressed point: 0x04 || X(32) || Y(32)
+				uuidParsed, _ := uuid.Parse(relayBotID)
+				prefix := byte(0x02)
+				if pubRaw[64]&1 == 1 {
+					prefix = 0x03
 				}
-				p := qrPayload{
-					ID:  relayBotID,
-					Key: e2e.PublicKeyToBase64(priv.PublicKey()),
-				}
-				// Only include URL when it's not the default
+				qrBytes := make([]byte, 50)
+				qrBytes[0] = 0x01 // format version
+				copy(qrBytes[1:17], uuidParsed[:])
+				qrBytes[17] = prefix
+				copy(qrBytes[18:50], pubRaw[1:33]) // X coordinate
+				// Only include URL when it's not the default — embed as suffix after the 50-byte header
 				if botBase != "https://bot.lingti.com" {
-					p.URL = botBase
+					qrBytes = append(qrBytes, []byte(botBase)...)
 				}
-				payload, _ := json.Marshal(p)
 				fmt.Println("[Relay] Scan with lsbot mobile to add this bot:")
-				qrterminal.GenerateHalfBlock(string(payload), qrterminal.L, os.Stdout)
+				qrterminal.GenerateWithConfig(string(qrBytes), qrterminal.Config{
+					Level:          qrterminal.L,
+					Writer:         os.Stdout,
+					HalfBlocks:     true,
+					BlackChar:      qrterminal.BLACK_BLACK,
+					WhiteBlackChar: qrterminal.WHITE_BLACK,
+					WhiteChar:      qrterminal.WHITE_WHITE,
+					BlackWhiteChar: qrterminal.BLACK_WHITE,
+					QuietZone:      1,
+				})
 			}
 		}
 	}

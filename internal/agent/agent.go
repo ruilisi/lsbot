@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ruilisi/lsbot/internal/agent/history"
 	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
 	"github.com/ruilisi/lsbot/internal/config"
 	cronpkg "github.com/ruilisi/lsbot/internal/cron"
@@ -447,13 +448,24 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 	// Build the tools list
 	tools := a.buildToolsList()
 
-	// Get conversation history
-	history := a.memory.GetHistory(convKey)
-	logger.Trace("[Agent] Conversation key: %s, history messages: %d", convKey, len(history))
+	// Get conversation history (in-memory first, populate from SQLite on first access)
+	hist := a.memory.GetHistory(convKey)
+	if len(hist) == 0 {
+		if hs, err := history.Global(); err == nil {
+			if loaded, err := hs.Load(convKey, 50); err == nil && len(loaded) > 0 {
+				for _, m := range loaded {
+					a.memory.AddMessage(convKey, Message{Role: m.Role, Content: m.Content})
+				}
+				hist = a.memory.GetHistory(convKey)
+				logger.Debug("[Agent] Loaded %d messages from persistent history for %s", len(hist), convKey)
+			}
+		}
+	}
+	logger.Trace("[Agent] Conversation key: %s, history messages: %d", convKey, len(hist))
 
 	// Create messages with history
-	messages := make([]Message, 0, len(history)+1)
-	messages = append(messages, history...)
+	messages := make([]Message, 0, len(hist)+1)
+	messages = append(messages, hist...)
 	messages = append(messages, Message{
 		Role:    "user",
 		Content: msg.Text,
@@ -892,11 +904,19 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 		logger.Warn("[Agent] Tool loop hit max rounds (%d), forcing stop (user: %s)", maxToolRounds, msg.Username)
 	}
 
-	// Save conversation to memory
+	// Save conversation to in-memory store
 	a.memory.AddExchange(convKey,
 		Message{Role: "user", Content: msg.Text},
 		Message{Role: "assistant", Content: resp.Content},
 	)
+
+	// Persist to SQLite for cross-session recall
+	if hs, err := history.Global(); err == nil {
+		_ = hs.Save(convKey, msg.Platform, msg.Username, []history.Message{
+			{Role: "user", Content: msg.Text},
+			{Role: "assistant", Content: resp.Content},
+		})
+	}
 
 	// Log response at verbose level
 	logger.Debug("[Agent] Response: %s", resp.Content)

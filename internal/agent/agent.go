@@ -1741,6 +1741,18 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name:        "mixture_of_agents",
+			Description: "Send the same prompt to multiple AI providers simultaneously, then synthesise their responses into one high-quality answer. Use for complex, subjective, or high-stakes questions where multiple perspectives improve accuracy. Requires at least 2 configured providers.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"prompt":    map[string]string{"type": "string", "description": "The question or task to send to all providers"},
+					"providers": map[string]any{"type": "array", "items": map[string]string{"type": "string"}, "description": "Provider names to include (e.g. [\"openai\", \"deepseek\", \"gemini\"]). Defaults to the agent's configured providers."},
+				},
+				"required": []string{"prompt"},
+			}),
+		},
+		Tool{
 			Name:        "delegate_task",
 			Description: "Spawn one or more isolated child agents to run tasks in parallel. Each child has no conversation history and its result is returned here. Use for independent sub-tasks that can run concurrently (research, file processing, multi-step analysis). Do NOT use for tasks requiring user interaction.",
 			InputSchema: jsonSchema(map[string]any{
@@ -1884,6 +1896,9 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 		}
 		out, _ := json.Marshal(results)
 		return string(out)
+
+	case "mixture_of_agents":
+		return a.MixtureOfAgents(ctx, args)
 
 	case "delegate_task":
 		return a.DelegateTask(ctx, args)

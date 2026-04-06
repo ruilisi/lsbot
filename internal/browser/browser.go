@@ -410,7 +410,7 @@ func detectChrome() string {
 			}
 		}
 	case "linux":
-		for _, name := range []string{"google-chrome", "google-chrome-stable"} {
+		for _, name := range []string{"google-chrome", "google-chrome-stable", "chromium-browser", "chromium"} {
 			if p, err := exec.LookPath(name); err == nil {
 				return p
 			}

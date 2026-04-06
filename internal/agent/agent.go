@@ -585,6 +585,7 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 ### Memory & Profile
 - profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
 - memory_write: Persist important facts about the user to long-term memory (replaces full MEMORY.md content)
+- user_model_write: Update USER.md — your evolving model of the user's personality, communication style, and preferences (separate from MEMORY.md)
 
 ### Browser Automation (snapshot-then-act pattern)
 - browser_start: Start new browser or connect to existing Chrome via cdp_url (e.g. "127.0.0.1:9222")
@@ -742,6 +743,11 @@ Current date: %s%s%s`, autoApprovalNotice, runtime.GOOS, runtime.GOARCH, homeDir
 
 	if memory != "" {
 		systemPrompt += "\n\n## Your Memory About This User\n" + memory
+	}
+
+	userModel := userprofile.LoadUserModel()
+	if userModel != "" {
+		systemPrompt += "\n\n## User Model (personality, style, preferences)\n" + userModel
 	}
 
 	if !profile.IsOnboarded() {
@@ -1685,6 +1691,15 @@ func (a *Agent) buildToolsList() []Tool {
 				"required":   []string{"content"},
 			}),
 		},
+		Tool{
+			Name:        "user_model_write",
+			Description: "Update USER.md — your evolving model of this user's personality, communication style, preferences, and workflow habits. This is separate from MEMORY.md (general facts). Write the COMPLETE updated content; it replaces the previous file.",
+			InputSchema: jsonSchema(map[string]any{
+				"type":       "object",
+				"properties": map[string]any{"content": map[string]string{"type": "string", "description": "Full USER.md content describing the user model"}},
+				"required":   []string{"content"},
+			}),
+		},
 	)
 
 	// Append tools from external MCP servers
@@ -1766,6 +1781,13 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 	case "memory_write":
 		content, _ := args["content"].(string)
 		if err := userprofile.WriteMemory(content); err != nil {
+			return `{"error": "` + err.Error() + `"}`
+		}
+		return `{"ok": true}`
+
+	case "user_model_write":
+		content, _ := args["content"].(string)
+		if err := userprofile.WriteUserModel(content); err != nil {
 			return `{"error": "` + err.Error() + `"}`
 		}
 		return `{"ok": true}`

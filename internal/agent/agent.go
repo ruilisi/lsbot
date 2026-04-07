@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/ruilisi/lsbot/internal/agent/history"
 	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
 	"github.com/ruilisi/lsbot/internal/config"
@@ -17,6 +18,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/security"
 	"github.com/ruilisi/lsbot/internal/skills"
+	"github.com/ruilisi/lsbot/internal/tools"
 	"github.com/ruilisi/lsbot/internal/userprofile"
 )
 
@@ -602,6 +604,9 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 - web_search: Search the web (DuckDuckGo)
 - web_fetch: Fetch URL content
 - open_url: Open URL in browser
+
+### Image Generation
+- image_generate: Generate an image from a text prompt using DALL-E 3 (requires OPENAI_API_KEY). Returns local file path; send as attachment.
 
 ### Clipboard
 - clipboard_read: Read clipboard
@@ -1279,6 +1284,21 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 
+		// === IMAGE GENERATION ===
+		{
+			Name:        "image_generate",
+			Description: "Generate an image from a text prompt using DALL-E 3. Requires OPENAI_API_KEY. Returns the local file path — send it as a file attachment to the user.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"prompt":  map[string]string{"type": "string", "description": "Detailed description of the image to generate"},
+					"size":    map[string]string{"type": "string", "description": "Image size: 1024x1024 (default), 1792x1024, or 1024x1792"},
+					"quality": map[string]string{"type": "string", "description": "Image quality: standard (default) or hd"},
+				},
+				"required": []string{"prompt"},
+			}),
+		},
+
 		// === CLIPBOARD ===
 		{
 			Name:        "clipboard_read",
@@ -1815,6 +1835,35 @@ func (a *Agent) processToolCalls(ctx context.Context, toolCalls []ToolCall) ([]T
 				ToolCallID: tc.ID,
 				Content:    content,
 				IsError:    file == nil,
+			})
+			continue
+		}
+
+		if tc.Name == "image_generate" {
+			var imgArgs map[string]any
+			_ = json.Unmarshal(tc.Input, &imgArgs)
+			req := mcp.CallToolRequest{}
+			req.Params.Arguments = imgArgs
+			res, err := tools.ImageGenerate(ctx, req)
+			resultText := extractText(res)
+			isErr := err != nil || strings.HasPrefix(resultText, "Error")
+			if err != nil {
+				resultText = fmt.Sprintf("Error: %v", err)
+			}
+			// Parse image_path: out and add as file attachment
+			if strings.HasPrefix(resultText, "image_path:") {
+				lines := strings.SplitN(resultText, "\n", 2)
+				imgPath := strings.TrimPrefix(lines[0], "image_path:")
+				files = append(files, router.FileAttachment{Path: imgPath, MediaType: "image"})
+				resultText = "Image generated and attached."
+				if len(lines) > 1 {
+					resultText += "\n" + lines[1]
+				}
+			}
+			results = append(results, ToolResult{
+				ToolCallID: tc.ID,
+				Content:    resultText,
+				IsError:    isErr,
 			})
 			continue
 		}

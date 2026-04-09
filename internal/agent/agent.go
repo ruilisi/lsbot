@@ -889,6 +889,8 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 }
 
 // formatSkillsSection returns a formatted string listing eligible skills, or empty if none.
+// Default skills (metadata.default=true) have their full content inlined so the AI can
+// use them immediately without being told to "check" the skill first.
 func formatSkillsSection() string {
 	cfg, err := config.Load()
 	var disabled, extraDirs []string
@@ -902,10 +904,28 @@ func formatSkillsSection() string {
 		return ""
 	}
 	var sb strings.Builder
-	sb.WriteString("\n\nSkills:\n")
+
+	// Inline full content of default skills first so the AI has them in context.
 	for _, s := range eligible {
-		fmt.Fprintf(&sb, "  %s: %s\n", s.Name, s.Description)
+		if s.Metadata.Default && s.Content != "" {
+			fmt.Fprintf(&sb, "\n\n## Skill: %s\n%s", s.Name, s.Content)
+		}
 	}
+
+	// List remaining (non-default) skills by name + description.
+	var nonDefault []skills.SkillStatus
+	for _, s := range eligible {
+		if !s.Metadata.Default {
+			nonDefault = append(nonDefault, s)
+		}
+	}
+	if len(nonDefault) > 0 {
+		sb.WriteString("\n\nSkills:\n")
+		for _, s := range nonDefault {
+			fmt.Fprintf(&sb, "  %s: %s\n", s.Name, s.Description)
+		}
+	}
+
 	fmt.Fprintf(&sb, "\n安装 Skill: 将 skill 文件夹放入 %s 即可", skills.ShortenHomePath(report.ManagedDir))
 	return sb.String()
 }

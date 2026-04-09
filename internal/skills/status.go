@@ -81,8 +81,8 @@ func checkEligibility(entry SkillEntry) SkillStatus {
 		}
 	}
 
-	// Gate 3: always flag — skip remaining gates
-	if entry.Metadata.Always {
+	// Gate 3: always or default flag — skip remaining gates
+	if entry.Metadata.Always || entry.Metadata.Default {
 		status.Status = StatusReady
 		return status
 	}

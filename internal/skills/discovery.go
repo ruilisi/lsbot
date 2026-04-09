@@ -39,10 +39,11 @@ type SkillEntry struct {
 
 // SkillMetadata holds gating and display metadata
 type SkillMetadata struct {
-	Emoji    string       `json:"emoji,omitempty" yaml:"emoji,omitempty"`
-	OS       []string     `json:"os,omitempty" yaml:"os,omitempty"`
-	Always   bool         `json:"always,omitempty" yaml:"always,omitempty"`
-	Requires Requirements `json:"requires,omitempty" yaml:"requires,omitempty"`
+	Emoji    string        `json:"emoji,omitempty" yaml:"emoji,omitempty"`
+	OS       []string      `json:"os,omitempty" yaml:"os,omitempty"`
+	Always   bool          `json:"always,omitempty" yaml:"always,omitempty"`
+	Default  bool          `json:"default,omitempty" yaml:"default,omitempty"`
+	Requires Requirements  `json:"requires,omitempty" yaml:"requires,omitempty"`
 	Install  []InstallSpec `json:"install,omitempty" yaml:"install,omitempty"`
 }
 

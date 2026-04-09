@@ -39,6 +39,14 @@ func FormatList(report StatusReport, opts FormatListOptions) string {
 		return string(data)
 	}
 
+	// Count default skills for the header
+	defaultCount := 0
+	for _, s := range skills {
+		if s.Metadata.Default {
+			defaultCount++
+		}
+	}
+
 	if len(skills) == 0 {
 		if opts.Eligible {
 			return "No eligible skills found. Run `lsbot skills list` to see all skills."
@@ -53,8 +61,8 @@ func FormatList(report StatusReport, opts FormatListOptions) string {
 
 	var b strings.Builder
 
-	fmt.Fprintf(&b, "%sSkills%s %s(%d/%d ready)%s\n\n",
-		colorBold, colorReset, colorGray, eligible, len(skills), colorReset)
+	fmt.Fprintf(&b, "%sSkills%s %s(%d/%d ready, %d default)%s\n\n",
+		colorBold, colorReset, colorGray, eligible, len(skills), defaultCount, colorReset)
 
 	// Column widths
 	statusW := 12
@@ -254,7 +262,11 @@ func FormatCheck(report StatusReport, asJSON bool) string {
 			if emoji == "" {
 				emoji = "📦"
 			}
-			fmt.Fprintf(&b, "  %s %s\n", emoji, skill.Name)
+			tag := ""
+			if skill.Metadata.Default {
+				tag = colorGray + " [default]" + colorReset
+			}
+			fmt.Fprintf(&b, "  %s %s%s\n", emoji, skill.Name, tag)
 		}
 	}
 
@@ -293,7 +305,11 @@ func formatSkillName(entry SkillEntry) string {
 	if emoji == "" {
 		emoji = "📦"
 	}
-	return fmt.Sprintf("%s %s%s%s", emoji, colorCyan, entry.Name, colorReset)
+	name := fmt.Sprintf("%s %s%s%s", emoji, colorCyan, entry.Name, colorReset)
+	if entry.Metadata.Default {
+		name += colorGray + " [default]" + colorReset
+	}
+	return name
 }
 
 func formatMissingSummary(m MissingRequirements) string {

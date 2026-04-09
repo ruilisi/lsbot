@@ -6,6 +6,7 @@ metadata:
     "openclaw":
       {
         "emoji": "💰",
+        "default": true,
         "requires": { "bins": ["sqlite3"] },
         "install":
           [

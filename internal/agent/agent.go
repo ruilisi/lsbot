@@ -98,6 +98,18 @@ func New(cfg Config) (*Agent, error) {
 	}, nil
 }
 
+// init sets up the FTS5 table for session search once per process.
+func init() { go initHistory() }
+
+// initHistory ensures the FTS5 table exists. Called lazily on first use.
+func initHistory() {
+	if hs, err := history.Global(); err == nil {
+		if err := hs.EnsureFTS(); err != nil {
+			logger.Warn("[Agent] FTS5 init: %v", err)
+		}
+	}
+}
+
 // openaiCompatProviders maps provider names to their default base URLs and models.
 var openaiCompatProviders = map[string]struct {
 	baseURL string
@@ -1692,6 +1704,18 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name:        "session_search",
+			Description: "Search past conversations using full-text search. Returns snippets and message context from matching sessions. Use this to recall what was discussed in previous conversations.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"query":        map[string]string{"type": "string", "description": "Full-text search query"},
+					"max_sessions": map[string]any{"type": "integer", "description": "Max sessions to return (default 3)"},
+				},
+				"required": []string{"query"},
+			}),
+		},
+		Tool{
 			Name:        "user_model_write",
 			Description: "Update USER.md — your evolving model of this user's personality, communication style, preferences, and workflow habits. This is separate from MEMORY.md (general facts). Write the COMPLETE updated content; it replaces the previous file.",
 			InputSchema: jsonSchema(map[string]any{
@@ -1791,6 +1815,26 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 			return `{"error": "` + err.Error() + `"}`
 		}
 		return `{"ok": true}`
+
+	case "session_search":
+		query, _ := args["query"].(string)
+		maxSessions := 3
+		if v, ok := args["max_sessions"].(float64); ok && v > 0 {
+			maxSessions = int(v)
+		}
+		hs, err := history.Global()
+		if err != nil {
+			return fmt.Sprintf(`{"error": %q}`, err.Error())
+		}
+		results, err := hs.Search(query, maxSessions, 20)
+		if err != nil {
+			return fmt.Sprintf(`{"error": %q}`, err.Error())
+		}
+		if len(results) == 0 {
+			return `{"results": [], "message": "No matching sessions found."}`
+		}
+		out, _ := json.Marshal(results)
+		return string(out)
 	}
 
 	// Handle cron tools that need Agent context

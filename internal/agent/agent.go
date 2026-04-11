@@ -835,6 +835,8 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 	maxToolRounds := a.maxToolRounds
 	var pendingFiles []router.FileAttachment
 	toolCallCounts := map[string]int{} // track per-tool call counts
+	var trajToolCalls []ToolCallRecord  // for trajectory recording
+	turnStart := time.Now()
 	for round := range maxToolRounds {
 		if resp.FinishReason != "tool_use" {
 			break
@@ -862,10 +864,21 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 		toolResults, files := a.processToolCalls(ctx, resp.ToolCalls)
 		pendingFiles = append(pendingFiles, files...)
 
-		// Log tool results that look like errors
-		for _, result := range toolResults {
+		// Log tool results that look like errors; record for trajectory
+		for i, result := range toolResults {
 			if result.IsError || strings.HasPrefix(result.Content, "Error") {
 				logger.Warn("[Agent] Tool error (round %d/%d): %s", round+1, maxToolRounds, result.Content)
+			}
+			if i < len(resp.ToolCalls) {
+				rec := ToolCallRecord{
+					Name:   resp.ToolCalls[i].Name,
+					Input:  resp.ToolCalls[i].Input,
+					Output: result.Content,
+				}
+				if result.IsError {
+					rec.ErrMsg = result.Content
+				}
+				trajToolCalls = append(trajToolCalls, rec)
 			}
 		}
 
@@ -977,6 +990,19 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 			{Role: "assistant", Content: resp.Content},
 		})
 	}
+
+	// Save trajectory entry if enabled
+	saveTrajectory(TrajectoryEntry{
+		Timestamp:   time.Now(),
+		ConvKey:     convKey,
+		Platform:    msg.Platform,
+		Username:    msg.Username,
+		UserMessage: msg.Text,
+		ToolCalls:   trajToolCalls,
+		Response:    resp.Content,
+		RoundCount:  len(trajToolCalls),
+		DurationMs:  time.Since(turnStart).Milliseconds(),
+	})
 
 	// Log response at verbose level
 	logger.Debug("[Agent] Response: %s", resp.Content)

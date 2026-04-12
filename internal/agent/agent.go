@@ -1657,7 +1657,13 @@ func (a *Agent) processToolCalls(ctx context.Context, toolCalls []ToolCall) ([]T
 			continue
 		}
 
-		result := a.executeTool(ctx, tc.Name, tc.Input)
+		toolTimeout := 90 * time.Second
+		if strings.HasPrefix(tc.Name, "browser_") {
+			toolTimeout = 2 * time.Minute
+		}
+		toolCtx, toolCancel := context.WithTimeout(ctx, toolTimeout)
+		result := a.executeTool(toolCtx, tc.Name, tc.Input)
+		toolCancel()
 		results = append(results, ToolResult{
 			ToolCallID: tc.ID,
 			Content:    result,

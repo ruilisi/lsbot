@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"encoding/base64"
 	"strconv"
 	"strings"
 	"syscall"
@@ -594,7 +595,6 @@ func runRelay(cmd *cobra.Command, args []string) {
 		if relayE2EKeyFile != "" {
 			if priv, err := e2e.LoadKeyPair(relayE2EKeyFile); err == nil {
 				// Compact binary payload: 0x01 (version) + 16B UUID + 33B compressed P-256 pubkey = 50 bytes
-				// This produces a V3 QR code (29x29) vs V7 (45x45) for JSON, ~40% smaller.
 				pubRaw := priv.PublicKey().Bytes() // 65-byte uncompressed point: 0x04 || X(32) || Y(32)
 				uuidParsed, _ := uuid.Parse(relayBotID)
 				prefix := byte(0x02)
@@ -610,8 +610,12 @@ func runRelay(cmd *cobra.Command, args []string) {
 				if botBase != "https://bot.lingti.com" {
 					qrBytes = append(qrBytes, []byte(botBase)...)
 				}
+				// Encode as "lsbot1:<base64url>" so the QR contains only ASCII printable
+				// chars. Raw binary bytes can be corrupted by barcode scanners that
+				// interpret data as UTF-8 (e.g. Android ML Kit).
+				qrContent := "lsbot1:" + base64.RawURLEncoding.EncodeToString(qrBytes)
 				fmt.Println("[Relay] Scan with lsbot mobile to add this bot:")
-				qrterminal.GenerateWithConfig(string(qrBytes), qrterminal.Config{
+				qrterminal.GenerateWithConfig(qrContent, qrterminal.Config{
 					Level:          qrterminal.L,
 					Writer:         os.Stdout,
 					HalfBlocks:     true,

@@ -658,7 +658,7 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 
 ### Memory & Profile
 - profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
-- memory_write: Persist important facts about the user to long-term memory (replaces full MEMORY.md content)
+- memory: Manage long-term memory entries (§-delimited). Actions: add (append new fact), replace (rewrite full content), remove (delete entry containing a substring)
 - user_model_write: Update USER.md — your evolving model of the user's personality, communication style, and preferences (separate from MEMORY.md)
 
 ### Browser Automation (snapshot-then-act pattern)
@@ -1803,12 +1803,15 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
-			Name:        "memory_write",
-			Description: "Persist notes about the user to long-term memory (MEMORY.md). Call this whenever you learn something important to remember: preferences, facts, context. Pass the COMPLETE updated memory content (not just a diff) — this replaces the previous memory.",
+			Name:        "memory",
+			Description: "Manage long-term memory (MEMORY.md). Use 'add' to append a new §-delimited fact, 'replace' to rewrite full content, 'remove' to delete the first entry containing a substring. Oldest entries are trimmed automatically when the 2200-char limit is reached.",
 			InputSchema: jsonSchema(map[string]any{
-				"type":       "object",
-				"properties": map[string]any{"content": map[string]string{"type": "string", "description": "Full MEMORY.md content to persist"}},
-				"required":   []string{"content"},
+				"type": "object",
+				"properties": map[string]any{
+					"action":  map[string]string{"type": "string", "description": "One of: add, replace, remove"},
+					"content": map[string]string{"type": "string", "description": "For add/replace: the text to add or the full new content. For remove: substring to match."},
+				},
+				"required": []string{"action", "content"},
 			}),
 		},
 		Tool{
@@ -1963,12 +1966,25 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 			return `{"error": "failed to save profile: ` + err.Error() + `"}`
 		}
 		return `{"ok": true, "nickname": "` + p.Nickname + `", "timezone": "` + p.Timezone + `"}`
-	case "memory_write":
+	case "memory", "memory_write": // memory_write kept for backward compat
+		action, _ := args["action"].(string)
 		content, _ := args["content"].(string)
-		if err := userprofile.WriteMemory(content); err != nil {
+		if action == "" {
+			action = "replace" // legacy memory_write behaviour
+		}
+		var err error
+		switch action {
+		case "add":
+			err = userprofile.AppendMemory(content)
+		case "remove":
+			err = userprofile.RemoveMemoryEntry(content)
+		default: // "replace"
+			err = userprofile.WriteMemory(content)
+		}
+		if err != nil {
 			return `{"error": "` + err.Error() + `"}`
 		}
-		return `{"ok": true}`
+		return `{"ok": true, "action": "` + action + `"}`
 
 	case "user_model_write":
 		content, _ := args["content"].(string)

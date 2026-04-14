@@ -28,6 +28,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/e2e"
 	"github.com/ruilisi/lsbot/internal/mcp"
 	"github.com/ruilisi/lsbot/internal/platforms/relay"
+	"github.com/ruilisi/lsbot/internal/platforms/webapp"
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/skills"
 
@@ -52,6 +53,15 @@ var (
 // Call this before Start() on iOS to use the writable Documents directory.
 func SetDataDir(dir string) {
 	config.SetDataDir(dir)
+}
+
+// GatewayPort is the port used when running in gateway (local) mode.
+// Set before calling Start if you need a specific port; 0 = auto-assign.
+var GatewayPort = 18080
+
+// GetGatewayPort returns the actual port the gateway is listening on (useful after auto-assign).
+func GetGatewayPort() int {
+	return GatewayPort
 }
 
 // Version returns the lsbot version string (set via ldflags at build time).
@@ -146,8 +156,10 @@ func Start(configPath string) error {
 		err := startRelay(ctx, cfg)
 		emit("[lsbot] startRelay returned: %v", err)
 		return err
+	case "gateway", "local":
+		return startGateway(ctx, cfg)
 	default:
-		return fmt.Errorf("unsupported mode %q on mobile (use relay)", mode)
+		return fmt.Errorf("unsupported mode %q on mobile (use relay or gateway)", mode)
 	}
 }
 
@@ -437,4 +449,51 @@ func (w *callbackWriter) Write(p []byte) (n int, err error) {
 		w.buf.WriteString(rest)
 	}
 	return len(p), nil
+}
+
+// --- gateway startup ---
+
+func startGateway(ctx context.Context, cfg *config.Config) error {
+	provider, apiKey, baseURL, model := resolveAI(cfg)
+	if apiKey == "" {
+		return fmt.Errorf("AI API key not configured — edit .lsbot.yaml and set api_key")
+	}
+
+	agentCfg := agent.Config{
+		Provider:         provider,
+		APIKey:           apiKey,
+		BaseURL:          baseURL,
+		Model:            model,
+		AllowedPaths:     cfg.Security.AllowedPaths,
+		DisableFileTools: cfg.Security.DisableFileTools,
+		MaxToolRounds:    cfg.AI.MaxRounds,
+		CallTimeoutSecs:  cfg.AI.CallTimeoutSecs,
+	}
+
+	aiAgent, err := agent.New(agentCfg)
+	if err != nil {
+		return fmt.Errorf("failed to create agent: %w", err)
+	}
+
+	pool := agent.NewAgentPool(aiAgent, agentCfg, cfg)
+	r := router.New(pool.HandleMessage)
+
+	port := GatewayPort
+	wa, err := webapp.New(webapp.Config{Port: port})
+	if err != nil {
+		return fmt.Errorf("failed to create webapp: %w", err)
+	}
+	r.Register(wa)
+
+	if err := r.Start(ctx); err != nil {
+		return fmt.Errorf("gateway start failed: %w", err)
+	}
+
+	emit("[lsbot:gateway_port] %d", port)
+	emit("[lsbot] gateway ready on ws://localhost:%d/ws", port)
+
+	<-ctx.Done()
+	emit("[lsbot] shutting down gateway...")
+	r.Stop()
+	return nil
 }

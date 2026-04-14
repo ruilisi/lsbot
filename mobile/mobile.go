@@ -276,10 +276,15 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 		return fmt.Errorf("relay start failed: %w", err)
 	}
 
-	botPageURL := "https://bot.lingti.com/bots/" + cfg.BotID
 	emit("[lsbot] relay connected — bot ID: %s", cfg.BotID)
-	emit("[lsbot] bot page: %s", botPageURL)
-	emit("[lsbot] open bot page in your browser to start chatting")
+	emit("[lsbot:bot_id] %s", cfg.BotID)
+	// Emit public key so the mobile app can do in-process E2EE chat
+	if e2eKeyFile != "" {
+		if privKey, err2 := e2e.GenerateOrLoadKeyPair(e2eKeyFile); err2 == nil {
+			pubB64 := e2e.PublicKeyToBase64(privKey.PublicKey())
+			emit("[lsbot:pubkey] %s", pubB64)
+		}
+	}
 
 	// Block until context cancelled (Stop() called)
 	<-ctx.Done()

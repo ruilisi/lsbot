@@ -315,10 +315,9 @@ func looksLikeSkillsDir(dir string) bool {
 	return false
 }
 
-// managedSkillsDir returns the user-level skills directory
+// managedSkillsDir returns the user-level skills directory (respects config.SetDataDir).
 func managedSkillsDir() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lsbot", "skills")
+	return config.SkillsDir()
 }
 
 // HasBinary checks if a binary exists in PATH

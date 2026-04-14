@@ -136,7 +136,10 @@ func Start(configPath string) error {
 
 	switch mode {
 	case "relay":
-		return startRelay(ctx, cfg)
+		emit("[lsbot] calling startRelay...")
+		err := startRelay(ctx, cfg)
+		emit("[lsbot] startRelay returned: %v", err)
+		return err
 	default:
 		return fmt.Errorf("unsupported mode %q on mobile (use relay)", mode)
 	}
@@ -178,14 +181,15 @@ func RunCommand(args string) (string, error) {
 // --- relay startup ---
 
 func startRelay(ctx context.Context, cfg *config.Config) error {
-	// Resolve AI provider from config
+	emit("[lsbot] resolving AI config...")
 	provider, apiKey, baseURL, model := resolveAI(cfg)
+	emit("[lsbot] provider=%s hasKey=%v", provider, apiKey != "")
 
 	if apiKey == "" {
-		return fmt.Errorf("AI API key not configured — edit .lsbot.yaml and set ai.api_key")
+		return fmt.Errorf("AI API key not configured — edit .lsbot.yaml and set api_key")
 	}
 
-	// E2E key file
+	emit("[lsbot] setting up E2E key...")
 	e2eKeyFile := cfg.E2EKeyFile
 	if e2eKeyFile == "" {
 		homeDir, _ := os.UserHomeDir()
@@ -203,6 +207,7 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 		}
 	}
 
+	emit("[lsbot] creating agent...")
 	// MCP servers from config
 	var mcpServers []mcpclient.ServerConfig
 	for _, s := range cfg.AI.MCPServers {
@@ -227,10 +232,12 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 	if err != nil {
 		return fmt.Errorf("failed to create agent: %w", err)
 	}
+	emit("[lsbot] agent created, setting up router...")
 
 	pool := agent.NewAgentPool(aiAgent, agentCfg, cfg)
 	r := router.New(pool.HandleMessage)
 
+	emit("[lsbot] setting up cron...")
 	// Cron scheduler
 	homeDir, _ := os.UserHomeDir()
 	cronPath := filepath.Join(homeDir, ".lsbot.db")
@@ -242,6 +249,7 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 		defer cronScheduler.Stop()
 	}
 
+	emit("[lsbot] connecting relay...")
 	// Relay platform
 	relayUserID := cfg.Relay.UserID
 	relayPlatform := cfg.Relay.Platform
@@ -337,14 +345,25 @@ func toggleSkill(name string, enable bool, cfg *config.Config) error {
 // --- helpers ---
 
 func resolveAI(cfg *config.Config) (provider, apiKey, baseURL, model string) {
-	// Try named providers / agents first
+	// 1. Try named provider / relay.provider / ai.provider
 	if resolved, found := cfg.ResolveProvider(""); found {
 		provider = resolved.Provider
 		apiKey = resolved.APIKey
 		baseURL = resolved.BaseURL
 		model = resolved.Model
 	}
-	// Fall back to flat ai: block
+	// 2. If still no key, use the default agent directly
+	if apiKey == "" {
+		if id := cfg.DefaultAgentID(); id != "" {
+			if resolved, found := cfg.ResolveProvider(id); found {
+				provider = resolved.Provider
+				apiKey = resolved.APIKey
+				baseURL = resolved.BaseURL
+				model = resolved.Model
+			}
+		}
+	}
+	// 3. Fall back to flat ai: block
 	if provider == "" {
 		provider = cfg.AI.Provider
 	}
@@ -357,13 +376,16 @@ func resolveAI(cfg *config.Config) (provider, apiKey, baseURL, model string) {
 	if model == "" {
 		model = cfg.AI.Model
 	}
-	// Fall back to env vars
+	// 4. Fall back to env vars
 	if apiKey == "" {
 		apiKey = os.Getenv("AI_API_KEY")
 	}
 	if apiKey == "" {
 		apiKey = os.Getenv("ANTHROPIC_API_KEY")
 	}
+	// Trim whitespace/newlines from key (YAML multiline quirk)
+	apiKey = strings.TrimSpace(apiKey)
+	model = strings.TrimSpace(model)
 	return
 }
 

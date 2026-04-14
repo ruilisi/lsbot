@@ -276,7 +276,10 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 		return fmt.Errorf("relay start failed: %w", err)
 	}
 
+	botPageURL := "https://bot.lingti.com/bots/" + cfg.BotID
 	emit("[lsbot] relay connected — bot ID: %s", cfg.BotID)
+	emit("[lsbot] bot page: %s", botPageURL)
+	emit("[lsbot] open bot page in your browser to start chatting")
 
 	// Block until context cancelled (Stop() called)
 	<-ctx.Done()

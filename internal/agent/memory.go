@@ -114,6 +114,24 @@ func (m *ConversationMemory) AddExchange(key string, userMsg, assistantMsg Messa
 	}
 }
 
+// Replace atomically replaces the full message list for a conversation key.
+// Used after context compression to sync the in-memory store with the
+// condensed message set.
+func (m *ConversationMemory) Replace(key string, msgs []Message) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	conv, ok := m.conversations[key]
+	if !ok {
+		conv = &Conversation{}
+		m.conversations[key] = conv
+	}
+	cp := make([]Message, len(msgs))
+	copy(cp, msgs)
+	conv.Messages = cp
+	conv.UpdatedAt = time.Now()
+}
+
 // Clear clears the conversation history for a key
 func (m *ConversationMemory) Clear(key string) {
 	m.mu.Lock()

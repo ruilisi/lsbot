@@ -94,6 +94,9 @@ func Start(configPath string) error {
 	mu.Unlock()
 
 	defer func() {
+		if r := recover(); r != nil {
+			emit("[lsbot] panic: %v", r)
+		}
 		mu.Lock()
 		running = false
 		cancelFn = nil

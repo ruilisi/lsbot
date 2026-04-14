@@ -29,7 +29,7 @@ import (
 const (
 	DefaultServerURL  = "wss://bot.lingti.com/ws"
 	DefaultWebhookURL = "https://bot.lingti.com/webhook"
-	ClientVersion     = "2.1.8"
+	ClientVersion     = "2.2.0"
 
 	writeTimeout      = 10 * time.Second
 	readTimeout       = 60 * time.Second
@@ -709,9 +709,8 @@ func (p *Platform) readLoop() {
 			if closeErr, ok := err.(*websocket.CloseError); ok {
 				// Policy violation means another client connected with same user-id
 				if closeErr.Code == websocket.ClosePolicyViolation {
-					log.Printf("[Relay] Disconnected: %s", closeErr.Text)
-					log.Printf("[Relay] Exiting - please ensure only one client is running per user-id")
-					os.Exit(1)
+					log.Printf("[Relay] Disconnected: policy violation — %s", closeErr.Text)
+					return
 				}
 				if closeErr.Text != "" {
 					log.Printf("[Relay] Connection closed by server: %s", closeErr.Text)

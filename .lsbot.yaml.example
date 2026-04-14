@@ -1,227 +1,140 @@
-# lsbot-example.yaml
-# Copy this file to ~/.lsbot.yaml and fill in your credentials.
-# Only configure sections relevant to your setup — everything is optional.
-#
-# Usage:
-#   cp .lsbot.yaml.example ~/.lsbot.yaml
-
-# ── Agents ────────────────────────────────────────────────────────────────────
-# Each agent is an independent AI persona with its own provider credentials,
-# instructions, and workspace. Use `lsbot agents add` to add interactively.
-#
-# Fields:
-#   id           — unique key, referenced in bindings
-#   default      — true = used when no binding matches
-#   provider     — AI provider name: deepseek | kimi | claude | openai | gemini | qwen | minimax | ollama
-#   api_key      — provider API key
-#   model        — model name (optional; uses provider default if omitted)
-#   base_url     — custom API endpoint (optional; for self-hosted/proxy)
-#   fallbacks    — ordered list of agent IDs to try when quota is exhausted
-#   instructions — system prompt text, or path to a .md/.txt file
-#   workspace    — root directory for file operations
-#   allow_tools  — whitelist of MCP tool names; empty = allow all
-#   deny_tools   — blacklist of MCP tool names (applied after allowlist)
-
-agents:
-  - id: default
-    default: true
-    provider: deepseek
-    api_key: sk-YOUR_DEEPSEEK_KEY
-    model: deepseek-chat
-    instructions: "You are a helpful assistant."
-    workspace: ~/Projects
-
-  - id: coder
-    provider: claude
-    api_key: sk-ant-YOUR_ANTHROPIC_KEY
-    model: claude-sonnet-4-20250514
-    instructions: |
-      You are an expert software engineer. Focus on writing clean, efficient code.
-      Always explain your reasoning before making changes.
-    workspace: ~/Projects
-    deny_tools:
-      - file_trash         # don't allow deleting to trash
-      - notification_send  # no desktop popups
-
-  - id: writer
-    provider: kimi
-    api_key: sk-YOUR_KIMI_KEY
-    model: kimi-k2.5
-    instructions: ~/agents/writer-instructions.md   # load from file
-    workspace: ~/Documents/writing
-
-# ── Bindings ──────────────────────────────────────────────────────────────────
-# Map incoming messages to agents based on platform and/or channel ID.
-# Rules are checked top-to-bottom; first match wins.
-# If no binding matches, the agent marked default:true is used.
-#
-# Use `lsbot agents bind <agent-id> --bind <platform>[:<channel_id>]` to add.
-
-bindings:
-  - agent_id: coder
-    comment: "Slack #dev channel → coder agent"
-    match:
-      platform: slack
-      channel_id: C12345ABCDE
-
-  - agent_id: writer
-    comment: "All Telegram messages → writer agent"
-    match:
-      platform: telegram
-
-  - agent_id: default
-    comment: "Everything else"
-    match: {}
-
-# ── Relay ─────────────────────────────────────────────────────────────────────
-# Run lsbot as a bot on one platform.
-# platform: wecom | feishu | slack | wechat
-
-relay:
-  platform: wecom
-  provider: default     # agent ID or provider type to use for relay messages
-  # server_url: wss://lsbot.org/ws          # override default (wss://bot.lingti.com/ws)
-  # webhook_url: https://lsbot.org/webhook  # override default (https://bot.lingti.com/webhook)
-
-# ── Platforms ─────────────────────────────────────────────────────────────────
-# Fill in credentials for whichever platform(s) you use.
-# Use `lsbot channels add` to configure interactively.
-# Unused platforms can be left commented out or removed entirely.
-
-platforms:
-  wecom:
-    corp_id: "YOUR_CORP_ID"
-    agent_id: "YOUR_AGENT_ID"
-    secret: "YOUR_SECRET"
-    token: "YOUR_TOKEN"
-    aes_key: "YOUR_AES_KEY"
-
-  feishu:
-    app_id: "YOUR_APP_ID"
-    app_secret: "YOUR_APP_SECRET"
-
-  slack:
-    bot_token: "xoxb-YOUR_BOT_TOKEN"
-    app_token: "xapp-YOUR_APP_TOKEN"
-
-  telegram:
-    token: "YOUR_BOT_TOKEN"
-
-  discord:
-    token: "YOUR_BOT_TOKEN"
-
-  dingtalk:
-    client_id: "YOUR_CLIENT_ID"
-    client_secret: "YOUR_CLIENT_SECRET"
-
-  whatsapp:
-    phone_number_id: "YOUR_PHONE_NUMBER_ID"
-    access_token: "YOUR_ACCESS_TOKEN"
-    verify_token: "YOUR_VERIFY_TOKEN"
-
-  line:
-    channel_secret: "YOUR_CHANNEL_SECRET"
-    channel_token: "YOUR_CHANNEL_TOKEN"
-
-  teams:
-    app_id: "YOUR_APP_ID"
-    app_password: "YOUR_APP_PASSWORD"
-    tenant_id: "YOUR_TENANT_ID"
-
-  matrix:
-    homeserver_url: "https://matrix.org"
-    user_id: "@bot:matrix.org"
-    access_token: "YOUR_ACCESS_TOKEN"
-
-  mattermost:
-    server_url: "https://your-mattermost.com"
-    token: "YOUR_BOT_TOKEN"
-    team_name: "your-team"
-
-  googlechat:
-    project_id: "YOUR_PROJECT_ID"
-    credentials_file: "/path/to/credentials.json"
-
-  imessage:
-    bluebubbles_url: "http://localhost:1234"
-    bluebubbles_password: "YOUR_PASSWORD"
-
-  signal:
-    api_url: "http://localhost:8080"
-    phone_number: "+1234567890"
-
-  twitch:
-    token: "YOUR_OAUTH_TOKEN"
-    channel: "your_channel"
-    bot_name: "your_bot"
-
-  nostr:
-    private_key: "YOUR_NSEC_PRIVATE_KEY"
-    relays: "wss://relay.damus.io,wss://relay.nostr.info"
-
-  zalo:
-    app_id: "YOUR_APP_ID"
-    secret_key: "YOUR_SECRET_KEY"
-    access_token: "YOUR_ACCESS_TOKEN"
-
-  nextcloud:
-    server_url: "https://your-nextcloud.com"
-    username: "bot"
-    password: "YOUR_PASSWORD"
-    room_token: "YOUR_ROOM_TOKEN"
-
-  webapp:
-    port: 8686
-    token: "YOUR_ACCESS_TOKEN"
-
-# ── AI settings ───────────────────────────────────────────────────────────────
-ai:
-  max_rounds: 100     # max tool-call iterations per message
-  call_timeout_secs: 90   # base timeout (seconds) for each AI API call; increase for slow local models like Ollama
-
-  # Override AI provider per platform or per channel (legacy; prefer agents+bindings above)
-  overrides:
-    - platform: telegram
-      provider: claude
-    - platform: slack
-      channel_id: C12345ABCDE    # optional: restrict to a specific channel
-      provider: openai
-
-  # External MCP tool servers — bot connects on startup and exposes their tools
-  mcp_servers:
-    - name: chrome
-      command: npx
-      args: ["-y", "chrome-devtools-mcp@latest", "--browser-url=http://127.0.0.1:9222", "--no-usage-statistics"]
-    # - name: my_server
-    #   url: http://localhost:3000/sse
-
-# ── Security ──────────────────────────────────────────────────────────────────
+transport: stdio
+port: 8686
 security:
-  allowed_paths:
-    - ~/Projects
-    - ~/Documents
-  blocked_commands:
-    - "rm -rf /"
-    - "mkfs"
-  # require_confirmation: []    # commands that need user approval before running
-  # disable_file_tools: false   # set true to block all file_read/file_write tools
-
-# ── Logging ───────────────────────────────────────────────────────────────────
+    allowed_paths:
+        - ~/Projects
+        - ~/Documents
+    blocked_commands:
+        - rm -rf /
+        - mkfs
+    require_confirmation: []
+    disable_file_tools: false
 logging:
-  level: info           # debug | info | warn | error
-  file: /tmp/lsbot.log
-
-# ── Skills ────────────────────────────────────────────────────────────────────
-# skills:
-#   disabled:
-#     - weather       # disable bundled skills by name
-#   extra_dirs:
-#     - ~/my-skills   # load additional skills from custom directories
-
-# ── Security keys ─────────────────────────────────────────────────────────────
-# e2e_key_file: ~/.lsbot/e2e.pem   # path to E2EE key pair (PEM); generated by `lsbot e2e regen`
-
-# ── Browser automation ────────────────────────────────────────────────────────
-# browser:
-#   screen_size: fullscreen     # or e.g. 1280x800
-#   cdp_url: "127.0.0.1:9222"
+    level: info
+    file: /tmp/lsbot.log
+ai:
+    max_rounds: 100
+    call_timeout_secs: 90
+    mcp_servers:
+        - name: chrome
+          command: npx
+          args:
+            - -y
+            - chrome-devtools-mcp@latest
+            - --browser-url=http://127.0.0.1:9222
+            - --no-usage-statistics
+    overrides:
+        - platform: telegram
+          provider: claude
+        - platform: slack
+          channel_id: C12345ABCDE
+          provider: openai
+platforms:
+    wecom:
+        corp_id: YOUR_CORP_ID
+        agent_id: YOUR_AGENT_ID
+        secret: YOUR_SECRET
+        token: YOUR_TOKEN
+        aes_key: YOUR_AES_KEY
+    slack:
+        bot_token: xoxb-YOUR_BOT_TOKEN
+        app_token: xapp-YOUR_APP_TOKEN
+    telegram:
+        token: YOUR_BOT_TOKEN
+    discord:
+        token: YOUR_BOT_TOKEN
+    feishu:
+        app_id: YOUR_APP_ID
+        app_secret: YOUR_APP_SECRET
+    dingtalk:
+        client_id: YOUR_CLIENT_ID
+        client_secret: YOUR_CLIENT_SECRET
+    whatsapp:
+        phone_number_id: YOUR_PHONE_NUMBER_ID
+        access_token: YOUR_ACCESS_TOKEN
+        verify_token: YOUR_VERIFY_TOKEN
+    line:
+        channel_secret: YOUR_CHANNEL_SECRET
+        channel_token: YOUR_CHANNEL_TOKEN
+    teams:
+        app_id: YOUR_APP_ID
+        app_password: YOUR_APP_PASSWORD
+        tenant_id: YOUR_TENANT_ID
+    matrix:
+        homeserver_url: https://matrix.org
+        user_id: '@bot:matrix.org'
+        access_token: YOUR_ACCESS_TOKEN
+    googlechat:
+        project_id: YOUR_PROJECT_ID
+        credentials_file: /path/to/credentials.json
+    mattermost:
+        server_url: https://your-mattermost.com
+        token: YOUR_BOT_TOKEN
+        team_name: your-team
+    imessage:
+        bluebubbles_url: http://localhost:1234
+        bluebubbles_password: YOUR_PASSWORD
+    signal:
+        api_url: http://localhost:8080
+        phone_number: "+1234567890"
+    twitch:
+        token: YOUR_OAUTH_TOKEN
+        channel: your_channel
+        bot_name: your_bot
+    nostr:
+        private_key: YOUR_NSEC_PRIVATE_KEY
+        relays: wss://relay.damus.io,wss://relay.nostr.info
+    zalo:
+        app_id: YOUR_APP_ID
+        secret_key: YOUR_SECRET_KEY
+        access_token: YOUR_ACCESS_TOKEN
+    nextcloud:
+        server_url: https://your-nextcloud.com
+        username: bot
+        password: YOUR_PASSWORD
+        room_token: YOUR_ROOM_TOKEN
+    webapp:
+        port: 8686
+        token: YOUR_ACCESS_TOKEN
+relay:
+    platform: wecom
+    provider: default
+agents:
+    - id: default
+      default: true
+      provider: deepseek
+      api_key: sk-YOUR_DEEPSEEK_KEY
+      model: deepseek-chat
+      instructions: You are a helpful assistant.
+      workspace: ~/Projects
+    - id: coder
+      provider: claude
+      api_key: sk-ant-YOUR_ANTHROPIC_KEY
+      model: claude-sonnet-4-20250514
+      instructions: |
+        You are an expert software engineer. Focus on writing clean, efficient code.
+        Always explain your reasoning before making changes.
+      workspace: ~/Projects
+      deny_tools:
+        - file_trash
+        - notification_send
+    - id: writer
+      provider: kimi
+      api_key: sk-YOUR_KIMI_KEY
+      model: kimi-k2.5
+      instructions: ~/agents/writer-instructions.md
+      workspace: ~/Documents/writing
+bindings:
+    - agent_id: coder
+      comment: 'Slack #dev channel → coder agent'
+      match:
+        platform: slack
+        channel_id: C12345ABCDE
+    - agent_id: writer
+      comment: All Telegram messages → writer agent
+      match:
+        platform: telegram
+    - agent_id: default
+      comment: Everything else
+      match: {}
+bot_id: 4b27f1e9-43d0-421d-9c7f-c87edb487e8d

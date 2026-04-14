@@ -318,11 +318,16 @@ func runSkillsCommand(args []string, cfg *config.Config) (string, error) {
 		return "", toggleSkill(args[1], false, cfg)
 	}
 	if args[0] == "download" {
-		count, err := skills.DownloadBundledSkills("")
+		emit("[lsbot] fetching skills from GitHub...")
+		count, err := skills.DownloadBundledSkills("", func(skill string) {
+			emit("[lsbot] installed skill: %s", skill)
+		})
 		if err != nil {
 			return "", err
 		}
-		return fmt.Sprintf("Downloaded %d skills to %s", count, config.SkillsDir()), nil
+		msg := fmt.Sprintf("[lsbot] downloaded %d skills to %s", count, config.SkillsDir())
+		emit(msg)
+		return msg, nil
 	}
 
 	return "", fmt.Errorf("unknown skills subcommand: %s", args[0])

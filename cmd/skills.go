@@ -125,7 +125,7 @@ func runSkillsCheck(_ *cobra.Command, _ []string) {
 
 func runSkillsDownload(_ *cobra.Command, _ []string) {
 	fmt.Println("Downloading bundled skills from GitHub...")
-	count, err := skills.DownloadBundledSkills("")
+	count, err := skills.DownloadBundledSkills("", nil)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)

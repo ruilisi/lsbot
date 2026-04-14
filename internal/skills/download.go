@@ -20,7 +20,8 @@ const (
 
 // DownloadBundledSkills downloads bundled skills from GitHub into the managed skills directory.
 // It overwrites existing skills with the same name.
-func DownloadBundledSkills(destDir string) (int, error) {
+// progress is called with each skill name as it is installed (may be nil).
+func DownloadBundledSkills(destDir string, progress func(skill string)) (int, error) {
 	if destDir == "" {
 		destDir = managedSkillsDir()
 	}
@@ -99,6 +100,10 @@ func DownloadBundledSkills(destDir string) (int, error) {
 
 			if filepath.Base(target) == "SKILL.md" {
 				count++
+				if progress != nil {
+					skillName := filepath.Base(filepath.Dir(target))
+					progress(skillName)
+				}
 			}
 		}
 	}

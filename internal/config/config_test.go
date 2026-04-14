@@ -39,22 +39,22 @@ func TestResolveAI_ChannelOverride(t *testing.T) {
 	}
 }
 
-func TestResolveProvider_ExactMatch(t *testing.T) {
+func TestResolveProvider_ByAgentID(t *testing.T) {
 	cfg := &Config{
-		Providers: map[string]ProviderEntry{
-			"my-kimi": {Provider: "kimi", APIKey: "ak-xxx", Model: "kimi-k2.5"},
+		Agents: []AgentEntry{
+			{ID: "coder", Provider: "kimi", APIKey: "ak-xxx", Model: "kimi-k2.5"},
 		},
 	}
-	e, ok := cfg.ResolveProvider("my-kimi")
+	e, ok := cfg.ResolveProvider("coder")
 	if !ok || e.Provider != "kimi" || e.APIKey != "ak-xxx" {
-		t.Errorf("expected exact match, got ok=%v entry=%+v", ok, e)
+		t.Errorf("expected match by agent ID, got ok=%v entry=%+v", ok, e)
 	}
 }
 
 func TestResolveProvider_ByProviderType(t *testing.T) {
 	cfg := &Config{
-		Providers: map[string]ProviderEntry{
-			"my-kimi": {Provider: "kimi", APIKey: "ak-xxx", Model: "kimi-k2.5"},
+		Agents: []AgentEntry{
+			{ID: "coder", Provider: "kimi", APIKey: "ak-xxx", Model: "kimi-k2.5"},
 		},
 	}
 	e, ok := cfg.ResolveProvider("kimi")
@@ -75,14 +75,14 @@ func TestResolveProvider_BackwardCompat(t *testing.T) {
 
 func TestResolveProvider_EmptyName(t *testing.T) {
 	cfg := &Config{
-		Relay: RelayConfig{Provider: "my-kimi"},
-		Providers: map[string]ProviderEntry{
-			"my-kimi": {Provider: "kimi", APIKey: "ak-xxx"},
+		Relay: RelayConfig{Provider: "kimi"},
+		Agents: []AgentEntry{
+			{ID: "default", Default: true, Provider: "kimi", APIKey: "ak-xxx"},
 		},
 	}
 	e, ok := cfg.ResolveProvider("")
 	if !ok || e.Provider != "kimi" {
-		t.Errorf("expected fallback to relay.provider, got ok=%v entry=%+v", ok, e)
+		t.Errorf("expected fallback to relay.provider → agent, got ok=%v entry=%+v", ok, e)
 	}
 }
 

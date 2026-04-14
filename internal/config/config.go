@@ -9,21 +9,20 @@ import (
 )
 
 type Config struct {
-	Transport string                    `yaml:"transport"` // "stdio" or "sse"
-	Port      int                       `yaml:"port"`
-	Security  SecurityConfig            `yaml:"security"`
-	Logging   LoggingConfig             `yaml:"logging"`
-	AI        AIConfig                  `yaml:"ai,omitempty"`
-	Providers map[string]ProviderEntry  `yaml:"providers,omitempty"`
-	Platforms PlatformConfig            `yaml:"platforms,omitempty"`
-	Mode      string                    `yaml:"mode,omitempty"` // "relay" or "router"
-	Relay     RelayConfig               `yaml:"relay,omitempty"`
-	Skills    SkillsConfig              `yaml:"skills,omitempty"`
-	Browser   BrowserConfig             `yaml:"browser,omitempty"`
-	Agents    []AgentEntry              `yaml:"agents,omitempty"`
-	Bindings  []AgentBinding            `yaml:"bindings,omitempty"`
-	BotID      string                    `yaml:"bot_id,omitempty"`
-	E2EKeyFile string                    `yaml:"e2e_key_file,omitempty"` // path to PEM key file
+	Transport  string         `yaml:"transport"` // "stdio" or "sse"
+	Port       int            `yaml:"port"`
+	Security   SecurityConfig `yaml:"security"`
+	Logging    LoggingConfig  `yaml:"logging"`
+	AI         AIConfig       `yaml:"ai,omitempty"`
+	Platforms  PlatformConfig `yaml:"platforms,omitempty"`
+	Mode       string         `yaml:"mode,omitempty"` // "relay" or "router"
+	Relay      RelayConfig    `yaml:"relay,omitempty"`
+	Skills     SkillsConfig   `yaml:"skills,omitempty"`
+	Browser    BrowserConfig  `yaml:"browser,omitempty"`
+	Agents     []AgentEntry   `yaml:"agents,omitempty"`
+	Bindings   []AgentBinding `yaml:"bindings,omitempty"`
+	BotID      string         `yaml:"bot_id,omitempty"`
+	E2EKeyFile string         `yaml:"e2e_key_file,omitempty"` // path to PEM key file
 }
 
 // ProviderEntry defines a named AI provider configuration.
@@ -107,6 +106,7 @@ type AgentEntry struct {
 	APIKey       string   `yaml:"api_key,omitempty"`
 	BaseURL      string   `yaml:"base_url,omitempty"`
 	Model        string   `yaml:"model,omitempty"`
+	Fallbacks    []string `yaml:"fallbacks,omitempty"`    // ordered list of fallback agent IDs or provider types
 	Instructions string   `yaml:"instructions,omitempty"` // inline text or path to a file
 	Workspace    string   `yaml:"workspace,omitempty"`    // workspace directory for this agent
 	AllowTools   []string `yaml:"allow_tools,omitempty"`  // whitelist; empty = allow all
@@ -157,11 +157,10 @@ func (c *Config) ResolveAI(platform, channelID string) AIConfig {
 	return base
 }
 
-// ResolveProvider looks up a named provider. Resolution order:
-//  1. Exact key match in Providers map
-//  2. Scan Providers for entry whose .Provider field matches name
-//  3. If Providers map is empty, construct from ai: block (backward compat)
-//  4. If name is empty, fall back: relay.provider → ai.provider
+// ResolveProvider looks up a provider by name. Resolution order:
+//  1. Search agents by ID or provider type (inline credentials)
+//  2. Backward compat: construct from ai: block
+//  3. If name is empty, fall back: relay.provider → ai.provider
 func (c *Config) ResolveProvider(name string) (ProviderEntry, bool) {
 	if name == "" {
 		name = c.Relay.Provider
@@ -173,44 +172,28 @@ func (c *Config) ResolveProvider(name string) (ProviderEntry, bool) {
 		return ProviderEntry{}, false
 	}
 
-	if len(c.Providers) > 0 {
-		// 1. Exact key match
-		if e, ok := c.Providers[name]; ok {
-			if e.Provider == "" {
-				e.Provider = name
-			}
-			return e, true
+	// 1. Search agents by ID or provider type
+	for _, a := range c.Agents {
+		if strings.EqualFold(a.ID, name) || strings.EqualFold(a.Provider, name) {
+			ai := c.ResolveAgentAI(a)
+			return ProviderEntry{
+				Provider:  ai.Provider,
+				APIKey:    ai.APIKey,
+				BaseURL:   ai.BaseURL,
+				Model:     ai.Model,
+				Fallbacks: a.Fallbacks,
+			}, true
 		}
-		// 2. Match by provider type
-		for _, e := range c.Providers {
-			if strings.EqualFold(e.Provider, name) {
-				return e, true
-			}
-		}
-		return ProviderEntry{}, false
 	}
 
-	// 3. Backward compat: construct from ai: block
-	if strings.EqualFold(c.AI.Provider, name) || name == "" {
+	// 2. Backward compat: construct from ai: block
+	if strings.EqualFold(c.AI.Provider, name) {
 		return ProviderEntry{
 			Provider: c.AI.Provider,
 			APIKey:   c.AI.APIKey,
 			BaseURL:  c.AI.BaseURL,
 			Model:    c.AI.Model,
 		}, true
-	}
-
-	// 4. Search agents by ID or provider type
-	for _, a := range c.Agents {
-		if strings.EqualFold(a.ID, name) || strings.EqualFold(a.Provider, name) {
-			ai := c.ResolveAgentAI(a)
-			return ProviderEntry{
-				Provider: ai.Provider,
-				APIKey:   ai.APIKey,
-				BaseURL:  ai.BaseURL,
-				Model:    ai.Model,
-			}, true
-		}
 	}
 
 	// Provider name doesn't match anything — return entry with just the provider name

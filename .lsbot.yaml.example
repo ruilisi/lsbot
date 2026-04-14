@@ -5,77 +5,36 @@
 # Usage:
 #   cp .lsbot.yaml.example ~/.lsbot.yaml
 
-# ── AI Providers ──────────────────────────────────────────────────────────────
-# Define named providers; reference them by key in agents or relay.provider.
-# You can define multiple providers and switch between them without restarting.
-
-providers:
-  deepseek:
-    provider: deepseek
-    api_key: sk-YOUR_DEEPSEEK_KEY
-    base_url: https://api.deepseek.com/v1
-    model: deepseek-chat
-
-  kimi:
-    provider: kimi
-    api_key: sk-YOUR_KIMI_KEY
-    model: kimi-k2.5
-
-  minimax:
-    provider: minimax
-    api_key: sk-YOUR_MINIMAX_KEY
-    base_url: https://api.minimax.chat/v1
-    model: MiniMax-M2.5
-
-  claude:
-    provider: claude
-    api_key: sk-ant-YOUR_ANTHROPIC_KEY
-    model: claude-sonnet-4-20250514
-
-  openai:
-    provider: openai
-    api_key: sk-YOUR_OPENAI_KEY
-    model: gpt-4o
-
-  gemini:
-    provider: gemini
-    api_key: YOUR_GEMINI_KEY
-    model: gemini-2.0-flash
-
-  qwen:
-    provider: qwen
-    api_key: sk-YOUR_QWEN_KEY
-    model: qwen-turbo
-
-  ollama:
-    provider: ollama
-    base_url: http://localhost:11434/v1
-    model: llama3.2
-
 # ── Agents ────────────────────────────────────────────────────────────────────
-# Each agent is an independent AI persona with its own provider, instructions,
-# and workspace directory. Use `lsbot agents add` to add interactively.
+# Each agent is an independent AI persona with its own provider credentials,
+# instructions, and workspace. Use `lsbot agents add` to add interactively.
 #
 # Fields:
 #   id           — unique key, referenced in bindings
 #   default      — true = used when no binding matches
-#   provider     — references a key in `providers` above (or inline provider name)
-#   api_key      — overrides the provider's api_key (optional)
-#   model        — overrides the provider's model (optional)
+#   provider     — AI provider name: deepseek | kimi | claude | openai | gemini | qwen | minimax | ollama
+#   api_key      — provider API key
+#   model        — model name (optional; uses provider default if omitted)
+#   base_url     — custom API endpoint (optional; for self-hosted/proxy)
+#   fallbacks    — ordered list of agent IDs to try when quota is exhausted
 #   instructions — system prompt text, or path to a .md/.txt file
-#   workspace    — root directory for file operations (defaults to ~/.lingti/agents/<id>)
+#   workspace    — root directory for file operations
 #   allow_tools  — whitelist of MCP tool names; empty = allow all
 #   deny_tools   — blacklist of MCP tool names (applied after allowlist)
 
 agents:
   - id: default
     default: true
-    provider: deepseek    # references providers.deepseek above
+    provider: deepseek
+    api_key: sk-YOUR_DEEPSEEK_KEY
+    model: deepseek-chat
     instructions: "You are a helpful assistant."
     workspace: ~/Projects
 
   - id: coder
     provider: claude
+    api_key: sk-ant-YOUR_ANTHROPIC_KEY
+    model: claude-sonnet-4-20250514
     instructions: |
       You are an expert software engineer. Focus on writing clean, efficient code.
       Always explain your reasoning before making changes.
@@ -86,6 +45,8 @@ agents:
 
   - id: writer
     provider: kimi
+    api_key: sk-YOUR_KIMI_KEY
+    model: kimi-k2.5
     instructions: ~/agents/writer-instructions.md   # load from file
     workspace: ~/Documents/writing
 
@@ -118,7 +79,7 @@ bindings:
 
 relay:
   platform: wecom
-  provider: kimi        # references a key in providers above
+  provider: default     # agent ID or provider type to use for relay messages
   # server_url: wss://lsbot.org/ws          # override default (wss://bot.lingti.com/ws)
   # webhook_url: https://lsbot.org/webhook  # override default (https://bot.lingti.com/webhook)
 

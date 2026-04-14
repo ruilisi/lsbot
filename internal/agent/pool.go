@@ -48,10 +48,7 @@ func (p *AgentPool) HandleMessage(ctx context.Context, msg router.Message) (rout
 		return p.handleWithAgentRouting(ctx, msg)
 	}
 
-	// --- LEGACY PATH: named providers or ai.overrides ---
-	if len(p.fullCfg.Providers) > 0 {
-		return p.defaultAgent.HandleMessage(ctx, msg)
-	}
+	// --- LEGACY PATH: ai.overrides ---
 	if len(p.fullCfg.AI.Overrides) == 0 {
 		return p.defaultAgent.HandleMessage(ctx, msg)
 	}

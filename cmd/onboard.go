@@ -268,30 +268,63 @@ func runOnboard(cmd *cobra.Command, args []string) {
 	printOnboardSummary(cfg)
 }
 
+// upsertDefaultAgent writes provider credentials inline onto the default agent,
+// creating it if none exists yet.
+func upsertDefaultAgent(cfg *config.Config, provider, apiKey, baseURL, model string) {
+	for i, a := range cfg.Agents {
+		if a.Default || a.ID == "default" {
+			if provider != "" {
+				cfg.Agents[i].Provider = provider
+			}
+			if apiKey != "" {
+				cfg.Agents[i].APIKey = apiKey
+			}
+			if baseURL != "" {
+				cfg.Agents[i].BaseURL = baseURL
+			}
+			if model != "" {
+				cfg.Agents[i].Model = model
+			}
+			return
+		}
+	}
+	// No default agent yet — create one
+	entry := config.AgentEntry{ID: "default", Default: true, Provider: provider}
+	if apiKey != "" {
+		entry.APIKey = apiKey
+	}
+	if baseURL != "" {
+		entry.BaseURL = baseURL
+	}
+	if model != "" {
+		entry.Model = model
+	}
+	cfg.Agents = append([]config.AgentEntry{entry}, cfg.Agents...)
+}
+
+// resolveDisplayProvider returns the provider name and masked key from the default agent.
+func resolveDisplayProvider(cfg *config.Config) (string, string) {
+	for _, a := range cfg.Agents {
+		if a.Default || a.ID == "default" {
+			return a.Provider, a.APIKey
+		}
+	}
+	if len(cfg.Agents) > 0 {
+		return cfg.Agents[0].Provider, cfg.Agents[0].APIKey
+	}
+	return "", ""
+}
+
 func hasOnboardFlags(_ *cobra.Command) bool {
 	return onboardProvider != "" || onboardAPIKey != "" || onboardPlatform != ""
 }
 
 func applyOnboardFlags(cfg *config.Config) {
 	if onboardProvider != "" {
-		// Write to named providers map (new format)
-		entry := config.ProviderEntry{Provider: onboardProvider}
-		if onboardAPIKey != "" {
-			entry.APIKey = onboardAPIKey
-		}
-		if onboardBaseURL != "" {
-			entry.BaseURL = onboardBaseURL
-		}
-		if onboardModel != "" {
-			entry.Model = onboardModel
-		}
-		name := onboardProvider
-		if cfg.Providers == nil {
-			cfg.Providers = make(map[string]config.ProviderEntry)
-		}
-		cfg.Providers[name] = entry
-		cfg.Relay.Provider = name
-		// Also keep ai: block for backward compat
+		// Write inline credentials directly onto the default agent
+		upsertDefaultAgent(cfg, onboardProvider, onboardAPIKey, onboardBaseURL, onboardModel)
+		cfg.Relay.Provider = onboardProvider
+		// Keep ai: block for backward compat with older lsbot versions
 		cfg.AI.Provider = onboardProvider
 		if onboardAPIKey != "" {
 			cfg.AI.APIKey = onboardAPIKey
@@ -490,15 +523,13 @@ func runInteractiveWizard(cfg *config.Config) {
 	fmt.Println("  ───────────────────────────────────")
 
 	// Show existing config if present
-	if cfg.AI.Provider != "" || len(cfg.Providers) > 0 {
+	defaultAgentProvider, defaultAgentKey := resolveDisplayProvider(cfg)
+	if cfg.AI.Provider != "" || defaultAgentProvider != "" {
 		displayProvider := cfg.AI.Provider
 		displayKey := cfg.AI.APIKey
-		if displayProvider == "" && len(cfg.Providers) > 0 {
-			for name, e := range cfg.Providers {
-				displayProvider = name
-				displayKey = e.APIKey
-				break
-			}
+		if displayProvider == "" {
+			displayProvider = defaultAgentProvider
+			displayKey = defaultAgentKey
 		}
 		fmt.Printf("\n  Existing config found: %s / %s\n", displayProvider, maskKey(displayKey))
 		idx := promptSelect("What would you like to do?", []string{
@@ -668,16 +699,8 @@ func stepAIProvider(cfg *config.Config) {
 	model := promptText("Model", p.defModel)
 	cfg.AI.Model = model
 
-	// Also write to named providers map
-	if cfg.Providers == nil {
-		cfg.Providers = make(map[string]config.ProviderEntry)
-	}
-	cfg.Providers[p.name] = config.ProviderEntry{
-		Provider: cfg.AI.Provider,
-		APIKey:   cfg.AI.APIKey,
-		BaseURL:  cfg.AI.BaseURL,
-		Model:    cfg.AI.Model,
-	}
+	// Write inline credentials directly onto the default agent
+	upsertDefaultAgent(cfg, cfg.AI.Provider, cfg.AI.APIKey, cfg.AI.BaseURL, cfg.AI.Model)
 	cfg.Relay.Provider = p.name
 
 	fmt.Printf("\n  > AI provider configured: %s / %s\n", cfg.AI.Provider, cfg.AI.Model)

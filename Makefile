@@ -1,4 +1,4 @@
-VERSION := 2.1.8
+VERSION := 2.2.0
 BUILD := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 PROJECTNAME := lsbot
 GOBASE := $(shell pwd)
@@ -10,7 +10,7 @@ LDFLAGS_DEBUG=-ldflags "-X github.com/pltanton/lsbot/internal/mcp.ServerVersion=
 GOBUILD=go build $(LDFLAGS)
 GOBUILD_DEBUG=go build $(LDFLAGS_DEBUG)
 
-.PHONY: all build build-debug clean install uninstall test darwin-all darwin-arm64 darwin-amd64 darwin-universal linux-all linux-amd64 linux-arm64 windows-all windows-amd64 windows-arm64
+.PHONY: all build build-debug clean install uninstall test darwin-all darwin-arm64 darwin-amd64 darwin-universal linux-all linux-amd64 linux-arm64 windows-all windows-amd64 windows-arm64 ios-framework android-lib
 
 # Default: build for current platform
 build:
@@ -54,6 +54,22 @@ windows-arm64:
 	CGO_ENABLED=0 GOARCH=arm64 GOOS=windows $(GOBUILD) -o $(GOBIN)/$(PROJECTNAME)-$(VERSION)-windows-arm64.exe .
 
 windows-all: windows-amd64 windows-arm64
+
+# Mobile framework builds (requires: go install golang.org/x/mobile/cmd/gomobile@latest && gomobile init)
+ios-framework:
+	mkdir -p $(GOBIN)
+	gomobile bind -target ios -o $(GOBIN)/lsbot.xcframework \
+		-ldflags "-X github.com/ruilisi/lsbot/internal/mcp.ServerVersion=$(VERSION)" \
+		./mobile/
+	cd $(GOBIN) && zip -r lsbot-$(VERSION)-ios.xcframework.zip lsbot.xcframework
+	@echo "iOS XCFramework: $(GOBIN)/lsbot-$(VERSION)-ios.xcframework.zip"
+
+android-lib:
+	mkdir -p $(GOBIN)
+	gomobile bind -target android -o $(GOBIN)/lsbot.aar \
+		-ldflags "-X github.com/ruilisi/lsbot/internal/mcp.ServerVersion=$(VERSION)" \
+		./mobile/
+	@echo "Android AAR: $(GOBIN)/lsbot.aar"
 
 # Code signing (macOS)
 codesign:

@@ -48,6 +48,12 @@ var (
 	logWriter      io.Writer = os.Stderr
 )
 
+// SetDataDir redirects all lsbot data paths (skills, cron DB, E2E keys) to dir.
+// Call this before Start() on iOS to use the writable Documents directory.
+func SetDataDir(dir string) {
+	config.SetDataDir(dir)
+}
+
 // Version returns the lsbot version string (set via ldflags at build time).
 func Version() string {
 	return mcp.ServerVersion
@@ -192,8 +198,7 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 	emit("[lsbot] setting up E2E key...")
 	e2eKeyFile := cfg.E2EKeyFile
 	if e2eKeyFile == "" {
-		homeDir, _ := os.UserHomeDir()
-		e2eKeyFile = filepath.Join(homeDir, ".lsbot-e2e.pem")
+		e2eKeyFile = filepath.Join(config.HubDir(), "e2e.pem")
 	}
 	// Auto-generate key on first run
 	if _, err := os.Stat(e2eKeyFile); os.IsNotExist(err) {
@@ -239,8 +244,7 @@ func startRelay(ctx context.Context, cfg *config.Config) error {
 
 	emit("[lsbot] setting up cron...")
 	// Cron scheduler
-	homeDir, _ := os.UserHomeDir()
-	cronPath := filepath.Join(homeDir, ".lsbot.db")
+	cronPath := filepath.Join(config.HubDir(), "cron.db")
 	if cronStore, err := cronpkg.NewStore(cronPath); err == nil {
 		cronNotifier := agent.NewRouterCronNotifier(r)
 		cronScheduler := cronpkg.NewScheduler(cronStore, aiAgent, aiAgent, cronNotifier)

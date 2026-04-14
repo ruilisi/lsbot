@@ -63,19 +63,17 @@ type SkillsConfig struct {
 
 // SkillsDir returns the managed skills directory path
 func SkillsDir() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lsbot", "skills")
+	return filepath.Join(dataHome(), "skills")
 }
 
-// HubDir returns ~/.lsbot/ — the lsbot data directory
+// HubDir returns the lsbot data directory (~/.lsbot or overrideDataDir)
 func HubDir() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".lsbot")
+	return dataHome()
 }
 
-// HubSkillsDir returns ~/.lsbot/skills/ — where hub-installed skills live
+// HubSkillsDir returns the hub-installed skills directory
 func HubSkillsDir() string {
-	return filepath.Join(HubDir(), "skills")
+	return filepath.Join(dataHome(), "skills")
 }
 
 // MCPServerConfig describes one external MCP server to connect to.
@@ -436,6 +434,23 @@ func ConfigDir() string {
 
 // overridePath is set via SetConfigPath to use a custom config file location.
 var overridePath string
+
+// overrideDataDir is set via SetDataDir to redirect ~/.lsbot to a writable sandbox path.
+var overrideDataDir string
+
+// SetDataDir redirects all data paths (skills, cron DB, E2E keys) from ~/.lsbot
+// to the given directory. Call before Start() on platforms with restricted home dirs (e.g. iOS).
+func SetDataDir(dir string) {
+	overrideDataDir = dir
+}
+
+func dataHome() string {
+	if overrideDataDir != "" {
+		return overrideDataDir
+	}
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, ".lsbot")
+}
 
 // SetConfigPath overrides the default ~/.lsbot.yaml path for all Load() calls.
 func SetConfigPath(path string) {

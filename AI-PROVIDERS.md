@@ -64,65 +64,65 @@ lsbot relay --provider qwen --api-key sk-xxx --model qwen-max
 
 ---
 
-## Named Providers / 命名 Provider 配置（推荐）
+## Multi-Agent Configuration / 多 Agent 配置（推荐）
 
-The recommended way to configure AI providers. Define each provider as a named entry, then reference by name.
+The recommended way to configure multiple AI providers. Define each agent with its own provider, api_key, and model.
 
-推荐的 AI 配置方式。将每个 provider 定义为命名条目，然后按名称引用。
+推荐的多 AI 配置方式。每个 agent 独立定义 provider、api_key、model，互不干扰。
 
 ### Config Format / 配置格式
 
 ```yaml
-providers:
-  my-deepseek:
+agents:
+  - id: default
+    default: true
     provider: deepseek
     api_key: sk-xxx
     model: deepseek-chat
-  my-kimi:
+  - id: smart
     provider: kimi
     api_key: ak-xxx
     model: kimi-k2.5
-  my-minimax:
-    provider: minimax
-    api_key: sk-xxx
-    base_url: https://api.minimax.chat/v1
-    model: MiniMax-M2.5
+  - id: coder
+    provider: claude
+    api_key: sk-ant-xxx
+    model: claude-sonnet-4-20250514
 
 relay:
   platform: wecom
-  provider: my-kimi        # references named provider
+  provider: default    # references agent id (or provider name directly)
 
 ai:
-  max_rounds: 100          # shared settings stay here
+  max_rounds: 100      # shared settings stay here
   mcp_servers: [...]
 ```
 
 ### Resolution / 解析规则
 
-When `--provider` is specified (CLI or config), lsbot resolves the name:
+When `--provider` is specified (CLI or config), lsbot resolves the value:
 
-1. **Exact key match** — `--provider my-kimi` matches `providers.my-kimi` directly
-2. **Provider type match** — `--provider kimi` scans entries for `.provider == "kimi"`
-3. **Backward compat** — if no `providers:` map exists, falls back to `ai:` block
+1. **Agent id match** — `--provider default` matches `agents[].id == "default"` directly
+2. **Provider type match** — `--provider kimi` finds the first agent with `provider: kimi`
+3. **Backward compat** — if no `agents:` list exists, falls back to `ai:` block
 
-CLI flags `--api-key`, `--base-url`, `--model` still override individual fields on the resolved entry.
+CLI flags `--api-key`, `--base-url`, `--model` still override individual fields on the resolved agent.
 
 ```bash
-# Use named provider directly
-lsbot relay --provider my-kimi
+# Use agent id directly
+lsbot relay --provider default
 
-# Use provider type (finds first matching entry)
+# Use provider type (finds first matching agent)
 lsbot relay --provider kimi
 
-# Override model on a named provider
-lsbot relay --provider my-kimi --model moonshot-v1-8k
+# Override model on a matched agent
+lsbot relay --provider kimi --model moonshot-v1-8k
 ```
 
 ### Benefits / 优势
 
-- Each provider carries its own api_key, base_url, model — no cross-contamination
-- `--provider kimi` won't inherit deepseek's base_url from the `ai:` block
-- Easy to switch between providers: just change `relay.provider`
+- Each agent carries its own api_key, base_url, model — no cross-contamination
+- `--provider kimi` won't inherit deepseek's base_url from another agent
+- Easy to route different platforms to different agents via `bindings:`
 - Old `ai:` format still works unchanged (backward compatible)
 
 ---

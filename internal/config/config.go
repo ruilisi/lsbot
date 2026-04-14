@@ -51,7 +51,7 @@ type BrowserConfig struct {
 type RelayConfig struct {
 	UserID     string `yaml:"user_id,omitempty"`
 	Platform   string `yaml:"platform,omitempty"`   // "feishu", "slack", "wechat", "wecom"
-	Provider   string `yaml:"provider,omitempty"`   // references a named provider in Providers map
+	Provider   string `yaml:"provider,omitempty"`   // references an agent id or provider name
 	ServerURL  string `yaml:"server_url,omitempty"` // WebSocket URL override
 	WebhookURL string `yaml:"webhook_url,omitempty"` // Webhook URL override
 }

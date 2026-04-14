@@ -44,22 +44,6 @@ lsbot onboard
 ```yaml
 mode: relay  # "relay" 或 "router"
 
-# ── 命名 Provider 配置（推荐）────────────────────────────────────────────────
-# 每个 provider 独立定义 api_key / base_url / model，不会互相污染
-providers:
-  my-deepseek:
-    provider: deepseek
-    api_key: sk-xxx
-    model: deepseek-chat
-  my-kimi:
-    provider: kimi
-    api_key: ak-xxx
-    model: kimi-k2.5
-  my-claude:
-    provider: claude
-    api_key: sk-ant-xxx
-    model: claude-sonnet-4-20250514
-
 # ── Agents（推荐）────────────────────────────────────────────────────────────
 # 每个 Agent 是独立的 AI 人格单元，拥有独立的 provider、指令、工作目录。
 # 用 `lsbot agents add` 交互式创建，或直接在此配置。
@@ -67,9 +51,10 @@ providers:
 # 字段：
 #   id           — 唯一标识，bindings 中引用
 #   default      — true = 无匹配 binding 时的兜底 agent
-#   provider     — 引用 providers 中的 key（或直接写 provider 名称）
-#   api_key      — 覆盖 provider 的 api_key（可选）
-#   model        — 覆盖 provider 的 model（可选）
+#   provider     — AI 服务商名称（deepseek / claude / kimi / qwen 等）
+#   api_key      — 该 agent 的 API 密钥
+#   base_url     — 自定义 API 地址（可选）
+#   model        — 模型名称（可选，留空使用 provider 默认值）
 #   instructions — 系统提示词文本，或指向 .md/.txt 文件的路径
 #   workspace    — 文件操作的根目录（默认 ~/.lingti/agents/<id>）
 #   allow_tools  — 工具白名单（空 = 允许全部）
@@ -77,12 +62,16 @@ providers:
 agents:
   - id: default
     default: true
-    provider: my-deepseek
+    provider: deepseek
+    api_key: sk-YOUR_DEEPSEEK_KEY
+    model: deepseek-chat
     instructions: "You are a helpful assistant."
     workspace: ~/Projects
 
   - id: coder
-    provider: my-claude
+    provider: claude
+    api_key: sk-ant-YOUR_ANTHROPIC_KEY
+    model: claude-sonnet-4-20250514
     instructions: |
       You are an expert software engineer. Focus on clean, efficient code.
     workspace: ~/Projects
@@ -91,7 +80,9 @@ agents:
       - notification_send
 
   - id: writer
-    provider: my-kimi
+    provider: kimi
+    api_key: sk-YOUR_KIMI_KEY
+    model: kimi-k2.5
     instructions: ~/agents/writer-instructions.md   # 从文件加载
     workspace: ~/Documents/writing
 
@@ -148,7 +139,7 @@ ai:
 
 relay:
   platform: wecom    # "feishu", "slack", "wechat", "wecom"
-  provider: my-kimi  # 引用 providers 中的命名条目
+  provider: default  # 引用 agents 中的 id（或直接写 provider 名称）
   user_id: ""        # 从 /whoami 获取（WeCom 不需要）
 
 platforms:

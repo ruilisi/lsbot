@@ -475,9 +475,15 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 	}
 	logger.Trace("[Agent] Conversation key: %s, history messages: %d", convKey, len(hist))
 
-	// Create messages with history
+	// Create messages with history; auto-compress if the conversation is too long.
 	messages := make([]Message, 0, len(hist)+1)
 	messages = append(messages, hist...)
+	if estimateTokens(messages) > compressTokenThreshold {
+		messages = a.compressMessages(ctx, messages)
+		// Sync compressed history back to in-memory store so future turns are accurate.
+		a.memory.Replace(convKey, messages)
+		logger.Info("[Agent] Context auto-compressed for conversation %s", convKey)
+	}
 	messages = append(messages, Message{
 		Role:    "user",
 		Content: msg.Text,

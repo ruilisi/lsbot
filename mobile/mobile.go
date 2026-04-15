@@ -13,6 +13,7 @@ package mobile
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"fmt"
 	"io"
 	"log"
@@ -33,6 +34,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/skills"
 
 	"github.com/google/uuid"
+	_ "modernc.org/sqlite"
 )
 
 // OutputCallback receives log lines from the running lsbot instance.
@@ -191,9 +193,41 @@ func RunCommand(args string) (string, error) {
 		return runSkillsCommand(parts[1:], cfg)
 	case "version":
 		return fmt.Sprintf("lsbot %s", mcp.ServerVersion), nil
+	case "db":
+		return runDBCommand(parts[1:])
 	default:
 		return "", fmt.Errorf("command %q not supported in mobile mode", parts[0])
 	}
+}
+
+// runDBCommand tests SQLite connectivity.
+// Usage: db test  — creates a test table, inserts a row, queries it.
+func runDBCommand(args []string) (string, error) {
+	if len(args) == 0 || args[0] != "test" {
+		return "", fmt.Errorf("usage: db test")
+	}
+	dbDir := filepath.Join(config.HubDir(), "db")
+	if err := os.MkdirAll(dbDir, 0755); err != nil {
+		return "", fmt.Errorf("mkdir %s: %w", dbDir, err)
+	}
+	dbPath := filepath.Join(dbDir, "_test.db")
+	db, err := sql.Open("sqlite", dbPath)
+	if err != nil {
+		return "", fmt.Errorf("sql.Open: %w", err)
+	}
+	defer db.Close()
+	if _, err := db.Exec(`CREATE TABLE IF NOT EXISTS _test (id INTEGER PRIMARY KEY, val TEXT)`); err != nil {
+		return "", fmt.Errorf("create table: %w", err)
+	}
+	if _, err := db.Exec(`INSERT INTO _test (val) VALUES ('ok')`); err != nil {
+		return "", fmt.Errorf("insert: %w", err)
+	}
+	var val string
+	if err := db.QueryRow(`SELECT val FROM _test LIMIT 1`).Scan(&val); err != nil {
+		return "", fmt.Errorf("query: %w", err)
+	}
+	os.Remove(dbPath)
+	return fmt.Sprintf("SQLite OK — path=%s val=%s", dbPath, val), nil
 }
 
 // --- relay startup ---

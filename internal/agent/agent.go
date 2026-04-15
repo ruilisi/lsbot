@@ -29,6 +29,7 @@ type Agent struct {
 	fallbackProviders  []Provider // ordered fallbacks tried when quota is exhausted
 	memory             *ConversationMemory
 	sessions           *SessionStore
+	todos              *TodoRegistry
 	autoApprove        bool
 	customInstructions string
 	cronScheduler      *cronpkg.Scheduler
@@ -91,6 +92,7 @@ func New(cfg Config) (*Agent, error) {
 		fallbackProviders:  fallbackProviders,
 		memory:             NewMemory(50, 60*time.Minute), // Keep 50 messages, 60 min TTL
 		sessions:           NewSessionStore(),
+		todos:              newTodoRegistry(),
 		autoApprove:        cfg.AutoApprove,
 		customInstructions: cfg.CustomInstructions,
 		pathChecker:        security.NewPathChecker(cfg.AllowedPaths),
@@ -536,6 +538,10 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 		// Sync compressed history back to in-memory store so future turns are accurate.
 		a.memory.Replace(convKey, messages)
 		logger.Info("[Agent] Context auto-compressed for conversation %s", convKey)
+		// Re-inject active todos so the agent doesn't lose track of in-progress work.
+		if injection := a.todos.Get(convKey).FormatForInjection(); injection != "" {
+			messages = append(messages, Message{Role: "assistant", Content: injection})
+		}
 	}
 	messages = append(messages, Message{
 		Role:    "user",
@@ -658,6 +664,7 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 
 ### Memory & Profile
 - profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
+- todo: Manage in-session task list (read/write/merge). Use for multi-step plans; list survives context compression.
 - memory: Manage long-term memory entries (§-delimited). Actions: add (append new fact), replace (rewrite full content), remove (delete entry containing a substring)
 - user_model_write: Update USER.md — your evolving model of the user's personality, communication style, and preferences (separate from MEMORY.md)
 
@@ -881,7 +888,7 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 			}
 		}
 
-		toolResults, files := a.processToolCalls(ctx, resp.ToolCalls)
+		toolResults, files := a.processToolCalls(ctx, convKey, resp.ToolCalls)
 		pendingFiles = append(pendingFiles, files...)
 
 		// Log tool results that look like errors; record for trajectory
@@ -1839,6 +1846,29 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name: "todo",
+			Description: "Manage your task list for the current session. Use for complex tasks with 3+ steps or when the user gives multiple tasks. Call with no parameters to read the current list.\n\nWriting:\n- Provide 'todos' array to create/update items\n- merge=false (default): replace entire list\n- merge=true: update existing items by id, add new ones\n\nEach item: {id, content, status: pending|in_progress|completed|cancelled}\nList order is priority. Only ONE item in_progress at a time.\nMark items completed immediately when done.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"todos": map[string]any{
+						"type":        "array",
+						"description": "Task items to write. Omit to read.",
+						"items": map[string]any{
+							"type": "object",
+							"properties": map[string]any{
+								"id":      map[string]string{"type": "string"},
+								"content": map[string]string{"type": "string"},
+								"status":  map[string]any{"type": "string", "enum": []string{"pending", "in_progress", "completed", "cancelled"}},
+							},
+							"required": []string{"id", "content", "status"},
+						},
+					},
+					"merge": map[string]any{"type": "boolean", "description": "true: update by id; false (default): replace list"},
+				},
+			}),
+		},
+		Tool{
 			Name:        "session_search",
 			Description: "Search past conversations using full-text search. Returns snippets and message context from matching sessions. Use this to recall what was discussed in previous conversations.",
 			InputSchema: jsonSchema(map[string]any{
@@ -1875,7 +1905,7 @@ func (a *Agent) buildToolsList() []Tool {
 }
 
 // processToolCalls executes tool calls and returns results plus any file attachments
-func (a *Agent) processToolCalls(ctx context.Context, toolCalls []ToolCall) ([]ToolResult, []router.FileAttachment) {
+func (a *Agent) processToolCalls(ctx context.Context, convKey string, toolCalls []ToolCall) ([]ToolResult, []router.FileAttachment) {
 	results := make([]ToolResult, 0, len(toolCalls))
 	var files []router.FileAttachment
 
@@ -1927,7 +1957,7 @@ func (a *Agent) processToolCalls(ctx context.Context, toolCalls []ToolCall) ([]T
 			toolTimeout = 2 * time.Minute
 		}
 		toolCtx, toolCancel := context.WithTimeout(ctx, toolTimeout)
-		result := a.executeTool(toolCtx, tc.Name, tc.Input)
+		result := a.executeTool(toolCtx, convKey, tc.Name, tc.Input)
 		toolCancel()
 		results = append(results, ToolResult{
 			ToolCallID: tc.ID,
@@ -1940,7 +1970,7 @@ func (a *Agent) processToolCalls(ctx context.Context, toolCalls []ToolCall) ([]T
 }
 
 // executeTool runs a tool and returns the result
-func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMessage) string {
+func (a *Agent) executeTool(ctx context.Context, convKey, name string, input json.RawMessage) string {
 	logger.Info("[Agent] Executing tool: %s", name)
 
 	// Parse input arguments
@@ -1992,6 +2022,10 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 			return `{"error": "` + err.Error() + `"}`
 		}
 		return `{"ok": true}`
+
+	case "todo":
+		store := a.todos.Get(convKey)
+		return HandleTodoTool(store, args)
 
 	case "session_search":
 		query, _ := args["query"].(string)

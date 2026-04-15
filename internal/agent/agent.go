@@ -562,6 +562,10 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 - cron_pause: Pause a scheduled task
 - cron_resume: Resume a paused scheduled task
 
+### Database (SQLite)
+- db_exec: Execute SQL (CREATE TABLE, INSERT, UPDATE, DELETE) on a named local SQLite database. Data persists across conversations. Use db="ledger" for finance, db="todos" for tasks, etc.
+- db_query: SELECT from a local SQLite database. Returns JSON array of rows.
+
 ### Memory & Profile
 - profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
 - memory_write: Persist important facts about the user to long-term memory (replaces full MEMORY.md content)
@@ -1599,6 +1603,32 @@ func (a *Agent) buildToolsList() []Tool {
 				"required":   []string{"id"},
 			}),
 		},
+
+		// === SQLITE DATABASE ===
+		{
+			Name:        "db_exec",
+			Description: "Execute a SQL statement (CREATE TABLE, INSERT, UPDATE, DELETE) on a named local SQLite database. The database is persistent across conversations.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"sql": map[string]string{"type": "string", "description": "SQL statement to execute"},
+					"db":  map[string]string{"type": "string", "description": "Database name (default: \"default\"). Use descriptive names e.g. \"ledger\", \"todos\", \"notes\""},
+				},
+				"required": []string{"sql"},
+			}),
+		},
+		{
+			Name:        "db_query",
+			Description: "Execute a SELECT query on a named local SQLite database. Returns JSON array of rows.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"sql": map[string]string{"type": "string", "description": "SELECT statement"},
+					"db":  map[string]string{"type": "string", "description": "Database name (default: \"default\")"},
+				},
+				"required": []string{"sql"},
+			}),
+		},
 	}
 
 	// === MEMORY & PROFILE ===
@@ -1721,6 +1751,12 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 		return a.executeCronPause(args)
 	case "cron_resume":
 		return a.executeCronResume(args)
+
+	// SQLite
+	case "db_exec":
+		return executeSQLiteExec(ctx, args)
+	case "db_query":
+		return executeSQLiteQuery(ctx, args)
 	}
 
 	// Block file tools entirely if disabled

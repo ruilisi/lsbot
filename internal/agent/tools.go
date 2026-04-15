@@ -867,3 +867,25 @@ func executeGitHubRepoView(ctx context.Context) string {
 	}
 	return extractText(result)
 }
+
+// === SQLITE ===
+
+func executeSQLiteExec(ctx context.Context, args map[string]any) string {
+	req := mcp.CallToolRequest{}
+	req.Params.Arguments = args
+	result, err := tools.SQLiteExec(ctx, req)
+	if err != nil {
+		return "Error: " + err.Error()
+	}
+	return extractText(result)
+}
+
+func executeSQLiteQuery(ctx context.Context, args map[string]any) string {
+	req := mcp.CallToolRequest{}
+	req.Params.Arguments = args
+	result, err := tools.SQLiteQuery(ctx, req)
+	if err != nil {
+		return "Error: " + err.Error()
+	}
+	return extractText(result)
+}

@@ -2017,6 +2017,11 @@ func (a *Agent) callToolDirect(ctx context.Context, name string, args map[string
 		if c, ok := args["command"].(string); ok {
 			cmd = c
 		}
+		// Intercept sqlite3 CLI calls — not available on iOS/mobile.
+		// Redirect the model to use the built-in db_exec / db_query tools.
+		if strings.Contains(cmd, "sqlite3") {
+			return "ERROR: sqlite3 CLI is not available. Use the db_exec tool for INSERT/CREATE/UPDATE/DELETE and db_query tool for SELECT instead. These are native SQLite tools that work on all platforms including iOS."
+		}
 		return executeShell(ctx, cmd)
 
 	// Git & GitHub

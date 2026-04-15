@@ -25,6 +25,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/agent"
 	"github.com/ruilisi/lsbot/internal/agent/mcpclient"
 	"github.com/ruilisi/lsbot/internal/config"
+	"github.com/ruilisi/lsbot/internal/logger"
 	cronpkg "github.com/ruilisi/lsbot/internal/cron"
 	"github.com/ruilisi/lsbot/internal/e2e"
 	"github.com/ruilisi/lsbot/internal/mcp"
@@ -85,13 +86,26 @@ func SetOutputCallback(cb OutputCallback) {
 	defer mu.Unlock()
 	outputCallback = cb
 	if cb != nil {
-		// Redirect the standard logger to our callback writer
+		// Redirect both the standard logger and lsbot's internal logger
 		logWriter = &callbackWriter{cb: cb}
 		log.SetOutput(logWriter)
+		logger.SetOutput(logWriter)
 	} else {
 		log.SetOutput(os.Stderr)
+		logger.SetOutput(os.Stderr)
 		logWriter = os.Stderr
 	}
+}
+
+// SetLogLevel sets the log verbosity. Valid values: "info", "debug", "trace".
+// Call before or after Start — takes effect immediately.
+func SetLogLevel(level string) {
+	l, err := logger.ParseLevel(level)
+	if err != nil {
+		emit("[lsbot] unknown log level %q, using info", level)
+		l = logger.LevelInfo
+	}
+	logger.SetLevel(l)
 }
 
 // Start starts lsbot using the config file at configPath.

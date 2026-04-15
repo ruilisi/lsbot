@@ -2,6 +2,7 @@ package logger
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -71,6 +72,19 @@ func SetLevel(level Level) {
 	mu.Lock()
 	defer mu.Unlock()
 	currentLevel = level
+}
+
+// SetOutput redirects all logger output to w (e.g. to capture logs in mobile/gomobile context).
+func SetOutput(w io.Writer) {
+	mu.Lock()
+	defer mu.Unlock()
+	traceLogger.SetOutput(w)
+	debugLogger.SetOutput(w)
+	infoLogger.SetOutput(w)
+	warnLogger.SetOutput(w)
+	errorLogger.SetOutput(w)
+	fatalLogger.SetOutput(w)
+	panicLogger.SetOutput(w)
 }
 
 // GetLevel returns the current log level

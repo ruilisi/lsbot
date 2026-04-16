@@ -275,7 +275,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 				fmt.Fprintf(os.Stderr, "Warning: failed to save bot ID: %v\n", err)
 			}
 		}
-		fmt.Printf("[Gateway] Your bot page: https://bot.lingti.com/bots/%s\n", savedCfg.BotID)
+		fmt.Printf("[Gateway] Your bot page: https://lsbot.net/bots/%s\n", savedCfg.BotID)
 	}
 
 	debugEnabled := logger.IsDebug()
@@ -356,7 +356,7 @@ func runGateway(cmd *cobra.Command, args []string) {
 
 	registerPlatforms(r)
 
-	// Connect outbound to bot.lingti.com so the bot page receives messages
+	// Connect outbound to lsbot.net so the bot page receives messages
 	if cfgErr == nil && savedCfg.BotID != "" {
 		providerName := aiProvider
 		if providerName == "" {

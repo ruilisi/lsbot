@@ -13,9 +13,9 @@
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/Website-lsbot.org-blue?style=flat)](https://lsbot.org)
-[![CN Mirror](https://img.shields.io/badge/国内镜像-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![CN Mirror](https://img.shields.io/badge/国内镜像-lsbot.net-blue?style=flat)](https://lsbot.net)
 
-> 📖 **文档：[lsbot.org/docs](https://lsbot.org/docs)** | 国内镜像：[bot.lingti.com/docs](https://bot.lingti.com/docs)
+> 📖 **文档：[lsbot.org/docs](https://lsbot.org/docs)** | 国内镜像：[lsbot.net/docs](https://lsbot.net/docs)
 
 ---
 
@@ -78,7 +78,7 @@ lsbot relay --provider deepseek --api-key sk-xxx
 4. 每一条响应在离开你的进程前加密
 5. 每一条消息到达你的进程后解密
 
-中继服务器（lsbot.org，国内镜像 bot.lingti.com）只看到密文。它无法读取你的消息，无法记录你的对话，无法推断你在使用哪些工具或访问哪些文件。
+中继服务器（lsbot.org，国内镜像 lsbot.net）只看到密文。它无法读取你的消息，无法记录你的对话，无法推断你在使用哪些工具或访问哪些文件。
 
 ```bash
 lsbot e2e pubkey
@@ -105,7 +105,7 @@ lsbot e2e pubkey
 
 你的 AI Bot 可以访问你的终端、你的文件、你的代码库。它知道你在做什么项目，知道你的工作流程，知道你的私人文档。**这些信息通过一个你不控制的服务器转发——这不是可接受的风险，这是一个架构缺陷。**
 
-lsbot 的设计前提是：中继服务器是不可信的。这不是对 lsbot.org 或 bot.lingti.com 的不信任，而是一个工程原则：**不需要信任的地方，就不应该建立信任依赖。**
+lsbot 的设计前提是：中继服务器是不可信的。这不是对 lsbot.org 或 lsbot.net 的不信任，而是一个工程原则：**不需要信任的地方，就不应该建立信任依赖。**
 
 ---
 
@@ -122,7 +122,7 @@ lsbot 没有云端数据库。
 | Cron 任务数据库 | `~/.lingti.db` | ❌ |
 | 技能文件 | `~/.lingti/skills/` | ❌ |
 
-云中继服务器（`lsbot.org`，国内镜像 `bot.lingti.com`）只做一件事：**路由加密后的消息**。它不保存任何内容，不分析任何内容，不记录任何内容。消息转发后立即丢弃。
+云中继服务器（`lsbot.org`，国内镜像 `lsbot.net`）只做一件事：**路由加密后的消息**。它不保存任何内容，不分析任何内容，不记录任何内容。消息转发后立即丢弃。
 
 即使中继服务器明天关闭，你所有的数据、配置、历史记录都完好无损在你的机器上。这不是承诺，这是架构决定的结果。
 
@@ -155,7 +155,7 @@ Your bot page: https://lsbot.org/bots/xxx
 E2E fingerprint: sha256:a3f7c91b2d4e8f06
 ```
 
-> 国内用户：Bot 页面也可通过 `https://bot.lingti.com/bots/xxx` 访问。
+> 国内用户：Bot 页面也可通过 `https://lsbot.net/bots/xxx` 访问。
 
 打开链接，点击状态栏的 **Secure** → 粘贴公钥 → 核对指纹，即可在浏览器中与 Bot 进行端到端加密对话。
 
@@ -163,7 +163,7 @@ E2E fingerprint: sha256:a3f7c91b2d4e8f06
 
 #### 端到端加密（E2EE）
 
-Bot Page 默认启用**端到端加密**，relay 服务器（lsbot.org / bot.lingti.com）无法读取消息内容：
+Bot Page 默认启用**端到端加密**，relay 服务器（lsbot.org / lsbot.net）无法读取消息内容：
 
 - bot 首次启动时，在 `~/.lsbot.pem` 自动生成持久化 P-256 密钥，日志打印指纹
 - 浏览器打开 Bot Page，点击状态栏 **Secure** 进入设置面板
@@ -270,7 +270,7 @@ lsbot relay --platform feishu \
 
 ## 样例
 
-> 📺 **完整演示、截图和使用示例，请访问：[bot.lingti.com/docs/examples](https://lsbot.org/docs/examples)**
+> 📺 **完整演示、截图和使用示例，请访问：[lsbot.net/docs/examples](https://lsbot.org/docs/examples)**
 
 主要功能演示：
 
@@ -488,7 +488,7 @@ lsbot skills info github
 企业微信(用户消息) --> lsbot.org(云中继，只看密文) --WebSocket--> lsbot(本地AI处理)
 ```
 
-> 国内用户可使用镜像节点 `bot.lingti.com`，效果相同。
+> 国内用户可使用镜像节点 `lsbot.net`，效果相同。
 
 | | 传统方案 | 云中继方案 |
 |---|---|---|
@@ -716,4 +716,4 @@ MIT License
 
 ---
 
-**lsbot** — Lean & Secure Bot · [lsbot.org](https://lsbot.org) · [bot.lingti.com（国内）](https://bot.lingti.com) · [GitHub](https://github.com/ruilisi/lsbot)
+**lsbot** — Lean & Secure Bot · [lsbot.org](https://lsbot.org) · [lsbot.net（国内）](https://lsbot.net) · [GitHub](https://github.com/ruilisi/lsbot)

@@ -62,10 +62,6 @@ func SetDataDir(dir string) {
 // Set before calling Start if you need a specific port; 0 = auto-assign.
 var GatewayPort = 18080
 
-// GetGatewayPort returns the actual port the gateway is listening on (useful after auto-assign).
-func GetGatewayPort() int {
-	return GatewayPort
-}
 
 // Version returns the lsbot version string (set via ldflags at build time).
 func Version() string {

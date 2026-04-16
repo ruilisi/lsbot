@@ -13,11 +13,11 @@ English | [中文](./README.md)
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/Website-lsbot.org-blue?style=flat)](https://lsbot.org)
-[![CN Mirror](https://img.shields.io/badge/CN%20Mirror-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![CN Mirror](https://img.shields.io/badge/CN%20Mirror-lsbot.net-blue?style=flat)](https://lsbot.net)
 
 **lsbot** is a lean, secure AI Bot — single static binary, zero dependencies, end-to-end encrypted by default. Your data stays on your machine.
 
-> 📖 **Docs: [lsbot.org/docs](https://lsbot.org/docs)** | China Mainland mirror: [bot.lingti.com](https://bot.lingti.com)
+> 📖 **Docs: [lsbot.org/docs](https://lsbot.org/docs)** | China Mainland mirror: [lsbot.net](https://lsbot.net)
 
 **Core Advantages:**
 - **End-to-End Encrypted** — E2EE on by default (P-256 ECDH + AES-256-GCM), out-of-band key verification
@@ -65,7 +65,7 @@ E2E fingerprint: sha256:a3f7c91b2d4e8f06
 
 Open the link to chat with your bot in the browser — one command, no platform setup needed.
 
-> China Mainland users: your bot page is also accessible at `https://bot.lingti.com/bots/xxx`.
+> China Mainland users: your bot page is also accessible at `https://lsbot.net/bots/xxx`.
 
 > Supported `--provider` values: `deepseek`, `claude`, `kimi`, `minimax`, `gemini`, `openai`, and more. See [AI-PROVIDERS.md](AI-PROVIDERS.md).
 
@@ -222,7 +222,7 @@ In addition to MCP mode, lsbot can also run as a **message router**, connecting 
 
 **Cloud Relay Advantage:** No public server, no domain registration, no HTTPS certificate, no firewall configuration, 5 minutes to complete integration.
 
-> Relay servers: **lsbot.org** (International) · **bot.lingti.com** (China Mainland mirror). All relay traffic is end-to-end encrypted — the relay sees only ciphertext.
+> Relay servers: **lsbot.org** (International) · **lsbot.net** (China Mainland mirror). All relay traffic is end-to-end encrypted — the relay sees only ciphertext.
 
 ### MCP Toolset — 75+ Local System Tools
 
@@ -418,6 +418,6 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contact
 
-- Website: [lsbot.org](https://lsbot.org) | China Mainland mirror: [bot.lingti.com](https://bot.lingti.com)
+- Website: [lsbot.org](https://lsbot.org) | China Mainland mirror: [lsbot.net](https://lsbot.net)
 - Email: `jiefeng@ruc.edu.cn` / `jiefeng.hopkins@gmail.com`
 - GitHub: [github.com/ruilisi/lsbot](https://github.com/ruilisi/lsbot)

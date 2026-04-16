@@ -3,10 +3,10 @@
 云中继是运行 lsbot 的**首选方式**。在本地运行一条命令，AI bot 就能接入所有支持的聊天平台——无需服务器、无需公网 IP、无需配置防火墙。
 
 ```
-聊天平台 → bot.lingti.com（云中继，国际：lsbot.org）←WebSocket→ lsbot relay（你的电脑）→ AI
+聊天平台 → lsbot.net（云中继，国际：lsbot.org）←WebSocket→ lsbot relay（你的电脑）→ AI
 ```
 
-你的电脑主动向 `bot.lingti.com`（国际：`lsbot.org`）发起出站 WebSocket 连接，由云端服务器承接平台的回调请求。所有 AI 推理均在本地完成，API Key 不会离开你的机器。
+你的电脑主动向 `lsbot.net`（国际：`lsbot.org`）发起出站 WebSocket 连接，由云端服务器承接平台的回调请求。所有 AI 推理均在本地完成，API Key 不会离开你的机器。
 
 ---
 
@@ -18,7 +18,7 @@
 | 企业微信（WeCom） | ✅ | 注意 [IP 策略限制](#企业微信-ip-策略) |
 | 飞书（Feishu / Lark） | ✅ | |
 | Slack | ✅ | |
-| Bot Page（`bot.lingti.com/bots/<id>`） | ✅ | 浏览器直接访问，无需平台账号 |
+| Bot Page（`lsbot.net/bots/<id>`） | ✅ | 浏览器直接访问，无需平台账号 |
 
 其他平台（Telegram、Discord、钉钉、WhatsApp 等）通过 [`gateway`](docs/gateway-vs-relay.md) 接入。
 
@@ -50,7 +50,7 @@ lsbot relay
 启动后终端会打印你的专属链接：
 
 ```
-[Relay] Your bot page: https://bot.lingti.com/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+[Relay] Your bot page: https://lsbot.net/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 **第三步：打开网页开始聊天**
@@ -88,7 +88,7 @@ lsbot relay --platform wecom \
   --api-key sk-xxx
 ```
 
-在企业微信管理后台将回调 URL 设置为：`https://bot.lingti.com/wecom`
+在企业微信管理后台将回调 URL 设置为：`https://lsbot.net/wecom`
 
 完整教程：[docs/wecom-integration.md](docs/wecom-integration.md)
 
@@ -123,7 +123,7 @@ lsbot relay --platform slack \
 每个 relay 实例都有一个持久 UUID，保存在 `~/.lsbot.yaml`。启动时会打印：
 
 ```
-[Relay] Your bot page: https://bot.lingti.com/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+[Relay] Your bot page: https://lsbot.net/bots/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 任何人拿到这个链接，就能在浏览器里打开多标签对话界面，直接与你的 bot 聊天。无需登录、无需安装任何应用。UUID 既是标识符也是访问凭证——把链接分享给谁，谁就能访问。
@@ -151,8 +151,8 @@ lsbot relay --refresh-bot-id
 ```
 --user-id        relay 用户 ID（必填，或 RELAY_USER_ID 环境变量）
 --platform       feishu | slack | wechat | wecom（仅用 bot page 时可省略）
---server         WebSocket 地址（默认：wss://bot.lingti.com/ws，国际：wss://lsbot.org/ws）
---webhook        Webhook 地址（默认：https://bot.lingti.com/webhook，国际：https://lsbot.org/webhook）
+--server         WebSocket 地址（默认：wss://lsbot.net/ws，国际：wss://lsbot.org/ws）
+--webhook        Webhook 地址（默认：https://lsbot.net/webhook，国际：https://lsbot.org/webhook）
 
 --provider       AI 提供商：claude、deepseek、kimi、qwen、minimax、ollama 等
 --api-key        AI API Key（或 AI_API_KEY 环境变量）
@@ -189,7 +189,7 @@ lsbot relay --refresh-bot-id
 relay:
   platform: wecom
   user_id: your-id
-  # 可选：指定中继服务器（默认 bot.lingti.com，国际节点用 lsbot.org）
+  # 可选：指定中继服务器（默认 lsbot.net，国际节点用 lsbot.org）
   # server_url: wss://lsbot.org/ws
   # webhook_url: https://lsbot.org/webhook
 
@@ -218,12 +218,12 @@ lsbot relay
 ## 工作原理
 
 ```
-1. lsbot relay 向 wss://bot.lingti.com/ws 建立 WebSocket 连接（国际：wss://lsbot.org/ws）
+1. lsbot relay 向 wss://lsbot.net/ws 建立 WebSocket 连接（国际：wss://lsbot.org/ws）
 2. 携带 user_id、platform 和平台凭据进行认证
 3. 云中继服务器为你的平台注册公网端点
-   （例如企业微信回调：https://bot.lingti.com/wecom，国际：https://lsbot.org/wecom）
+   （例如企业微信回调：https://lsbot.net/wecom，国际：https://lsbot.org/wecom）
 4. 平台消息送达云中继 → 通过 WebSocket 转发到你的本地机器
-5. 本地 AI 处理完成 → POST 响应到 https://bot.lingti.com/webhook（国际：https://lsbot.org/webhook）
+5. 本地 AI 处理完成 → POST 响应到 https://lsbot.net/webhook（国际：https://lsbot.org/webhook）
 6. 云中继服务器调用平台 API 将回复发送给用户
 ```
 
@@ -245,14 +245,14 @@ AI API Key 只在第 4–5 步本地使用，不经过云中继服务器。
 
 ## 企业微信 IP 策略
 
-> **注意：** 企业微信云中继偶尔会出现 API 调用失败，原因是 `bot.lingti.com` 的 IP（`106.52.166.51`）由所有用户共用。当流量较大或请求模式异常时，腾讯的 IP 信誉系统可能将该 IP 临时标记为可疑。
+> **注意：** 企业微信云中继偶尔会出现 API 调用失败，原因是 `lsbot.net` 的 IP（`106.52.166.51`）由所有用户共用。当流量较大或请求模式异常时，腾讯的 IP 信誉系统可能将该 IP 临时标记为可疑。
 
 **表现症状：**
 - 回调验证成功，但发送回复失败
 - 日志中出现企业微信 API 返回权限错误或 IP 相关错误
 - 时好时坏、不稳定
 
-**根本原因：** 企业微信要求调用发消息 API 的 IP 必须在"企业可信 IP"名单中。`bot.lingti.com` 是多用户共享的服务器，腾讯可能对其 IP 施加更严格的审查。
+**根本原因：** 企业微信要求调用发消息 API 的 IP 必须在"企业可信 IP"名单中。`lsbot.net` 是多用户共享的服务器，腾讯可能对其 IP 施加更严格的审查。
 
 **解决方案：**
 
@@ -355,7 +355,7 @@ sudo journalctl -u lsbot-relay -f
 → 添加 `--platform wecom`（或 feishu/slack/wechat），或在 `~/.lsbot.yaml` 中设置 `relay.platform`。如果只用 bot page 模式，确保配置文件中存在 `bot_id`。
 
 **连接成功但收不到消息**
-→ 确认平台管理后台的回调 URL 已正确配置并指向 `bot.lingti.com`。
+→ 确认平台管理后台的回调 URL 已正确配置并指向 `lsbot.net`。
 
 **企业微信回调验证失败**
 → 确保在企业微信后台点击「保存」*之前*，`lsbot relay` 已经在运行。云中继服务器需要活跃的 WebSocket 连接才能处理验证请求。

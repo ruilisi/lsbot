@@ -36,7 +36,7 @@ For more information:
   lsbot help                       # Show all commands
   lsbot <command> --help           # Help for specific command
   https://lsbot.org                    # Official website & docs
-  https://bot.lingti.com               # CN mirror
+  https://lsbot.net               # CN mirror
   https://github.com/ruilisi/lsbot # Source code
 
 `)

@@ -14,6 +14,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/Website-lsbot.org-blue?style=flat)](https://lsbot.org)
 [![CN Mirror](https://img.shields.io/badge/国内镜像-bot.lingti.com-blue?style=flat)](https://bot.lingti.com)
+[![SafeSkill 87/100](https://img.shields.io/badge/SafeSkill-87%2F100_Passes%20with%20Notes-yellow)](https://safeskill.dev/scan/ruilisi-lsbot)
 
 > 📖 **文档：[lsbot.org/docs](https://lsbot.org/docs)** | 国内镜像：[bot.lingti.com/docs](https://bot.lingti.com/docs)
 

@@ -665,6 +665,7 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 ### Memory & Profile
 - profile_update: Save/update your nickname and timezone (call during onboarding or when user changes preferences)
 - todo: Manage in-session task list (read/write/merge). Use for multi-step plans; list survives context compression.
+- clarify: Ask the user a structured question (up to 4 choices). Use when a decision has meaningful trade-offs. Omit choices for open-ended questions.
 - memory: Manage long-term memory entries (§-delimited). Actions: add (append new fact), replace (rewrite full content), remove (delete entry containing a substring)
 - user_model_write: Update USER.md — your evolving model of the user's personality, communication style, and preferences (separate from MEMORY.md)
 
@@ -1869,6 +1870,23 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name:        "clarify",
+			Description: "Ask the user a clarifying question, optionally with up to 4 choices. Use when the task is ambiguous and the user should choose an approach. Omit choices for open-ended questions. Do NOT use for dangerous-command confirmation (the shell tool handles that). Prefer making a default choice yourself for low-stakes decisions.\n\nWhen you call this tool, include the returned question text verbatim in your response to the user.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"question": map[string]string{"type": "string", "description": "The question to ask the user."},
+					"choices": map[string]any{
+						"type":        "array",
+						"items":       map[string]string{"type": "string"},
+						"maxItems":    4,
+						"description": "Up to 4 answer choices. Omit for open-ended questions.",
+					},
+				},
+				"required": []string{"question"},
+			}),
+		},
+		Tool{
 			Name:        "session_search",
 			Description: "Search past conversations using full-text search. Returns snippets and message context from matching sessions. Use this to recall what was discussed in previous conversations.",
 			InputSchema: jsonSchema(map[string]any{
@@ -2026,6 +2044,31 @@ func (a *Agent) executeTool(ctx context.Context, convKey, name string, input jso
 	case "todo":
 		store := a.todos.Get(convKey)
 		return HandleTodoTool(store, args)
+
+	case "clarify":
+		question, _ := args["question"].(string)
+		if question == "" {
+			return `{"error":"question is required"}`
+		}
+		var sb strings.Builder
+		sb.WriteString(question)
+		if choicesRaw, ok := args["choices"]; ok && choicesRaw != nil {
+			b, _ := json.Marshal(choicesRaw)
+			var choices []string
+			if json.Unmarshal(b, &choices) == nil && len(choices) > 0 {
+				if len(choices) > 4 {
+					choices = choices[:4]
+				}
+				sb.WriteString("\n")
+				for i, c := range choices {
+					sb.WriteString(fmt.Sprintf("\n%d. %s", i+1, c))
+				}
+				sb.WriteString(fmt.Sprintf("\n%d. Other (type your answer)", len(choices)+1))
+			}
+		}
+		result, _ := json.Marshal(map[string]string{"presented_to_user": sb.String()})
+		return string(result)
+
 
 	case "session_search":
 		query, _ := args["query"].(string)

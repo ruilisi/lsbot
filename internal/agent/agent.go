@@ -18,6 +18,7 @@ import (
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/security"
 	"github.com/ruilisi/lsbot/internal/skills"
+	"github.com/ruilisi/lsbot/internal/termui"
 	"github.com/ruilisi/lsbot/internal/tools"
 	"github.com/ruilisi/lsbot/internal/userprofile"
 )
@@ -416,6 +417,25 @@ func (a *Agent) handleBuiltinCommand(ctx context.Context, msg router.Message) (r
 	case "/think high", "深度思考":
 		a.sessions.SetThinkingLevel(convKey, ThinkHigh)
 		return router.Response{Text: "思考模式: 深度"}, true
+
+	case "/skin":
+		parts := strings.Fields(text)
+		if len(parts) < 2 {
+			// List available skins
+			skins := termui.ListBuiltinSkins()
+			var sb strings.Builder
+			sb.WriteString("🎨 可用主题 (skin):\n")
+			for _, s := range skins {
+				sb.WriteString(fmt.Sprintf("  %-10s  %s\n", s.Name, s.Description))
+			}
+			sb.WriteString("\n用法: /skin <name> 切换主题\n")
+			sb.WriteString("自定义: 将 YAML 文件放到 ~/.lsbot/skins/<name>.yaml\n")
+			sb.WriteString("环境变量: LSBOT_SKIN=<name>")
+			return router.Response{Text: sb.String()}, true
+		}
+		skinName := parts[1]
+		termui.SetActiveSkin(config.HubDir(), skinName)
+		return router.Response{Text: fmt.Sprintf("✓ 主题已切换至: %s", skinName)}, true
 
 	case "/compress", "/ctx", "压缩上下文":
 		hist := a.memory.GetHistory(convKey)

@@ -41,19 +41,19 @@ type Agent struct {
 type Config struct {
 	Provider           string // "claude" or "deepseek" (default: "claude")
 	APIKey             string
-	BaseURL            string // Custom API base URL (optional)
-	Model              string // Model name (optional, uses provider default)
-	AutoApprove        bool     // Skip all confirmation prompts (default: false)
-	CustomInstructions string   // Additional instructions appended to system prompt (optional)
-	AllowedPaths       []string // Restrict file/shell operations to these directories (empty = no restriction)
-	DisableFileTools   bool     // Completely disable all file operation tools
-	MaxToolRounds      int      // Max tool-call iterations per message (0 = use default 100)
-	CallTimeoutSecs    int      // Base timeout in seconds for each AI API call (0 = use default 90s base)
+	BaseURL            string                   // Custom API base URL (optional)
+	Model              string                   // Model name (optional, uses provider default)
+	AutoApprove        bool                     // Skip all confirmation prompts (default: false)
+	CustomInstructions string                   // Additional instructions appended to system prompt (optional)
+	AllowedPaths       []string                 // Restrict file/shell operations to these directories (empty = no restriction)
+	DisableFileTools   bool                     // Completely disable all file operation tools
+	MaxToolRounds      int                      // Max tool-call iterations per message (0 = use default 100)
+	CallTimeoutSecs    int                      // Base timeout in seconds for each AI API call (0 = use default 90s base)
 	MCPServers         []mcpclient.ServerConfig // External MCP servers to connect to
-	AllowTools         []string // Tool whitelist; empty = allow all
-	DenyTools          []string // Tool blacklist; applied after allowlist
-	Workspace          string   // Working directory for this agent
-	Fallbacks          []Config // Ordered fallback provider configs tried when quota is exhausted
+	AllowTools         []string                 // Tool whitelist; empty = allow all
+	DenyTools          []string                 // Tool blacklist; applied after allowlist
+	Workspace          string                   // Working directory for this agent
+	Fallbacks          []Config                 // Ordered fallback provider configs tried when quota is exhausted
 }
 
 // New creates a new Agent with the specified provider
@@ -102,37 +102,36 @@ var openaiCompatProviders = map[string]struct {
 	baseURL string
 	model   string
 }{
-	"minimax":    {"https://api.minimax.chat/v1", "MiniMax-Text-01"},
-	"doubao":     {"https://ark.cn-beijing.volces.com/api/v3", "doubao-pro-32k"},
-	"zhipu":      {"https://open.bigmodel.cn/api/paas/v4", "glm-4-flash"},
-	"openai":     {"https://api.openai.com/v1", "gpt-4o"},
-	"gemini":     {"https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.0-flash"},
-	"yi":         {"https://api.lingyiwanwu.com/v1", "yi-large"},
-	"stepfun":    {"https://api.stepfun.com/v1", "step-2-16k"},
+	"minimax":     {"https://api.minimax.chat/v1", "MiniMax-Text-01"},
+	"doubao":      {"https://ark.cn-beijing.volces.com/api/v3", "doubao-pro-32k"},
+	"zhipu":       {"https://open.bigmodel.cn/api/paas/v4", "glm-4-flash"},
+	"openai":      {"https://api.openai.com/v1", "gpt-4o"},
+	"yi":          {"https://api.lingyiwanwu.com/v1", "yi-large"},
+	"stepfun":     {"https://api.stepfun.com/v1", "step-2-16k"},
 	"siliconflow": {"https://api.siliconflow.cn/v1", "Qwen/Qwen2.5-72B-Instruct"},
-	"grok":       {"https://api.x.ai/v1", "grok-2-latest"},
-	"baichuan":   {"https://api.baichuan-ai.com/v1", "Baichuan4"},
-	"spark":      {"https://spark-api-open.xf-yun.com/v1", "generalv3.5"},
-	"hunyuan":    {"https://api.hunyuan.cloud.tencent.com/v1", "hunyuan-turbos-latest"},
-	"ollama":     {"http://localhost:11434/v1", "llama3.2"},
+	"grok":        {"https://api.x.ai/v1", "grok-2-latest"},
+	"baichuan":    {"https://api.baichuan-ai.com/v1", "Baichuan4"},
+	"spark":       {"https://spark-api-open.xf-yun.com/v1", "generalv3.5"},
+	"hunyuan":     {"https://api.hunyuan.cloud.tencent.com/v1", "hunyuan-turbos-latest"},
+	"ollama":      {"http://localhost:11434/v1", "llama3.2"},
 }
 
 // openaiCompatAliases maps alternative names to canonical provider names.
 var openaiCompatAliases = map[string]string{
-	"glm":          "zhipu",
-	"chatglm":      "zhipu",
-	"gpt":          "openai",
-	"chatgpt":      "openai",
-	"lingyiwanwu":  "yi",
-	"wanwu":        "yi",
-	"google":       "gemini",
-	"xai":          "grok",
-	"bytedance":    "doubao",
-	"volcengine":   "doubao",
-	"iflytek":      "spark",
-	"xunfei":       "spark",
-	"tencent":      "hunyuan",
-	"hungyuan":     "hunyuan",
+	"glm":         "zhipu",
+	"chatglm":     "zhipu",
+	"gpt":         "openai",
+	"chatgpt":     "openai",
+	"lingyiwanwu": "yi",
+	"wanwu":       "yi",
+	"google":      "gemini",
+	"xai":         "grok",
+	"bytedance":   "doubao",
+	"volcengine":  "doubao",
+	"iflytek":     "spark",
+	"xunfei":      "spark",
+	"tencent":     "hunyuan",
+	"hungyuan":    "hunyuan",
 }
 
 // inferProviderFromModel guesses the provider from a model name when provider is unset.
@@ -175,6 +174,9 @@ func createProvider(cfg Config) (Provider, error) {
 	if name == "" && cfg.Model != "" {
 		name = inferProviderFromModel(cfg.Model)
 	}
+	if canonical, ok := openaiCompatAliases[name]; ok {
+		name = canonical
+	}
 
 	switch name {
 	case "deepseek":
@@ -201,11 +203,13 @@ func createProvider(cfg Config) (Provider, error) {
 			BaseURL: cfg.BaseURL,
 			Model:   cfg.Model,
 		})
+	case "gemini":
+		return NewGeminiProvider(GeminiConfig{
+			APIKey:  cfg.APIKey,
+			BaseURL: cfg.BaseURL,
+			Model:   cfg.Model,
+		})
 	default:
-		// Check aliases
-		if canonical, ok := openaiCompatAliases[name]; ok {
-			name = canonical
-		}
 		// Check OpenAI-compatible providers
 		if defaults, ok := openaiCompatProviders[name]; ok {
 			return NewOpenAICompatProvider(OpenAICompatConfig{

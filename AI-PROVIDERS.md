@@ -16,7 +16,7 @@ lsbot supports **16 AI providers** covering mainstream LLM platforms globally pl
 | 6 | `doubao` | Doubao / 豆包 (ByteDance) | `doubao-pro-32k` | `https://ark.cn-beijing.volces.com/api/v3` | [console.volcengine.com/ark](https://console.volcengine.com/ark) |
 | 7 | `zhipu` | Zhipu / 智谱 GLM | `glm-4-flash` | `https://open.bigmodel.cn/api/paas/v4` | [open.bigmodel.cn](https://open.bigmodel.cn/) |
 | 8 | `openai` | OpenAI (GPT) | `gpt-4o` | `https://api.openai.com/v1` | [platform.openai.com](https://platform.openai.com/api-keys) |
-| 9 | `gemini` | Gemini (Google) | `gemini-2.0-flash` | `https://generativelanguage.googleapis.com/v1beta/openai` | [aistudio.google.com](https://aistudio.google.com/apikey) |
+| 9 | `gemini` | Gemini (Google) | `gemini-2.0-flash` | `https://generativelanguage.googleapis.com/v1beta` | [aistudio.google.com](https://aistudio.google.com/apikey) |
 | 10 | `yi` | Yi / 零一万物 (Lingyiwanwu) | `yi-large` | `https://api.lingyiwanwu.com/v1` | [platform.lingyiwanwu.com](https://platform.lingyiwanwu.com/) |
 | 11 | `stepfun` | StepFun / 阶跃星辰 | `step-2-16k` | `https://api.stepfun.com/v1` | [platform.stepfun.com](https://platform.stepfun.com/) |
 | 12 | `baichuan` | Baichuan / 百川智能 | `Baichuan4` | `https://api.baichuan-ai.com/v1` | [platform.baichuan-ai.com](https://platform.baichuan-ai.com/) |
@@ -531,8 +531,8 @@ Run `ollama list` to see installed models. Popular choices:
 
 ## Notes / 说明
 
-- All non-Claude providers use the **OpenAI-compatible API** format, making it easy to add new providers.
-- 除 Claude 外，所有 provider 均使用 **OpenAI 兼容 API** 格式，便于扩展。
+- Most non-Claude providers use the **OpenAI-compatible API** format. Gemini uses the native Google `generateContent` API.
+- 除 Claude 外，大多数 provider 使用 **OpenAI 兼容 API**；Gemini 使用 Google 原生 `generateContent` API。
 - `siliconflow` is an aggregator platform that provides access to many open-source models (Qwen, DeepSeek, Llama, etc.) through a single API key.
 - `siliconflow` 是一个聚合平台，通过一个 API Key 即可访问多种开源模型（Qwen、DeepSeek、Llama 等）。
 - You can always override the default model with `--model` and the default API URL with `--base-url`.

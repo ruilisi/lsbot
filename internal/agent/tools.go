@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
 	"time"
@@ -17,6 +18,55 @@ import (
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/tools"
 )
+
+// dangerousPatterns is the comprehensive list of shell patterns that are
+// blocked before execution. Each entry is (compiled-regex, human description).
+// Ported and adapted from hermes-agent tools/approval.py.
+var dangerousPatterns = []struct {
+	re   *regexp.Regexp
+	desc string
+}{
+	{regexp.MustCompile(`(?i)\brm\s+(-[^\s]*\s+)*/`), "delete in root path"},
+	{regexp.MustCompile(`(?i)\brm\s+-[^\s]*r`), "recursive delete"},
+	{regexp.MustCompile(`(?i)\brm\s+--recursive\b`), "recursive delete (long flag)"},
+	{regexp.MustCompile(`(?i)\bchmod\s+(-[^\s]*\s+)*(777|666|o\+[rwx]*w|a\+[rwx]*w)\b`), "world/other-writable permissions"},
+	{regexp.MustCompile(`(?i)\bchown\s+(-[^\s]*)?R\s+root`), "recursive chown to root"},
+	{regexp.MustCompile(`(?i)\bmkfs\b`), "format filesystem"},
+	{regexp.MustCompile(`(?i)\bdd\s+.*if=`), "disk copy"},
+	{regexp.MustCompile(`(?i)>\s*/dev/sd`), "write to block device"},
+	{regexp.MustCompile(`(?i)\bDROP\s+(TABLE|DATABASE)\b`), "SQL DROP"},
+	{regexp.MustCompile(`(?i)\bDELETE\s+FROM\b(?!.*\bWHERE\b)`), "SQL DELETE without WHERE"},
+	{regexp.MustCompile(`(?i)\bTRUNCATE\s+(TABLE)?\s*\w`), "SQL TRUNCATE"},
+	{regexp.MustCompile(`(?i)>\s*/etc/`), "overwrite system config"},
+	{regexp.MustCompile(`(?i)\bsystemctl\s+(-[^\s]+\s+)*(stop|restart|disable|mask)\b`), "stop/restart system service"},
+	{regexp.MustCompile(`(?i)\bkill\s+-9\s+-1\b`), "kill all processes"},
+	{regexp.MustCompile(`(?i)\bpkill\s+-9\b`), "force kill processes"},
+	{regexp.MustCompile(`(?i):\(\)\s*\{\s*:\s*\|\s*:\s*&\s*\}\s*;\s*:`), "fork bomb"},
+	{regexp.MustCompile(`(?i)\b(bash|sh|zsh|ksh)\s+-[^\s]*c(\s+|$)`), "shell command via -c/-lc flag"},
+	{regexp.MustCompile(`(?i)\b(python[23]?|perl|ruby|node)\s+-[ec]\s+`), "script execution via -e/-c flag"},
+	{regexp.MustCompile(`(?i)\b(curl|wget)\b.*\|\s*(ba)?sh\b`), "pipe remote content to shell"},
+	{regexp.MustCompile(`(?i)\bxargs\s+.*\brm\b`), "xargs with rm"},
+	{regexp.MustCompile(`(?i)\bfind\b.*-exec\s+(/\S*/)?rm\b`), "find -exec rm"},
+	{regexp.MustCompile(`(?i)\bfind\b.*-delete\b`), "find -delete"},
+	{regexp.MustCompile(`(?i)\bgit\s+reset\s+--hard\b`), "git reset --hard (destroys uncommitted changes)"},
+	{regexp.MustCompile(`(?i)\bgit\s+push\b.*--force\b`), "git force push"},
+	{regexp.MustCompile(`(?i)\bgit\s+push\b.*-f\b`), "git force push short flag"},
+	{regexp.MustCompile(`(?i)\bgit\s+clean\s+-[^\s]*f`), "git clean with force (deletes untracked files)"},
+	{regexp.MustCompile(`(?i)\bgit\s+branch\s+-D\b`), "git branch force delete"},
+	{regexp.MustCompile(`(?i)\b(cp|mv|install)\b.*\s/etc/`), "copy/move file into /etc/"},
+	{regexp.MustCompile(`(?i)\bsed\s+-[^\s]*i.*\s/etc/`), "in-place edit of system config"},
+}
+
+// detectDangerousCommand returns (true, description) if the command matches
+// any dangerous pattern, (false, "") otherwise.
+func detectDangerousCommand(cmd string) (bool, string) {
+	for _, p := range dangerousPatterns {
+		if p.re.MatchString(cmd) {
+			return true, p.desc
+		}
+	}
+	return false, ""
+}
 
 // executeSystemInfo runs the system_info tool
 func executeSystemInfo(ctx context.Context) string {
@@ -218,18 +268,14 @@ func executeFileWrite(ctx context.Context, path string, content string) string {
 func executeShell(ctx context.Context, command string) string {
 	logger.Debug("[Shell] Executing: %s", command)
 
-	// Safety check - dangerous commands
-	blocked := []string{"rm -rf /", "mkfs", "dd if="}
-	cmdLower := strings.ToLower(command)
-	for _, b := range blocked {
-		if strings.Contains(cmdLower, b) {
-			logger.Debug("[Shell] Command blocked for safety")
-			return "Command blocked for safety"
-		}
+	// Safety check — enhanced dangerous command detection
+	if dangerous, desc := detectDangerousCommand(command); dangerous {
+		logger.Warn("[Shell] Command blocked (%s): %s", desc, command)
+		return fmt.Sprintf("BLOCKED: Command matched dangerous pattern (%s). Do NOT retry this command.", desc)
 	}
 
 	// Safety check - block reading sensitive files via shell
-	// Check if command references any sensitive file patterns
+	cmdLower := strings.ToLower(command)
 	for _, pat := range sensitiveFilePatterns {
 		if strings.Contains(cmdLower, pat) {
 			logger.Warn("[Shell] Command blocked: references sensitive file pattern '%s'", pat)

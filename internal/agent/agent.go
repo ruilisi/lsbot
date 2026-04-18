@@ -2080,14 +2080,55 @@ func (a *Agent) executeTool(ctx context.Context, convKey, name string, input jso
 		if err != nil {
 			return fmt.Sprintf(`{"error": %q}`, err.Error())
 		}
-		results, err := hs.Search(query, maxSessions, 20)
+		results, err := hs.Search(query, maxSessions, 40)
 		if err != nil {
 			return fmt.Sprintf(`{"error": %q}`, err.Error())
 		}
 		if len(results) == 0 {
 			return `{"results": [], "message": "No matching sessions found."}`
 		}
-		out, _ := json.Marshal(results)
+		// Summarize each session using the LLM for cleaner recall.
+		type summarizedResult struct {
+			ConvKey   string `json:"conv_key"`
+			Platform  string `json:"platform"`
+			Username  string `json:"username"`
+			UpdatedAt string `json:"updated_at"`
+			Summary   string `json:"summary"`
+		}
+		var summaries []summarizedResult
+		sysPrompt := "You are reviewing a past conversation transcript to help recall what happened. " +
+			"Summarize the conversation with a focus on the search topic. Include: " +
+			"what the user asked, what actions were taken, key outcomes, commands/files/URLs mentioned. " +
+			"Be concise but preserve specific technical details. Write in past tense."
+		for _, r := range results {
+			var transcript strings.Builder
+			for _, m := range r.Messages {
+				transcript.WriteString(strings.ToUpper(m.Role) + ": " + m.Content + "\n\n")
+			}
+			userPrompt := fmt.Sprintf("Search topic: %s\n\nTRANSCRIPT:\n%s\n\nSummarize with focus on: %s",
+				query, transcript.String(), query)
+			sumResp, sumErr := a.chatWithFallback(ctx, ChatRequest{
+				Messages:  []Message{{Role: "user", Content: userPrompt}},
+				SystemPrompt: sysPrompt,
+				MaxTokens: 512,
+			})
+			summary := r.Snippet // fallback to FTS snippet
+			if sumErr == nil && sumResp.Content != "" {
+				summary = sumResp.Content
+			}
+			summaries = append(summaries, summarizedResult{
+				ConvKey:   r.ConvKey,
+				Platform:  r.Platform,
+				Username:  r.Username,
+				UpdatedAt: r.UpdatedAt.Format("2006-01-02 15:04"),
+				Summary:   summary,
+			})
+		}
+		out, _ := json.Marshal(map[string]any{
+			"query":   query,
+			"results": summaries,
+			"count":   len(summaries),
+		})
 		return string(out)
 
 	case "mixture_of_agents":

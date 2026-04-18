@@ -1710,6 +1710,18 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name:        "delegate_task",
+			Description: "Spawn one or more isolated child agents to run tasks in parallel. Each child has no conversation history and its result is returned here. Use for independent sub-tasks that can run concurrently (research, file processing, multi-step analysis). Do NOT use for tasks requiring user interaction.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"task":    map[string]string{"type": "string", "description": "A single task for one child agent"},
+					"tasks":   map[string]any{"type": "array", "items": map[string]string{"type": "string"}, "description": "Multiple tasks to run in parallel"},
+					"context": map[string]string{"type": "string", "description": "Optional shared context injected into every child agent's prompt"},
+				},
+			}),
+		},
+		Tool{
 			Name:        "session_search",
 			Description: "Search past conversations using full-text search. Returns snippets and message context from matching sessions. Use this to recall what was discussed in previous conversations.",
 			InputSchema: jsonSchema(map[string]any{
@@ -1841,6 +1853,9 @@ func (a *Agent) executeTool(ctx context.Context, name string, input json.RawMess
 		}
 		out, _ := json.Marshal(results)
 		return string(out)
+
+	case "delegate_task":
+		return a.DelegateTask(ctx, args)
 	}
 
 	// Handle cron tools that need Agent context

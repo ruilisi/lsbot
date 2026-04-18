@@ -382,7 +382,7 @@ func runSkillsCommand(args []string, cfg *config.Config) (string, error) {
 			return "", err
 		}
 		msg := fmt.Sprintf("[lsbot] downloaded %d skills to %s", count, config.SkillsDir())
-		emit(msg)
+		emit("%s", msg)
 		return msg, nil
 	}
 

@@ -669,6 +669,12 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 - memory: Manage long-term memory entries (§-delimited). Actions: add (append new fact), replace (rewrite full content), remove (delete entry containing a substring)
 - user_model_write: Update USER.md — your evolving model of the user's personality, communication style, and preferences (separate from MEMORY.md)
 
+### Home Assistant (smart home control)
+- ha_list_entities: List HA entities, optionally filtered by domain (light, switch, sensor…) or area name
+- ha_get_state: Get detailed state and attributes of a single HA entity
+- ha_list_services: List available HA services/actions, optionally filtered by domain
+- ha_call_service: Call a HA service (e.g. light.turn_on, climate.set_temperature). Blocked: shell_command, hassio, rest_command.
+
 ### Browser Automation (snapshot-then-act pattern)
 - browser_start: Start new browser or connect to existing Chrome via cdp_url (e.g. "127.0.0.1:9222")
 - browser_navigate: Navigate to a URL (auto-connects to Chrome on port 9222 if available, otherwise launches new)
@@ -1887,6 +1893,48 @@ func (a *Agent) buildToolsList() []Tool {
 			}),
 		},
 		Tool{
+			Name:        "ha_list_entities",
+			Description: "List Home Assistant entities. Filter by domain (light, switch, sensor, climate…) or area name. Requires HASS_URL and HASS_TOKEN env vars.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"domain": map[string]string{"type": "string", "description": "Entity domain to filter (e.g. light, switch, sensor)"},
+					"area":   map[string]string{"type": "string", "description": "Area name to filter by (partial match on friendly_name)"},
+				},
+			}),
+		},
+		Tool{
+			Name:        "ha_get_state",
+			Description: "Get detailed state and attributes of a single Home Assistant entity.",
+			InputSchema: jsonSchema(map[string]any{
+				"type":       "object",
+				"properties": map[string]any{"entity_id": map[string]string{"type": "string", "description": "Entity ID (e.g. light.living_room)"}},
+				"required":   []string{"entity_id"},
+			}),
+		},
+		Tool{
+			Name:        "ha_list_services",
+			Description: "List Home Assistant services (actions) available, optionally filtered by domain.",
+			InputSchema: jsonSchema(map[string]any{
+				"type":       "object",
+				"properties": map[string]any{"domain": map[string]string{"type": "string", "description": "Domain to filter (e.g. light, climate)"}},
+			}),
+		},
+		Tool{
+			Name:        "ha_call_service",
+			Description: "Call a Home Assistant service to control smart home devices. Examples: light.turn_on, light.turn_off, climate.set_temperature, cover.open_cover. Blocked: shell_command, hassio, rest_command.",
+			InputSchema: jsonSchema(map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"domain":    map[string]string{"type": "string", "description": "Service domain (e.g. light, switch, climate)"},
+					"service":   map[string]string{"type": "string", "description": "Service name (e.g. turn_on, set_temperature)"},
+					"entity_id": map[string]string{"type": "string", "description": "Target entity ID (optional for some services)"},
+					"data":      map[string]any{"type": "object", "description": "Additional service data (e.g. {brightness: 128, temperature: 22})"},
+				},
+				"required": []string{"domain", "service"},
+			}),
+		},
+		Tool{
 			Name:        "session_search",
 			Description: "Search past conversations using full-text search. Returns snippets and message context from matching sessions. Use this to recall what was discussed in previous conversations.",
 			InputSchema: jsonSchema(map[string]any{
@@ -2130,6 +2178,15 @@ func (a *Agent) executeTool(ctx context.Context, convKey, name string, input jso
 			"count":   len(summaries),
 		})
 		return string(out)
+
+	case "ha_list_entities":
+		return handleHAListEntities(ctx, args)
+	case "ha_get_state":
+		return handleHAGetState(ctx, args)
+	case "ha_list_services":
+		return handleHAListServices(ctx, args)
+	case "ha_call_service":
+		return handleHACallService(ctx, args)
 
 	case "mixture_of_agents":
 		return a.MixtureOfAgents(ctx, args)

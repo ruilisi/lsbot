@@ -438,15 +438,44 @@ var overridePath string
 // overrideDataDir is set via SetDataDir to redirect ~/.lsbot to a writable sandbox path.
 var overrideDataDir string
 
+// activeProfile holds the current profile name, set by SetProfile or LSBOT_PROFILE env var.
+var activeProfile string
+
 // SetDataDir redirects all data paths (skills, cron DB, E2E keys) from ~/.lsbot
 // to the given directory. Call before Start() on platforms with restricted home dirs (e.g. iOS).
 func SetDataDir(dir string) {
 	overrideDataDir = dir
 }
 
+// SetProfile switches the active profile, isolating all data under
+// ~/.lsbot/profiles/<name>/. An empty name resets to the default (~/.lsbot).
+// Must be called before any HubDir()/dataHome() call (i.e. at process start).
+func SetProfile(name string) {
+	activeProfile = strings.TrimSpace(name)
+}
+
+// ActiveProfile returns the currently active profile name, or "" for default.
+// It reads LSBOT_PROFILE from the environment if SetProfile has not been called.
+func ActiveProfile() string {
+	if activeProfile != "" {
+		return activeProfile
+	}
+	return os.Getenv("LSBOT_PROFILE")
+}
+
+// ProfilesDir returns the directory that contains all named profiles.
+func ProfilesDir() string {
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, ".lsbot", "profiles")
+}
+
 func dataHome() string {
 	if overrideDataDir != "" {
 		return overrideDataDir
+	}
+	if p := ActiveProfile(); p != "" {
+		home, _ := os.UserHomeDir()
+		return filepath.Join(home, ".lsbot", "profiles", p)
 	}
 	home, _ := os.UserHomeDir()
 	return filepath.Join(home, ".lsbot")

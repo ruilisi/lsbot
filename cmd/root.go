@@ -15,6 +15,7 @@ var (
 	autoApprove      bool
 	disableFileTools bool
 	configFile       string
+	profileFlag      string
 )
 
 var rootCmd = &cobra.Command{
@@ -36,6 +37,9 @@ It provides tools for:
 		if configFile != "" {
 			config.SetConfigPath(configFile)
 		}
+		if profileFlag != "" {
+			config.SetProfile(profileFlag)
+		}
 		// Parse and set log level
 		level, err := logger.ParseLevel(logLevel)
 		if err != nil {
@@ -49,6 +53,8 @@ It provides tools for:
 func init() {
 	rootCmd.PersistentFlags().StringVar(&configFile, "config", "",
 		"Config file path (default: ~/.lsbot.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&profileFlag, "profile", "p", "",
+		"Active profile name; data stored in ~/.lsbot/profiles/<name>/ (overrides LSBOT_PROFILE env var)")
 	rootCmd.PersistentFlags().StringVar(&logLevel, "log", "info",
 		"Log level: trace, debug, info, warn, error, fatal, panic")
 	rootCmd.PersistentFlags().BoolVarP(&autoApprove, "yes", "y", false,

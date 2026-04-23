@@ -3,12 +3,18 @@ package telegram
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
+	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
+	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/ruilisi/lsbot/internal/router"
 	"github.com/ruilisi/lsbot/internal/sentryutil"
+	"github.com/ruilisi/lsbot/internal/transcription"
 )
 
 // Platform implements router.Platform for Telegram
@@ -17,12 +23,15 @@ type Platform struct {
 	messageHandler func(msg router.Message)
 	ctx            context.Context
 	cancel         context.CancelFunc
+	transcriber    *transcription.Transcriber // optional; nil = no voice transcription
 }
 
 // Config holds Telegram configuration
 type Config struct {
-	Token string // Bot token from @BotFather
-	Debug bool   // Enable debug logging
+	Token           string // Bot token from @BotFather
+	Debug           bool   // Enable debug logging
+	WhisperAPIKey   string // OpenAI API key for voice transcription (optional)
+	WhisperBaseURL  string // Custom Whisper-compatible endpoint (optional)
 }
 
 // New creates a new Telegram platform
@@ -38,7 +47,11 @@ func New(cfg Config) (*Platform, error) {
 
 	bot.Debug = cfg.Debug
 
-	return &Platform{bot: bot}, nil
+	p := &Platform{bot: bot}
+	if cfg.WhisperAPIKey != "" {
+		p.transcriber = transcription.New(cfg.WhisperAPIKey, cfg.WhisperBaseURL)
+	}
+	return p, nil
 }
 
 // Name returns the platform name
@@ -120,6 +133,26 @@ func (p *Platform) handleUpdates(updates tgbotapi.UpdatesChannel) {
 			}
 
 			text := p.cleanMention(update.Message.Text)
+
+			// Handle voice messages via Whisper transcription
+			if text == "" && update.Message.Voice != nil && p.transcriber != nil {
+				if t, err := p.transcribeVoice(update.Message.Voice.FileID); err == nil {
+					text = "[Voice] " + t
+				}
+			}
+
+			// Handle audio files (music, audio attachments)
+			if text == "" && update.Message.Audio != nil && p.transcriber != nil {
+				if t, err := p.transcribeVoice(update.Message.Audio.FileID); err == nil {
+					text = "[Audio] " + t
+				}
+			}
+
+			// Handle caption for media messages (photos, videos, documents with caption)
+			if text == "" && update.Message.Caption != "" {
+				text = p.cleanMention(update.Message.Caption)
+			}
+
 			if text == "" {
 				continue
 			}
@@ -147,6 +180,44 @@ func (p *Platform) handleUpdates(updates tgbotapi.UpdatesChannel) {
 	}
 }
 
+// transcribeVoice downloads a Telegram file by fileID and transcribes it.
+func (p *Platform) transcribeVoice(fileID string) (string, error) {
+	fileConfig := tgbotapi.FileConfig{FileID: fileID}
+	tgFile, err := p.bot.GetFile(fileConfig)
+	if err != nil {
+		return "", fmt.Errorf("telegram: get file: %w", err)
+	}
+
+	url := tgFile.Link(p.bot.Token)
+
+	// Download to a temp file
+	tmpDir := os.TempDir()
+	ext := filepath.Ext(tgFile.FilePath)
+	if ext == "" {
+		ext = ".ogg"
+	}
+	tmpFile, err := os.CreateTemp(tmpDir, "tg-voice-*"+ext)
+	if err != nil {
+		return "", fmt.Errorf("telegram: temp file: %w", err)
+	}
+	defer os.Remove(tmpFile.Name())
+	defer tmpFile.Close()
+
+	client := &http.Client{Timeout: 30 * time.Second}
+	resp, err := client.Get(url)
+	if err != nil {
+		return "", fmt.Errorf("telegram: download voice: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if _, err := io.Copy(tmpFile, resp.Body); err != nil {
+		return "", fmt.Errorf("telegram: write voice: %w", err)
+	}
+	tmpFile.Close()
+
+	return p.transcriber.TranscribeFile(tmpFile.Name())
+}
+
 // shouldRespond checks if the bot should respond to this message
 func (p *Platform) shouldRespond(msg *tgbotapi.Message) bool {
 	// Always respond in private chats
@@ -159,10 +230,17 @@ func (p *Platform) shouldRespond(msg *tgbotapi.Message) bool {
 		if strings.Contains(msg.Text, "@"+p.bot.Self.UserName) {
 			return true
 		}
+		if msg.Caption != "" && strings.Contains(msg.Caption, "@"+p.bot.Self.UserName) {
+			return true
+		}
 		if msg.ReplyToMessage != nil && msg.ReplyToMessage.From.ID == p.bot.Self.ID {
 			return true
 		}
 		if msg.IsCommand() {
+			return true
+		}
+		// Voice messages in groups only if they reply to bot
+		if msg.Voice != nil && msg.ReplyToMessage != nil && msg.ReplyToMessage.From.ID == p.bot.Self.ID {
 			return true
 		}
 		return false

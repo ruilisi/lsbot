@@ -304,7 +304,9 @@ type SlackConfig struct {
 }
 
 type TelegramConfig struct {
-	Token string `yaml:"token,omitempty"`
+	Token          string `yaml:"token,omitempty"`
+	WhisperAPIKey  string `yaml:"whisper_api_key,omitempty"`  // OpenAI key for voice transcription
+	WhisperBaseURL string `yaml:"whisper_base_url,omitempty"` // Custom Whisper-compatible endpoint
 }
 
 type DiscordConfig struct {

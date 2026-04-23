@@ -1,6 +1,7 @@
 package agent
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -108,7 +109,7 @@ func TestHandleBuiltinCommand(t *testing.T) {
 	}
 	for _, tt := range tests {
 		msg := router.Message{Text: tt.text, Platform: "test", ChannelID: "c1", UserID: "u1", Username: "tester"}
-		_, handled := agent.handleBuiltinCommand(msg)
+		_, handled := agent.handleBuiltinCommand(context.Background(), msg)
 		if handled != tt.handled {
 			t.Errorf("handleBuiltinCommand(%q): got handled=%v, want %v", tt.text, handled, tt.handled)
 		}

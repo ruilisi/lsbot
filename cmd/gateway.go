@@ -901,7 +901,10 @@ func registerPlatforms(r *router.Router) {
 	}
 
 	if telegramToken != "" {
-		p, err := telegram.New(telegram.Config{Token: telegramToken})
+		p, err := telegram.New(telegram.Config{
+			Token:         telegramToken,
+			WhisperAPIKey: os.Getenv("WHISPER_API_KEY"),
+		})
 		if err != nil {
 			logger.Warn("Error creating Telegram platform: %v, skipping", err)
 			return

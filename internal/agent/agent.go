@@ -278,7 +278,7 @@ func (a *Agent) chatWithFallback(ctx context.Context, req ChatRequest) (ChatResp
 }
 
 // handleBuiltinCommand handles special commands without calling AI
-func (a *Agent) handleBuiltinCommand(msg router.Message) (router.Response, bool) {
+func (a *Agent) handleBuiltinCommand(ctx context.Context, msg router.Message) (router.Response, bool) {
 	text := strings.TrimSpace(msg.Text)
 	textLower := strings.ToLower(text)
 	convKey := ConversationKey(msg.Platform, msg.ChannelID, msg.UserID)
@@ -308,6 +308,10 @@ func (a *Agent) handleBuiltinCommand(msg router.Message) (router.Response, bool)
 显示设置:
   /verbose on     显示详细执行过程
   /verbose off    隐藏执行过程
+
+上下文管理:
+  /usage, /tokens 查看当前 token 用量
+  /compress       手动压缩上下文（自动在超过阈值时触发）
 
 其他:
   /whoami         查看用户信息
@@ -410,6 +414,33 @@ func (a *Agent) handleBuiltinCommand(msg router.Message) (router.Response, bool)
 	case "/think high", "深度思考":
 		a.sessions.SetThinkingLevel(convKey, ThinkHigh)
 		return router.Response{Text: "思考模式: 深度"}, true
+
+	case "/compress", "/ctx", "压缩上下文":
+		hist := a.memory.GetHistory(convKey)
+		if len(hist) == 0 {
+			return router.Response{Text: "当前没有对话历史可压缩。"}, true
+		}
+		before := estimateTokens(hist)
+		compressed := a.compressMessages(ctx, hist)
+		a.memory.Replace(convKey, compressed)
+		after := estimateTokens(compressed)
+		return router.Response{
+			Text: fmt.Sprintf("✓ 上下文已压缩\n- 压缩前: ~%d tokens (%d 条消息)\n- 压缩后: ~%d tokens (%d 条消息)",
+				before, len(hist), after, len(compressed)),
+		}, true
+
+	case "/usage", "/tokens", "用量":
+		hist := a.memory.GetHistory(convKey)
+		tokens := estimateTokens(hist)
+		pct := 0
+		const ctxLimit = 200_000 // conservative estimate
+		if tokens > 0 {
+			pct = tokens * 100 / ctxLimit
+		}
+		return router.Response{
+			Text: fmt.Sprintf("📊 上下文用量\n- 消息数: %d 条\n- 估算 tokens: ~%d\n- 上下文占用: ~%d%%\n- 压缩阈值: %d tokens\n\n提示: 使用 /compress 手动压缩上下文",
+				len(hist), tokens, pct, compressTokenThreshold),
+		}, true
 	}
 
 	return router.Response{}, false
@@ -450,7 +481,7 @@ func (a *Agent) HandleMessage(ctx context.Context, msg router.Message) (router.R
 	logger.Info("[Agent] Processing message from %s: %s (provider: %s)", msg.Username, msg.Text, a.provider.Name())
 
 	// Handle built-in commands
-	if resp, handled := a.handleBuiltinCommand(msg); handled {
+	if resp, handled := a.handleBuiltinCommand(ctx, msg); handled {
 		return resp, nil
 	}
 

@@ -997,11 +997,16 @@ Once you have both answers, call the profile_update tool to save them. Then proc
 		logger.Warn("[Agent] Tool loop hit max rounds (%d), forcing stop (user: %s)", maxToolRounds, msg.Username)
 	}
 
-	// Save conversation to in-memory store
-	a.memory.AddExchange(convKey,
-		Message{Role: "user", Content: msg.Text},
-		Message{Role: "assistant", Content: resp.Content},
-	)
+	// Save conversation to in-memory store (skip empty assistant messages —
+	// DeepSeek and some providers reject history with blank assistant content).
+	if resp.Content != "" {
+		a.memory.AddExchange(convKey,
+			Message{Role: "user", Content: msg.Text},
+			Message{Role: "assistant", Content: resp.Content},
+		)
+	} else {
+		a.memory.AddMessage(convKey, Message{Role: "user", Content: msg.Text})
+	}
 
 	// Persist to SQLite for cross-session recall
 	if hs, err := history.Global(); err == nil {

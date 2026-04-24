@@ -80,6 +80,9 @@ func (p *OpenAICompatProvider) Chat(ctx context.Context, req ChatRequest) (ChatR
 	}
 
 	for _, msg := range req.Messages {
+		if msg.Role == "assistant" && msg.Content == "" && len(msg.ToolCalls) == 0 {
+			continue
+		}
 		messages = append(messages, p.toOpenAIMessage(msg))
 	}
 

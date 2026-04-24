@@ -68,8 +68,12 @@ func (p *DeepSeekProvider) Chat(ctx context.Context, req ChatRequest) (ChatRespo
 		})
 	}
 
-	// Add conversation messages
+	// Add conversation messages, skipping empty assistant messages that some
+	// providers (DeepSeek) reject with "content or tool_calls must be set".
 	for _, msg := range req.Messages {
+		if msg.Role == "assistant" && msg.Content == "" && len(msg.ToolCalls) == 0 {
+			continue
+		}
 		messages = append(messages, p.toOpenAIMessage(msg))
 	}
 

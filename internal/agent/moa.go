@@ -42,7 +42,7 @@ func (a *Agent) MixtureOfAgents(ctx context.Context, args map[string]any) string
 			p, err := createProvider(Config{
 				Provider: providerName,
 				Model:    model,
-				// No API key here — rely on env var resolution inside createProvider
+				APIKey:   resolveProviderAPIKey(providerName),
 			})
 			if err != nil {
 				logger.Warn("[MoA] Could not create provider %q: %v", name, err)

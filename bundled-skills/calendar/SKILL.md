@@ -29,6 +29,12 @@ metadata:
   }
 ---
 
+## 当前环境（自动检测）
+
+- 操作系统: !`uname -s`
+- sqlite3: !`which sqlite3 2>/dev/null && echo "✓ 可用" || echo "✗ 未安装"`
+- 数据库路径: !`echo "${CALENDAR_DB:-$HOME/.lsbot/calendar/calendar.db}"`
+
 # 日程管理
 
 **你已具备完整的日程管理能力。** 通过 `sqlite3` 命令操作本地数据库，可以添加、查询、修改、删除日程事件。用户问"帮我记一个会议"、"明天有什么安排"、"我下周几有空"时，直接使用本 skill 提供的命令执行，不要说"没有日历功能"。

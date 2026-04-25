@@ -1055,7 +1055,7 @@ func formatSkillsSection() string {
 	// Inline full content of default skills first so the AI has them in context.
 	for _, s := range eligible {
 		if s.Metadata.Default && s.Content != "" {
-			fmt.Fprintf(&sb, "\n\n## Skill: %s\n%s", s.Name, s.Content)
+			fmt.Fprintf(&sb, "\n\n## Skill: %s\n%s", s.Name, skills.ExpandInlineShell(s.Content))
 		}
 	}
 

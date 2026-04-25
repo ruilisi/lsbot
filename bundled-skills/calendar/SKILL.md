@@ -32,7 +32,7 @@ metadata:
 ## 当前环境（自动检测）
 
 - 操作系统: !`uname -s`
-- sqlite3: !`which sqlite3 2>/dev/null && echo "✓ 可用" || echo "✗ 未安装"`
+- sqlite3: !`command -v sqlite3 >/dev/null 2>&1 && echo "✓ 可用" || echo "✗ 未安装"`
 - 数据库路径: !`echo "${CALENDAR_DB:-$HOME/.lsbot/calendar/calendar.db}"`
 
 # 日程管理

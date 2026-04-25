@@ -17,7 +17,7 @@ import (
 const ServerName = "lsbot"
 
 // ServerVersion is set via ldflags at build time
-var ServerVersion = "2.2.0"
+var ServerVersion = "2.3.0"
 
 // ToolHandler is a function that handles tool calls
 type ToolHandler func(ctx context.Context, req mcp.CallToolRequest) (*mcp.CallToolResult, error)

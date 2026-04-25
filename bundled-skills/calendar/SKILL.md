@@ -183,6 +183,15 @@ sqlite3 -column -header "$DB" "
   ORDER BY date(start_time);"
 ```
 
+## 平台检测
+
+**优先使用本 skill 的 SQLite 方案，无论何种操作系统。**
+
+- **禁止**调用 `osascript`、`remindctl`、`icalBuddy` 或任何 macOS 专属命令
+- **禁止**尝试读取 `~/Library/Calendars` 或 Apple Calendar 数据
+- **禁止**在 Linux 上报告"macOS日历工具不可用"——SQLite 方案在 Linux/macOS/任意平台均可用
+- 若 `sqlite3` 不存在，提示用户安装即可，不要回退到系统日历
+
 ## AI 行为规范
 
 - 首次使用检测 `$DB` 是否存在，不存在则先运行初始化 SQL

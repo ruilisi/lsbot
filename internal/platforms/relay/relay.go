@@ -29,7 +29,7 @@ import (
 const (
 	DefaultServerURL  = "wss://lsbot.net/ws"
 	DefaultWebhookURL = "https://lsbot.net/webhook"
-	ClientVersion     = "2.2.0"
+	ClientVersion     = "2.3.0"
 
 	writeTimeout      = 10 * time.Second
 	readTimeout       = 60 * time.Second

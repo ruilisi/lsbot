@@ -35,7 +35,8 @@ var dangerousPatterns = []struct {
 	{regexp.MustCompile(`(?i)\bdd\s+.*if=`), "disk copy"},
 	{regexp.MustCompile(`(?i)>\s*/dev/sd`), "write to block device"},
 	{regexp.MustCompile(`(?i)\bDROP\s+(TABLE|DATABASE)\b`), "SQL DROP"},
-	{regexp.MustCompile(`(?i)\bDELETE\s+FROM\b(?!.*\bWHERE\b)`), "SQL DELETE without WHERE"},
+	// Note: "DELETE FROM without WHERE" is handled programmatically in detectDangerousCommand
+	// because Go's RE2 doesn't support negative lookaheads.
 	{regexp.MustCompile(`(?i)\bTRUNCATE\s+(TABLE)?\s*\w`), "SQL TRUNCATE"},
 	{regexp.MustCompile(`(?i)>\s*/etc/`), "overwrite system config"},
 	{regexp.MustCompile(`(?i)\bsystemctl\s+(-[^\s]+\s+)*(stop|restart|disable|mask)\b`), "stop/restart system service"},
@@ -57,6 +58,9 @@ var dangerousPatterns = []struct {
 	{regexp.MustCompile(`(?i)\bsed\s+-[^\s]*i.*\s/etc/`), "in-place edit of system config"},
 }
 
+var deleteFromRe = regexp.MustCompile(`(?i)\bDELETE\s+FROM\b`)
+var whereRe = regexp.MustCompile(`(?i)\bWHERE\b`)
+
 // detectDangerousCommand returns (true, description) if the command matches
 // any dangerous pattern, (false, "") otherwise.
 func detectDangerousCommand(cmd string) (bool, string) {
@@ -64,6 +68,11 @@ func detectDangerousCommand(cmd string) (bool, string) {
 		if p.re.MatchString(cmd) {
 			return true, p.desc
 		}
+	}
+	// DELETE FROM without WHERE — handled separately because Go's RE2 doesn't
+	// support negative lookaheads.
+	if deleteFromRe.MatchString(cmd) && !whereRe.MatchString(cmd) {
+		return true, "SQL DELETE without WHERE"
 	}
 	return false, ""
 }
